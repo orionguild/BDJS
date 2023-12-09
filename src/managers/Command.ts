@@ -118,6 +118,8 @@ export class CommandManager extends AdvancedCollection<string, CommandData> {
                 type: command.type,
                 status: 'Loaded'
             })
+
+            delete require.cache[require.resolve(join(root, dir, file))]
         }
 
         this.#logCommands()
