@@ -1,10 +1,10 @@
 /** Custom time parser. */
-class TimeParser {
+export class TimeParser {
     /**
      * Parses human time to milliseconds.
-     * @param {string} time - The human time to parse.
+     * @param time 
      */
-    parse(time) {
+    parse(time: string) {
         const now = new Date
         const monthDays = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate()
         /** Util conversion constants. */
@@ -37,7 +37,7 @@ class TimeParser {
                 compiledKind += char
                 if (compiledKind !== '') {
                     const parsedValue = Number(compiledTime.trim())
-                    let newTime, kind = compiledKind.trim().toLowerCase()
+                    let newTime: number, kind = compiledKind.trim().toLowerCase()
                     if (suffixes.seconds.includes(kind)) {
                         newTime = milliseconds.second * parsedValue
                     } else if (suffixes.minutes.includes(kind)) {
@@ -94,5 +94,3 @@ class TimeParser {
         ]
     }
 }
-
-module.exports = { TimeParser }

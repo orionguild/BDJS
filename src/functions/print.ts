@@ -1,0 +1,17 @@
+import { BaseFunction } from '../structures/Function'
+
+export default new BaseFunction({
+    description: 'Prints a text into the console.',
+    parameters: [
+        {
+            name: 'Texts',
+            description: 'The text to print into the console.',
+            required: true,
+            resolver: 'String',
+            value: 'none'
+        }
+    ],
+    code: async function(d, [text]) {
+        console.log(text)
+    }
+})

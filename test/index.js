@@ -1,40 +1,52 @@
-const { Reader } = require('../src/core/Reader')
-const { Data } = require('../src/structures/Data')
-const { inspect } = require('util')
-const { Bot } = require('../src/index')
+const { BaseFunction } = require('../dist/structures/BaseFunction')
+const { FunctionManager } = require('../dist/managers/Function')
+const { CommandManager } = require('../dist/managers/Command')
+const { Condition } = require('../dist/util/Condition')
+const { Data } = require('../dist/structures/Data')
+const { Reader } = require('../dist/core/Reader')
+const { join } = require('path')
 
-const client = new Bot({
-    events: [
-        'ready'
-    ],
-    intents: [
-        'Guilds',
-        'GuildMessages',
-        'MessageContent'
-    ],
-    prefixes: [
-        '+'
-    ]
-})
+const functions = new FunctionManager()
+functions.set('PRINT', require('../dist/functions/print').default)
+functions.set('IF', require('../dist/functions/if').default)
+functions.set('LOWER', new BaseFunction({
+    description: 'xd',
+    parameters: [{
+        name: 'xd',
+        description:'aw',
+        compile:true,
+        unescape:true
+    }],
+    code: async (d, [text]) => {
+        return text.toLowerCase()
+    }
+}))
+
+const commands = new CommandManager
+commands.add({
+    name: 'hola',
+    type: 'ready',
+    code: `
+        $ping[true]
+    `
+}).load(join(__dirname, 'commands'), true)
+
+const reader = new Reader
 
 const data = new Data({
+    env: {
+        message: 'HELLO WORLD!'
+    },
+    functions,
+    instanceTime: new Date,
     commandType: 'unknown',
-    env: {},
-    instanceTime: Date.now()
+    reader
 })
 
-Reader.compile(`
-$amistad_es_amigo[si;o;no]
-yo digo q smn
-$yastas[mami]
-`, data).then(res => {
-    const t = inspect(res.compiled.strings.map(x => x.value), {
-        colors: true
-    })
-    const f = inspect(res.compiled.functions.map(x => x.toString), {
-        colors: true
-    })
-
-    console.log('COMPILED_TEXTS', t)
-    console.log('COMPILED_FUNCTIONS', f)
+reader.compile(`
+true
+`.trim(), data).then((d) => {
+    console.log(
+        d
+    )
 })
