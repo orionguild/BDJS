@@ -20,7 +20,7 @@ export class FunctionManager extends AdvancedCollection<string, BaseFunction> {
                         file.startsWith('$') 
                             ? file.slice(1, -3)
                             : file.slice(0, -3)
-                        ).toUpperCase()
+                        ).toLowerCase()
 
                     this.set(
                         name,

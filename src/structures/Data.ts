@@ -2,8 +2,11 @@ import { FunctionManager } from '../managers/Function'
 import { StringCommandTypes } from '../index'
 import { CompiledData, Reader } from '../core/Reader'
 import { Condition } from '../util/Condition'
+import { BaseFunction } from './Function'
+import { Container } from './Container'
 import { Context } from './Context'
 import { Util } from '../util/Util'
+import { Log } from '../util/Log'
 import { Bot } from './Bot'
 
 interface DataOptions {
@@ -19,6 +22,7 @@ interface DataOptions {
     commandType: StringCommandTypes
     reader: Reader
     context?: Context<any>
+    container?: Container
 }
 
 
@@ -29,11 +33,14 @@ export class Data {
     ctx?: Context<any>
     env: Record<string, any>
     functions: FunctionManager
+    function?: BaseFunction
     instanceTime?: Date
     commandType: StringCommandTypes
     compiled: CompiledData & Record<string, any>
+    container: Container
     reader: Reader
     util: typeof Util
+    logs: typeof Log
     constructor(options: DataOptions) {
         this.bot = options.bot
         this.code = ''
@@ -42,9 +49,12 @@ export class Data {
         this.instanceTime = options.instanceTime ?? new Date
         this.commandType = options.commandType ?? 'unknown'
         this.compiled = {} as CompiledData
+        this.function = {} as BaseFunction
+        this.container = options.container ?? new Container
         this.ctx = options.context
         this.reader = options.reader ?? new Reader()
         this.condition = Condition
+        this.logs = Log
         this.util = Util
     }
 
@@ -56,6 +66,15 @@ export class Data {
     deleteEnvironmentVariable(name: string) {
         delete this.env[name]
         return this
+    }
+
+    /**
+     * Extends a parent data.
+     * @param options - Data options to inherit.
+     * @returns {Data}
+     */
+    extend(options: DataOptions): Data {
+        return new Data({ ...options })
     }
 
     /**

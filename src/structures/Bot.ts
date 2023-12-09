@@ -1,3 +1,4 @@
+import { BDJSApplicationCommandManager } from '../managers/ApplicationCommand'
 import { Client, ClientEvents, ClientOptions } from 'discord.js'
 import { FunctionManager } from '../managers/Function'
 import { CommandManager } from '../managers/Command'
@@ -42,6 +43,7 @@ export interface BDJSOptions extends ClientOptions {
  * Represents a BDJS client.
  */
 export class Bot extends Client<true> {
+    public appManager = new BDJSApplicationCommandManager(this)
     public commands = new CommandManager
     public events = new EventManager
     public functions = new FunctionManager

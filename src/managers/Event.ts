@@ -28,6 +28,7 @@ export class EventManager extends AdvancedCollection<string, BaseEvent<any>> {
                             await event.listener(bot, ...args)
                         }
                     )
+                    delete require.cache[join(root, file)]
                 }
             }
         }

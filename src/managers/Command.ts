@@ -1,14 +1,15 @@
 import { AsciiTable3, AlignmentEnum } from 'ascii-table3'
 import { AdvancedCollection } from 'nekord-collection'
-import { Bot, StringCommandTypes } from '../index'
+import { Bot, SlashCommandBuilder, StringCommandTypes } from '../index'
 import { lstat, readdir } from 'fs/promises'
 import { randomUUID } from 'crypto'
 import { Log } from '../util/Log'
 import { join } from 'path'
 import clc from 'cli-color'
 
-interface CommandData {
+export interface CommandData {
     _path_?: string
+    data?: SlashCommandBuilder
     name?: string
     aliases?: string[]
     type: StringCommandTypes
@@ -47,7 +48,7 @@ export class CommandManager extends AdvancedCollection<string, CommandData> {
     add(...commands: CommandData[]) {
         for (const command of commands) {
             command._path_ = 'main_file'.toUpperCase()
-            command.name = command.name ?? randomUUID()
+            command.name = command.name ?? randomUUID().slice(0, 13).toUpperCase()
             if (!command.code) {
                 Log.error(`"${command.name}" can't be loaded!` + [
                     '|-> at: ' + command.name
@@ -106,7 +107,7 @@ export class CommandManager extends AdvancedCollection<string, CommandData> {
             }
 
             // Ensure command name.
-            command.name = command.name ?? randomUUID()
+            command.name = command.name ?? randomUUID().slice(0, 13).toUpperCase()
 
             // Assign command path.
             command._path_ = join(root, dir, file)
@@ -183,6 +184,13 @@ export class CommandManager extends AdvancedCollection<string, CommandData> {
             'prefixed',
             'unprefixed',
             'ready',
+            'anyInteraction',
+            'autocompleteInteraction',
+            'buttonInteraction',
+            'commandInteraction',
+            'contextMenuInteraction',
+            'modalInteraction',
+            'selectMenuInteraction',
             'unknown'
         ]
     }

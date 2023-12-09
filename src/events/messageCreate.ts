@@ -14,16 +14,17 @@ export default new BaseEvent<[Message]>({
         const unprefixed = bot.commands.filter(command => command.type === 'unprefixed')
         const prefixed = bot.commands.filter(command => command.type === 'prefixed')
         const always = bot.commands.filter(command => command.type === 'always')
-        const data = new Data({
-            context,
-            commandType: 'unprefixed',
-            functions: bot.functions,
-            instanceTime: new Date,
-            reader: bot.reader,
-        })
 
         // Always reply commands.
         for (const command of always) {
+            const data = new Data({
+                bot,
+                context,
+                commandType: 'always',
+                functions: bot.functions,
+                instanceTime: new Date,
+                reader: bot.reader,
+            })
             const res = await data.reader.compile(
                 command.code,
                 data
@@ -37,6 +38,14 @@ export default new BaseEvent<[Message]>({
             const commandName = args.shift()?.toLowerCase() ?? ''
             const command = unprefixed.find(cmd => cmd.name === commandName || cmd.aliases?.includes(commandName))
             if (command) {
+                const data = new Data({
+                    bot,
+                    context,
+                    commandType: 'unprefixed',
+                    functions: bot.functions,
+                    instanceTime: new Date,
+                    reader: bot.reader,
+                })
                 const res = await data.reader.compile(
                     command.code,
                     data
@@ -47,6 +56,14 @@ export default new BaseEvent<[Message]>({
 
         // Prefixed commands.
         const args = message.content.split(/ +/g)
+        const data = new Data({
+            bot,
+            context,
+            commandType: 'prefixed',
+            functions: bot.functions,
+            instanceTime: new Date,
+            reader: bot.reader,
+        })
         const prefixes = bot.extraOptions.prefixes.map(async prefix => {
             const res = await data.reader.compile(prefix, data)
             const prx = res?.code.toLowerCase()

@@ -1,15 +1,16 @@
-const { BaseFunction } = require('../dist/structures/BaseFunction')
+const { BaseFunction } = require('../dist/structures/Function')
 const { FunctionManager } = require('../dist/managers/Function')
 const { CommandManager } = require('../dist/managers/Command')
 const { Condition } = require('../dist/util/Condition')
 const { Data } = require('../dist/structures/Data')
 const { Reader } = require('../dist/core/Reader')
+const { Util } = require('../dist/util/Util')
 const { join } = require('path')
 
 const functions = new FunctionManager()
-functions.set('PRINT', require('../dist/functions/print').default)
-functions.set('IF', require('../dist/functions/if').default)
-functions.set('LOWER', new BaseFunction({
+functions.set('print', require('../dist/functions/print').default)
+functions.set('if', require('../dist/functions/if').default)
+functions.set('lower', new BaseFunction({
     description: 'xd',
     parameters: [{
         name: 'xd',
@@ -42,6 +43,15 @@ const data = new Data({
     commandType: 'unknown',
     reader
 })
+
+const clonedData = Util.deepClone(data)
+clonedData.functions.set('testing', {
+    code: async (d, [text]) => {
+        return text.toLowerCase()
+    }
+})
+
+console.log(clonedData)
 
 reader.compile(`
 true

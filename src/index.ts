@@ -1,7 +1,19 @@
+import { SlashCommandBuilder } from 'discord.js'
 import { BDJSOptions, Bot } from './structures/Bot'
 import { Log } from './util/Log'
 
-export type StringCommandTypes = 'always' | 'ready' | 'prefixed' | 'unprefixed' | 'unknown'
+export type StringCommandTypes = 'always'
+| 'ready'
+| 'prefixed'
+| 'unprefixed'
+| 'anyInteraction'
+| 'modalInteraction'
+| 'buttonInteraction'
+| 'commandInteraction'
+| 'selectMenuInteraction'
+| 'contextMenuInteraction'
+| 'autocompleteInteraction'
+| 'unknown'
 export type StringEventNames = 'onApplicationCommandPermissionsUpdate'
 | 'onAutoModerationActionExecution'
 | 'onAutoModerationRuleCreate'
@@ -109,5 +121,6 @@ function BDJSDefaultOptions(auth: `${string}.${string}.${string}`, prefixes: str
 export {
     BDJSOptions,
     BDJSDefaultOptions,
-    Bot
+    Bot,
+    SlashCommandBuilder
 }

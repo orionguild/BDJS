@@ -54,6 +54,7 @@ export default new BaseEvent({
         const commands = bot.commands.filter(command => command.type === 'ready')
 
         const data = new Data({
+            bot,
             commandType: 'ready',
             functions: bot.functions,
             instanceTime: new Date,

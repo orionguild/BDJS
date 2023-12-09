@@ -1,6 +1,7 @@
 import { RawFunction, RawString } from './Structures'
 import { Data } from '../structures/Data'
 import { Log } from '../util/Log'
+import { inspect } from 'util'
 
 /**
  * Represents the compiled data by BDJS reader.
@@ -161,40 +162,49 @@ export class Reader {
         let parsedFunctions: string[] = [], texts = compiled.strings.map(str => str.value)
 
         for (const dfunc of compiled.functions) {
-            const spec = data.functions.get(dfunc.name.slice(1).toUpperCase())
+            const spec = data.functions.get(dfunc.name.slice(1).toLowerCase())
+            data.function = spec
+
             if (!spec) {
-                Log.error('"' + dfunc.name + '" is not a function.\n' + [
-                    '|-> Please provide a valid function name at:',
-                    '|-> Line: ' + dfunc.line,
-                    '|-> Source: "' + dfunc.toString + '"',
-                    '|--------------------------------------------'
-                ].join('\n'))
+                Log.error(
+                    [
+                        '"' + dfunc.name + '" is not a function.',
+                        '|-> Please provide a valid function name at:',
+                        '|-> Line: ' + dfunc.line,
+                        '|-> Source: "' + dfunc.toString + '"',
+                        '|--------------------------------------------'
+                    ].join('\n')
+                )
                 return
             } else if (dfunc.closed === false) {
-                Log.error('"' + dfunc.name + '" is not a closed.\n' + [
-                    '|-> Please make sure to close function fields at:',
-                    '|-> Line: ' + dfunc.line,
-                    '|-> Source: "' + dfunc.toString + '"',
-                    '|-------------------------------------------------'
-                ].join('\n'))
+                Log.error(
+                    [
+                        '"' + dfunc.name + '" is not a closed.',
+                        '|-> Please make sure to close function fields at:',
+                        '|-> Line: ' + dfunc.line,
+                        '|-> Source: "' + dfunc.toString + '"',
+                        '|-------------------------------------------------'
+                    ].join('\n')
+                )
                 return
             }
 
             const fields = dfunc.fields.map(field => field.value)
             for (let idx = 0; idx < fields.length; idx++) {
                 const field = fields[idx],
-                    compile = spec.parameters?.[idx].compile ?? true,
-                    unescape = spec.parameters?.[idx].unescape ?? true
+                    compile = (spec.parameters?.[idx] ?? { compile: true }).compile === true,
+                    unescape = (spec.parameters?.[idx] ?? { unescape: true }).unescape === true
                 
-                const parsed = compile ? (await this.compile(field, data))?.code ?? '' : field
+                const parsed = compile ? (await data.reader.compile(field, data))?.code ?? '' : field
                 const result = unescape ? UnescapeText(parsed) : parsed
 
                 fields[idx] = result
             }
 
             const result = await spec.code(data, fields).catch(e => {
-                Log.error('Something internal went wrong!' + [
-                    JSON.stringify(e, null, 3)
+                Log.error([
+                    'Something internal went wrong!',
+                    inspect(e, { depth: 5 })
                 ].join('\n'))
             })
             parsedFunctions[parsedFunctions.length] = result === undefined ? '' : result
@@ -206,6 +216,6 @@ export class Reader {
 
         data.setCode(texts.join(''))
         data.compiled = compiled
-        return data
+        return data as Data
     }
 }

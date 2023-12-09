@@ -64,8 +64,9 @@ export class Container {
      * Set the payload content.
      * @param content - Payload content.
      */
-    setContent(content: string) {
-        this.content = content
+    pushContent(content: string) {
+        if (!this.content) this.content = ''
+        this.content += content
         return this
     }
 
