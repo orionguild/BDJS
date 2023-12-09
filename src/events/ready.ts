@@ -6,7 +6,7 @@ import { Log } from '../util/Log'
 import clc from 'cli-color'
 
 export default new BaseEvent({
-    name: 'ready',
+    name: 'onReady',
     description: 'Executed when client user is ready.',
     once: true,
     async listener(bot) {

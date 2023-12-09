@@ -3,6 +3,7 @@ import { FunctionManager } from '../managers/Function'
 import { CommandManager } from '../managers/Command'
 import { EventManager } from '../managers/Event'
 import { DataBaseOptions } from 'collie-db'
+import { StringEventNames } from '../index'
 import { Reader } from '../core/Reader'
 
 /**
@@ -11,7 +12,7 @@ import { Reader } from '../core/Reader'
  * @param type - Reformulation type.
  * @returns {string[]}
  */
-function reformulateEvents(
+export function reformulateEvents(
     names: string[],
     type: 'BDJS' | 'DJS' = 'BDJS'
 ) {
@@ -29,7 +30,7 @@ interface BDJSOptions extends ClientOptions {
     auth: `${string}.${string}.${string}`
     autoUpdate?: boolean
     database?: DataBaseOptions
-    events: keyof ClientEvents[]
+    events: StringEventNames[]
     pointErrorsTo?: 'stdout' | 'discord'
     prefixes: string[]
 }

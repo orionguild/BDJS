@@ -1,8 +1,9 @@
+import { StringEventNames } from '../index'
 import { ClientEvents } from 'discord.js'
 import { Bot } from './Bot'
 
 export interface BaseEvent<T extends any[]> {
-    name: keyof ClientEvents
+    name: StringEventNames
     description?: string
     once?: boolean
     listener: (bot: Bot, ...args: T) => Promise<any>

@@ -113,13 +113,19 @@ export class CommandManager extends AdvancedCollection<string, CommandData> {
      * @returns {boolean}
      */
     #validateType(type: StringCommandTypes) {
-        const types = [
+        const types =  this.types
+        return types.includes(type)
+    }
+
+    /**
+     * Return all valid command types.
+     */
+    get types(): StringCommandTypes[] {
+        return [
             'prefixed',
             'unprefixed',
             'ready',
             'unknown'
-        ] as StringCommandTypes[]
-
-        return types.includes(type)
+        ]
     }
 }
