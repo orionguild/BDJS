@@ -11,6 +11,7 @@ export default new BaseEvent({
     once: true,
     async listener(bot) {
         const autoUpdate = bot.extraOptions.autoUpdate ?? true
+        const disableLogs = bot.extraOptions.disableLogs ?? false
         const currentVersion = (await import('../../package.json')).version
 
         const result = await request('https://registry.npmjs.org/bdjs', {
@@ -25,7 +26,7 @@ export default new BaseEvent({
         const npmdata = await result.body.json() as { 'dist-tags': { latest: string } }
         const fetchedVersion = npmdata['dist-tags'].latest
 
-        if (fetchedVersion !== currentVersion) {
+        if (fetchedVersion !== currentVersion && disableLogs === false) {
             Log.warn([
                 'You are using an outdated version of BDJS!',
                 'Last version: ' + fetchedVersion,

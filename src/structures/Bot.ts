@@ -5,6 +5,7 @@ import { EventManager } from '../managers/Event'
 import { DataBaseOptions } from 'collie-db'
 import { StringEventNames } from '../index'
 import { Reader } from '../core/Reader'
+import { Log } from '../util/Log'
 
 /**
  * Convert BDJS names into RAW discord.js client.
@@ -26,10 +27,11 @@ export function reformulateEvents(
     return names
 }
 
-interface BDJSOptions extends ClientOptions {
+export interface BDJSOptions extends ClientOptions {
     auth: `${string}.${string}.${string}`
     autoUpdate?: boolean
     database?: DataBaseOptions
+    disableLogs?: boolean
     events: StringEventNames[]
     pointErrorsTo?: 'stdout' | 'discord'
     prefixes: string[]
@@ -47,6 +49,10 @@ export class Bot extends Client<true> {
     constructor(options: BDJSOptions) {
         super(options)
         this.extraOptions = options
+
+        // Prefix validation
+        if (options.prefixes.length === 0)
+            Log.error('Provide 1 prefix at least!'), process.exit()
     }
 
     /**

@@ -1,4 +1,5 @@
-import { Bot } from './structures/Bot'
+import { BDJSOptions, Bot } from './structures/Bot'
+import { Log } from './util/Log'
 
 export type StringCommandTypes = 'ready' | 'prefixed' | 'unprefixed' | 'unknown'
 export type StringEventNames = 'onApplicationCommandPermissionsUpdate'
@@ -76,4 +77,37 @@ export type StringEventNames = 'onApplicationCommandPermissionsUpdate'
 | 'onGuildScheduledEventUserAdd'
 | 'onGuildScheduledEventUserRemove'
 
-export { Bot }
+function BDJSDefaultOptions(auth: `${string}.${string}.${string}`, prefixes: string[]) {
+    if (!auth) return Log.error('You must provide a bot token!')
+    if (prefixes.length === 0) return Log.error('You must provide 1 prefix at least!')
+    return {
+        auth,
+        database: {
+            tables: [
+                {
+                    name: 'main',
+                    mod: './database/main.json'
+                }
+            ],
+            timeoutsTable: 'timeouts',
+            autoSave: false,
+            mod: './database'
+        },
+        events: [
+            'onReady',
+            'onMessageCreate'
+        ],
+        intents: [
+            'Guilds',
+            'GuildMessages',
+            'MessageContent'
+        ],
+        prefixes
+    } as BDJSOptions
+}
+
+export {
+    BDJSOptions,
+    BDJSDefaultOptions,
+    Bot
+}

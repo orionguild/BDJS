@@ -1,9 +1,11 @@
+import { AsciiTable3, AlignmentEnum } from 'ascii-table3'
 import { AdvancedCollection } from 'nekord-collection'
-import { StringCommandTypes } from '../index'
+import { Bot, StringCommandTypes } from '../index'
 import { lstat, readdir } from 'fs/promises'
+import { randomUUID } from 'crypto'
 import { Log } from '../util/Log'
 import { join } from 'path'
-import { randomUUID } from 'crypto'
+import clc from 'cli-color'
 
 interface CommandData {
     _path_?: string
@@ -12,6 +14,13 @@ interface CommandData {
     type: StringCommandTypes
     code: string
     [key: string]: unknown
+}
+
+interface CommandStatus {
+    name: string,
+    path: string,
+    type: StringCommandTypes,
+    status: 'Loaded' | 'Not loaded'
 }
 
 export class CommandManager extends AdvancedCollection<string, CommandData> {
@@ -26,6 +35,11 @@ export class CommandManager extends AdvancedCollection<string, CommandData> {
     #directory: string | null = null
 
     /**
+     * To save all loaded command statuses.
+     */
+    #commandStatus: CommandStatus[] = []
+
+    /**
      * Add a commands into the manager.
      * @param commands - Array of commands.
      * @returns {CommandManager}
@@ -34,7 +48,6 @@ export class CommandManager extends AdvancedCollection<string, CommandData> {
         for (const command of commands) {
             command._path_ = 'main_file'.toUpperCase()
             command.name = command.name ?? randomUUID()
-
             if (!command.code) {
                 Log.error(`"${command.name}" can't be loaded!` + [
                     '|-> at: ' + command.name
@@ -47,12 +60,13 @@ export class CommandManager extends AdvancedCollection<string, CommandData> {
                 ].join('\n'))
                 continue
             }
-            
-            this.set(
-                command.name ?? randomUUID(),
-                command
-            )
-
+            this.set(command.name, command)
+            this.#commandStatus.push({
+                name: command.name,
+                path: command._path_,
+                type: command.type,
+                status: 'Loaded'
+            })
         }
         return this
     }
@@ -61,8 +75,9 @@ export class CommandManager extends AdvancedCollection<string, CommandData> {
      * Load all commands inside a directory.
      * @param dir - Commands directory.
      * @param providing_cwd - Set to "true" if your directory provides a custom cwd.
+     * @param log - Log commands.
      */
-    async load(dir: string, providing_cwd = false) {
+    async load(dir: string, providing_cwd = false, log = false) {
         const root = providing_cwd ? '' : process.cwd()
         const files = await readdir(join(root, dir))
 
@@ -72,7 +87,7 @@ export class CommandManager extends AdvancedCollection<string, CommandData> {
         for (const file of files) {
             const stat = await lstat(join(root, dir, file))
             if (stat.isDirectory()) {
-                await this.load(join(dir, file))
+                await this.load(join(dir, file), providing_cwd, false)
                 continue
             }
 
@@ -90,21 +105,33 @@ export class CommandManager extends AdvancedCollection<string, CommandData> {
                 continue
             }
 
-            this.set(
-                command.name ?? randomUUID(),
-                command
-            )
+            // Ensure command name.
+            command.name = command.name ?? randomUUID()
+
+            // Assign command path.
+            command._path_ = join(root, dir, file)
+
+            this.set(command.name, command)
+            this.#commandStatus.push({
+                name: command.name,
+                path: command._path_,
+                type: command.type,
+                status: 'Loaded'
+            })
         }
 
+        this.#logCommands()
     }
 
     /**
      * Reload commands from source.
+     * @param bot - BDJS client.
      * @returns {Promise<void>}
      */
-    async reload() {
+    async reload(bot: Bot) {
         if (!this.#directory) return Log.error('Cannot find a commands directory.')
-        return await this.load(this.#directory, this.#cwd)
+        this.clear()
+        return await this.load(this.#directory, this.#cwd, true)
     }
 
     /**
@@ -113,8 +140,36 @@ export class CommandManager extends AdvancedCollection<string, CommandData> {
      * @returns {boolean}
      */
     #validateType(type: StringCommandTypes) {
-        const types =  this.types
+        const types = this.types
         return types.includes(type)
+    }
+
+    /**
+     * Log loaded commands.
+     */
+    #logCommands() {
+        const rows: string[][] = []
+        const table = new AsciiTable3('Commands')
+
+        table.setHeading('Name', 'Type', 'Status', 'Path')
+        .setAlign(2, AlignmentEnum.AUTO)
+        .setStyle('compact')
+
+        for (const data of this.#commandStatus) {
+            rows.push([
+                data.name,
+                data.type,
+                data.status === 'Loaded' ? clc.green('LOADED') : clc.red('NOT LOADED'),
+                AsciiTable3.truncateString(data.path, 20)
+            ])
+        }
+
+        table.addRowMatrix(rows)
+        
+        console.log(table.toString())
+        this.#commandStatus.length = 0
+
+        return this
     }
 
     /**
