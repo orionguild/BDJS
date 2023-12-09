@@ -1,7 +1,7 @@
 import { BDJSOptions, Bot } from './structures/Bot'
 import { Log } from './util/Log'
 
-export type StringCommandTypes = 'ready' | 'prefixed' | 'unprefixed' | 'unknown'
+export type StringCommandTypes = 'always' | 'ready' | 'prefixed' | 'unprefixed' | 'unknown'
 export type StringEventNames = 'onApplicationCommandPermissionsUpdate'
 | 'onAutoModerationActionExecution'
 | 'onAutoModerationRuleCreate'

@@ -35,6 +35,7 @@ export interface BDJSOptions extends ClientOptions {
     events: StringEventNames[]
     pointErrorsTo?: 'stdout' | 'discord'
     prefixes: string[]
+    replyBots?: boolean
 }
 
 /**

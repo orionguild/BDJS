@@ -2,6 +2,7 @@ import { FunctionManager } from '../managers/Function'
 import { StringCommandTypes } from '../index'
 import { CompiledData, Reader } from '../core/Reader'
 import { Condition } from '../util/Condition'
+import { Context } from './Context'
 import { Util } from '../util/Util'
 import { Bot } from './Bot'
 
@@ -17,6 +18,7 @@ interface DataOptions {
     /** The current command type for this instance. */
     commandType: StringCommandTypes
     reader: Reader
+    context?: Context<any>
 }
 
 
@@ -24,6 +26,7 @@ export class Data {
     bot?: Bot
     code: string
     condition: typeof Condition
+    ctx?: Context<any>
     env: Record<string, any>
     functions: FunctionManager
     instanceTime?: Date
@@ -39,6 +42,7 @@ export class Data {
         this.instanceTime = options.instanceTime ?? new Date
         this.commandType = options.commandType ?? 'unknown'
         this.compiled = {} as CompiledData
+        this.ctx = options.context
         this.reader = options.reader ?? new Reader()
         this.condition = Condition
         this.util = Util
