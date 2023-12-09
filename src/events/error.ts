@@ -1,7 +1,7 @@
 import { BaseEvent } from '../structures/Event'
 import { Log } from '../util/Log'
 
-export default new BaseEvent<[error: Error]>({
+export default new BaseEvent<[Error]>({
     name: 'error',
     description: 'Executed when an error is emitted.',
     async listener(bot, error) {
