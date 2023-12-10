@@ -79,6 +79,14 @@ export class Util {
         // If the type is not handled, return the input as is
         return input;
     }
+
+    /**
+     * Sleep the remaining code for the given time.
+     * @param time - Time to sleep the code.
+     */
+    static async sleep(time: number) {
+        return new Promise(res => setTimeout(res, time))
+    }
       
 
     /**

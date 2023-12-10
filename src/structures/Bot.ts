@@ -2,6 +2,7 @@ import { BDJSApplicationCommandManager } from '../managers/ApplicationCommand'
 import { Client, ClientEvents, ClientOptions } from 'discord.js'
 import { FunctionManager } from '../managers/Function'
 import { CommandManager } from '../managers/Command'
+import { StatusManager } from '../managers/Status'
 import { EventManager } from '../managers/Event'
 import { DataBaseOptions } from 'collie-db'
 import { StringEventNames } from '../index'
@@ -48,6 +49,7 @@ export class Bot extends Client<true> {
     public events = new EventManager
     public functions = new FunctionManager
     public reader = new Reader
+    public status = new StatusManager(this)
     public extraOptions: BDJSOptions
     constructor(options: BDJSOptions) {
         super(options)

@@ -72,5 +72,6 @@ export default new BaseEvent({
             })
         }
 
+        if (bot.status.size > 0) bot.status.rotate()
     }
 })
