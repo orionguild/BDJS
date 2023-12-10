@@ -4,6 +4,7 @@ import { readdir } from 'fs/promises'
 import { join } from 'path'
 
 export class FunctionManager extends AdvancedCollection<string, BaseFunction> {
+    #injections: Record<string, { name: string, target: string, data: BaseFunction }> = {}
     /**
      * Load all functions from the native core.
      * @param {string} dir Function directory.
@@ -30,5 +31,36 @@ export class FunctionManager extends AdvancedCollection<string, BaseFunction> {
             }
         }
 
+    }
+
+    /**
+     * Inject a subfunction into a function.
+     * @param target - Function name where the function will be injected in.
+     * @param name - Name of the function to be injected.
+     * @param data - Data of the function to be injected.
+     * @returns {FunctionManager}
+     */
+    inject(target: string, name: string, data: BaseFunction) {
+        this.#injections[
+            name.startsWith('$') 
+                ? name.slice(1).toLowerCase() 
+                : name.toLowerCase()
+        ] = {
+            data,
+            name: name.startsWith('$') 
+                ? name.slice(1).toLowerCase() 
+                : name.toLowerCase(),
+            target: target.startsWith('$') 
+                ? target.slice(1).toLowerCase() 
+                : target.toLowerCase()
+        }
+        return this
+    }
+
+    /**
+     * Get all cached function injects.
+     */
+    get injections() {
+        return this.#injections
     }
 }

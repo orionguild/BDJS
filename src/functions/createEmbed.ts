@@ -62,6 +62,11 @@ export default new BaseFunction({
             }
         }));
 
+        const injections = Object.values(data.functions.injections).filter(func => func.target === 'createembed')
+        for (const inject of injections) {
+            data.functions.set(inject.name, inject.data)
+        }
+
         const result = await data.reader.compile(payload, data)
 
         d.container.addEmbed(embed.toJSON())
