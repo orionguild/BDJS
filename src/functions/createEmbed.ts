@@ -25,6 +25,11 @@ export default new BaseFunction({
             async code(extended, [text]) {
                 embed.setDescription(text)
             }
+        })).set('setthumbnail', new BaseFunction({
+            description: 'Set a thumbnail for the embed.',
+            async code(extended, [url]) {
+                embed.setThumbnail(url)
+            }
         })).set('setfooter', new BaseFunction({
             description: 'Set the footer for the embed.',
             async code(extended, [text, icon]) {
