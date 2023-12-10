@@ -180,6 +180,7 @@ export class Reader {
         let parsedFunctions: string[] = [], texts = compiled.strings.map(str => str.value)
 
         for (const dfunc of compiled.functions) {
+            if (data.bot?.extraOptions.debug === true) Log.debug(`Parsing ${dfunc.name} => ${dfunc.toString}`)
             const spec = data.functions.get(dfunc.name.slice(1).toLowerCase())
             data.function = spec
 
@@ -229,6 +230,7 @@ export class Reader {
         }
 
         parsedFunctions.forEach((text, index) => {
+            if (data.bot?.extraOptions.debug === true) Log.debug(`Replacing overload "(call_${index})" to "${text === '' ? 'none' : text}"`)
             texts[texts.indexOf(`(call_${index})`)] = text
         })
 

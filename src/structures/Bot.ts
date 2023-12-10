@@ -34,6 +34,7 @@ export interface BDJSOptions extends ClientOptions {
     autoUpdate?: boolean
     database?: DataBaseOptions
     disableLogs?: boolean
+    debug?: boolean
     events: StringEventNames[]
     prefixes: string[]
     replyBots?: boolean

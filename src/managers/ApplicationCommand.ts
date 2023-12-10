@@ -33,6 +33,8 @@ export class BDJSApplicationCommandManager {
 
             this.#commands.set(spec.name, spec.toJSON())
             delete require.cache[join(root, dir, file)]
+
+            if (this.#bot.extraOptions.debug === true) Log.debug(`Specification "${spec.name}" was loaded.`)
         }
 
     }
