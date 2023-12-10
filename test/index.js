@@ -10,6 +10,7 @@ const { join } = require('path')
 const functions = new FunctionManager()
 functions.set('print', require('../dist/functions/print').default)
 functions.set('if', require('../dist/functions/if').default)
+functions.set('version', require('../dist/functions/version').default)
 functions.set('lower', new BaseFunction({
     description: 'xd',
     parameters: [{
@@ -23,15 +24,6 @@ functions.set('lower', new BaseFunction({
     }
 }))
 
-const commands = new CommandManager
-commands.add({
-    name: 'hola',
-    type: 'ready',
-    code: `
-        $ping[true]
-    `
-}).load(join(__dirname, 'commands'), true)
-
 const reader = new Reader
 
 const data = new Data({
@@ -44,19 +36,10 @@ const data = new Data({
     reader
 })
 
-const clonedData = Util.deepClone(data)
-clonedData.functions.set('testing', {
-    code: async (d, [text]) => {
-        return text.toLowerCase()
-    }
-})
-
-console.log(clonedData)
-
 reader.compile(`
-true
+$version
 `.trim(), data).then((d) => {
     console.log(
-        d
+        d.code
     )
 })

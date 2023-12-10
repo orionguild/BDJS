@@ -159,6 +159,24 @@ export class Reader {
             compiled.function = new RawFunction
         }
 
+        if (compiled.temp.value.startsWith('$') && compiled.type.startsWith('function')) {
+            compiled.strings.push(
+                new RawString().overwrite(
+                    `(call_${compiled.functions.length})`
+                )
+            )
+            
+            const rest = new RawFunction()
+            .setName(compiled.temp.value)
+            .setClosed(true)
+            .setIndex(compiled.functions.length)
+            .setLine(compiled.line);
+
+            compiled.functions.push(rest)
+            compiled.temp = new RawString
+            compiled.type = 'any'
+        }
+
         let parsedFunctions: string[] = [], texts = compiled.strings.map(str => str.value)
 
         for (const dfunc of compiled.functions) {
