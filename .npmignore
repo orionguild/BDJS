@@ -1,0 +1,11 @@
+# Folders
+/node_modules
+/src
+/test
+
+# Files
+.eslintrc.json
+.gitignore
+pnpm-lock.yaml
+tsconfig.json
+tsconfig.tsbuildinfo
