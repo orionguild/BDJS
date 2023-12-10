@@ -67,9 +67,9 @@ export class Bot extends Client<true> {
     override async login() {
         // Error handler.
         this.on('error', error => require('../events/error').default.listener(this, error))
+        this.on('ready', () => require('../events/ready').default.listener(this))
 
         // Loading core.
-        await this.functions.load()
         await this.events.load(this)
         return await super.login(
             this.extraOptions.auth

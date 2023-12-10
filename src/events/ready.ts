@@ -3,7 +3,6 @@ import { Data } from '../structures/Data'
 import { Agent, request } from 'undici'
 import { exec } from 'child_process'
 import { Log } from '../util/Log'
-import clc from 'cli-color'
 import { inspect } from 'util'
 
 export default new BaseEvent({
@@ -11,6 +10,15 @@ export default new BaseEvent({
     description: 'Executed when client user is ready.',
     once: true,
     async listener(bot) {
+        await bot.functions.load().then(() => {
+            if (bot.extraOptions.debug === true) Log.debug(
+                [
+                    `${bot.functions.size} functions were loaded`,
+                    '$' + bot.functions.keyArray().join(' - $')
+                ].join('\n')
+            )
+        })
+
         const autoUpdate = bot.extraOptions.autoUpdate ?? true
         const disableLogs = bot.extraOptions.disableLogs ?? false
         const currentVersion = (await import('../../package.json')).version
@@ -33,6 +41,10 @@ export default new BaseEvent({
                 'Last version: ' + fetchedVersion,
                 'Current version: ' + currentVersion
                 ].join('\n'))
+        } else if (fetchedVersion === currentVersion && disableLogs === false) {
+            Log.info([
+                'Using the latest version of BDJS: ' + currentVersion
+            ].join('\n'))
         }
         
         if (autoUpdate) {
@@ -52,6 +64,7 @@ export default new BaseEvent({
             })
         }
 
+        if (!bot.extraOptions.events.includes('onReady')) return;
         const commands = bot.commands.filter(command => command.type === 'ready')
 
         const data = new Data({

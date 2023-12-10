@@ -16,7 +16,7 @@ export class EventManager extends AdvancedCollection<string, BaseEvent<any>> {
 
         for (const file of files) {
             if (file.endsWith('.js')) {
-                if (file === 'error.js') continue
+                if (file === 'error.js' || file === 'ready.js') continue
                 const event = require(join(root, file)).default as BaseEvent<any>
                 if (
                     event instanceof BaseEvent

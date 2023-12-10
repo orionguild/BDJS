@@ -8,12 +8,13 @@ export default new BaseFunction({
             description: 'The text to print into the console.',
             required: true,
             resolver: 'String',
+            compile: true,
             value: 'none'
         }
     ],
     code: async function(d, [text]) {
         if (text === undefined) throw new d.error(d, 'required', 'Texts', d.function?.name!)
-        
+
         console.log(text)
     }
 })

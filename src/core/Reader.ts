@@ -182,8 +182,9 @@ export class Reader {
 
         for (const dfunc of compiled.functions) {
             if (data.bot?.extraOptions.debug === true) Log.debug(`Parsing ${dfunc.name} => ${dfunc.toString}`)
-            const spec = data.functions.get(dfunc.name.slice(1).toLowerCase()) as AddProperty<BaseFunction, 'name', string>
-            spec.name = dfunc.name, data.function = spec
+            const spec = data.functions.get(dfunc.name.slice(1).toLowerCase())
+            const functionData = { name: dfunc.name, ...spec } as AddProperty<BaseFunction, 'name', string>
+            data.function = functionData
 
             if (!spec) {
                 Log.error(
