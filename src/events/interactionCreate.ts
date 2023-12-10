@@ -19,10 +19,7 @@ export default new BaseEvent<[Interaction]>({
                 instanceTime: new Date,
                 reader: bot.reader
             })
-            const res = await data.reader.compile(cmd.code, data)
-            if (res?.code && interaction.isRepliable()) {
-                await interaction.reply(res.code)
-            }
+            await data.reader.compile(cmd.code, data)
         })
 
         // Button interactions.
@@ -40,12 +37,7 @@ export default new BaseEvent<[Interaction]>({
             ).find(
                 cmd => cmd.name === interaction.customId
             )
-            if (command) {
-                const res = await data.reader.compile(command.code, data)
-                if (res?.code && !interaction.replied) {
-                    await interaction.reply(res.code)
-                }
-            }
+            if (command) await data.reader.compile(command.code, data)
         }
 
         // Select menu interactions.
@@ -63,12 +55,7 @@ export default new BaseEvent<[Interaction]>({
             ).find(
                 cmd => cmd.name === interaction.customId
             )
-            if (command) {
-                const res = await data.reader.compile(command.code, data)
-                if (res?.code && !interaction.replied) {
-                    await interaction.reply(res.code)
-                }
-            }
+            if (command) await data.reader.compile(command.code, data)
         }
 
         // Modal interactions.
@@ -86,12 +73,7 @@ export default new BaseEvent<[Interaction]>({
             ).find(
                 cmd => cmd.name === interaction.customId
             )
-            if (command) {
-                const res = await data.reader.compile(command.code, data)
-                if (res?.code && !interaction.replied) {
-                    await interaction.reply(res.code)
-                }
-            }
+            if (command) await data.reader.compile(command.code, data)
         }
 
         // Slash commands
@@ -109,12 +91,7 @@ export default new BaseEvent<[Interaction]>({
             ).find(
                 cmd => cmd.name?.startsWith(interaction.commandName)
             )
-            if (command) {
-                const res = await data.reader.compile(command.code, data)
-                if (res?.code && !interaction.replied) {
-                    await interaction.reply(res.code)
-                }
-            }
+            if (command) await data.reader.compile(command.code, data)
         }
     }
 })
