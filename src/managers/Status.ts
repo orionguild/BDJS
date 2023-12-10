@@ -1,4 +1,5 @@
 import { ActivityType, Collection } from 'discord.js'
+import { Data } from '../structures/Data'
 import { Bot } from '../structures/Bot'
 import { Util } from '../util/Util'
 import { Log } from '../util/Log'
@@ -58,15 +59,17 @@ export class StatusManager {
     /**
      * Rotates all cached statuses.
      */
-    async rotate() {
+    async rotate(d: Data) {
         let i = 0;
         while (true) {
             const data = this.#data.get(i.toString()) as StatusData
 
+            const text = await d.reader.compile(data.text, d)
+
             this.#bot.user.presence.set({
                 activities: [
                     {
-                        name: data.text,
+                        name: text!.code,
                         type: data.type
                     }
                 ],

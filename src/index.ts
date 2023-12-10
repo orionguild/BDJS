@@ -1,4 +1,5 @@
 import { ActivityType, SlashCommandBuilder } from 'discord.js'
+import { BaseFunction } from './structures/Function'
 import { BDJSOptions, Bot } from './structures/Bot'
 import { CommandData } from './managers/Command'
 import { Data } from './structures/Data'
@@ -122,6 +123,7 @@ function BDJSDefaultOptions(auth: `${string}.${string}.${string}`, prefixes: str
 
 export {
     ActivityType,
+    BaseFunction,
     BDJSOptions,
     BDJSDefaultOptions,
     Bot,

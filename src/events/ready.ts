@@ -4,6 +4,7 @@ import { Agent, request } from 'undici'
 import { exec } from 'child_process'
 import { Log } from '../util/Log'
 import clc from 'cli-color'
+import { inspect } from 'util'
 
 export default new BaseEvent({
     name: 'onReady',
@@ -66,12 +67,10 @@ export default new BaseEvent({
                 command.code,
                 data
             ).catch(e => {
-                Log.error(
-                    JSON.stringify(e, null, 4)
-                )
+                Log.error(inspect(e, { depth: 4 }))
             })
         }
 
-        if (bot.status.size > 0) bot.status.rotate()
+        if (bot.status.size > 0) bot.status.rotate(data)
     }
 })
