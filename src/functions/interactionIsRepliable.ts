@@ -4,9 +4,7 @@ import { BaseInteraction } from 'discord.js'
 export default new BaseFunction({
     description: 'Check whether interaction is repliable or not.',
     code: async function(d) {
-        if (!(d.ctx?.data instanceof BaseInteraction)) return d.logs.error(
-            'Disallowed function: $interactionIsRepliable just can be used inside interactions.'
-        )
+        if (!(d.ctx?.data instanceof BaseInteraction)) throw new d.error(d, 'disallowed', d.function?.name!, 'interactions')
         return d.ctx.data.isRepliable()
     }
 })

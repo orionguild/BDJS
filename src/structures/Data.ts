@@ -9,6 +9,8 @@ import { Util } from '../util/Util'
 import { Log } from '../util/Log'
 import { Bot } from './Bot'
 
+export type AddProperty<T, K extends string, V> = T & { [key in K]: V };
+
 interface DataOptions {
     /** BDJS client instance. */
     bot?: Bot
@@ -33,14 +35,14 @@ export class Data {
     ctx?: Context<any>
     env: Record<string, any>
     functions: FunctionManager
-    function?: BaseFunction
+    function?: AddProperty<BaseFunction, 'name', string>
     instanceTime?: Date
     commandType: StringCommandTypes
     compiled: CompiledData & Record<string, any>
     container: Container
     reader: Reader
     util: typeof Util
-    logs: typeof Log
+    error: typeof Log
     constructor(options: DataOptions) {
         this.bot = options.bot
         this.code = ''
@@ -49,12 +51,12 @@ export class Data {
         this.instanceTime = options.instanceTime ?? new Date
         this.commandType = options.commandType ?? 'unknown'
         this.compiled = {} as CompiledData
-        this.function = {} as BaseFunction
+        this.function = {} as AddProperty<BaseFunction, 'name', string>
         this.container = options.container ?? new Container
         this.ctx = options.context
         this.reader = options.reader ?? new Reader()
         this.condition = Condition
-        this.logs = Log
+        this.error = Log
         this.util = Util
     }
 

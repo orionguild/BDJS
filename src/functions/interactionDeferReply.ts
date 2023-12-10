@@ -1,5 +1,6 @@
 import { BaseFunction } from '../structures/Function'
 import { BaseInteraction } from 'discord.js'
+import { inspect } from 'util'
 
 export default new BaseFunction({
     description: 'Defers an interaction.',
@@ -22,20 +23,15 @@ export default new BaseFunction({
         }
     ],
     code: async function(d, [ephemeral = 'false', returnId = 'false']) {
-        if (!(d.ctx?.data instanceof BaseInteraction)) return d.logs.error(
-            'Disallowed function: $interactionDeferReply just can be used inside interactions.'
-        )
-        if (!d.ctx.data.isRepliable()) return d.logs.error(
-            d.commandType + ' is not repliable.'
-        )
-        if (d.ctx.data.deferred) return d.logs.error(
-            'Cannot defer an interaction that is already deferred.'
-        )
+        if (!(d.ctx?.data instanceof BaseInteraction))
+            throw new d.error(d, 'disallowed', d.function?.name!, 'interactions')
+        if (!d.ctx.data.isRepliable()) throw new d.error(d, 'custom', `${d.commandType} is not repliable.`)
+        if (d.ctx.data.deferred) throw new d.error(d, 'custom', 'Cannot defer an interaction that is already deferred.')
 
         const data = await d.ctx.data.deferReply({ ephemeral: ephemeral === 'true' }).then((res) => {
             return res
         }).catch(e => {
-            d.logs.error(JSON.stringify(e, null, 4))
+            throw new d.error(d, 'custom', inspect(e, { depth: 4 }))
         })
 
         if (data && data.id && returnId === 'true') return data.id

@@ -12,6 +12,8 @@ export default new BaseFunction({
         }
     ],
     code: async function(d, [text]) {
+        if (text === undefined) throw new d.error(d, 'required', 'Texts', d.function?.name!)
+        
         console.log(text)
     }
 })

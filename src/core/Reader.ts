@@ -1,5 +1,6 @@
+import { AddProperty, Data } from '../structures/Data'
 import { RawFunction, RawString } from './Structures'
-import { Data } from '../structures/Data'
+import { BaseFunction } from '../structures/Function'
 import { Log } from '../util/Log'
 import { inspect } from 'util'
 
@@ -181,8 +182,8 @@ export class Reader {
 
         for (const dfunc of compiled.functions) {
             if (data.bot?.extraOptions.debug === true) Log.debug(`Parsing ${dfunc.name} => ${dfunc.toString}`)
-            const spec = data.functions.get(dfunc.name.slice(1).toLowerCase())
-            data.function = spec
+            const spec = data.functions.get(dfunc.name.slice(1).toLowerCase()) as AddProperty<BaseFunction, 'name', string>
+            spec.name = dfunc.name, data.function = spec
 
             if (!spec) {
                 Log.error(

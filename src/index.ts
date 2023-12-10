@@ -17,6 +17,7 @@ export type StringCommandTypes = 'always'
 | 'contextMenuInteraction'
 | 'autocompleteInteraction'
 | 'unknown'
+
 export type StringEventNames = 'onApplicationCommandPermissionsUpdate'
 | 'onAutoModerationActionExecution'
 | 'onAutoModerationRuleCreate'
@@ -129,5 +130,6 @@ export {
     Bot,
     CommandData,
     Data,
+    Log,
     SlashCommandBuilder
 }

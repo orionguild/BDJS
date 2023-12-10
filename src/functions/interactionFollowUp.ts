@@ -1,5 +1,6 @@
 import { BaseFunction } from '../structures/Function'
 import { BaseInteraction } from 'discord.js'
+import { inspect } from 'util'
 
 export default new BaseFunction({
     description: 'Follow up an interaction reply.',
@@ -27,15 +28,9 @@ export default new BaseFunction({
         }
     ],
     code: async function(d, [message, ephemeral = 'false', returnId = 'false']) {
-        if (!(d.ctx?.data instanceof BaseInteraction)) return d.logs.error(
-            'Disallowed function: $interactionReply just can be used inside interactions.'
-        )
-        if (!d.ctx.data.isRepliable()) return d.logs.error(
-            d.commandType + ' is not repliable.'
-        )
-        if (!d.ctx.data.replied) return d.logs.error(
-            'Cannot follow up an interaction that is not replied.'
-        )
+        if (!(d.ctx?.data instanceof BaseInteraction)) throw new d.error(d, 'disallowed', d.function?.name!, 'interactions')
+        if (!d.ctx.data.isRepliable()) throw new d.error(d, 'custom', `${d.commandType} is not repliable.`)
+        if (!d.ctx.data.replied) throw new d.error(d, 'custom', 'Cannot follow up an interaction that is not replied.')
 
         const result = await d.reader.compile(message, d)
         if (result?.code) d.container.pushContent(result.code)
@@ -46,7 +41,7 @@ export default new BaseFunction({
             d.container.clear()
             return res
         }).catch(e => {
-            d.logs.error(JSON.stringify(e, null, 4))
+            throw new d.error(d, 'custom', inspect(e, { depth: 4 }))
         })
 
         if (data && data.id && returnId === 'true') return data.id

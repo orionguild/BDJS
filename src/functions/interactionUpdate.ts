@@ -1,5 +1,6 @@
 import { MessageComponentInteraction } from 'discord.js'
 import { BaseFunction } from '../structures/Function'
+import { inspect } from 'util'
 
 export default new BaseFunction({
     description: 'Updates an interaction.',
@@ -21,15 +22,9 @@ export default new BaseFunction({
         }
     ],
     code: async function(d, [message, returnId = 'false']) {
-        if (!(d.ctx?.data instanceof MessageComponentInteraction)) return d.logs.error(
-            'Disallowed function: $interactionUpdate just can be used inside component interactions.'
-        )
-        if (!d.ctx.data.isRepliable()) return d.logs.error(
-            d.commandType + ' is not repliable.'
-        )
-        if (!d.ctx.data.replied) return d.logs.error(
-            'Cannot update an interaction that is not replied.'
-        )
+        if (!(d.ctx?.data instanceof MessageComponentInteraction)) throw new d.error(d, 'disallowed', d.function?.name!, 'component interactions')
+        if (!d.ctx.data.isRepliable()) throw new d.error(d, 'custom', `${d.commandType} is not repliable.`)
+        if (!d.ctx.data.replied) throw new d.error(d, 'custom', 'Cannot update an interaction that is not replied.')
 
         const result = await d.reader.compile(message, d)
         if (result?.code) d.container.pushContent(result.code)
@@ -38,7 +33,7 @@ export default new BaseFunction({
             d.container.clear()
             return res
         }).catch(e => {
-            d.logs.error(JSON.stringify(e, null, 4))
+            throw new d.error(d, 'custom', inspect(e, { depth: 4 }))
         })
 
         if (data && data.id && returnId === 'true') return data.id
