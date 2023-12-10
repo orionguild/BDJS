@@ -1,5 +1,7 @@
-import { SlashCommandBuilder } from 'discord.js'
+import { ActivityType, SlashCommandBuilder } from 'discord.js'
 import { BDJSOptions, Bot } from './structures/Bot'
+import { CommandData } from './managers/Command'
+import { Data } from './structures/Data'
 import { Log } from './util/Log'
 
 export type StringCommandTypes = 'always'
@@ -119,8 +121,11 @@ function BDJSDefaultOptions(auth: `${string}.${string}.${string}`, prefixes: str
 }
 
 export {
+    ActivityType,
     BDJSOptions,
     BDJSDefaultOptions,
     Bot,
+    CommandData,
+    Data,
     SlashCommandBuilder
 }

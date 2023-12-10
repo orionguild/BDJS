@@ -35,7 +35,6 @@ export interface BDJSOptions extends ClientOptions {
     database?: DataBaseOptions
     disableLogs?: boolean
     events: StringEventNames[]
-    pointErrorsTo?: 'stdout' | 'discord'
     prefixes: string[]
     replyBots?: boolean
 }
