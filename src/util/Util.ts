@@ -1,4 +1,4 @@
-import { Guild } from 'discord.js'
+import { Guild, PermissionsBitField, PermissionsString } from 'discord.js'
 
 export class Util {
     /**
@@ -78,6 +78,16 @@ export class Util {
         }
         // If the type is not handled, return the input as is
         return input;
+    }
+
+    /**
+     * Validates all provided permissions names.
+     * @param permissions - Permission names.
+     * @returns {boolean}
+     */
+    static validatePermissions(...permissions: PermissionsString[]) {
+        const validPermissions = Object.keys(PermissionsBitField.Flags)
+        return permissions.every(t => validPermissions.includes(t))
     }
 
     /**

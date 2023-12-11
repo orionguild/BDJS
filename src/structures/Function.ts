@@ -33,6 +33,14 @@ interface BaseFieldOptions {
 
 export interface BaseFunction {
     /**
+     * Whether function support builder functions.
+     */
+    builders?: boolean
+    /**
+     * Whether function is subfunction-injectable.
+     */
+    injectable?: boolean
+    /**
      * Description for this function.
     */
     description: string
@@ -45,6 +53,8 @@ export interface BaseFunction {
 
 export class BaseFunction implements BaseFunction {
     constructor(options: BaseFunction) {
+        this.builders = options.builders ?? false
+        this.injectable = options.injectable ?? false
         this.description = options.description
         this.parameters = options.parameters ?? []
         this.code = options.code

@@ -29,7 +29,7 @@ export default new BaseEvent<[Message]>({
                 command.code,
                 data
             )
-            if (res?.code) await message.channel.send(res.code)
+            if (res.code !== '') await message.channel.send(res.code)
         }
 
         // Unprefixed commands.
@@ -50,7 +50,7 @@ export default new BaseEvent<[Message]>({
                     command.code,
                     data
                 )
-                if (res?.code) await message.channel.send(res.code)
+                if (res.code !== '') await message.channel.send(res.code)
             }
         }
 
@@ -80,7 +80,7 @@ export default new BaseEvent<[Message]>({
                 command.code,
                 data
             )
-            if (res?.code) await message.channel.send(res.code)
+            if (res.code !== '') await message.channel.send(res.code)
         }
     }
 })

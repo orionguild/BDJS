@@ -142,3 +142,6 @@ As of now, these events are supported.
 
 ## Resources
 > Auto-generated documentation: [Click here](https://cyberghxst.github.io/bdjs)
+
+## What inspired BDJS?
+> HyteScript.js: [npm](https://npmjs.com/package/hytescript.js)

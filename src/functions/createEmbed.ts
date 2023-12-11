@@ -2,6 +2,8 @@ import { BaseFunction } from '../structures/Function'
 import { EmbedBuilder } from 'discord.js'
 
 export default new BaseFunction({
+    builders: true,
+    injectable: true,
     description: 'Creates an embed.',
     parameters: [
         {
