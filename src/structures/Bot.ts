@@ -9,6 +9,7 @@ import { EventManager } from '../managers/Event'
 import { StringEventNames } from '../index'
 import { Reader } from '../core/Reader'
 import { BDJSLog } from '../util/BDJSLog'
+import { Plugin } from './Plugin'
 
 /**
  * Convert BDJS names into RAW discord.js client.
@@ -37,6 +38,7 @@ export interface BDJSOptions extends ClientOptions {
     disableLogs?: boolean
     debug?: boolean
     events: StringEventNames[]
+    plugins?: Plugin[]
     prefixes: string[]
     replyBots?: boolean
 }
@@ -85,7 +87,7 @@ export class Bot extends Client<true> {
         this.on('ready', () => require('../events/ready').default.listener(this))
 
         // Loading core.
-        await this.events.load(this)
+        await this.events.loadNatives(this)
         await this.db.init()
         return await super.login(
             this.extraOptions.auth

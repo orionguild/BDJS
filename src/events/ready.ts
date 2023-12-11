@@ -1,8 +1,9 @@
 import { BaseEvent } from '../structures/Event'
+import { Plugin } from '../structures/Plugin'
 import { Data } from '../structures/Data'
+import { BDJSLog } from '../util/BDJSLog'
 import { Agent, request } from 'undici'
 import { exec } from 'child_process'
-import { BDJSLog } from '../util/BDJSLog'
 import { inspect } from 'util'
 
 export default new BaseEvent({
@@ -10,14 +11,26 @@ export default new BaseEvent({
     description: 'Executed when client user is ready.',
     once: true,
     async listener(bot) {
-        await bot.functions.load().then(() => {
+        await bot.functions.loadNatives().then(() => {
             if (bot.extraOptions.debug === true) BDJSLog.debug(
                 [
-                    `${bot.functions.size} functions were loaded`,
-                    '$' + bot.functions.keyArray().join(' - $')
+                    `${bot.functions.size} native functions were loaded`,
+                    // '$' + bot.functions.keyArray().join(' - $')
                 ].join('\n')
             )
         })
+
+        // Plugin loader
+        if (bot.extraOptions.plugins && bot.extraOptions.plugins.length > 0) {
+            for (const plugin of bot.extraOptions.plugins) {
+                if (plugin instanceof Plugin) {
+                    plugin.__attach__(bot)
+                    BDJSLog.info(`Plugin loaded: "${plugin.name}" - ${plugin.version}`)
+                } else
+                    // @ts-ignore
+                    BDJSLog.error('Cannot load plugin: ' + plugin.constructor.name)
+            }
+        }
 
         const autoUpdate = bot.extraOptions.autoUpdate ?? true
         const disableLogs = bot.extraOptions.disableLogs ?? false

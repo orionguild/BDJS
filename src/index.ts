@@ -2,6 +2,7 @@ import { ActivityType, SlashCommandBuilder } from 'discord.js'
 import { BaseFunction } from './structures/Function'
 import { BDJSOptions, Bot } from './structures/Bot'
 import { CommandData } from './managers/Command'
+import { Plugin } from './structures/Plugin'
 import { Data } from './structures/Data'
 import { BDJSLog } from './util/BDJSLog'
 
@@ -139,10 +140,11 @@ export {
     BaseFunction,
     BDJSCustomEvents,
     BDJSDefaultOptions,
+    BDJSLog,
     BDJSOptions,
     Bot,
     CommandData,
     Data,
-    BDJSLog,
+    Plugin,
     SlashCommandBuilder
 }

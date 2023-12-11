@@ -10,7 +10,7 @@ export class EventManager extends AdvancedCollection<string, BaseEvent<any>> {
      * Load events from a directory.
      * @param bot - BDJS client.
      */
-    async load(bot: Bot) {
+    async loadNatives(bot: Bot) {
         const root = __dirname.replace('managers', 'events')
         const files = await readdir(root)
 

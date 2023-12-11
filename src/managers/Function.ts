@@ -11,7 +11,7 @@ export class FunctionManager extends AdvancedCollection<string, BaseFunction> {
      * @param {string} dir Function directory.
      * @returns {Promise<void>}
      */
-    async load() {
+    async loadNatives() {
         const root = __dirname.replace('managers', 'functions'), files = await readdir(root)
 
         for (const file of files) {
