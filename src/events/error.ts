@@ -22,10 +22,24 @@ export default new BaseEvent<[Error]>({
                 reader: bot.reader
             })
 
+            data.functions.add({
+                name: 'getError',
+                description: 'Get an error prooerty.',
+                code: async (d, [property]) => {
+                    const properties = ['message', 'stack', 'raw']
+                        if (!properties.includes(property.toLowerCase()))
+                            throw new data.error(data, 'invalid', 'property', data.function?.name!)
+                        
+                        const err = inspect(property.toLowerCase() === 'raw' ? error : (error as any)[property], { depth: 4 })
+
+                        return err
+                }
+            })
+
             for (const command of commands) {
                 await data.reader.compile(command.code, data)
             }
         }
-        
+
     }
 })
