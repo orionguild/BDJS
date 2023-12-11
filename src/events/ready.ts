@@ -47,7 +47,7 @@ export default new BaseEvent({
             ].join('\n'))
         }
         
-        if (autoUpdate) {
+        if (autoUpdate && fetchedVersion !== currentVersion) {
             const res = exec('npm i bdjs@latest', error => {
                 if (error) {
                     Log.error([
