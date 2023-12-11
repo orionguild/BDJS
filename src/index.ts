@@ -18,6 +18,9 @@ export type StringCommandTypes = 'always'
 | 'contextMenuInteraction'
 | 'autocompleteInteraction'
 | 'unknown'
+// BDJS customs
+| 'interval'
+| 'timeout'
 
 export type StringEventNames = 'onApplicationCommandPermissionsUpdate'
 | 'onAutoModerationActionExecution'
@@ -93,6 +96,14 @@ export type StringEventNames = 'onApplicationCommandPermissionsUpdate'
 | 'onGuildScheduledEventDelete'
 | 'onGuildScheduledEventUserAdd'
 | 'onGuildScheduledEventUserRemove'
+// BDJS customs
+| 'onTimeout'
+| 'onInterval'
+
+interface BDJSCustomEvents {
+    interval: (data: Record<string, any>) => void
+    timeout: (data: Record<string, any>) => void
+}
 
 function BDJSDefaultOptions(auth: `${string}.${string}.${string}`, prefixes: string[]) {
     if (!auth) return BDJSLog.error('You must provide a bot token!')
@@ -126,8 +137,9 @@ function BDJSDefaultOptions(auth: `${string}.${string}.${string}`, prefixes: str
 export {
     ActivityType,
     BaseFunction,
-    BDJSOptions,
+    BDJSCustomEvents,
     BDJSDefaultOptions,
+    BDJSOptions,
     Bot,
     CommandData,
     Data,

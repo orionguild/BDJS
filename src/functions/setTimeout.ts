@@ -39,7 +39,7 @@ export default new BaseFunction({
         setTimeout(() => {
             d.reader.compile(code, d).then((compiled) => {
                 if (compiled.code !== '')
-                    d.setEnvironmentVariable(variable, compiled.code)
+                    d.setEnvironmentVariable(variable, compiled.code), d.bot?.emit('timeout', d.env)
             })
         }, ms(duration))
 

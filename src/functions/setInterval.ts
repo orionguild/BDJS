@@ -39,7 +39,7 @@ export default new BaseFunction({
         setInterval(() => {
             d.reader.compile(code, d).then((compiled) => {
                 if (compiled.code !== '')
-                    d.setEnvironmentVariable(variable, compiled.code)
+                    d.setEnvironmentVariable(variable, compiled.code), d.bot?.emit('interval', d.env)
             })
         }, ms(duration))
 
