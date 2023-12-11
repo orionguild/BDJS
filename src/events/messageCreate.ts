@@ -20,6 +20,9 @@ export default new BaseEvent<[Message]>({
             const data = new Data({
                 bot,
                 context,
+                env: {
+                    '__BDJS__ARGS__': message.content.split(/ +/g)
+                },
                 commandType: 'always',
                 functions: bot.functions,
                 instanceTime: new Date,
@@ -42,6 +45,9 @@ export default new BaseEvent<[Message]>({
                     bot,
                     context,
                     commandType: 'unprefixed',
+                    env: {
+                        '__BDJS__ARGS__': args
+                    },
                     functions: bot.functions,
                     instanceTime: new Date,
                     reader: bot.reader,
@@ -60,6 +66,9 @@ export default new BaseEvent<[Message]>({
             bot,
             context,
             commandType: 'prefixed',
+            env: {
+                '__BDJS__ARGS__': args
+            },
             functions: bot.functions,
             instanceTime: new Date,
             reader: bot.reader,
