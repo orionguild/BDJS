@@ -276,7 +276,7 @@ const bot = new Bot({
 })
 ```
 ### Modules
-Every function/export must be under "default" property.
+Every function/event export must be under "default" property.
 ```js
 const { BaseFunction } = require('bdjs')
 
