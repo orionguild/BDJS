@@ -6,7 +6,9 @@
 # Files
 .eslintrc.json
 .gitignore
+builders.descriptions.txt
 command.types.descriptions.txt
+injection.descriptions.txt
 event.names.descriptions.txt
 pnpm-lock.yaml
 tsconfig.json

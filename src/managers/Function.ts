@@ -1,5 +1,6 @@
-import { BaseFunction } from '../structures/Function'
 import { AdvancedCollection } from 'nekord-collection'
+import { BaseFunction } from '../structures/Function'
+import { AddProperty } from '../structures/Data'
 import { readdir } from 'fs/promises'
 import { join } from 'path'
 
@@ -31,6 +32,19 @@ export class FunctionManager extends AdvancedCollection<string, BaseFunction> {
             }
         }
 
+    }
+
+    /**
+     * Adds a function into the manager.
+     * @param data - Array of functions.
+     * @returns {FunctionManager}
+     */
+    add(...data: AddProperty<BaseFunction, 'name', string>[]) {
+        for (const func of data) {
+            const name = func.name.toLowerCase(), body = func as BaseFunction
+            this.set(name.startsWith('$') ? name.slice(1) : name, body)
+        }
+        return this
     }
 
     /**
