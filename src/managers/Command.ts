@@ -181,6 +181,7 @@ export class CommandManager extends AdvancedCollection<string, CommandData> {
     get types(): StringCommandTypes[] {
         return [
             'always',
+            'error',
             'prefixed',
             'unprefixed',
             'ready',

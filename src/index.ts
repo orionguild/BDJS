@@ -6,6 +6,7 @@ import { Data } from './structures/Data'
 import { BDJSLog } from './util/BDJSLog'
 
 export type StringCommandTypes = 'always'
+| 'error'
 | 'ready'
 | 'prefixed'
 | 'unprefixed'

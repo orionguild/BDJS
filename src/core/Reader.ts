@@ -217,6 +217,8 @@ export class Reader {
             }
 
             const result = await spec.code(data, fields).catch(e => {
+                if (data.bot?.extraOptions.events.includes('onError'))
+                    data.bot.emit('error', e);
                 throw e
             })
 
