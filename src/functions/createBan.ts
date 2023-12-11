@@ -19,6 +19,14 @@ export default new BaseFunction({
             required: false,
             resolver: 'String',
             value: 'd.ctx?.guild?.id'
+        },
+        {
+            name: 'Options',
+            description: 'Ban creation option builders.',
+            required: false,
+            compile: false,
+            resolver:'String',
+            value: 'none'
         }
     ],
     code: async function(d, [userID, guildID = d.ctx?.guild?.id, options]) {
