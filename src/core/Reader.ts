@@ -186,29 +186,21 @@ export class Reader {
             const functionData = { name: dfunc.name, ...spec } as AddProperty<BaseFunction, 'name', string>
             data.function = functionData
 
-            if (!spec) {
-                Log.error(
-                    [
-                        '"' + dfunc.name + '" is not a function.',
-                        '|-> Please provide a valid function name at:',
-                        '|-> Line: ' + dfunc.line,
-                        '|-> Source: "' + dfunc.toString + '"',
-                        '|--------------------------------------------'
-                    ].join('\n')
-                )
-                return
-            } else if (dfunc.closed === false) {
-                Log.error(
-                    [
-                        '"' + dfunc.name + '" is not a closed.',
-                        '|-> Please make sure to close function fields at:',
-                        '|-> Line: ' + dfunc.line,
-                        '|-> Source: "' + dfunc.toString + '"',
-                        '|-------------------------------------------------'
-                    ].join('\n')
-                )
-                return
-            }
+            if (!spec) throw new data.error(data, 'custom', [
+                '"' + dfunc.name + '" is not a function.',
+                '|-> Please provide a valid function name at:',
+                '|-> Line: ' + dfunc.line,
+                '|-> Source: "' + dfunc.toString + '"',
+                '|--------------------------------------------'
+            ].join('\n'))
+
+            if (dfunc.closed === false) throw new data.error(data, 'custom', [
+                '"' + dfunc.name + '" is not a closed.',
+                '|-> Please make sure to close function fields at:',
+                '|-> Line: ' + dfunc.line,
+                '|-> Source: "' + dfunc.toString + '"',
+                '|-------------------------------------------------'
+            ].join('\n'))
 
             const fields = dfunc.fields.map(field => field.value)
             for (let idx = 0; idx < fields.length; idx++) {
@@ -223,11 +215,12 @@ export class Reader {
             }
 
             const result = await spec.code(data, fields).catch(e => {
-                Log.error([
+                throw new data.error(data, 'custom', [
                     'Something internal went wrong!',
                     inspect(e, { depth: 5 })
                 ].join('\n'))
             })
+            
             parsedFunctions[parsedFunctions.length] = result === undefined ? '' : result
         }
 

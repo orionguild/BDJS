@@ -42,10 +42,9 @@ export default new BaseFunction({
 
         const results: string[] = []
 
-        try {
-            const res = await d.reader.compile(code, d)
-            if (res?.code) results.push(res.code)
-        } catch (e: any) {
+        d.reader.compile(code, d).then((data) => {
+            if (data.code !== '') results.push(data.code)
+        }).catch(async (e) => {
             const data = d.extend(d)
             data.functions.set('error',
                 new BaseFunction({
@@ -63,12 +62,12 @@ export default new BaseFunction({
             );
 
             const res = await data.reader.compile(catchCode, data)
+            if (res.code !== '') results.push(res.code)
+        })
+
+        if (finallyCode) {
+            const res = await d.reader.compile(finallyCode, d)
             if (res?.code) results.push(res.code)
-        } finally {
-            if (finallyCode) {
-                const res = await d.reader.compile(finallyCode, d)
-                if (res?.code) results.push(res.code)
-            }
         }
 
         return results.join(sep)
