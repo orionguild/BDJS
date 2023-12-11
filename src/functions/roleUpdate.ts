@@ -1,18 +1,17 @@
-import { ColorResolvable, PermissionsString, RoleCreateOptions, resolveColor } from 'discord.js'
+import { ColorResolvable, PermissionsString, RoleEditOptions, resolveColor } from 'discord.js'
 import { BaseFunction } from '../structures/Function'
 import { inspect } from 'util'
 
 export default new BaseFunction({
     builders: true,
     injectable: false,
-    description: 'Creates a role in a guild.',
+    description: 'Updates a role in a guild.',
     parameters: [
         {
-            name: 'Name',
-            description: 'The name for the role.',
+            name: 'Role ID',
+            description: 'Guild role ID to be updated.',
             required: true,
             resolver: 'String',
-            compile: true,
             value: 'none'
         },
         {
@@ -25,27 +24,23 @@ export default new BaseFunction({
         },
         {
             name: 'Guild ID',
-            description: 'The ID of the guild where role should be created.',
+            description: 'The ID of the guild where role will be updated.',
             required: false,
             resolver: 'String',
             value: 'd.ctx?.guild?.id'
-        },
-        {
-            name: 'Return ID',
-            description: 'Whether return role ID.',
-            required: false,
-            resolver: 'Boolean',
-            value: 'false'
         }
     ],
-    code: async function(d, [name, options, guildID = d.ctx?.guild?.id, returnID = 'false']) {
+    code: async function(d, [roleID, options, guildID = d.ctx?.guild?.id]) {
         if (name === undefined) throw new d.error(d, 'required', 'Texts', d.function?.name!)
         if (guildID === undefined) throw new d.error(d, 'invalid', 'Guild ID', d.function?.name!)
 
         const guild = d.bot?.guilds.cache.get(guildID)
         if (!guild) throw new d.error(d, 'invalid', 'Guild', d.function?.name!)
 
-        const data = {} as RoleCreateOptions
+        const role = guild.roles.cache.get(roleID) ?? await guild.roles.fetch(roleID)
+        if (!role) throw new d.error(d, 'invalid', 'Role', d.function?.name!)
+
+        const data = {} as RoleEditOptions
 
         data.name = name
 
@@ -78,6 +73,12 @@ export default new BaseFunction({
                 code: async (t, [mentionable = 'true']) => {
                     data.mentionable = mentionable === 'true'
                 }
+            })).set('setname', new BaseFunction({
+                description: 'Set the name for this role.',
+                code: async (t, [name]) => {
+                    if (name === undefined) throw new t.error(d, 'required', 'name', t.function?.name!)
+                    data.name = name
+                }
             })).set('setpermissions', new BaseFunction({
                 description: 'Set the permissions for this role.',
                 code: async (t, [...permissions]) => {
@@ -103,13 +104,9 @@ export default new BaseFunction({
 
             await subdata.reader.compile(options, subdata)
         }
-
-        const role = await guild.roles.create(data).then((r) => {
-            return r
-        }).catch(e => {
-            throw new d.error(d, 'custom', inspect(e, { depth: 1 }))
+        
+        await role.edit(data).catch(e => {
+            throw new d.error(d, 'custom', inspect(e))
         })
-
-        if (returnID === 'true' && role.id) return role.id
     }
 })
