@@ -2,18 +2,18 @@ import { BaseFunction } from '../structures/Function'
 import ms from 'ms'
 
 export default new BaseFunction({
-    description: 'Executes a code when the timeout ends.',
+    description: 'Executes a code after certain time.',
     parameters: [
         {
-            name: 'Duration',
-            description: 'The time to hold the code.',
+            name: 'Time',
+            description: 'The time to execute the code.',
             required: true,
             resolver: 'String',
             value: 'none'
         },
         {
             name: 'Code',
-            description: 'The code to be executed when the timeout ends.',
+            description: 'The code to be executed.',
             required: true,
             compile: false,
             resolver: 'String',
@@ -36,7 +36,7 @@ export default new BaseFunction({
 
         if (isNaN(parsedDuration)) throw new d.error(d, 'invalid', 'Duration', d.function?.name!)
 
-        setTimeout(() => {
+        setInterval(() => {
             d.reader.compile(code, d).then((compiled) => {
                 if (compiled.code !== '')
                     d.setEnvironmentVariable(variable, compiled.code)
