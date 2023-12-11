@@ -1,11 +1,12 @@
 import { BDJSApplicationCommandManager } from '../managers/ApplicationCommand'
 import { Client, ClientEvents, ClientOptions } from 'discord.js'
 import { FunctionManager } from '../managers/Function'
+import { VariableManager } from '../managers/Variable'
 import { CommandManager } from '../managers/Command'
 import { StatusManager } from '../managers/Status'
 import { EventManager } from '../managers/Event'
-import { DataBaseOptions } from 'collie-db'
 import { StringEventNames } from '../index'
+import DataBase, { DataBaseOptions } from 'collie-db'
 import { Reader } from '../core/Reader'
 import { BDJSLog } from '../util/BDJSLog'
 
@@ -51,13 +52,27 @@ export class Bot extends Client<true> {
     public reader = new Reader
     public status = new StatusManager(this)
     public extraOptions: BDJSOptions
+    public db: DataBase
+    public vars: VariableManager
     constructor(options: BDJSOptions) {
         super(options)
         this.extraOptions = options
+        this.db = new DataBase(options.database)
+        this.vars = new VariableManager(options.database?.tables.map(t => t.name) ?? ['main'], this.db)
 
         // Prefix validation
         if (options.prefixes.length === 0)
             BDJSLog.error('Provide 1 prefix at least!'), process.exit()
+    }
+
+    /**
+     * Load variables into the client.
+     * @param data - Variable records.
+     * @param {string} [table="main"] - Table name.
+     * @returns {VariableManager}
+     */
+    variables(data: Record<string, any>, table = 'main') {
+        return this.vars.fillTable(data, table)
     }
 
     /**
@@ -71,6 +86,7 @@ export class Bot extends Client<true> {
 
         // Loading core.
         await this.events.load(this)
+        await this.db.init()
         return await super.login(
             this.extraOptions.auth
         )
