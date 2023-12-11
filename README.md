@@ -132,13 +132,14 @@ const bot = new Bot({
 ```
 
 ## Supported events
-As of now, these events are supported.
 |        Name         |               Description                |
 |---------------------|------------------------------------------|
 | onError             | Executed when an error is emitted.       |
 | onInteractionCreate | Executed when an interaction is created. |
+| onInterval          | Executed when an interval is emitted.    |
 | onMessageCreate     | Executed when a message is created.      |
 | onReady             | Executed when client user is ready.      |
+| onTimeout           | Executed when a timeout is emitted.      |
 
 ## Function
 Functions are the compact way to interact with the Discord API.
@@ -288,7 +289,7 @@ module.exports['default'] = new BaseFunction({
 ```
 ### Aditional Information
 You must use BaseFunction and BaseEvent class to export your plugins.
-RAW objects will not be loaded.
+RAW objects wont be loaded.
 ```js
 const { BaseEvent, BaseFunction } = require('bdjs')
 
@@ -328,4 +329,5 @@ module.exports['default'] = {
 
 ## What inspired BDJS?
 > HyteScript.js: [npm](https://npmjs.com/package/hytescript.js)
+
 > ForgeScript: [npm](https://npmjs.com/package/forgescript)
