@@ -42,17 +42,17 @@ export default new BaseFunction({
 
         const results: string[] = []
 
-        d.reader.compile(code, d).then((data) => {
-            if (data.code !== '') results.push(data.code)
+        d.reader.compile(code, d).then((compiled) => {
+            if (compiled.code !== '') results.push(compiled.code)
         }).catch(async (e) => {
             const data = d.extend(d)
             data.functions.set('error',
                 new BaseFunction({
                     description: 'Retrieves a property from the error.',
-                    code: async function(extended, [property = 'message']) {
+                    code: async function(subdata, [property = 'message']) {
                         const properties = ['message', 'stack', 'raw']
                         if (!properties.includes(property.toLowerCase()))
-                            throw new extended.error(d, 'invalid', 'property', extended.function?.name!)
+                            throw new subdata.error(d, 'invalid', 'property', subdata.function?.name!)
                         
                         const error = inspect(property.toLowerCase() === 'raw' ? e : e[property], { depth: 4 })
 
@@ -61,13 +61,13 @@ export default new BaseFunction({
                 })
             );
 
-            const res = await data.reader.compile(catchCode, data)
-            if (res.code !== '') results.push(res.code)
+            const compiled = await data.reader.compile(catchCode, data)
+            if (compiled.code !== '') results.push(compiled.code)
         })
 
         if (finallyCode) {
-            const res = await d.reader.compile(finallyCode, d)
-            if (res?.code) results.push(res.code)
+            const compiled = await d.reader.compile(finallyCode, d)
+            if (compiled.code !== '') results.push(compiled.code)
         }
 
         return results.join(sep)

@@ -32,12 +32,13 @@ export default new BaseFunction({
         if (then === undefined) throw new d.error(d, 'required', 'then code', d.function?.name!)
 
         const evaluated = d.condition.evaluate(condition)
+        
         if (evaluated) {
-            const result = await d.reader.compile(then, d)
-            if (result?.code) return result.code
+            const compiled = await d.reader.compile(then, d)
+            if (compiled.code !== '') return compiled.code
         } else if (!evaluated && _else) {
-            const result = await d.reader.compile(_else, d)
-            if (result?.code) return result.code
+            const compiled = await d.reader.compile(_else, d)
+            if (compiled.code !== '') return compiled.code
         }
     }
 })

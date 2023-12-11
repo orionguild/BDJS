@@ -204,9 +204,10 @@ export class Reader {
 
             const fields = dfunc.fields.map(field => field.value)
             for (let idx = 0; idx < fields.length; idx++) {
-                const field = fields[idx],
-                    compile = (spec.parameters?.[idx] ?? { compile: true }).compile === true,
-                    unescape = (spec.parameters?.[idx] ?? { unescape: true }).unescape === true
+                const field = fields[idx]
+                
+                const compile = typeof spec.parameters?.[idx] === 'undefined' ? true : 'compile' in spec.parameters[idx] ? spec.parameters[idx].compile === true : true
+                const unescape = typeof spec.parameters?.[idx] === 'undefined' ? true : 'unescape' in spec.parameters[idx] ? spec.parameters[idx].unescape === true : true
                 
                 const parsed = compile ? (await data.reader.compile(field, data))?.code ?? '' : field
                 const result = unescape ? UnescapeText(parsed) : parsed
@@ -220,7 +221,7 @@ export class Reader {
                     inspect(e, { depth: 5 })
                 ].join('\n'))
             })
-            
+
             parsedFunctions[parsedFunctions.length] = result === undefined ? '' : result
         }
 
