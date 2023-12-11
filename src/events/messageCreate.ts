@@ -25,11 +25,11 @@ export default new BaseEvent<[Message]>({
                 instanceTime: new Date,
                 reader: bot.reader,
             })
-            const res = await data.reader.compile(
+            const compiled = await data.reader.compile(
                 command.code,
                 data
             )
-            if (res.code !== '') await message.channel.send(res.code)
+            if (compiled.code !== '') await message.channel.send(compiled.code)
         }
 
         // Unprefixed commands.
@@ -46,11 +46,11 @@ export default new BaseEvent<[Message]>({
                     instanceTime: new Date,
                     reader: bot.reader,
                 })
-                const res = await data.reader.compile(
+                const compiled = await data.reader.compile(
                     command.code,
                     data
                 )
-                if (res.code !== '') await message.channel.send(res.code)
+                if (compiled.code !== '') await message.channel.send(compiled.code)
             }
         }
 
@@ -65,8 +65,8 @@ export default new BaseEvent<[Message]>({
             reader: bot.reader,
         })
         const prefixes = bot.extraOptions.prefixes.map(async prefix => {
-            const res = await data.reader.compile(prefix, data)
-            const prx = res?.code.toLowerCase()
+            const compiled = await data.reader.compile(prefix, data)
+            const prx = compiled?.code.toLowerCase()
             return prx
         })
         const prefix = await prefixes.find(
@@ -76,11 +76,11 @@ export default new BaseEvent<[Message]>({
         const commandName = args.shift()?.slice(prefix.length).toLowerCase() ?? ''
         const command = prefixed.find(cmd => cmd.name?.toLowerCase() === commandName || cmd.aliases?.includes(commandName))
         if (command) {
-            const res = await data.reader.compile(
+            const compiled = await data.reader.compile(
                 command.code,
                 data
             )
-            if (res.code !== '') await message.channel.send(res.code)
+            if (compiled.code !== '') await message.channel.send(compiled.code)
         }
     }
 })

@@ -232,7 +232,7 @@ export class Reader {
             texts[texts.indexOf(`(call_${index})`)] = text
         })
 
-        data.setCode(texts.join(''))
+        data.setCode(texts.join('').trim())
         data.compiled = compiled
         return data as Data
     }
