@@ -1,6 +1,6 @@
 import { BaseFunction } from '../structures/Function'
+import { getMemberProperty } from './memberFetch'
 import { GuildMember } from 'discord.js'
-import { inspect } from 'util'
 
 export default new BaseFunction({
     description: 'Get a guild member property.',
@@ -38,9 +38,11 @@ export default new BaseFunction({
         const member = await guild.members.cache.get(memberID) as GuildMember & Record<string, string>
         if (!member) throw new d.error(d, 'invalid', 'member', d.function?.name!)
 
-        const types = Object.keys(member).concat(['isBot', 'isBannable'])
-        if (!types.includes(property)) throw new d.error(d, 'invalid', 'Property', d.function?.name!)
+        const types = Object.keys(member).map(prop => prop.toLowerCase()).concat([
+            'isbot', 'isbannable', 'ismuted'
+        ])
+        if (!types.includes(property.toLowerCase())) throw new d.error(d, 'invalid', 'Property', d.function?.name!)
 
-        return property === 'isBot' ? member.user.bot : property === 'isBannable' ? member.bannable : typeof member[property] === 'string' ? member[property] : typeof member[property] === 'number' ? member[property].toString() : inspect(member[property])
+        return getMemberProperty(member, property)
     }
 })

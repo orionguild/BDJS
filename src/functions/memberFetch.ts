@@ -2,6 +2,19 @@ import { BaseFunction } from '../structures/Function'
 import { GuildMember } from 'discord.js'
 import { inspect } from 'util'
 
+export function getMemberProperty(member: GuildMember & Record<string, any>, property: string) {
+    switch (property.toLowerCase()) {
+        case 'isbot':
+            return member.user.bot + ''
+        case 'isbannable':
+            return member.bannable + ''
+        case 'ismuted':
+            return (member.communicationDisabledUntil instanceof Date) + ''
+        default:
+            return typeof member[property] === 'string' ? member[property] : inspect(member[property])
+    }
+}
+
 export default new BaseFunction({
     description: 'Fetch a guild member property.',
     parameters: [
@@ -38,9 +51,11 @@ export default new BaseFunction({
         const member = await guild.members.fetch(memberID) as GuildMember & Record<string, string>
         if (!member) throw new d.error(d, 'invalid', 'member', d.function?.name!)
 
-        const types = Object.keys(member).concat(['isBot', 'isBannable'])
-        if (!types.includes(property)) throw new d.error(d, 'invalid', 'Property', d.function?.name!)
+        const types = Object.keys(member).map(prop => prop.toLowerCase()).concat([
+            'isbot', 'isbannable', 'ismuted'
+        ])
+        if (!types.includes(property.toLowerCase())) throw new d.error(d, 'invalid', 'Property', d.function?.name!)
 
-        return property === 'isBot' ? member.user.bot : property === 'isBannable' ? member.bannable : typeof member[property] === 'string' ? member[property] : typeof member[property] === 'number' ? member[property].toString() : inspect(member[property])
+        return getMemberProperty(member, property)
     }
 })
