@@ -18,6 +18,7 @@ export type StringCommandTypes = 'always'
 | 'selectMenuInteraction'
 | 'contextMenuInteraction'
 | 'autocompleteInteraction'
+| 'typing'
 | 'unknown'
 // BDJS customs
 | 'interval'

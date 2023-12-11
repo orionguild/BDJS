@@ -192,6 +192,7 @@ export class CommandManager extends AdvancedCollection<string, CommandData> {
             'contextMenuInteraction',
             'modalInteraction',
             'selectMenuInteraction',
+            'typing',
             'unknown',
             // BDJS Customs
             'interval',
