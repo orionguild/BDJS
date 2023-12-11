@@ -21,7 +21,7 @@ export default new BaseFunction({
         },
         {
             name: 'Variable',
-            description: 'Environment variable name to load the code results, if any.',
+            description: 'Environment variable name to load the code results to, if any.',
             required: true,
             compile: true,
             resolver: 'String',
