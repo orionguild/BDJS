@@ -6,6 +6,8 @@
 # Files
 .eslintrc.json
 .gitignore
+command.types.descriptions.txt
+event.names.descriptions.txt
 pnpm-lock.yaml
 tsconfig.json
 tsconfig.tsbuildinfo
