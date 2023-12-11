@@ -2,7 +2,7 @@ import { ActivityType, Collection } from 'discord.js'
 import { Data } from '../structures/Data'
 import { Bot } from '../structures/Bot'
 import { Util } from '../util/Util'
-import { Log } from '../util/Log'
+import { BDJSLog } from '../util/BDJSLog'
 import ms from 'ms'
 
 interface StatusData {
@@ -35,17 +35,17 @@ export class StatusManager {
                 time = 10000
             } = data
             if (!text) {
-                Log.error('Missing status text!')
+                BDJSLog.error('Missing status text!')
                 break
             } else if (typeof time !== 'string' && typeof time !== 'number') {
-                Log.error('Invalid status time provided!')
+                BDJSLog.error('Invalid status time provided!')
                 break
             }
 
             if (typeof time === 'string') time = ms(time)
 
             if (time === null || isNaN(Number(time))) {
-                Log.error('Invalid status time provided!')
+                BDJSLog.error('Invalid status time provided!')
                 break
             }
 

@@ -3,7 +3,7 @@ import { AdvancedCollection } from 'nekord-collection'
 import { Bot, SlashCommandBuilder, StringCommandTypes } from '../index'
 import { lstat, readdir } from 'fs/promises'
 import { randomUUID } from 'crypto'
-import { Log } from '../util/Log'
+import { BDJSLog } from '../util/BDJSLog'
 import { join } from 'path'
 import clc from 'cli-color'
 
@@ -50,12 +50,12 @@ export class CommandManager extends AdvancedCollection<string, CommandData> {
             command._path_ = 'main_file'.toUpperCase()
             command.name = command.name ?? randomUUID().slice(0, 13).toUpperCase()
             if (!command.code) {
-                Log.error(`"${command.name}" can't be loaded!` + [
+                BDJSLog.error(`"${command.name}" can't be loaded!` + [
                     '|-> at: ' + command.name
                 ].join('\n'))
                 continue
             } else if (!this.#validateType(command.type)) {
-                Log.error([
+                BDJSLog.error([
                     `Invalid command type "${command.type}" provided`,
                     '|-> at: ' + command._path_ + ' => ' + command.name,
                 ].join('\n'))
@@ -76,7 +76,7 @@ export class CommandManager extends AdvancedCollection<string, CommandData> {
      * Load all commands inside a directory.
      * @param dir - Commands directory.
      * @param providing_cwd - Set to "true" if your directory provides a custom cwd.
-     * @param log - Log commands.
+     * @param log - BDJSLog commands.
      */
     async load(dir: string, providing_cwd = false, log = false) {
         const root = providing_cwd ? '' : process.cwd()
@@ -94,12 +94,12 @@ export class CommandManager extends AdvancedCollection<string, CommandData> {
 
             const command = require(join(root, dir, file)) as CommandData
             if (!('code' in command)) {
-                Log.error(`"${file}" can't be loaded!` + [
+                BDJSLog.error(`"${file}" can't be loaded!` + [
                     '|-> at: ' + join(root, dir, file)
                 ].join('\n'))
                 continue
             } else if (!this.#validateType(command.type)) {
-                Log.error([
+                BDJSLog.error([
                     `Invalid command type "${command.type}" provided`,
                     '|-> at: ' + join(root, dir, file)
                 ].join('\n'))
@@ -132,7 +132,7 @@ export class CommandManager extends AdvancedCollection<string, CommandData> {
      * @returns {Promise<void>}
      */
     async reload(bot: Bot) {
-        if (!this.#directory) return Log.error('Cannot find a commands directory.')
+        if (!this.#directory) return BDJSLog.error('Cannot find a commands directory.')
         this.clear()
         return await this.load(this.#directory, this.#cwd, true)
     }
@@ -148,7 +148,7 @@ export class CommandManager extends AdvancedCollection<string, CommandData> {
     }
 
     /**
-     * Log loaded commands.
+     * BDJSLog loaded commands.
      */
     #logCommands() {
         const rows: string[][] = []

@@ -3,8 +3,9 @@ import clc from 'cli-color'
 
 type ErrorTypes = 'client' | 'command' | 'custom' | 'disallowed' | 'internal' | 'invalid' | 'required'
 
-export class Log extends Error {
+export class BDJSLog extends Error {
     name = ''
+    message = ''
     constructor(d: Data, type: ErrorTypes, ...args: string[] | undefined[]) {
         let message: string
 
@@ -13,19 +14,19 @@ export class Log extends Error {
                 message = `🤖 ${clc.blue('BDJS') + ':' + clc.blue('CLIENT')} | ${args.join(' ')}`
                 break
             case 'custom':
-                message = `🤖 ${clc.blue('BDJS') + ':' + clc.white('CUSTOM')} | ${args.join(' ')}`
+                message = `❌ ${clc.blue('BDJS') + ':' + clc.red('ERROR')} | ${args.join(' ')}`
                 break
             case 'command':
                 message = `ℹ  ${clc.blue('BDJS') + ':' + clc.magenta('COMMAND')} | ${args[0]} at ${args[1]}`
                 break
             case 'disallowed':
-                message = `❌ ${clc.blue('BDJS') + ':' + clc.red('DISALLOWED')} | ${args[0]} is only allowed in ${args[1]}`
+                message = `❌ ${clc.blue('BDJS') + ':' + clc.red('DISALLOWED')} | "${args[0]}" is only allowed in ${args[1]}`
                 break
             case 'internal':
                 message = `⚠️ ${clc.blue('BDJS') + ':' + clc.yellowBright('INTERNAL')} | ${args.join(' ')}`
                 break
             case 'invalid':
-                message = `❌ ${clc.blue('BDJS') + ':' + clc.red('ERROR')} | Invalid ${args[0]} in ${args[1]}`
+                message = `❌ ${clc.blue('BDJS') + ':' + clc.red('ERROR')} | Invalid "${args[0]}" in ${args[1]}`
                 break
             case 'required':
                 message = `❌ ${clc.blue('BDJS') + ':' + clc.red('ERROR')} | "${args[0]}" is required in ${args[1]}`
@@ -33,11 +34,11 @@ export class Log extends Error {
         }
 
         super(message)
-
+        this.message = message.split('|').map(x => x.trim())[1]
     }
 
     /**
-     * Log a colored error message into the console.
+     * BDJSLog a colored error message into the console.
      * @param message - The error message.
      * @returns {void}
      */
@@ -51,7 +52,7 @@ export class Log extends Error {
     }
 
     /**
-     * Log a colored information message into the console.
+     * BDJSLog a colored information message into the console.
      * @param message - The information message.
      * @returns {void}
      */
@@ -65,7 +66,7 @@ export class Log extends Error {
     }
 
     /**
-     * Log a colored warning message into the console.
+     * BDJSLog a colored warning message into the console.
      * @param message - The warning message.
      * @returns {void}
      */
@@ -79,7 +80,7 @@ export class Log extends Error {
     }
 
     /**
-     * Log a colored debug message into the console.
+     * BDJSLog a colored debug message into the console.
      * @param message - The debug message.
      * @returns {void}
      */

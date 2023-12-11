@@ -1,7 +1,7 @@
 import { AddProperty, Data } from '../structures/Data'
 import { RawFunction, RawString } from './Structures'
 import { BaseFunction } from '../structures/Function'
-import { Log } from '../util/Log'
+import { BDJSLog } from '../util/BDJSLog'
 import { inspect } from 'util'
 
 /**
@@ -181,7 +181,8 @@ export class Reader {
         let parsedFunctions: string[] = [], texts = compiled.strings.map(str => str.value)
 
         for (const dfunc of compiled.functions) {
-            if (data.bot?.extraOptions.debug === true) Log.debug(`Parsing ${dfunc.name} => ${dfunc.toString}`)
+            if (data.bot?.extraOptions.debug === true) BDJSLog.debug(`Parsing ${dfunc.name} => ${dfunc.toString}`)
+            
             const spec = data.functions.get(dfunc.name.slice(1).toLowerCase())
             const functionData = { name: dfunc.name, ...spec } as AddProperty<BaseFunction, 'name', string>
             data.function = functionData
@@ -205,7 +206,7 @@ export class Reader {
             const fields = dfunc.fields.map(field => field.value)
             for (let idx = 0; idx < fields.length; idx++) {
                 const field = fields[idx]
-                
+
                 const compile = typeof spec.parameters?.[idx] === 'undefined' ? true : 'compile' in spec.parameters[idx] ? spec.parameters[idx].compile === true : true
                 const unescape = typeof spec.parameters?.[idx] === 'undefined' ? true : 'unescape' in spec.parameters[idx] ? spec.parameters[idx].unescape === true : true
                 
@@ -216,17 +217,16 @@ export class Reader {
             }
 
             const result = await spec.code(data, fields).catch(e => {
-                throw new data.error(data, 'custom', [
-                    'Something internal went wrong!',
-                    inspect(e, { depth: 5 })
-                ].join('\n'))
+                throw e
             })
 
             parsedFunctions[parsedFunctions.length] = result === undefined ? '' : result
         }
 
         parsedFunctions.forEach((text, index) => {
-            if (data.bot?.extraOptions.debug === true) Log.debug(`Replacing overload "(call_${index})" to "${text === '' ? 'none' : text}"`)
+            if (data.bot?.extraOptions.debug === true) 
+                BDJSLog.debug(`Replacing overload "(call_${index})" to "${text === '' ? 'none' : text}"`)
+        
             texts[texts.indexOf(`(call_${index})`)] = text
         })
 

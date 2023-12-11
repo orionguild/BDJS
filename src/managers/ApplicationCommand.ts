@@ -1,7 +1,7 @@
 import { Collection, RESTPostAPIApplicationCommandsJSONBody, SlashCommandBuilder } from 'discord.js'
 import { lstat, readdir } from 'fs/promises'
 import { Bot } from '../structures/Bot'
-import { Log } from '../util/Log'
+import { BDJSLog } from '../util/BDJSLog'
 import { join } from 'path'
 
 export class BDJSApplicationCommandManager {
@@ -34,7 +34,7 @@ export class BDJSApplicationCommandManager {
             this.#commands.set(spec.name, spec.toJSON())
             delete require.cache[join(root, dir, file)]
 
-            if (this.#bot.extraOptions.debug === true) Log.debug(`Specification "${spec.name}" was loaded.`)
+            if (this.#bot.extraOptions.debug === true) BDJSLog.debug(`Specification "${spec.name}" was loaded.`)
         }
 
     }
@@ -48,16 +48,16 @@ export class BDJSApplicationCommandManager {
             for (const guildID of guildIDs) {
                 const guild = this.#bot.guilds.cache.get(guildID) ?? await this.#bot.guilds.fetch(guildID)
                 if (!guild) {
-                    Log.error('Cannot sync command specifications to "' + guildID + '"')
+                    BDJSLog.error('Cannot sync command specifications to "' + guildID + '"')
                     continue
                 }
                 await guild.commands.set(this.commandsArray).catch(e => {
-                    Log.error(JSON.stringify(e, null, 4))
+                    BDJSLog.error(JSON.stringify(e, null, 4))
                 })
             }
         } else if (typeof guildIDs === 'undefined') {
             await this.#bot.application.commands.set(this.commandsArray).catch(e => {
-                Log.error(JSON.stringify(e, null, 4))
+                BDJSLog.error(JSON.stringify(e, null, 4))
             })
         }
     }

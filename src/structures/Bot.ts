@@ -7,7 +7,7 @@ import { EventManager } from '../managers/Event'
 import { DataBaseOptions } from 'collie-db'
 import { StringEventNames } from '../index'
 import { Reader } from '../core/Reader'
-import { Log } from '../util/Log'
+import { BDJSLog } from '../util/BDJSLog'
 
 /**
  * Convert BDJS names into RAW discord.js client.
@@ -57,7 +57,7 @@ export class Bot extends Client<true> {
 
         // Prefix validation
         if (options.prefixes.length === 0)
-            Log.error('Provide 1 prefix at least!'), process.exit()
+            BDJSLog.error('Provide 1 prefix at least!'), process.exit()
     }
 
     /**

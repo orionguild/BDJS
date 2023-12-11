@@ -2,7 +2,7 @@ import { Bot, reformulateEvents } from '../structures/Bot'
 import { AdvancedCollection } from 'nekord-collection'
 import { BaseEvent } from '../structures/Event'
 import { lstat, readdir } from 'fs/promises'
-import { Log } from '../util/Log'
+import { BDJSLog } from '../util/BDJSLog'
 import { join } from 'path'
 
 export class EventManager extends AdvancedCollection<string, BaseEvent<any>> {
@@ -30,7 +30,7 @@ export class EventManager extends AdvancedCollection<string, BaseEvent<any>> {
                         }
                     )
                     delete require.cache[join(root, file)]
-                    if (bot.extraOptions.debug === true) Log.debug(
+                    if (bot.extraOptions.debug === true) BDJSLog.debug(
                         `"${event.name}" is being listened.`
                     )
                 }

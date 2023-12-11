@@ -6,7 +6,7 @@ import { BaseFunction } from './Function'
 import { Container } from './Container'
 import { Context } from './Context'
 import { Util } from '../util/Util'
-import { Log } from '../util/Log'
+import { BDJSLog } from '../util/BDJSLog'
 import { Bot } from './Bot'
 
 export type AddProperty<T, K extends string, V> = T & { [key in K]: V };
@@ -42,7 +42,7 @@ export class Data {
     container: Container
     reader: Reader
     util: typeof Util
-    error: typeof Log
+    error: typeof BDJSLog
     constructor(options: DataOptions) {
         this.bot = options.bot
         this.code = ''
@@ -56,7 +56,7 @@ export class Data {
         this.ctx = options.context
         this.reader = options.reader ?? new Reader()
         this.condition = Condition
-        this.error = Log
+        this.error = BDJSLog
         this.util = Util
     }
 

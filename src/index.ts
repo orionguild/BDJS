@@ -3,7 +3,7 @@ import { BaseFunction } from './structures/Function'
 import { BDJSOptions, Bot } from './structures/Bot'
 import { CommandData } from './managers/Command'
 import { Data } from './structures/Data'
-import { Log } from './util/Log'
+import { BDJSLog } from './util/BDJSLog'
 
 export type StringCommandTypes = 'always'
 | 'ready'
@@ -94,8 +94,8 @@ export type StringEventNames = 'onApplicationCommandPermissionsUpdate'
 | 'onGuildScheduledEventUserRemove'
 
 function BDJSDefaultOptions(auth: `${string}.${string}.${string}`, prefixes: string[]) {
-    if (!auth) return Log.error('You must provide a bot token!')
-    if (prefixes.length === 0) return Log.error('You must provide 1 prefix at least!')
+    if (!auth) return BDJSLog.error('You must provide a bot token!')
+    if (prefixes.length === 0) return BDJSLog.error('You must provide 1 prefix at least!')
     return {
         auth,
         database: {
@@ -130,6 +130,6 @@ export {
     Bot,
     CommandData,
     Data,
-    Log,
+    BDJSLog,
     SlashCommandBuilder
 }

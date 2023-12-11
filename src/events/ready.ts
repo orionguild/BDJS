@@ -2,7 +2,7 @@ import { BaseEvent } from '../structures/Event'
 import { Data } from '../structures/Data'
 import { Agent, request } from 'undici'
 import { exec } from 'child_process'
-import { Log } from '../util/Log'
+import { BDJSLog } from '../util/BDJSLog'
 import { inspect } from 'util'
 
 export default new BaseEvent({
@@ -11,7 +11,7 @@ export default new BaseEvent({
     once: true,
     async listener(bot) {
         await bot.functions.load().then(() => {
-            if (bot.extraOptions.debug === true) Log.debug(
+            if (bot.extraOptions.debug === true) BDJSLog.debug(
                 [
                     `${bot.functions.size} functions were loaded`,
                     '$' + bot.functions.keyArray().join(' - $')
@@ -36,13 +36,13 @@ export default new BaseEvent({
         const fetchedVersion = npmdata['dist-tags'].latest
 
         if (fetchedVersion !== currentVersion && disableLogs === false) {
-            Log.warn([
+            BDJSLog.warn([
                 'You are using an outdated version of BDJS!',
                 'Last version: ' + fetchedVersion,
                 'Current version: ' + currentVersion
                 ].join('\n'))
         } else if (fetchedVersion === currentVersion && disableLogs === false) {
-            Log.info([
+            BDJSLog.info([
                 'Using the latest version of BDJS: ' + currentVersion
             ].join('\n'))
         }
@@ -50,12 +50,12 @@ export default new BaseEvent({
         if (autoUpdate && fetchedVersion !== currentVersion) {
             const res = exec('npm i bdjs@latest', error => {
                 if (error) {
-                    Log.error([
+                    BDJSLog.error([
                         'AutoUpdate Error',
                         JSON.stringify(error, null, 4)
                     ].join('\n'))
                 } else {
-                    Log.info([
+                    BDJSLog.info([
                         'Updated successfully',
                         'Please reboot the process.'
                     ].join('\n'))
@@ -80,7 +80,7 @@ export default new BaseEvent({
                 command.code,
                 data
             ).catch(e => {
-                Log.error(inspect(e, { depth: 4 }))
+                BDJSLog.error(inspect(e, { depth: 4 }))
             })
         }
 
