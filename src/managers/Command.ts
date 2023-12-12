@@ -47,7 +47,7 @@ export class CommandManager extends AdvancedCollection<string, CommandData> {
      */
     add(...commands: CommandData[]) {
         for (const command of commands) {
-            command._path_ = 'main_file'.toUpperCase()
+            if (!command._path_) command._path_ = 'main_file'.toUpperCase()
             command.name = command.name ?? randomUUID().slice(0, 13).toUpperCase()
             if (!command.code) {
                 BDJSLog.error(`"${command.name}" can't be loaded!` + [
@@ -196,7 +196,9 @@ export class CommandManager extends AdvancedCollection<string, CommandData> {
             'unknown',
             // BDJS Customs
             'interval',
-            'timeout'
+            'timeout',
+            'memberJoin',
+            'memberLeave'
         ]
     }
 }

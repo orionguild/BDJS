@@ -1,6 +1,6 @@
 {
   "name": "bdjs",
-  "version": "1.0.0-h",
+  "version": "1.0.0-i",
   "description": "A TypeScript-written library to create Discord bots with ease.",
   "main": "./dist/index.js",
   "type": "commonjs",

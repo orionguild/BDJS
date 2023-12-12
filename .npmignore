@@ -2,6 +2,7 @@
 /node_modules
 /src
 /test
+/database
 
 # Files
 .eslintrc.json

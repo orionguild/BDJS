@@ -1,4 +1,4 @@
-import { ActivityType, SlashCommandBuilder } from 'discord.js'
+import { ActivityType, Shard, SlashCommandBuilder } from 'discord.js'
 import { BaseFunction } from './structures/Function'
 import { BDJSOptions, Bot } from './structures/Bot'
 import { CommandData } from './managers/Command'
@@ -18,6 +18,8 @@ export type StringCommandTypes = 'always'
 | 'selectMenuInteraction'
 | 'contextMenuInteraction'
 | 'autocompleteInteraction'
+| 'memberJoin'
+| 'memberLeave'
 | 'typing'
 | 'unknown'
 // BDJS customs
@@ -104,6 +106,7 @@ export type StringEventNames = 'onApplicationCommandPermissionsUpdate'
 
 interface BDJSCustomEvents {
     interval: (data: Record<string, any>) => void
+    shardCreate: (shard: Shard) => void
     timeout: (data: Record<string, any>) => void
 }
 
