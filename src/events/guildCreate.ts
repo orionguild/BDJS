@@ -19,6 +19,7 @@ export default new BaseEvent<[Guild]>({
             })
 
             for (const command of commands) {
+                data.command = command
                 await data.reader.compile(command.code, data)
             }
     }

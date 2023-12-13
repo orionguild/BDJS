@@ -37,6 +37,7 @@ export default new BaseEvent<[Error]>({
             })
 
             for (const command of commands) {
+                data.command = command
                 await data.reader.compile(command.code, data)
             }
         }

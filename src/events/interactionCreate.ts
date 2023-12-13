@@ -15,6 +15,7 @@ export default new BaseEvent<[Interaction]>({
                 bot,
                 commandType: 'anyInteraction',
                 context,
+                command: cmd,
                 functions: bot.functions,
                 instanceTime: new Date,
                 reader: bot.reader
@@ -24,24 +25,12 @@ export default new BaseEvent<[Interaction]>({
 
         // Button interactions.
         if (interaction.isButton()) {
-            const data = new Data({
-                bot,
-                commandType: 'buttonInteraction',
-                context,
-                functions: bot.functions,
-                instanceTime: new Date,
-                reader: bot.reader
-            })
             const command = bot.commands.filter(
                 cmd => cmd.type === 'buttonInteraction'
             ).find(
                 cmd => cmd.name === interaction.customId
             )
-            if (command) await data.reader.compile(command.code, data)
-        }
 
-        // Select menu interactions.
-        if (interaction.isAnySelectMenu()) {
             const data = new Data({
                 bot,
                 commandType: 'buttonInteraction',
@@ -50,16 +39,38 @@ export default new BaseEvent<[Interaction]>({
                 instanceTime: new Date,
                 reader: bot.reader
             })
+
+            if (command) data.command = command, await data.reader.compile(command.code, data)
+        }
+
+        // Select menu interactions.
+        if (interaction.isAnySelectMenu()) {
             const command = bot.commands.filter(
                 cmd => cmd.type === 'selectMenuInteraction'
             ).find(
                 cmd => cmd.name === interaction.customId
             )
-            if (command) await data.reader.compile(command.code, data)
+
+            const data = new Data({
+                bot,
+                commandType: 'buttonInteraction',
+                context,
+                functions: bot.functions,
+                instanceTime: new Date,
+                reader: bot.reader
+            })
+
+            if (command) data.command = command, await data.reader.compile(command.code, data)
         }
 
         // Modal interactions.
         if (interaction.isModalSubmit()) {
+            const command = bot.commands.filter(
+                cmd => cmd.type === 'modalInteraction'
+            ).find(
+                cmd => cmd.name === interaction.customId
+            )
+
             const data = new Data({
                 bot,
                 commandType: 'modalInteraction',
@@ -68,16 +79,18 @@ export default new BaseEvent<[Interaction]>({
                 instanceTime: new Date,
                 reader: bot.reader
             })
-            const command = bot.commands.filter(
-                cmd => cmd.type === 'modalInteraction'
-            ).find(
-                cmd => cmd.name === interaction.customId
-            )
-            if (command) await data.reader.compile(command.code, data)
+
+            if (command) data.command = command, await data.reader.compile(command.code, data)
         }
 
         // Slash commands
         if (interaction.isCommand()) {
+            const command = bot.commands.filter(
+                cmd => cmd.type === 'commandInteraction'
+            ).find(
+                cmd => cmd.name?.startsWith(interaction.commandName)
+            )
+
             const data = new Data({
                 bot,
                 commandType: 'commandInteraction',
@@ -86,12 +99,8 @@ export default new BaseEvent<[Interaction]>({
                 instanceTime: new Date,
                 reader: bot.reader
             })
-            const command = bot.commands.filter(
-                cmd => cmd.type === 'commandInteraction'
-            ).find(
-                cmd => cmd.name?.startsWith(interaction.commandName)
-            )
-            if (command) await data.reader.compile(command.code, data)
+
+            if (command) data.command = command, await data.reader.compile(command.code, data)
         }
     }
 })

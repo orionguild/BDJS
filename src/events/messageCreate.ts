@@ -20,6 +20,7 @@ export default new BaseEvent<[Message]>({
             const data = new Data({
                 bot,
                 context,
+                command,
                 env: {
                     '__BDJS__ARGS__': message.content.split(/ +/g)
                 },
@@ -44,6 +45,7 @@ export default new BaseEvent<[Message]>({
                 const data = new Data({
                     bot,
                     context,
+                    command,
                     commandType: 'unprefixed',
                     env: {
                         '__BDJS__ARGS__': args
@@ -85,6 +87,7 @@ export default new BaseEvent<[Message]>({
         const commandName = args.shift()?.slice(prefix.length).toLowerCase() ?? ''
         const command = prefixed.find(cmd => cmd.name?.toLowerCase() === commandName || cmd.aliases?.includes(commandName))
         if (command) {
+            data.command = command
             const compiled = await data.reader.compile(
                 command.code,
                 data

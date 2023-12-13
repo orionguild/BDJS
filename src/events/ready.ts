@@ -89,6 +89,7 @@ export default new BaseEvent({
         })
 
         for (const command of commands) {
+            data.command = command
             await data.reader.compile(
                 command.code,
                 data

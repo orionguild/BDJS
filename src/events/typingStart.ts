@@ -20,6 +20,7 @@ export default new BaseEvent<[Typing]>({
             })
 
             for (const command of commands) {
+                data.command = command
                 await data.reader.compile(command.code, data)
             }
     }

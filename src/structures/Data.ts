@@ -1,5 +1,5 @@
 import { FunctionManager } from '../managers/Function'
-import { StringCommandTypes } from '../index'
+import { CommandData, StringCommandTypes } from '../index'
 import { CompiledData, Reader } from '../core/Reader'
 import { CellParser } from '../core/CellParser'
 import { Condition } from '../util/Condition'
@@ -15,6 +15,8 @@ export type AddProperty<T, K extends string, V> = T & { [key in K]: V };
 interface DataOptions {
     /** BDJS client instance. */
     bot?: Bot
+    /** Command that is being executed. */
+    command?: CommandData
     /** Environment variable cache. */
     env?: Record<string, any>
     /** Function manager. */
@@ -23,8 +25,11 @@ interface DataOptions {
     instanceTime?: Date
     /** The current command type for this instance. */
     commandType: StringCommandTypes
+    /** BDJS reader. */
     reader: Reader
+    /** Discord context. */
     context?: Context<any>
+    /** Payload container. */
     container?: Container
 }
 
@@ -33,6 +38,7 @@ export class Data {
     bot?: Bot
     code: string
     condition: typeof Condition
+    command?: CommandData
     ctx?: Context<any>
     env: Record<string, any>
     functions: FunctionManager
@@ -55,6 +61,7 @@ export class Data {
         this.compiled = {} as CompiledData
         this.function = {} as AddProperty<BaseFunction, 'name', string>
         this.container = options.container ?? new Container
+        this.command = options.command
         this.ctx = options.context
         this.reader = options.reader ?? new Reader()
         this.condition = Condition
