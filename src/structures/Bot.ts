@@ -38,6 +38,7 @@ export interface BDJSOptions extends ClientOptions {
     disableLogs?: boolean
     debug?: boolean
     events: StringEventNames[]
+    mentionPrefix?: boolean
     plugins?: Plugin[]
     prefixes: string[]
     replyBots?: boolean

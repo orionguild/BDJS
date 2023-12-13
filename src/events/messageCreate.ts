@@ -63,7 +63,7 @@ export default new BaseEvent<[Message]>({
         }
 
         // Prefixed commands.
-        const args = message.content.split(/ +/g)
+        let args = message.content.split(/ +/g)
         const data = new Data({
             bot,
             context,
@@ -75,16 +75,17 @@ export default new BaseEvent<[Message]>({
             instanceTime: new Date,
             reader: bot.reader,
         })
-        const prefixes = bot.extraOptions.prefixes.map(async prefix => {
+        let prefixes: string[] = []
+        for (const prefix of bot.extraOptions.prefixes) {
             const compiled = await data.reader.compile(prefix, data)
-            const prx = compiled?.code.toLowerCase()
-            return prx
-        })
-        const prefix = await prefixes.find(
-            async prx => args[0].toLowerCase().startsWith(await prx as string)
-        )
+            prefixes.push(compiled.code.toLowerCase())
+        }
+        prefixes = bot.extraOptions.mentionPrefix === true ? [...prefixes, `<@${bot.user.id}>`, `<@!${bot.user.id}>`] : prefixes
+        const prefix = prefixes.find(prx => args.at(0)?.toLowerCase().startsWith(prx))?.trim()
         if (!prefix) return;
-        const commandName = args.shift()?.slice(prefix.length).toLowerCase() ?? ''
+        const commandName = args.at(0)?.toLowerCase() === prefix ? args[1]?.toLowerCase() : args.shift()?.toLowerCase().slice(prefix.length)
+        if (args.at(0)?.toLowerCase() === prefix) args = args.slice(2)
+        if (!commandName) return;
         const command = prefixed.find(cmd => cmd.name?.toLowerCase() === commandName || cmd.aliases?.includes(commandName))
         if (command) {
             data.command = command
