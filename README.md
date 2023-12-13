@@ -113,6 +113,13 @@ bot.commands.load('commands').then(async () => {
 | selectMenuInteraction | Executed when a select menu interaction is created.                           |
 | commandInteraction    | Executed when a command interaction is created.                               |
 | modalInteraction      | Executed when a modal interaction is created.                                 |
+| interval              | Executed when an interval is emitted.                                         |
+| timeout               | Executed when a timeout is emitted.                                           |
+| typingStart           | Executed when someone starts typing in a guild channel.                       |
+| memberJoin            | Executed when a new member joins a guild.                                     |
+| memberLeave           | Executed when a member leaves a guild.                                        |
+| botJoin               | Executed when bot joins a guild.                                              |
+| botLeave              | Executed when bot leaves a guild.                                             |
 
 ## Events
 Events must be declared inside client constructor to be listened, else the event won't be executed.
@@ -132,14 +139,21 @@ const bot = new Bot({
 ```
 
 ## Supported events
-|        Name         |               Description                |
-|---------------------|------------------------------------------|
-| onError             | Executed when an error is emitted.       |
-| onInteractionCreate | Executed when an interaction is created. |
-| onInterval          | Executed when an interval is emitted.    |
-| onMessageCreate     | Executed when a message is created.      |
-| onReady             | Executed when client user is ready.      |
-| onTimeout           | Executed when a timeout is emitted.      |
+|        Name         |                Description                |
+|---------------------|-------------------------------------------|
+| onError             | Executed when an error is emitted.        |
+| onGuildCreate       | Executed when bot joins a guild.          |
+| onGuildDelete       | Executed when bot leaves a guild.         |
+| onGuildMemberAdd    | Executed when a new member joins a guild. |
+| onGuildMemberRemove | Executed when a new member joins a guild. |
+| onInteractionCreate | Executed when an interaction is created.  |
+| onInterval          | Executed when an interval is emitted.     |
+| onMessageCreate     | Executed when a message is created.       |
+| onReady             | Executed when client user is ready.       |
+| onShardCreate       | Executed when a shard is created.         |
+| onShardReady        | Executed when an interval is emitted.     |
+| onTimeout           | Executed when a timeout is emitted.       |
+| onTypingStart       | Executed when someone starts typing.      |
 
 ## Function
 Functions are the compact way to interact with the Discord API.
@@ -206,10 +220,12 @@ $roleCreate[xd;
 $setPermissions[SendMessages]
 ```
 ### Builder-compatible functions
-| Function name |        Description         |
-|---------------|----------------------------|
-| $createEmbed  | Creates an embed.          |
-| $roleCreate   | Creates a role in a guild. |
+|  Function name   |        Description         |
+|------------------|----------------------------|
+| $createActionRow | Creates a new action row.  |
+| $createEmbed     | Creates an embed.          |
+| $roleCreate      | Creates a role in a guild. |
+| $roleUpdate      | Updates a role in a guild. |
 ### Function injections
 Injections allows to inject subfunctions to any function that supports it.
 ```js
