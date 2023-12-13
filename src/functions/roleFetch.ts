@@ -38,7 +38,7 @@ export default new BaseFunction({
         const role = await guild.roles.cache.get(roleID) as Role & Record<string, string>
         if (!role) throw new d.error(d, 'invalid', 'Role', d.function?.name!)
 
-        const types = Object.keys(role)
+        const types = Object.keys(JSON.parse(JSON.stringify(role)))
         if (!types.includes(property)) throw new d.error(d, 'invalid', 'Property', d.function?.name!)
 
         return typeof role[property] === 'string' ? role[property] : typeof role[property] === 'number' ? role[property].toString() : inspect(role[property])

@@ -27,10 +27,8 @@ export default new BaseFunction({
         const user = d.bot?.users.cache.get(memberID) as User & Record<string, string>
         if (!user) throw new d.error(d, 'invalid', 'user', d.function?.name!)
 
-        const types = Object.keys(user).map(prop => prop.toLowerCase()).concat([
-            'isbot'
-        ])
-        if (!types.includes(property.toLowerCase())) throw new d.error(d, 'invalid', 'Property', d.function?.name!)
+        const types = Object.keys(JSON.parse(JSON.stringify(user))).concat(['isBot'])
+        if (!types.includes(property)) throw new d.error(d, 'invalid', 'Property', d.function?.name!)
 
         return getUserProperty(user, property)
     }

@@ -26,7 +26,7 @@ function getClientProperty(d: Data, property: string): string | undefined {
         case 'userCount':
             return d.bot?.guilds.cache.map(t => t.memberCount).reduce((a, b) => a + b).toString()
         default:
-            return typeof client[property] === 'string' ? client[property] : typeof client[property] === 'number' ? client[property].toString() : inspect(client[property])
+            return Array.isArray(client[property]) ? client[property].join(',') : typeof client[property] === 'string' ? client[property] : typeof client[property] === 'number' ? client[property].toString() : inspect(client[property])
     }
 }
 
