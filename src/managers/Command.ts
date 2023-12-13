@@ -193,12 +193,14 @@ export class CommandManager extends AdvancedCollection<string, CommandData> {
             'modalInteraction',
             'selectMenuInteraction',
             'typing',
+            'memberJoin',
+            'memberLeave',
+            'botJoin',
+            'botLeave',
             'unknown',
             // BDJS Customs
             'interval',
-            'timeout',
-            'memberJoin',
-            'memberLeave'
+            'timeout'
         ]
     }
 }

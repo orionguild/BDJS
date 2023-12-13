@@ -20,6 +20,8 @@ export type StringCommandTypes = 'always'
 | 'autocompleteInteraction'
 | 'memberJoin'
 | 'memberLeave'
+| 'botJoin'
+| 'botLeave'
 | 'typing'
 | 'unknown'
 // BDJS customs
