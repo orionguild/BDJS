@@ -45,7 +45,6 @@ export default new BaseFunction({
         else if (!channel && property !== 'exists') throw new d.error(d, 'invalid', 'Channel ID', d.function?.name!)
 
         const types = Object.keys(JSON.parse(JSON.stringify(channel)))
-        console.log(types)
         if (!types.includes(property)) throw new d.error(d, 'invalid', 'Property', d.function?.name!)
         
         return getChannelProperty(channel!, property)
