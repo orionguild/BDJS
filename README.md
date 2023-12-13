@@ -220,12 +220,14 @@ $roleCreate[xd;
 $setPermissions[SendMessages]
 ```
 ### Builder-compatible functions
-|  Function name   |        Description         |
-|------------------|----------------------------|
-| $createActionRow | Creates a new action row.  |
-| $createEmbed     | Creates an embed.          |
-| $roleCreate      | Creates a role in a guild. |
-| $roleUpdate      | Updates a role in a guild. |
+|  Function name   |                    Description                     |
+|------------------|----------------------------------------------------|
+| $channelCreate   | Creates a channel in a guild.                      |
+| $createActionRow | Creates a new action row.                          |
+| $createBan       | Creates a ban for the provided user ID in a guild. |
+| $createEmbed     | Creates an embed.                                  |
+| $roleCreate      | Creates a role in a guild.                         |
+| $roleUpdate      | Updates a role in a guild.                         |
 ### Function injections
 Injections allows to inject subfunctions to any function that supports it.
 ```js

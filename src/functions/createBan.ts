@@ -4,6 +4,7 @@ import { inspect } from 'util'
 import ms from 'ms'
 
 export default new BaseFunction({
+    builders: true,
     description: 'Creates a ban for the provided user ID in a guild.',
     parameters: [
         {

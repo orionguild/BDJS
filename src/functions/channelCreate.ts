@@ -9,6 +9,7 @@ import { BaseFunction } from '../structures/Function'
 import { inspect } from 'util'
 
 export default new BaseFunction({
+    builders: true,
     description: 'Creates a channel in a guild.',
     parameters: [
         {
