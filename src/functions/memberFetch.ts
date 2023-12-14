@@ -10,6 +10,10 @@ export function getMemberProperty(member: GuildMember & Record<string, any>, pro
             return member.bannable + ''
         case 'ismuted':
             return (member.communicationDisabledUntil instanceof Date) + ''
+        case 'username':
+            return member.user.username
+        case 'id':
+            return member.user.id
         default:
             return Array.isArray(member[property]) ? member[property].join(',') : typeof member[property] === 'string' ? member[property] : inspect(member[property])
     }
@@ -51,7 +55,7 @@ export default new BaseFunction({
         const member = await guild.members.fetch(memberID) as GuildMember & Record<string, string>
         if (!member) throw new d.error(d, 'invalid', 'member', d.function?.name!)
 
-        const types = Object.keys(JSON.parse(JSON.stringify(member))).concat(['isBot', 'isBannable', 'isMuted'])
+        const types = Object.keys(JSON.parse(JSON.stringify(member))).concat(['isBot', 'isBannable', 'isMuted', 'username', 'id'])
         if (!types.includes(property)) throw new d.error(d, 'invalid', 'Property', d.function?.name!)
 
         return getMemberProperty(member, property)

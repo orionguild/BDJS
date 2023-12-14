@@ -38,7 +38,7 @@ export default new BaseFunction({
         const member = await guild.members.cache.get(memberID) as GuildMember & Record<string, string>
         if (!member) throw new d.error(d, 'invalid', 'member', d.function?.name!)
 
-        const types = Object.keys(JSON.parse(JSON.stringify(member))).concat(['isBot', 'isBannable', 'isMuted'])
+        const types = Object.keys(JSON.parse(JSON.stringify(member))).concat(['isBot', 'isBannable', 'isMuted', 'username', 'id'])
         if (!types.includes(property)) throw new d.error(d, 'invalid', 'Property', d.function?.name!)
 
         return getMemberProperty(member, property)
