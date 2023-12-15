@@ -48,6 +48,7 @@ export class Data {
     compiled: CompiledData & Record<string, any>
     container: Container
     reader: Reader
+    stop: boolean
     cells: typeof CellParser
     util: typeof Util
     error: typeof BDJSLog
@@ -64,6 +65,7 @@ export class Data {
         this.command = options.command
         this.ctx = options.context
         this.reader = options.reader ?? new Reader()
+        this.stop = false
         this.condition = Condition
         this.cells = CellParser
         this.error = BDJSLog

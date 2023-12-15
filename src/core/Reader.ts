@@ -182,6 +182,7 @@ export class Reader {
 
         for (const dfunc of compiled.functions) {
             if (data.bot?.extraOptions.debug === true) BDJSLog.debug(`Parsing ${dfunc.name} => ${dfunc.toString}`)
+            if (data.stop) break
             
             const spec = data.functions.get(dfunc.name.slice(1).toLowerCase())
             const functionData = { name: dfunc.name, ...spec } as AddProperty<BaseFunction, 'name', string>
