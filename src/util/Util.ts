@@ -1,4 +1,4 @@
-import { Guild, GuildTextBasedChannel, PermissionsBitField, PermissionsString, Snowflake, User } from 'discord.js'
+import { Guild, GuildBasedChannel, GuildTextBasedChannel, PermissionsBitField, PermissionsString, Snowflake, TextBasedChannel, User } from 'discord.js'
 import { Bot } from 'src/structures/Bot'
 import { Context } from 'src/structures/Context'
 
@@ -105,14 +105,13 @@ export class Util {
      * Get a guild channel.
      * @param {string} query - Channel resolver.
      * @param {Guild} guild - The guild where channel is in.
-     * @returns {Promise<TextBasedChannel | null>}
      */
-    static async getChannel(query: string, guild: Guild) {
+    static async getChannel<T = GuildBasedChannel>(query: string, guild: Guild): Promise<T | null> {
         if (!query) return null
         const someId = query.replace(/[^\d]/g, '')
         let channel = someId ? guild.channels.cache.get(someId) || (await guild.channels.fetch(someId).catch(e => null)) : null
         if (!channel) channel = guild.channels.cache.find(c => c.name.includes(query)) || null
-        return channel
+        return channel as T
     }
 
     /**
