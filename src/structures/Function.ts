@@ -1,6 +1,6 @@
 import { Data } from './Data'
 
-interface BaseFieldOptions {
+export interface BaseFieldOptions {
     /**
      * The field name.
      */
