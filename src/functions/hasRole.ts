@@ -2,7 +2,29 @@ import { BaseFunction } from '../structures/Function'
 
 export default new BaseFunction({
     description: 'Check if the provided member has a role.',
-    parameters: [],
+    parameters: [
+        {
+            name: 'Role ID',
+            description: 'Guild role ID to be checked.',
+            required: true,
+            resolver: 'String',
+            value: 'none'
+        },
+        {
+            name: 'Member ID',
+            description: 'The member to be checked.',
+            required: false,
+            resolver: 'String',
+            value: 'd.ctx?.user?.id'
+        },
+        {
+            name: 'Guild ID',
+            description: 'The ID of the guild member belongs to.',
+            required: false,
+            resolver: 'String',
+            value: 'd.ctx?.guild?.id'
+        }
+    ],
     code: async (d, [roleID, memberID = d.ctx?.user?.id, guildID = d.ctx?.guild?.id]) => {
         if (roleID === undefined) throw new d.error(d, 'required', 'Role ID', d.function?.name!)
         if (memberID === undefined) throw new d.error(d, 'invalid', 'Member ID', d.function?.name!)
