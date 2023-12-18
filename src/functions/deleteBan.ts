@@ -35,6 +35,9 @@ export default new BaseFunction({
 
         const user = d.bot?.users.cache.get(userID) || await d.bot?.users.fetch(userID)
         if (!user) throw new d.error(d, 'invalid', 'user ID', d.function?.name!)
+
+        const ban = guild.bans.cache.find(ban => ban.user.id === userID)
+        if (!ban) throw new d.error(d, 'custom', `Cannot find a ban against "${userID}"`)
         
         await guild.bans.remove(user, reason).catch(e => {
             throw new d.error(d, 'custom', inspect(e))
