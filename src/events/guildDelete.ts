@@ -14,7 +14,6 @@ export default new BaseEvent<[Guild]>({
                 context,
                 commandType: 'botLeave',
                 functions: bot.functions,
-                instanceTime: new Date,
                 reader: bot.reader
             })
 

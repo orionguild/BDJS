@@ -21,8 +21,6 @@ interface DataOptions {
     env?: Record<string, any>
     /** Function manager. */
     functions?: FunctionManager
-    /** The instance time for this data. */
-    instanceTime?: Date
     /** The current command type for this instance. */
     commandType: StringCommandTypes
     /** BDJS reader. */
@@ -43,7 +41,6 @@ export class Data {
     env: Record<string, any>
     functions: FunctionManager
     function?: AddProperty<BaseFunction, 'name', string>
-    instanceTime?: Date
     commandType: StringCommandTypes
     compiled: CompiledData & Record<string, any>
     container: Container
@@ -57,7 +54,6 @@ export class Data {
         this.code = ''
         this.env = options.env ?? {}
         this.functions = options.bot?.functions ?? options.functions ?? new FunctionManager
-        this.instanceTime = options.instanceTime ?? new Date
         this.commandType = options.commandType ?? 'unknown'
         this.compiled = {} as CompiledData
         this.function = {} as AddProperty<BaseFunction, 'name', string>

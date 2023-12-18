@@ -15,7 +15,6 @@ export default new BaseEvent<[Typing]>({
                 commandType: 'typing',
                 env: {},
                 functions: bot.functions,
-                instanceTime: new Date,
                 reader: bot.reader
             })
 

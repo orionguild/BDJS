@@ -14,7 +14,6 @@ export default new BaseEvent<[GuildMember | PartialGuildMember]>({
                 context,
                 commandType: 'memberLeave',
                 functions: bot.functions,
-                instanceTime: new Date,
                 reader: bot.reader
             })
 

@@ -18,7 +18,6 @@ export default new BaseEvent<[Error]>({
                     error
                 },
                 functions: bot.functions,
-                instanceTime: new Date,
                 reader: bot.reader
             })
 

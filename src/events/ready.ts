@@ -84,7 +84,6 @@ export default new BaseEvent({
             bot,
             commandType: 'ready',
             functions: bot.functions,
-            instanceTime: new Date,
             reader: bot.reader
         })
 

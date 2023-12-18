@@ -11,7 +11,6 @@ export default new BaseEvent<[Record<string, any>]>({
                 commandType: 'interval',
                 env,
                 functions: bot.functions,
-                instanceTime: new Date,
                 reader: bot.reader
             })
 

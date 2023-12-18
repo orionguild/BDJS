@@ -14,7 +14,6 @@ export default new BaseEvent<[GuildMember]>({
                 context,
                 commandType: 'memberJoin',
                 functions: bot.functions,
-                instanceTime: new Date,
                 reader: bot.reader
             })
 

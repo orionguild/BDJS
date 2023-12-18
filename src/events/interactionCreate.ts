@@ -17,7 +17,6 @@ export default new BaseEvent<[Interaction]>({
                 context,
                 command: cmd,
                 functions: bot.functions,
-                instanceTime: new Date,
                 reader: bot.reader
             })
             await data.reader.compile(cmd.code, data)
@@ -36,7 +35,6 @@ export default new BaseEvent<[Interaction]>({
                 commandType: 'buttonInteraction',
                 context,
                 functions: bot.functions,
-                instanceTime: new Date,
                 reader: bot.reader
             })
 
@@ -56,7 +54,6 @@ export default new BaseEvent<[Interaction]>({
                 commandType: 'buttonInteraction',
                 context,
                 functions: bot.functions,
-                instanceTime: new Date,
                 reader: bot.reader
             })
 
@@ -76,7 +73,6 @@ export default new BaseEvent<[Interaction]>({
                 commandType: 'modalInteraction',
                 context,
                 functions: bot.functions,
-                instanceTime: new Date,
                 reader: bot.reader
             })
 
@@ -96,7 +92,6 @@ export default new BaseEvent<[Interaction]>({
                 commandType: 'commandInteraction',
                 context,
                 functions: bot.functions,
-                instanceTime: new Date,
                 reader: bot.reader
             })
 

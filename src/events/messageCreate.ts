@@ -26,7 +26,7 @@ export default new BaseEvent<[Message]>({
                 },
                 commandType: 'always',
                 functions: bot.functions,
-                instanceTime: new Date,
+                
                 reader: bot.reader,
             })
             const compiled = await data.reader.compile(
@@ -51,7 +51,7 @@ export default new BaseEvent<[Message]>({
                         '__BDJS__ARGS__': args
                     },
                     functions: bot.functions,
-                    instanceTime: new Date,
+                    
                     reader: bot.reader,
                 })
                 const compiled = await data.reader.compile(
@@ -72,7 +72,6 @@ export default new BaseEvent<[Message]>({
                 '__BDJS__ARGS__': args
             },
             functions: bot.functions,
-            instanceTime: new Date,
             reader: bot.reader,
         })
         let prefixes: string[] = []
