@@ -92,33 +92,64 @@ export class CommandManager extends AdvancedCollection<string, CommandData> {
                 continue
             }
 
-            const command = require(join(root, dir, file)) as CommandData
-            if (!('code' in command)) {
-                BDJSLog.error(`"${file}" can't be loaded!` + [
-                    '|-> at: ' + join(root, dir, file)
-                ].join('\n'))
-                continue
-            } else if (!this.#validateType(command.type)) {
-                BDJSLog.error([
-                    `Invalid command type "${command.type}" provided`,
-                    '|-> at: ' + join(root, dir, file)
-                ].join('\n'))
-                continue
+            const command: CommandData | CommandData[] = require(join(root, dir, file))
+            if (Array.isArray(command)) {
+                for (const cmd of command) {
+                    if (!('code' in cmd)) {
+                        BDJSLog.error(`"${file}" can't be loaded!` + [
+                            '|-> at: ' + join(root, dir, file)
+                        ].join('\n'))
+                        continue
+                    } else if (!this.#validateType(cmd.type)) {
+                        BDJSLog.error([
+                            `Invalid command type "${cmd.type}" provided`,
+                            '|-> at: ' + join(root, dir, file)
+                        ].join('\n'))
+                        continue
+                    }
+        
+                    // Ensure command name.
+                    cmd.name = cmd.name ?? randomUUID().slice(0, 13).toUpperCase()
+        
+                    // Assign command path.
+                    cmd._path_ = join(root, dir, file)
+        
+                    this.set(cmd.name, cmd)
+                    this.#commandStatus.push({
+                        name: cmd.name,
+                        path: cmd._path_,
+                        type: cmd.type,
+                        status: 'Loaded'
+                    })
+                }
+            } else {
+                if (!('code' in command)) {
+                    BDJSLog.error(`"${file}" can't be loaded!` + [
+                        '|-> at: ' + join(root, dir, file)
+                    ].join('\n'))
+                    continue
+                } else if (!this.#validateType(command.type)) {
+                    BDJSLog.error([
+                        `Invalid command type "${command.type}" provided`,
+                        '|-> at: ' + join(root, dir, file)
+                    ].join('\n'))
+                    continue
+                }
+    
+                // Ensure command name.
+                command.name = command.name ?? randomUUID().slice(0, 13).toUpperCase()
+    
+                // Assign command path.
+                command._path_ = join(root, dir, file)
+    
+                this.set(command.name, command)
+                this.#commandStatus.push({
+                    name: command.name,
+                    path: command._path_,
+                    type: command.type,
+                    status: 'Loaded'
+                })
             }
-
-            // Ensure command name.
-            command.name = command.name ?? randomUUID().slice(0, 13).toUpperCase()
-
-            // Assign command path.
-            command._path_ = join(root, dir, file)
-
-            this.set(command.name, command)
-            this.#commandStatus.push({
-                name: command.name,
-                path: command._path_,
-                type: command.type,
-                status: 'Loaded'
-            })
 
             delete require.cache[require.resolve(join(root, dir, file))]
         }

@@ -28,13 +28,14 @@ export class BDJSApplicationCommandManager {
                 continue
             }
 
-            const spec = require(join(root, dir, file)).data
-            if (!(spec instanceof SlashCommandBuilder)) continue
-
-            this.#commands.set(spec.name, spec.toJSON())
+            const spec: SlashCommandBuilder | SlashCommandBuilder[] = require(join(root, dir, file)).data
+            if (!Array.isArray(spec)) this.#commands.set(spec.name, spec.toJSON())
+            else {
+                spec.forEach(cmd => {
+                    this.#commands.set(cmd.name, cmd.toJSON())
+                })
+            }
             delete require.cache[join(root, dir, file)]
-
-            if (this.#bot.extraOptions.debug === true) BDJSLog.debug(`Specification "${spec.name}" was loaded.`)
         }
 
     }
