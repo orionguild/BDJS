@@ -3,7 +3,22 @@ import { BaseFunction } from '../structures/Function'
 
 export default new BaseFunction({
     description: 'Retrieves an option from an interaction.',
-    parameters: [],
+    parameters: [
+        {
+            name: 'Option Type',
+            description: 'Option type to be retrieved. (between "customID" \| "focusedOption" \| "menuOption" \| "modalComponent" \| "slashOption" \| "subCommand" \| "subCommandGroup")',
+            required: true,
+            resolver: 'String',
+            value: 'none'
+        },
+        {
+            name: 'Extra Options',
+            description: 'Extra options to get an interaction value.',
+            required: false,
+            resolver: 'String',
+            value: 'none'
+        }
+    ],
     code: async function(d, [interactionType, ...options]) {
         if (!(d.ctx?.data instanceof BaseInteraction))
             throw new d.error(d, 'disallowed', d.function?.name!, 'interactions')
@@ -61,6 +76,8 @@ export default new BaseFunction({
                     throw new d.error(d, 'disallowed', 'slashOption', 'anyInteraction and commandInteraction')
                 return int.options.getSubcommandGroup(false)
             }
+            default:
+                throw new d.error(d, 'invalid', 'Option Type', d.function?.name!)
         }
     }
 })
