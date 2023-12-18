@@ -51,7 +51,7 @@ export default new BaseEvent<[Interaction]>({
 
             const data = new Data({
                 bot,
-                commandType: 'buttonInteraction',
+                commandType: 'selectMenuInteraction',
                 context,
                 functions: bot.functions,
                 reader: bot.reader
@@ -80,12 +80,12 @@ export default new BaseEvent<[Interaction]>({
         }
 
         // Slash commands
-        if (interaction.isCommand()) {
-            const command = bot.commands.filter(
-                cmd => cmd.type === 'commandInteraction'
-            ).find(
-                cmd => cmd.name?.startsWith(interaction.commandName)
-            )
+        if (interaction.isChatInputCommand()) {
+            const commands = bot.commands.filter(cmd => cmd.type === 'commandInteraction')
+            const command = interaction.options.getSubcommandGroup(false) 
+                ? commands.find(cmd => cmd.name?.toLowerCase() === `${interaction.commandName} ${interaction.options.getSubcommand(false)} ${interaction.options.getSubcommandGroup(false)}`)
+                : interaction.options.getSubcommand(false) ? commands.find(cmd => cmd.name?.toLowerCase() === `${interaction.commandName} ${interaction.options.getSubcommand(false)}`)
+                : commands.find(cmd => cmd.name?.toLowerCase() === interaction.commandName)
 
             const data = new Data({
                 bot,

@@ -3,6 +3,11 @@ import { lstat, readdir } from 'fs/promises'
 import { Bot } from '../structures/Bot'
 import { BDJSLog } from '../util/BDJSLog'
 import { join } from 'path'
+import { CommandData } from './Command'
+
+interface ExtendedCommandData extends CommandData {
+    data?: SlashCommandBuilder
+}
 
 export class BDJSApplicationCommandManager {
     #bot: Bot
@@ -28,12 +33,13 @@ export class BDJSApplicationCommandManager {
                 continue
             }
 
-            const spec: SlashCommandBuilder | SlashCommandBuilder[] = require(join(root, dir, file)).data
-            if (!Array.isArray(spec)) this.#commands.set(spec.name, spec.toJSON())
+            const spec: ExtendedCommandData | ExtendedCommandData[] = require(join(root, dir, file))
+            if (!Array.isArray(spec)) this.#commands.set(spec.data!.name, spec.data!.toJSON())
             else {
-                spec.forEach(cmd => {
-                    this.#commands.set(cmd.name, cmd.toJSON())
-                })
+                for (const cmd of spec) {
+                    if (!('data' in cmd)) continue
+                    this.#commands.set(cmd.data!.name!, cmd.data!.toJSON())
+                }
             }
             delete require.cache[join(root, dir, file)]
         }

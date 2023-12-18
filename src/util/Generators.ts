@@ -66,11 +66,11 @@ class FunctionInfo {
             `> \`${this.usage}\``,
             args,
             special,
-            '## Source Code',
+            /*'## Source Code',
             '```ts',
             await this.getSource(),
             '```',
-            `Available on GitHub: [Click Here](${this.url})`
+            `Available on GitHub: [Click Here](${this.url})`*/
         ].filter(line => !!line).join('\n')
     }
 

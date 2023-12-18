@@ -1,4 +1,4 @@
-import { ChatInputCommandInteraction, MessageComponentInteraction } from 'discord.js'
+import { ChatInputCommandInteraction } from 'discord.js'
 import { BaseFunction } from '../structures/Function'
 
 export default new BaseFunction({
