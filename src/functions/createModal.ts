@@ -28,8 +28,8 @@ export default new BaseFunction({
         }
     ],
     code: async function(d, [title, customID, components]) {
-        if (!(d.ctx?.data instanceof BaseInteraction)) throw new d.error(d, 'disallowed', d.function?.name!, 'interactions')
-        if (!(d.ctx.data.isMessageComponent() || d.ctx.data.isCommand())) throw new d.error(d, 'disallowed', d.function?.name!, 'message component/command interactions')
+        if (!(d.ctx?.raw instanceof BaseInteraction)) throw new d.error(d, 'disallowed', d.function?.name!, 'interactions')
+        if (!(d.ctx?.raw.isMessageComponent() || d.ctx?.raw.isCommand())) throw new d.error(d, 'disallowed', d.function?.name!, 'message component/command interactions')
         if (title === undefined) throw new d.error(d, 'required', 'Title', d.function?.name!)
         if (customID === undefined) throw new d.error(d, 'required', 'Custom ID', d.function?.name!)
         if (components === undefined) throw new d.error(d, 'required', 'Components', d.function?.name!)
@@ -90,6 +90,6 @@ export default new BaseFunction({
         .setCustomId(customID)
 
         await data.reader.compile(components, data)
-        await d.ctx?.data.showModal(modal)
+        await d.ctx?.raw.showModal(modal)
     }
 })

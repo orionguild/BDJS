@@ -14,14 +14,14 @@ export default new BaseFunction({
         }
     ],
     code: async function(d, [message]) {
-        if (!(d.ctx?.data instanceof BaseInteraction)) throw new d.error(d, 'disallowed', d.function?.name!, 'interactions')
-        if (!d.ctx.data.isRepliable()) throw new d.error(d, 'custom', `${d.commandType} is not repliable.`)
-        if (!d.ctx.data.deferred) throw new d.error(d, 'custom', 'Cannot edit an interaction that is not deferred.')
+        if (!(d.ctx?.raw instanceof BaseInteraction)) throw new d.error(d, 'disallowed', d.function?.name!, 'interactions')
+        if (!d.ctx?.raw.isRepliable()) throw new d.error(d, 'custom', `${d.commandType} is not repliable.`)
+        if (!d.ctx?.raw.deferred) throw new d.error(d, 'custom', 'Cannot edit an interaction that is not deferred.')
 
         const result = await d.reader.compile(message, d)
         if (result?.code) d.container.pushContent(result.code)
 
-        const data = await d.ctx.data.editReply(d.container).then((res) => {
+        const data = await d.ctx?.raw.editReply(d.container).then((res) => {
             d.container.clear()
             return res
         }).catch(e => {

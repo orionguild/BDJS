@@ -4,7 +4,10 @@ import { Guild } from 'discord.js'
 export function getGuildProperty(guild: Guild & Record<string, any>, property: string) {
     const data = JSON.parse(JSON.stringify(guild))
     let result: string
-    return Array.isArray(data[property]) ? data[property].join(',') : typeof data[property] === 'number' ? data[property].toString() : data[property]
+    return Array.isArray(data[property]) 
+        ? data[property].join(',') 
+        : typeof data[property] === 'number' 
+            ? data[property].toString() : data[property]
 }
 
 export default new BaseFunction({

@@ -28,16 +28,16 @@ export default new BaseFunction({
         }
     ],
     code: async function(d, [message, ephemeral = 'false', returnId = 'false']) {
-        if (!(d.ctx?.data instanceof BaseInteraction)) throw new d.error(d, 'disallowed', d.function?.name!, 'interactions')
-        if (!d.ctx.data.isRepliable()) throw new d.error(d, 'custom', `${d.commandType} is not repliable.`)
-        if (!d.ctx.data.replied) throw new d.error(d, 'custom', 'Cannot follow up an interaction that is not replied.')
+        if (!(d.ctx?.raw instanceof BaseInteraction)) throw new d.error(d, 'disallowed', d.function?.name!, 'interactions')
+        if (!d.ctx?.raw.isRepliable()) throw new d.error(d, 'custom', `${d.commandType} is not repliable.`)
+        if (!d.ctx?.raw.replied) throw new d.error(d, 'custom', 'Cannot follow up an interaction that is not replied.')
 
         const result = await d.reader.compile(message, d)
         if (result?.code) d.container.pushContent(result.code)
 
         if (ephemeral === 'true') (d.container as any).ephemeral = true
 
-        const data = await d.ctx.data.followUp(d.container).then((res) => {
+        const data = await d.ctx?.raw.followUp(d.container).then((res) => {
             d.container.clear()
             return res
         }).catch(e => {

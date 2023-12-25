@@ -22,14 +22,14 @@ export default new BaseFunction({
         }
     ],
     code: async function(d, [message, returnId = 'false']) {
-        if (!(d.ctx?.data instanceof BaseInteraction)) throw new d.error(d, 'disallowed', d.function?.name!, 'interactions')
-        if (!d.ctx.data.isRepliable()) throw new d.error(d, 'custom', `${d.commandType} is not repliable.`)
-        if (d.ctx.data.replied) throw new d.error(d, 'custom', 'Cannot reply an interaction that is already replied.')
+        if (!(d.ctx?.raw instanceof BaseInteraction)) throw new d.error(d, 'disallowed', d.function?.name!, 'interactions')
+        if (!d.ctx?.raw.isRepliable()) throw new d.error(d, 'custom', `${d.commandType} is not repliable.`)
+        if (d.ctx?.raw.replied) throw new d.error(d, 'custom', 'Cannot reply an interaction that is already replied.')
 
         const result = await d.reader.compile(message, d)
         if (result?.code) d.container.pushContent(result.code)
 
-        const data = await d.ctx.data.reply(d.container).then((res) => {
+        const data = await d.ctx?.raw.reply(d.container).then((res) => {
             d.container.clear()
             return res
         }).catch(e => {

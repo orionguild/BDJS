@@ -16,7 +16,7 @@ export default new BaseFunction({
             description: 'The member to be checked.',
             required: false,
             resolver: 'String',
-            value: 'd.ctx?.user?.id'
+            value: 'd.ctx?.author?.id'
         },
         {
             name: 'Guild ID',
@@ -26,7 +26,7 @@ export default new BaseFunction({
             value: 'd.ctx?.guild?.id'
         }
     ],
-    code: async function(d, [name, userID = d.ctx?.user?.id, guildID = d.ctx?.guild?.id]) {
+    code: async function(d, [name, userID = d.ctx?.author?.id, guildID = d.ctx?.guild?.id]) {
         if (name === undefined) throw new d.error(d, 'required', 'Permission Name', d.function?.name!)
         if (userID === undefined) throw new d.error(d, 'invalid', 'Member ID', d.function?.name!)
         if (guildID === undefined) throw new d.error(d, 'invalid', 'Guild ID', d.function?.name!)

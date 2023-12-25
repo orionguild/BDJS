@@ -7,7 +7,7 @@ export default new BaseEvent<[Interaction]>({
     name: 'onInteractionCreate',
     description: 'Executed when an interaction is created.',
     async listener(bot, interaction) {
-        const context = new Context(interaction)
+        const context = new Context(interaction, bot)
 
         // Any interaction commands.
         bot.commands.filter(cmd => cmd.type === 'anyInteraction').forEach(async cmd => {

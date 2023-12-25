@@ -10,7 +10,7 @@ export default new BaseEvent<[Message]>({
         const replyBots = bot.extraOptions.replyBots ?? false
         if (replyBots === false && message.author.bot) return;
 
-        const context = new Context(message)
+        const context = new Context(message, bot)
         const unprefixed = bot.commands.filter(command => command.type === 'unprefixed')
         const prefixed = bot.commands.filter(command => command.type === 'prefixed')
         const always = bot.commands.filter(command => command.type === 'always')

@@ -22,14 +22,14 @@ export default new BaseFunction({
         }
     ],
     code: async function(d, [message, returnId = 'false']) {
-        if (!(d.ctx?.data instanceof MessageComponentInteraction)) throw new d.error(d, 'disallowed', d.function?.name!, 'component interactions')
-        if (!d.ctx.data.isRepliable()) throw new d.error(d, 'custom', `${d.commandType} is not repliable.`)
-        if (!d.ctx.data.replied) throw new d.error(d, 'custom', 'Cannot update an interaction that is not replied.')
+        if (!(d.ctx?.raw instanceof MessageComponentInteraction)) throw new d.error(d, 'disallowed', d.function?.name!, 'component interactions')
+        if (!d.ctx?.raw.isRepliable()) throw new d.error(d, 'custom', `${d.commandType} is not repliable.`)
+        if (!d.ctx?.raw.replied) throw new d.error(d, 'custom', 'Cannot update an interaction that is not replied.')
 
         const result = await d.reader.compile(message, d)
         if (result?.code) d.container.pushContent(result.code)
 
-        const data = await d.ctx.data.update(d.container).then((res) => {
+        const data = await d.ctx?.raw.update(d.container).then((res) => {
             d.container.clear()
             return res
         }).catch(e => {

@@ -34,7 +34,7 @@ export default new BaseFunction({
             description: 'Guild member ID to fetch the property from.',
             required: true,
             resolver: 'String',
-            value: 'd.ctx?.user?.id'
+            value: 'd.ctx?.author?.id'
         },
         {
             name: 'Guild ID',
@@ -44,7 +44,7 @@ export default new BaseFunction({
             value: 'd.ctx?.guild?.id'
         }
     ],
-    code: async function(d, [property, memberID = d.ctx?.user?.id, guildID = d.ctx?.guild?.id]) {
+    code: async function(d, [property, memberID = d.ctx?.author?.id, guildID = d.ctx?.guild?.id]) {
         if (property === undefined) throw new d.error(d, 'required', 'Property Name', d.function?.name!)
         if (memberID === undefined) throw new d.error(d, 'invalid', 'member ID', d.function?.name!)
         if (guildID === undefined) throw new d.error(d, 'invalid', 'Guild ID', d.function?.name!)

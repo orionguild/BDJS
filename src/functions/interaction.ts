@@ -20,10 +20,10 @@ export default new BaseFunction({
         }
     ],
     code: async function(d, [interactionType, ...options]) {
-        if (!(d.ctx?.data instanceof BaseInteraction))
+        if (!(d.ctx?.raw instanceof BaseInteraction))
             throw new d.error(d, 'disallowed', d.function?.name!, 'interactions')
 
-        const int = d.ctx.data
+        const int = d.ctx?.raw
 
         switch (interactionType.toLowerCase()) {
             case 'customid': {

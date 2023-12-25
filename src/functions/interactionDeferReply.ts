@@ -23,12 +23,12 @@ export default new BaseFunction({
         }
     ],
     code: async function(d, [ephemeral = 'false', returnId = 'false']) {
-        if (!(d.ctx?.data instanceof BaseInteraction))
+        if (!(d.ctx?.raw instanceof BaseInteraction))
             throw new d.error(d, 'disallowed', d.function?.name!, 'interactions')
-        if (!d.ctx.data.isRepliable()) throw new d.error(d, 'custom', `${d.commandType} is not repliable.`)
-        if (d.ctx.data.deferred) throw new d.error(d, 'custom', 'Cannot defer an interaction that is already deferred.')
+        if (!d.ctx?.raw.isRepliable()) throw new d.error(d, 'custom', `${d.commandType} is not repliable.`)
+        if (d.ctx?.raw.deferred) throw new d.error(d, 'custom', 'Cannot defer an interaction that is already deferred.')
 
-        const data = await d.ctx.data.deferReply({ ephemeral: ephemeral === 'true' }).then((res) => {
+        const data = await d.ctx?.raw.deferReply({ ephemeral: ephemeral === 'true' }).then((res) => {
             return res
         }).catch(e => {
             throw new d.error(d, 'custom', inspect(e, { depth: 4 }))

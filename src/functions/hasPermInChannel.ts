@@ -16,7 +16,7 @@ export default new BaseFunction({
             description: 'The member to be checked.',
             required: false,
             resolver: 'String',
-            value: 'd.ctx?.user?.id'
+            value: 'd.ctx?.author?.id'
         },
         {
             name: 'Channel ID',
@@ -33,7 +33,7 @@ export default new BaseFunction({
             value: 'd.ctx?.guild?.id'
         }
     ],
-    code: async function(d, [name, userID = d.ctx?.user?.id, channelID = d.ctx?.channel?.id, guildID = d.ctx?.guild?.id]) {
+    code: async function(d, [name, userID = d.ctx?.author?.id, channelID = d.ctx?.channel?.id, guildID = d.ctx?.guild?.id]) {
         if (name === undefined) throw new d.error(d, 'required', 'Permission Name', d.function?.name!)
         if (userID === undefined) throw new d.error(d, 'invalid', 'Member ID', d.function?.name!)
         if (channelID === undefined) throw new d.error(d, 'invalid', 'Channel ID', d.function?.name!)
