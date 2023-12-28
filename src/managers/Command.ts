@@ -1,4 +1,5 @@
 import { Bot, SlashCommandBuilder, StringCommandTypes } from '../index'
+import { RESTPostAPIApplicationCommandsJSONBody } from 'discord.js'
 import { AsciiTable3, AlignmentEnum } from 'ascii-table3'
 import { lstat, readdir } from 'fs/promises'
 import { BDJSLog } from '../util/BDJSLog'
@@ -8,7 +9,7 @@ import clc from 'cli-color'
 
 export interface CommandData {
     _path_?: string
-    data?: SlashCommandBuilder
+    data?: SlashCommandBuilder | RESTPostAPIApplicationCommandsJSONBody
     name?: string
     aliases?: string[]
     type: StringCommandTypes

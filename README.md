@@ -150,8 +150,6 @@ const bot = new Bot({
 | onInterval          | Executed when an interval is emitted.     |
 | onMessageCreate     | Executed when a message is created.       |
 | onReady             | Executed when client user is ready.       |
-| onShardCreate       | Executed when a shard is created.         |
-| onShardReady        | Executed when an interval is emitted.     |
 | onTimeout           | Executed when a timeout is emitted.       |
 | onTypingStart       | Executed when someone starts typing.      |
 
@@ -344,6 +342,7 @@ module.exports['default'] = {
 
 ## Resources
 > Auto-generated documentation: [Click here](https://cyberghxst.github.io/bdjs)
+> Guide: [Click here](https://bd.js.org)
 
 ## What inspired BDJS?
 > HyteScript.js: [npm](https://npmjs.com/package/hytescript.js)
