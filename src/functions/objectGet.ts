@@ -13,7 +13,7 @@ export default new BaseFunction({
         },
         {
             name: 'Path',
-            description: 'Property path to set the value.',
+            description: 'Property path to retrieve.',
             required: true,
             resolver: 'String',
             value: 'none'
