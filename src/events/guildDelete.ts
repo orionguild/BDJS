@@ -8,7 +8,7 @@ export default new BaseEvent<[Guild]>({
     description: 'Executed when bot leaves a guild.',
     async listener(bot, guild) {
         const context = new Context(guild, bot)
-        const commands = bot.commands.filter(cmd => cmd.type === 'botLeave')
+        const commands = Array.from(bot.commands.values()).filter(cmd => cmd.type === 'botLeave')
             const data = new Data({
                 bot,
                 context,

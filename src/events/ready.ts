@@ -78,7 +78,7 @@ export default new BaseEvent({
         }
 
         if (!bot.extraOptions.events.includes('onReady')) return;
-        const commands = bot.commands.filter(command => command.type === 'ready')
+        const commands = Array.from(bot.commands.values()).filter(command => command.type === 'ready')
 
         const data = new Data({
             bot,

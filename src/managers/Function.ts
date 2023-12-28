@@ -1,10 +1,9 @@
-import { AdvancedCollection } from 'nekord-collection'
 import { BaseFunction } from '../structures/Function'
 import { AddProperty } from '../structures/Data'
 import { readdir } from 'fs/promises'
 import { join } from 'path'
 
-export class FunctionManager extends AdvancedCollection<string, BaseFunction> {
+export class FunctionManager extends Map<string, BaseFunction> {
     #injections: Record<string, { name: string, target: string, data: BaseFunction }> = {}
     /**
      * Load all functions from the native core.

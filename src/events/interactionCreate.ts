@@ -10,7 +10,7 @@ export default new BaseEvent<[Interaction]>({
         const context = new Context(interaction, bot)
 
         // Any interaction commands.
-        bot.commands.filter(cmd => cmd.type === 'anyInteraction').forEach(async cmd => {
+        Array.from(bot.commands.values()).filter(cmd => cmd.type === 'anyInteraction').forEach(async cmd => {
             const data = new Data({
                 bot,
                 commandType: 'anyInteraction',
@@ -24,7 +24,7 @@ export default new BaseEvent<[Interaction]>({
 
         // Button interactions.
         if (interaction.isButton()) {
-            const command = bot.commands.filter(
+            const command = Array.from(Array.from(bot.commands.values()).values()).filter(
                 cmd => cmd.type === 'buttonInteraction'
             ).find(
                 cmd => cmd.name === interaction.customId
@@ -43,7 +43,7 @@ export default new BaseEvent<[Interaction]>({
 
         // Select menu interactions.
         if (interaction.isAnySelectMenu()) {
-            const command = bot.commands.filter(
+            const command = Array.from(Array.from(bot.commands.values()).values()).filter(
                 cmd => cmd.type === 'selectMenuInteraction'
             ).find(
                 cmd => cmd.name === interaction.customId
@@ -62,7 +62,7 @@ export default new BaseEvent<[Interaction]>({
 
         // Modal interactions.
         if (interaction.isModalSubmit()) {
-            const command = bot.commands.filter(
+            const command = Array.from(bot.commands.values()).filter(
                 cmd => cmd.type === 'modalInteraction'
             ).find(
                 cmd => cmd.name === interaction.customId
@@ -81,7 +81,7 @@ export default new BaseEvent<[Interaction]>({
 
         // Slash commands
         if (interaction.isChatInputCommand()) {
-            const commands = bot.commands.filter(cmd => cmd.type === 'commandInteraction')
+            const commands = Array.from(bot.commands.values()).filter(cmd => cmd.type === 'commandInteraction')
             const command = interaction.options.getSubcommandGroup(false) 
                 ? commands.find(cmd => cmd.name?.toLowerCase() === `${interaction.commandName} ${interaction.options.getSubcommand(false)} ${interaction.options.getSubcommandGroup(false)}`)
                 : interaction.options.getSubcommand(false) ? commands.find(cmd => cmd.name?.toLowerCase() === `${interaction.commandName} ${interaction.options.getSubcommand(false)}`)

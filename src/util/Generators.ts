@@ -95,7 +95,7 @@ export class Generators {
      * Save StringEventNames type to a new file.
      */
     static eventNamesToFile() {
-        const events = new EventManager(2)
+        const events = new EventManager
         writeFileSync('./bdjs.events.txt', `
             export type StringEventNames = '${events.reformulatedNames.join('\'\n| \'')}'
         `.trim().split('\n').map(line => line.trim()).join('\n'))

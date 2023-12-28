@@ -1,9 +1,8 @@
-import { AsciiTable3, AlignmentEnum } from 'ascii-table3'
-import { AdvancedCollection } from 'nekord-collection'
 import { Bot, SlashCommandBuilder, StringCommandTypes } from '../index'
+import { AsciiTable3, AlignmentEnum } from 'ascii-table3'
 import { lstat, readdir } from 'fs/promises'
-import { randomUUID } from 'crypto'
 import { BDJSLog } from '../util/BDJSLog'
+import { randomUUID } from 'crypto'
 import { join } from 'path'
 import clc from 'cli-color'
 
@@ -24,7 +23,7 @@ interface CommandStatus {
     status: 'Loaded' | 'Not loaded'
 }
 
-export class CommandManager extends AdvancedCollection<string, CommandData> {
+export class CommandManager extends Map<string, CommandData> {
     /**
      * Mark as "directory provides cwd".
      */

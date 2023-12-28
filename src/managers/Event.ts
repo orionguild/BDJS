@@ -1,11 +1,10 @@
 import { Bot, reformulateEvents } from '../structures/Bot'
-import { AdvancedCollection } from 'nekord-collection'
 import { BaseEvent } from '../structures/Event'
 import { lstat, readdir } from 'fs/promises'
 import { BDJSLog } from '../util/BDJSLog'
 import { join } from 'path'
 
-export class EventManager extends AdvancedCollection<string, BaseEvent<any>> {
+export class EventManager extends Map<string, BaseEvent<any>> {
     /**
      * Load events from a directory.
      * @param bot - BDJS client.

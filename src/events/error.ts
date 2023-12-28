@@ -10,7 +10,7 @@ export default new BaseEvent<[Error]>({
         BDJSLog.error(inspect(error, { depth: 5 }))
 
         if (bot.extraOptions.events.includes('onError')) {
-            const commands = bot.commands.filter(cmd => cmd.type === 'error')
+            const commands = Array.from(bot.commands.values()).filter(cmd => cmd.type === 'error')
             const data = new Data({
                 bot,
                 commandType: 'error',

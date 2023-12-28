@@ -11,9 +11,9 @@ export default new BaseEvent<[Message]>({
         if (replyBots === false && message.author.bot) return;
 
         const context = new Context(message, bot)
-        const unprefixed = bot.commands.filter(command => command.type === 'unprefixed')
-        const prefixed = bot.commands.filter(command => command.type === 'prefixed')
-        const always = bot.commands.filter(command => command.type === 'always')
+        const unprefixed = Array.from(bot.commands.values()).filter(command => command.type === 'unprefixed')
+        const prefixed = Array.from(bot.commands.values()).filter(command => command.type === 'prefixed')
+        const always = Array.from(bot.commands.values()).filter(command => command.type === 'always')
 
         // Always reply commands.
         for (const command of always) {

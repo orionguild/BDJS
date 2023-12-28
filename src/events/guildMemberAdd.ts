@@ -8,7 +8,7 @@ export default new BaseEvent<[GuildMember]>({
     description: 'Executed when a new member joins a guild.',
     async listener(bot, member) {
         const context = new Context(member, bot)
-        const commands = bot.commands.filter(cmd => cmd.type === 'memberJoin')
+        const commands = Array.from(bot.commands.values()).filter(cmd => cmd.type === 'memberJoin')
             const data = new Data({
                 bot,
                 context,

@@ -8,7 +8,7 @@ export default new BaseEvent<[Typing]>({
     description: 'Executed when someone starts typing.',
     async listener(bot, typing) {
         const context = new Context(typing, bot)
-        const commands = bot.commands.filter(cmd => cmd.type === 'typing')
+        const commands = Array.from(bot.commands.values()).filter(cmd => cmd.type === 'typing')
             const data = new Data({
                 bot,
                 context,

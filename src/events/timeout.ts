@@ -5,7 +5,7 @@ export default new BaseEvent<[Record<string, any>]>({
     name: 'onTimeout',
     description: 'Executed when a timeout is emitted.',
     async listener(bot, env) {
-        const commands = bot.commands.filter(cmd => cmd.type === 'timeout')
+        const commands = Array.from(bot.commands.values()).filter(cmd => cmd.type === 'timeout')
             const data = new Data({
                 bot,
                 commandType: 'timeout',
