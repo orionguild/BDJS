@@ -47,7 +47,7 @@ export interface BDJSOptions extends ClientOptions {
 /**
  * Represents a BDJS client.
  */
-export class Bot extends Client<true> {
+export class Bot<T = DataBase> extends Client<true> {
     public appManager = new BDJSApplicationCommandManager(this)
     public commands = new CommandManager
     public events = new EventManager
@@ -55,13 +55,13 @@ export class Bot extends Client<true> {
     public reader = new Reader
     public status = new StatusManager(this)
     public extraOptions: BDJSOptions
-    public db: DataBase
-    public vars: VariableManager
+    public db: any | null = null
+    public vars: VariableManager | null = null
     constructor(options: BDJSOptions) {
         super(options)
         this.extraOptions = options
-        this.db = new DataBase(options.database)
-        this.vars = new VariableManager(options.database?.tables.map(t => t.name) ?? ['main'], this.db)
+        // this.db = new DataBase(options.database)
+        // this.vars = new VariableManager(options.database?.tables.map(t => t.name) ?? ['main'], this.db)
 
         // Prefix validation
         if (options.prefixes.length === 0)
@@ -75,7 +75,7 @@ export class Bot extends Client<true> {
      * @returns {VariableManager}
      */
     variables(data: Record<string, any>, table = 'main') {
-        return this.vars.fillTable(data, table)
+        return this.vars?.fillTable(data, table)
     }
 
     /**

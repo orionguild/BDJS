@@ -1,13 +1,15 @@
+// @ts-nocheck
+
 import DataBase from 'collie-db'
 
 /**
  * Represents a variable manager.
  */
-export class VariableManager {
+export class VariableManager<T extends unknown = DataBase> {
     _data: Record<string, Record<string, any>> = {}
     private tables: string[] = []
-    private db: DataBase
-    constructor(tables: string[], db: DataBase) {
+    private db: T
+    constructor(tables: string[], db: T) {
         for (const table of tables) {
             this.addTable(table)
         }
