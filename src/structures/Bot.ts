@@ -89,7 +89,6 @@ export class Bot<T = DataBase> extends Client<true> {
 
         // Loading core.
         await this.events.loadNatives(this)
-        await this.db.init()
         return await super.login(
             this.extraOptions.auth
         )

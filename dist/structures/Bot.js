@@ -66,7 +66,6 @@ class Bot extends discord_js_1.Client {
         this.on('ready', () => require('../events/ready').default.listener(this));
         // Loading core.
         await this.events.loadNatives(this);
-        await this.db.init();
         return await super.login(this.extraOptions.auth);
     }
 }
