@@ -43,13 +43,6 @@ export declare class Bot<T = DataBase> extends Client<true> {
     vars: VariableManager | null;
     constructor(options: BDJSOptions);
     /**
-     * Load variables into the client.
-     * @param data - Variable records.
-     * @param {string} [table="main"] - Table name.
-     * @returns {VariableManager}
-     */
-    variables(data: Record<string, any>, table?: string): VariableManager<DataBase> | undefined;
-    /**
      * Login the BDJS client into the Discord Gateway.
      * @returns {Promise<string>}
      */

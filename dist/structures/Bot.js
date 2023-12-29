@@ -48,15 +48,6 @@ class Bot extends discord_js_1.Client {
             BDJSLog_1.BDJSLog.error('Provide 1 prefix at least!'), process.exit();
     }
     /**
-     * Load variables into the client.
-     * @param data - Variable records.
-     * @param {string} [table="main"] - Table name.
-     * @returns {VariableManager}
-     */
-    variables(data, table = 'main') {
-        return this.vars?.fillTable(data, table);
-    }
-    /**
      * Login the BDJS client into the Discord Gateway.
      * @returns {Promise<string>}
      */

@@ -34,7 +34,9 @@ export class VariableManager<T extends unknown = DataBase> {
     public fillTable(data: Record<string, any>, table: string) {
         if (!this.tables.includes(table)) throw new Error('Invalid table name provided!')
         for (const [key, value] of Object.entries(data)) {
-            this._data[table][key] = typeof value === 'object' ? JSON.stringify(value) : typeof value !== 'string' ? value.toString() : value
+            this._data[table][key] = 
+                typeof value === 'object' ? JSON.stringify(value) 
+                : typeof value !== 'string' ? value.toString() : value
         }
         return this
     }
