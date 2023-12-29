@@ -44,6 +44,12 @@ export class Plugin {
     }
 
     /**
+     * Custom setup to let developers extend its plugin.
+     * @param bot - BDJS client instance.
+     */
+    async customSetup(bot: Bot) {}
+
+    /**
      * Attach this plugin into the BDJS client.
      * @param bot - BDJS client.
      */
@@ -62,5 +68,7 @@ export class Plugin {
                 )
             })
         }
+
+        this.customSetup(bot)
     }
 }
