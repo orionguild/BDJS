@@ -83,7 +83,7 @@ export class VariableManager<T extends unknown = DataBase> {
      * @param table Table name.
      */
     async has(name: string, table = 'main') {
-        return await this.db.has(table, name) && name in this._data[table]
+        return (await this.db.has(table, name)) && this.checkVar(name, table)
     }
 
     /**

@@ -76,7 +76,7 @@ class VariableManager {
      * @param table Table name.
      */
     async has(name, table = 'main') {
-        return await this.db.has(table, name) && name in this._data[table];
+        return (await this.db.has(table, name)) && this.checkVar(name, table);
     }
     /**
      * Delete a value from the database.
