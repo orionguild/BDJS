@@ -1,5 +1,5 @@
-import _ from 'lodash'
 import { BaseFunction } from '../structures/Function'
+import * as _ from 'lodash'
 
 export default new BaseFunction({
     description: 'Get a property from a command data.',
