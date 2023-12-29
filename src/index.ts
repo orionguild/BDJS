@@ -1,4 +1,5 @@
 import { ActivityType, Shard, SlashCommandBuilder } from 'discord.js'
+import { VariableManager } from './managers/Variable'
 import { BaseFunction } from './structures/Function'
 import { BDJSOptions, Bot } from './structures/Bot'
 import { CommandData } from './managers/Command'
@@ -152,5 +153,6 @@ export {
     CommandData,
     Data,
     Plugin,
-    SlashCommandBuilder
+    SlashCommandBuilder,
+    VariableManager
 }

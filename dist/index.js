@@ -1,9 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SlashCommandBuilder = exports.Plugin = exports.Data = exports.Bot = exports.BDJSLog = exports.BDJSDefaultOptions = exports.BaseFunction = exports.ActivityType = void 0;
+exports.VariableManager = exports.SlashCommandBuilder = exports.Plugin = exports.Data = exports.Bot = exports.BDJSLog = exports.BDJSDefaultOptions = exports.BaseFunction = exports.ActivityType = void 0;
 const discord_js_1 = require("discord.js");
 Object.defineProperty(exports, "ActivityType", { enumerable: true, get: function () { return discord_js_1.ActivityType; } });
 Object.defineProperty(exports, "SlashCommandBuilder", { enumerable: true, get: function () { return discord_js_1.SlashCommandBuilder; } });
+const Variable_1 = require("./managers/Variable");
+Object.defineProperty(exports, "VariableManager", { enumerable: true, get: function () { return Variable_1.VariableManager; } });
 const Function_1 = require("./structures/Function");
 Object.defineProperty(exports, "BaseFunction", { enumerable: true, get: function () { return Function_1.BaseFunction; } });
 const Bot_1 = require("./structures/Bot");
