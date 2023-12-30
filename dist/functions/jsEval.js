@@ -36,6 +36,8 @@ exports.default = new Function_1.BaseFunction({
             result = e;
         }
         if (returnResults === 'true' && result)
-            return (0, util_1.inspect)(result, { depth: 4 });
+            return typeof result === 'string' ? result
+                : typeof result === 'object' ? (0, util_1.inspect)(result, { depth: 4 })
+                    : result;
     }
 });

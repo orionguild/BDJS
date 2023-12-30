@@ -35,6 +35,9 @@ export default new BaseFunction({
             result = e
         }
 
-        if (returnResults === 'true' && result) return inspect(result, { depth: 4 })
+        if (returnResults === 'true' && result)
+            return typeof result === 'string' ? result
+                : typeof result === 'object' ? inspect(result, { depth: 4 })
+                : result
     }
 })
