@@ -1,4 +1,4 @@
-import { ActivityType, ContextMenuCommandBuilder, Shard, SlashCommandBuilder } from 'discord.js';
+import { ActivityType, ApplicationCommandType, ApplicationCommandOptionType, ContextMenuCommandBuilder, Shard, SlashCommandBuilder } from 'discord.js';
 import { VariableManager } from './managers/Variable';
 import { BaseFunction } from './structures/Function';
 import { BDJSOptions, Bot } from './structures/Bot';
@@ -14,4 +14,4 @@ interface BDJSCustomEvents {
     timeout: (data: Record<string, any>) => void;
 }
 declare function BDJSDefaultOptions(auth: `${string}.${string}.${string}`, prefixes: string[]): void | BDJSOptions;
-export { ActivityType, BaseFunction, BDJSCustomEvents, BDJSDefaultOptions, BDJSLog, BDJSOptions, Bot, CommandData, ContextMenuCommandBuilder, Data, Plugin, SlashCommandBuilder, VariableManager };
+export { ActivityType, ApplicationCommandType, ApplicationCommandOptionType, BaseFunction, BDJSCustomEvents, BDJSDefaultOptions, BDJSLog, BDJSOptions, Bot, CommandData, ContextMenuCommandBuilder, Data, Plugin, SlashCommandBuilder, VariableManager };

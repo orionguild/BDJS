@@ -1,4 +1,4 @@
-import { ActivityType, ContextMenuCommandBuilder, Shard, SlashCommandBuilder } from 'discord.js'
+import { ActivityType, ApplicationCommandType, ApplicationCommandOptionType, ContextMenuCommandBuilder, Shard, SlashCommandBuilder } from 'discord.js'
 import { VariableManager } from './managers/Variable'
 import { BaseFunction } from './structures/Function'
 import { BDJSOptions, Bot } from './structures/Bot'
@@ -133,6 +133,8 @@ function BDJSDefaultOptions(auth: `${string}.${string}.${string}`, prefixes: str
 
 export {
     ActivityType,
+    ApplicationCommandType,
+    ApplicationCommandOptionType,
     BaseFunction,
     BDJSCustomEvents,
     BDJSDefaultOptions,

@@ -1,8 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.VariableManager = exports.SlashCommandBuilder = exports.Plugin = exports.Data = exports.ContextMenuCommandBuilder = exports.Bot = exports.BDJSLog = exports.BDJSDefaultOptions = exports.BaseFunction = exports.ActivityType = void 0;
+exports.VariableManager = exports.SlashCommandBuilder = exports.Plugin = exports.Data = exports.ContextMenuCommandBuilder = exports.Bot = exports.BDJSLog = exports.BDJSDefaultOptions = exports.BaseFunction = exports.ApplicationCommandOptionType = exports.ApplicationCommandType = exports.ActivityType = void 0;
 const discord_js_1 = require("discord.js");
 Object.defineProperty(exports, "ActivityType", { enumerable: true, get: function () { return discord_js_1.ActivityType; } });
+Object.defineProperty(exports, "ApplicationCommandType", { enumerable: true, get: function () { return discord_js_1.ApplicationCommandType; } });
+Object.defineProperty(exports, "ApplicationCommandOptionType", { enumerable: true, get: function () { return discord_js_1.ApplicationCommandOptionType; } });
 Object.defineProperty(exports, "ContextMenuCommandBuilder", { enumerable: true, get: function () { return discord_js_1.ContextMenuCommandBuilder; } });
 Object.defineProperty(exports, "SlashCommandBuilder", { enumerable: true, get: function () { return discord_js_1.SlashCommandBuilder; } });
 const Variable_1 = require("./managers/Variable");
