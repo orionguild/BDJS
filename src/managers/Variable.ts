@@ -66,7 +66,7 @@ export class VariableManager<T extends unknown = DataBase> {
      * @param table Table name.
      */
     async get(name: string, table = 'main') {
-        return await this.db.get(table, name) ?? this._data[table][name]
+        return await this.db.get(table, name)// ?? this._data[table][name]
     }
 
     /**
@@ -85,7 +85,7 @@ export class VariableManager<T extends unknown = DataBase> {
      * @param table Table name.
      */
     async has(name: string, table = 'main') {
-        return (await this.db.has(table, name)) && this.checkVar(name, table)
+        return (await this.db.has(table, name))// && this.checkVar(name, table)
     }
 
     /**
