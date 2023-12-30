@@ -104,5 +104,48 @@ export default new BaseEvent<[Interaction]>({
 
             if (command) data.command = command, await data.reader.compile(command.code, data)
         }
+
+        // User context menus
+        if (interaction.isUserContextMenuCommand()) {
+            const commands = Array.from(bot.commands.values()).filter(cmd => cmd.type === 'userContextMenuInteraction')
+            const command = commands.find(cmd => cmd.name?.toLowerCase() === interaction.commandName)
+
+            const data = new Data({
+                bot,
+                commandType: 'userContextMenuInteraction',
+                context,
+                env: {
+                    targetId: interaction.targetId,
+                    targetMember: interaction.targetMember,
+                    targetUser: interaction.targetUser
+                },
+                functions: bot.functions,
+                reader: bot.reader
+            })
+
+            if (command) data.command = command, await data.reader.compile(command.code, data)
+        }
+
+        // Message context menus
+        if (interaction.isMessageContextMenuCommand()) {
+            const commands = Array.from(bot.commands.values()).filter(cmd => cmd.type === 'messageContextMenuInteraction')
+            const command = commands.find(cmd => cmd.name?.toLowerCase() === interaction.commandName)
+            
+            context.message = interaction.targetMessage
+            
+            const data = new Data({
+                bot,
+                commandType: 'messageContextMenuInteraction',
+                context,
+                env: {
+                    targetId: interaction.targetId,
+                    targetMessage: interaction.targetMessage
+                },
+                functions: bot.functions,
+                reader: bot.reader
+            })
+
+            if (command) data.command = command, await data.reader.compile(command.code, data)
+        }
     }
 })
