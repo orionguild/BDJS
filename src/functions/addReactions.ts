@@ -36,9 +36,9 @@ export default new BaseFunction({
     ],
     code: async function(d, [
         reactions,
-        messageID = d.ctx?.message?.id,
+        guildID = d.ctx?.guild?.id,
         channelID = d.ctx?.channel?.id,
-        guildID = d.ctx?.guild?.id
+        messageID = d.ctx?.message?.id,
     ]) {
         if (reactions === undefined) throw new d.error(d, 'required', 'Reactions', d.function?.name!)
         if (messageID === undefined) throw new d.error(d, 'invalid', 'Message ID', d.function?.name!)
