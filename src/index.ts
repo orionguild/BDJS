@@ -1,4 +1,4 @@
-import { ActivityType, Shard, SlashCommandBuilder } from 'discord.js'
+import { ActivityType, ContextMenuCommandBuilder, Shard, SlashCommandBuilder } from 'discord.js'
 import { VariableManager } from './managers/Variable'
 import { BaseFunction } from './structures/Function'
 import { BDJSOptions, Bot } from './structures/Bot'
@@ -118,17 +118,6 @@ function BDJSDefaultOptions(auth: `${string}.${string}.${string}`, prefixes: str
     if (prefixes.length === 0) return BDJSLog.error('You must provide 1 prefix at least!')
     return {
         auth,
-        database: {
-            tables: [
-                {
-                    name: 'main',
-                    mod: './database/main.json'
-                }
-            ],
-            timeoutsTable: 'timeouts',
-            autoSave: false,
-            mod: './database'
-        },
         events: [
             'onReady',
             'onMessageCreate'
@@ -151,6 +140,7 @@ export {
     BDJSOptions,
     Bot,
     CommandData,
+    ContextMenuCommandBuilder,
     Data,
     Plugin,
     SlashCommandBuilder,

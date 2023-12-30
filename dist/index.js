@@ -1,8 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.VariableManager = exports.SlashCommandBuilder = exports.Plugin = exports.Data = exports.Bot = exports.BDJSLog = exports.BDJSDefaultOptions = exports.BaseFunction = exports.ActivityType = void 0;
+exports.VariableManager = exports.SlashCommandBuilder = exports.Plugin = exports.Data = exports.ContextMenuCommandBuilder = exports.Bot = exports.BDJSLog = exports.BDJSDefaultOptions = exports.BaseFunction = exports.ActivityType = void 0;
 const discord_js_1 = require("discord.js");
 Object.defineProperty(exports, "ActivityType", { enumerable: true, get: function () { return discord_js_1.ActivityType; } });
+Object.defineProperty(exports, "ContextMenuCommandBuilder", { enumerable: true, get: function () { return discord_js_1.ContextMenuCommandBuilder; } });
 Object.defineProperty(exports, "SlashCommandBuilder", { enumerable: true, get: function () { return discord_js_1.SlashCommandBuilder; } });
 const Variable_1 = require("./managers/Variable");
 Object.defineProperty(exports, "VariableManager", { enumerable: true, get: function () { return Variable_1.VariableManager; } });
@@ -23,17 +24,6 @@ function BDJSDefaultOptions(auth, prefixes) {
         return BDJSLog_1.BDJSLog.error('You must provide 1 prefix at least!');
     return {
         auth,
-        database: {
-            tables: [
-                {
-                    name: 'main',
-                    mod: './database/main.json'
-                }
-            ],
-            timeoutsTable: 'timeouts',
-            autoSave: false,
-            mod: './database'
-        },
         events: [
             'onReady',
             'onMessageCreate'
