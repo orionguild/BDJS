@@ -41,6 +41,13 @@ exports.default = new Function_1.BaseFunction({
                     throw new extended.error(d, 'required', 'image URL', extended.function?.name);
                 embed.setThumbnail(url);
             }
+        })).set('setimage', new Function_1.BaseFunction({
+            description: 'Set an image for the embed.',
+            async code(extended, [url]) {
+                if (url === undefined)
+                    throw new extended.error(d, 'required', 'image URL', extended.function?.name);
+                embed.setImage(url);
+            }
         })).set('setfooter', new Function_1.BaseFunction({
             description: 'Set the footer for the embed.',
             async code(extended, [text, icon]) {

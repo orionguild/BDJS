@@ -1,14 +1,44 @@
 import { BaseFunction } from '../structures/Function'
 import { User } from 'discord.js'
-import { inspect } from 'util'
 
-export function getUserProperty(user: User & Record<string, any>, property: string) {
+export enum UserProperties {
+    isBot = 'isBot',
+    avatar = 'avatar',
+    id = 'id',
+    username = 'username',
+    displayName = 'displayName',
+    globalName = 'globalName',
+    banner = 'banner',
+    accentColor = 'accentColor',
+    timestamp = 'timestamp',
+    dmChannelID = 'dmChannelID'
+}
+
+export const isValidUserProperty = (property: UserProperties) => Object.values(UserProperties).includes(property)
+
+export function getUserProperty(user: User & Record<string, any>, property: UserProperties) {
     const data = JSON.parse(JSON.stringify(user))
     switch (property) {
         case 'isBot':
             return user.bot + ''
-        default:
-            return Array.isArray(data[property]) ? data[property].join(',') : typeof user[property] === 'string' ? user[property] : inspect(user[property])
+        case 'avatar':
+            return user.displayAvatarURL()
+        case 'id':
+            return user.id
+        case 'username':
+            return user.username
+        case 'displayName':
+            return user.displayName
+        case 'globalName':
+            return user.globalName
+        case 'banner':
+            return user.bannerURL()
+        case 'accentColor':
+            return user.hexAccentColor
+        case 'timestamp':
+            return user.createdTimestamp
+        case 'dmChannelID':
+            return user.dmChannel?.id
     }
 }
 
@@ -37,9 +67,8 @@ export default new BaseFunction({
         const user = await d.bot?.users.fetch(memberID) as User & Record<string, string>
         if (!user) throw new d.error(d, 'invalid', 'user', d.function?.name!)
 
-        const types = Object.keys(JSON.parse(JSON.stringify(user))).concat(['isBot'])
-        if (!types.includes(property)) throw new d.error(d, 'invalid', 'Property', d.function?.name!)
+        if (!isValidUserProperty(property as UserProperties)) throw new d.error(d, 'invalid', 'Property', d.function?.name!)
 
-        return getUserProperty(user, property)
+        return getUserProperty(user, property as UserProperties)
     }
 })

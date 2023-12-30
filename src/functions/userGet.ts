@@ -1,5 +1,5 @@
+import { getUserProperty, UserProperties, isValidUserProperty } from './userFetch'
 import { BaseFunction } from '../structures/Function'
-import { getUserProperty } from './userFetch'
 import { User } from 'discord.js'
 
 export default new BaseFunction({
@@ -27,9 +27,8 @@ export default new BaseFunction({
         const user = d.bot?.users.cache.get(memberID) as User & Record<string, string>
         if (!user) throw new d.error(d, 'invalid', 'user', d.function?.name!)
 
-        const types = Object.keys(JSON.parse(JSON.stringify(user))).concat(['isBot'])
-        if (!types.includes(property)) throw new d.error(d, 'invalid', 'Property', d.function?.name!)
+        if (!isValidUserProperty(property as UserProperties)) throw new d.error(d, 'invalid', 'Property', d.function?.name!)
 
-        return getUserProperty(user, property)
+        return getUserProperty(user, property as UserProperties)
     }
 })

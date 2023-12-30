@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const Function_1 = require("../structures/Function");
 const userFetch_1 = require("./userFetch");
+const Function_1 = require("../structures/Function");
 exports.default = new Function_1.BaseFunction({
     description: 'Get an user property.',
     parameters: [
@@ -28,8 +28,7 @@ exports.default = new Function_1.BaseFunction({
         const user = d.bot?.users.cache.get(memberID);
         if (!user)
             throw new d.error(d, 'invalid', 'user', d.function?.name);
-        const types = Object.keys(JSON.parse(JSON.stringify(user))).concat(['isBot']);
-        if (!types.includes(property))
+        if (!(0, userFetch_1.isValidUserProperty)(property))
             throw new d.error(d, 'invalid', 'Property', d.function?.name);
         return (0, userFetch_1.getUserProperty)(user, property);
     }

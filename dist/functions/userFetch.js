@@ -1,15 +1,45 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getUserProperty = void 0;
+exports.getUserProperty = exports.isValidUserProperty = exports.UserProperties = void 0;
 const Function_1 = require("../structures/Function");
-const util_1 = require("util");
+var UserProperties;
+(function (UserProperties) {
+    UserProperties["isBot"] = "isBot";
+    UserProperties["avatar"] = "avatar";
+    UserProperties["id"] = "id";
+    UserProperties["username"] = "username";
+    UserProperties["displayName"] = "displayName";
+    UserProperties["globalName"] = "globalName";
+    UserProperties["banner"] = "banner";
+    UserProperties["accentColor"] = "accentColor";
+    UserProperties["timestamp"] = "timestamp";
+    UserProperties["dmChannelID"] = "dmChannelID";
+})(UserProperties || (exports.UserProperties = UserProperties = {}));
+const isValidUserProperty = (property) => Object.values(UserProperties).includes(property);
+exports.isValidUserProperty = isValidUserProperty;
 function getUserProperty(user, property) {
     const data = JSON.parse(JSON.stringify(user));
     switch (property) {
         case 'isBot':
             return user.bot + '';
-        default:
-            return Array.isArray(data[property]) ? data[property].join(',') : typeof user[property] === 'string' ? user[property] : (0, util_1.inspect)(user[property]);
+        case 'avatar':
+            return user.displayAvatarURL();
+        case 'id':
+            return user.id;
+        case 'username':
+            return user.username;
+        case 'displayName':
+            return user.displayName;
+        case 'globalName':
+            return user.globalName;
+        case 'banner':
+            return user.bannerURL();
+        case 'accentColor':
+            return user.hexAccentColor;
+        case 'timestamp':
+            return user.createdTimestamp;
+        case 'dmChannelID':
+            return user.dmChannel?.id;
     }
 }
 exports.getUserProperty = getUserProperty;
@@ -39,8 +69,7 @@ exports.default = new Function_1.BaseFunction({
         const user = await d.bot?.users.fetch(memberID);
         if (!user)
             throw new d.error(d, 'invalid', 'user', d.function?.name);
-        const types = Object.keys(JSON.parse(JSON.stringify(user))).concat(['isBot']);
-        if (!types.includes(property))
+        if (!(0, exports.isValidUserProperty)(property))
             throw new d.error(d, 'invalid', 'Property', d.function?.name);
         return getUserProperty(user, property);
     }
