@@ -14,6 +14,13 @@ export default new BaseFunction({
             value: 'false'
         },
         {
+            name: 'Fetch Reply',
+            description: 'Whether fetch message reply.',
+            required: false,
+            resolver: 'Boolean',
+            value: 'true'
+        },
+        {
             name: 'Return ID',
             description: 'Returns the interaction reply ID.',
             required: false,
@@ -22,14 +29,15 @@ export default new BaseFunction({
             value: 'false'
         }
     ],
-    code: async function(d, [ephemeral = 'false', returnId = 'false']) {
+    code: async function(d, [ephemeral = 'false', fetchReply = 'false', returnId = 'false']) {
         if (!(d.ctx?.raw instanceof BaseInteraction))
             throw new d.error(d, 'disallowed', d.function?.name!, 'interactions')
         if (!d.ctx?.raw.isRepliable()) throw new d.error(d, 'custom', `${d.commandType} is not repliable.`)
         if (d.ctx?.raw.deferred) throw new d.error(d, 'custom', 'Cannot defer an interaction that is already deferred.')
 
-        const data = await d.ctx?.raw.deferReply({ ephemeral: ephemeral === 'true' }).then((res) => {
-            return res
+        const data = await d.ctx?.raw.deferReply({
+            ephemeral: ephemeral === 'true',
+            fetchReply: fetchReply === 'true'
         }).catch(e => {
             throw new d.error(d, 'custom', inspect(e, { depth: 4 }))
         })

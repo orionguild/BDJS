@@ -47,7 +47,7 @@ export default new BaseFunction({
         d.container.setFetchReply(fetchReply === 'true')
         d.container.setEphemeral(ephemeral === 'true')
 
-        const data = d.ctx?.raw.reply(d.container).catch(e => {
+        const data = await d.ctx?.raw.reply(d.container).catch(e => {
             throw new d.error(d, 'custom', inspect(e, { depth: 4 }))
         })
 

@@ -49,7 +49,7 @@ exports.default = new Function_1.BaseFunction({
             d.container.pushContent(result.code);
         d.container.setFetchReply(fetchReply === 'true');
         d.container.setEphemeral(ephemeral === 'true');
-        const data = d.ctx?.raw.reply(d.container).catch(e => {
+        const data = await d.ctx?.raw.reply(d.container).catch(e => {
             throw new d.error(d, 'custom', (0, util_1.inspect)(e, { depth: 4 }));
         });
         d.container.clear();
