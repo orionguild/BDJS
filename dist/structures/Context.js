@@ -17,12 +17,18 @@ function isValidInstance(data) {
  * Represents a context class.
  */
 class Context {
-    constructor(raw, client) {
+    constructor(data, client) {
         _Context_instances.add(this);
         _Context_hold.set(this, void 0);
         this.client = client;
-        this.raw = raw;
+        this.raw = data.raw;
         tslib_1.__classPrivateFieldSet(this, _Context_hold, null, "f");
+        this.author = data.author ?? null;
+        this.channel = data.channel ?? null;
+        this.interaction = data.interaction ?? null;
+        this.guild = data.guild ?? null;
+        this.member = data.member ?? null;
+        this.message = data.message ?? tslib_1.__classPrivateFieldGet(this, _Context_hold, "f");
     }
     /**
      * Defers the message response.
@@ -114,55 +120,6 @@ class Context {
         }
         else
             return null;
-    }
-    /**
-     * Points to the message author.
-     */
-    get author() {
-        return this.raw instanceof discord_js_1.Message
-            ? this.raw.author : this.raw instanceof discord_js_1.GuildMember
-            ? this.raw.user : this.raw instanceof discord_js_1.BaseInteraction
-            ? this.raw.user : this.raw instanceof discord_js_1.User
-            ? this.raw : null;
-    }
-    /**
-     * Points to a channel.
-     */
-    get channel() {
-        return this.raw instanceof discord_js_1.BaseChannel
-            ? this.raw : this.raw instanceof discord_js_1.User
-            ? this.raw.dmChannel : this.raw instanceof discord_js_1.GuildMember
-            ? this.raw.user.dmChannel : this.raw instanceof discord_js_1.Message
-            ? this.raw.channel : this.raw instanceof discord_js_1.BaseInteraction
-            ? this.raw.channel : null;
-    }
-    /**
-     * Points to the current guild, if any.
-     */
-    get guild() {
-        return this.raw instanceof discord_js_1.Guild
-            ? this.raw : this.raw instanceof discord_js_1.GuildChannel
-            ? this.raw.guild : this.raw instanceof discord_js_1.GuildMember
-            ? this.raw.guild : this.raw instanceof discord_js_1.Sticker
-            ? this.raw.guild : null;
-    }
-    /**
-     * Points to the current interaction, if any.
-     */
-    get interaction() {
-        return this.raw instanceof discord_js_1.BaseInteraction ? this.raw : null;
-    }
-    /**
-     * Points to the current guild member, if any.
-     */
-    get member() {
-        return this.raw instanceof discord_js_1.GuildMember ? this.raw : null;
-    }
-    /**
-     * Points to the current message, if any.
-     */
-    get message() {
-        return tslib_1.__classPrivateFieldGet(this, _Context_hold, "f");
     }
 }
 exports.Context = Context;

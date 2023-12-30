@@ -8,6 +8,8 @@ class Container {
     constructor() {
         this.files = [];
         this.components = [];
+        this.fetchReply = true;
+        this.ephemeral = true;
     }
     /**
      * Set the allowed mentions for this payload.
@@ -66,6 +68,22 @@ class Container {
         return this;
     }
     /**
+     * Whether fetch message reply.
+     * @param state - Boolean state.
+     */
+    setFetchReply(state) {
+        this.fetchReply = state;
+        return this;
+    }
+    /**
+     * Whether set ephemeral responses.
+     * @param state - Boolean state.
+     */
+    setEphemeral(state) {
+        this.ephemeral = state;
+        return this;
+    }
+    /**
      * Clear the container.
      */
     clear() {
@@ -74,6 +92,8 @@ class Container {
         this.components = undefined;
         this.embeds = undefined;
         this.files = undefined;
+        this.fetchReply = false;
+        this.ephemeral = false;
     }
 }
 exports.Container = Container;

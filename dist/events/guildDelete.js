@@ -7,7 +7,10 @@ exports.default = new Event_1.BaseEvent({
     name: 'onGuildDelete',
     description: 'Executed when bot leaves a guild.',
     async listener(bot, guild) {
-        const context = new Context_1.Context(guild, bot);
+        const context = new Context_1.Context({
+            guild,
+            raw: guild
+        }, bot);
         const commands = Array.from(bot.commands.values()).filter(cmd => cmd.type === 'botLeave');
         const data = new Data_1.Data({
             bot,

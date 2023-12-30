@@ -1,7 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const util_1 = require("util");
 const Function_1 = require("../structures/Function");
+const discord_js_1 = require("discord.js");
+const util_1 = require("util");
 exports.default = new Function_1.BaseFunction({
     description: 'Sends a message to the provided channel.',
     parameters: [
@@ -51,13 +52,11 @@ exports.default = new Function_1.BaseFunction({
         const compiled = await d.reader.compile(payload, d);
         if (compiled.code)
             d.container.pushContent(compiled.code);
-        channel.send(d.container).then((message) => {
-            d.container.clear();
-            if (returnID === 'true')
-                return message.id;
-        }).catch((e) => {
-            d.container.clear();
+        const message = await channel.send(d.container).catch((e) => {
             throw new d.error(d, 'custom', (0, util_1.inspect)(e, { depth: 2 }));
         });
+        d.container.clear();
+        if (message instanceof discord_js_1.Message && returnID === 'true')
+            return message.id;
     }
 });

@@ -24,11 +24,9 @@ exports.default = new Function_1.BaseFunction({
         const result = await d.reader.compile(message, d);
         if (result?.code)
             d.container.pushContent(result.code);
-        const data = await d.ctx?.raw.editReply(d.container).then((res) => {
-            d.container.clear();
-            return res;
-        }).catch(e => {
+        const data = await d.ctx?.raw.editReply(d.container).catch(e => {
             throw new d.error(d, 'custom', (0, util_1.inspect)(e, { depth: 4 }));
         });
+        d.container.clear();
     }
 });

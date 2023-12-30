@@ -7,7 +7,12 @@ export default new BaseEvent<[GuildMember | PartialGuildMember]>({
     name: 'onGuildMemberRemove',
     description: 'Executed when a new member joins a guild.',
     async listener(bot, member) {
-        const context = new Context(member, bot)
+        const context = new Context({
+            author: member.user,
+            guild: member.guild,
+            member,
+            raw: member
+        }, bot)
         const commands = Array.from(bot.commands.values()).filter(cmd => cmd.type === 'memberLeave')
             const data = new Data({
                 bot,

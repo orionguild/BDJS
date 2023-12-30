@@ -3,14 +3,22 @@ import { BaseEvent } from '../structures/Event'
 import { Data } from '../structures/Data'
 import { Message } from 'discord.js'
 
-export default new BaseEvent<[Message]>({
+export default new BaseEvent<[Message<true>]>({
     name: 'onMessageCreate',
     description: 'Executed when a message is created.',
     async listener(bot, message) {
         const replyBots = bot.extraOptions.replyBots ?? false
         if (replyBots === false && message.author.bot) return;
 
-        const context = new Context(message, bot)
+        const context = new Context({
+            author: message.author,
+            channel: message.channel,
+            guild: message.guild,
+            member: message.member,
+            message,
+            raw: message
+        }, bot)
+        
         const unprefixed = Array.from(bot.commands.values()).filter(command => command.type === 'unprefixed')
         const prefixed = Array.from(bot.commands.values()).filter(command => command.type === 'prefixed')
         const always = Array.from(bot.commands.values()).filter(command => command.type === 'always')

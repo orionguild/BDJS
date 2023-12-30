@@ -1,5 +1,5 @@
 import { BaseFunction } from '../structures/Function'
-import { BaseInteraction } from 'discord.js'
+import { BaseInteraction, Message } from 'discord.js'
 import { inspect } from 'util'
 
 export default new BaseFunction({
@@ -20,6 +20,13 @@ export default new BaseFunction({
             value: 'none'
         },
         {
+            name: 'Fetch Reply',
+            description: 'Whether fetch message reply.',
+            required: false,
+            resolver: 'Boolean',
+            value: 'true'
+        },
+        {
             name: 'Return ID',
             description: 'Returns the interaction reply ID.',
             required: false,
@@ -27,7 +34,7 @@ export default new BaseFunction({
             value: 'false'
         }
     ],
-    code: async function(d, [message, ephemeral = 'false', returnId = 'false']) {
+    code: async function(d, [message, ephemeral = 'false', fetchReply = 'true', returnId = 'false']) {
         if (!(d.ctx?.raw instanceof BaseInteraction)) throw new d.error(d, 'disallowed', d.function?.name!, 'interactions')
         if (!d.ctx?.raw.isRepliable()) throw new d.error(d, 'custom', `${d.commandType} is not repliable.`)
         if (!d.ctx?.raw.replied) throw new d.error(d, 'custom', 'Cannot follow up an interaction that is not replied.')
@@ -35,15 +42,16 @@ export default new BaseFunction({
         const result = await d.reader.compile(message, d)
         if (result?.code) d.container.pushContent(result.code)
 
-        if (ephemeral === 'true') (d.container as any).ephemeral = true
+        d.container.setFetchReply(fetchReply === 'true')
+        d.container.setEphemeral(ephemeral === 'true')
 
-        const data = await d.ctx?.raw.followUp(d.container).then((res) => {
-            d.container.clear()
-            return res
-        }).catch(e => {
+        const data = await d.ctx?.raw.followUp(d.container).catch(e => {
             throw new d.error(d, 'custom', inspect(e, { depth: 4 }))
         })
 
-        if (data && data.id && returnId === 'true') return data.id
+        d.container.clear()
+
+        if (data instanceof Message && returnId === 'true')
+            return data.id
     }
 })

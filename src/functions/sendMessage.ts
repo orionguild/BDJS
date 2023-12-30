@@ -1,5 +1,6 @@
-import { inspect } from 'util'
 import { BaseFunction } from '../structures/Function'
+import { Message } from 'discord.js'
+import { inspect } from 'util'
 
 export default new BaseFunction({
     description: 'Sends a message to the provided channel.',
@@ -53,12 +54,13 @@ export default new BaseFunction({
         const compiled = await d.reader.compile(payload, d)
         if (compiled.code) d.container.pushContent(compiled.code)
         
-        channel.send(d.container).then((message) => {
-            d.container.clear()
-            if (returnID === 'true') return message.id
-        }).catch((e) => {
-            d.container.clear()
+        const message = await channel.send(d.container).catch((e) => {
             throw new d.error(d, 'custom', inspect(e, { depth: 2 }))
         })
+        
+        d.container.clear()
+
+        if (message instanceof Message && returnID === 'true')
+            return message.id
     }
 })

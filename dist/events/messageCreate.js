@@ -10,7 +10,14 @@ exports.default = new Event_1.BaseEvent({
         const replyBots = bot.extraOptions.replyBots ?? false;
         if (replyBots === false && message.author.bot)
             return;
-        const context = new Context_1.Context(message, bot);
+        const context = new Context_1.Context({
+            author: message.author,
+            channel: message.channel,
+            guild: message.guild,
+            member: message.member,
+            message,
+            raw: message
+        }, bot);
         const unprefixed = Array.from(bot.commands.values()).filter(command => command.type === 'unprefixed');
         const prefixed = Array.from(bot.commands.values()).filter(command => command.type === 'prefixed');
         const always = Array.from(bot.commands.values()).filter(command => command.type === 'always');

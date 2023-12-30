@@ -1,4 +1,4 @@
-import { BaseChannel, BaseInteraction, ChatInputCommandInteraction, CommandInteraction, InteractionEditReplyOptions, InteractionUpdateOptions, InteractionReplyOptions, Guild, GuildChannel, GuildMember, MessageComponentInteraction, MessageEditOptions, Message, MessagePayload, MessageCreateOptions, ModalSubmitInteraction, TextChannel, StageChannel, ThreadChannel, NewsChannel, User, InteractionResponse, Sticker } from 'discord.js'
+import { BaseChannel, BaseInteraction, ChatInputCommandInteraction, CommandInteraction, InteractionEditReplyOptions, InteractionUpdateOptions, InteractionReplyOptions, Guild, GuildChannel, GuildMember, MessageComponentInteraction, MessageEditOptions, Message, MessagePayload, MessageCreateOptions, ModalSubmitInteraction, TextChannel, StageChannel, ThreadChannel, NewsChannel, User, InteractionResponse, Sticker, GuildTextBasedChannel, Interaction, PartialGuildMember, TextBasedChannel, APIInteractionGuildMember, PartialUser } from 'discord.js'
 import { Bot } from './Bot'
 
 /**
@@ -23,16 +23,43 @@ function isValidInstance(data: TextChannel | ThreadChannel | StageChannel | News
 }
 
 /**
+ * Context setters.
+ */
+interface ContextData<T extends unknown = unknown> {
+    guild?: Guild | null
+    message?: Message | null
+    channel?: TextBasedChannel | GuildTextBasedChannel | null
+    author?: PartialUser | User | null
+    member?: APIInteractionGuildMember | GuildMember | PartialGuildMember | null | undefined,
+    interaction?: Interaction,
+    raw: T
+}
+
+/**
  * Represents a context class.
  */
 export class Context<T extends unknown = unknown> {
     public client: Bot
     public raw: T
+    public guild: Guild | null
+    public message: Message | null
+    public channel: TextBasedChannel | GuildTextBasedChannel | null
+    public author: PartialUser | User | null
+    public member: APIInteractionGuildMember | GuildMember | PartialGuildMember | null | undefined
+    public interaction: Interaction | null
     #hold: InteractionResponse | Message | null
-    constructor(raw: T, client: Bot) {
+    constructor(data: ContextData<T>, client: Bot) {
         this.client = client
-        this.raw = raw
+        this.raw = data.raw
+
         this.#hold = null
+
+        this.author = data.author ?? null
+        this.channel = data.channel ?? null
+        this.interaction = data.interaction ?? null
+        this.guild = data.guild ?? null
+        this.member = data.member ?? null
+        this.message = data.message ?? this.#hold
     }
 
     /**
@@ -116,61 +143,6 @@ export class Context<T extends unknown = unknown> {
             this.#setMessage(reply)
             return reply
         } else return null
-    }
-
-    /**
-     * Points to the message author.
-     */
-    get author() {
-        return this.raw instanceof Message
-            ? this.raw.author : this.raw instanceof GuildMember
-                ? this.raw.user : this.raw instanceof BaseInteraction
-                    ? this.raw.user : this.raw instanceof User
-                        ? this.raw : null
-    }
-
-    /**
-     * Points to a channel.
-     */
-    get channel() {
-        return this.raw instanceof BaseChannel
-            ? this.raw : this.raw instanceof User
-                ? this.raw.dmChannel : this.raw instanceof GuildMember
-                    ? this.raw.user.dmChannel : this.raw instanceof Message
-                        ? this.raw.channel : this.raw instanceof BaseInteraction
-                            ? this.raw.channel : null
-    }
-
-    /**
-     * Points to the current guild, if any.
-     */
-    get guild() {
-        return this.raw instanceof Guild
-            ? this.raw : this.raw instanceof GuildChannel
-                ? this.raw.guild : this.raw instanceof GuildMember
-                    ? this.raw.guild : this.raw instanceof Sticker
-                        ? this.raw.guild : null
-    }
-
-    /**
-     * Points to the current interaction, if any.
-     */
-    get interaction() {
-        return this.raw instanceof BaseInteraction ? this.raw : null
-    }
-
-    /**
-     * Points to the current guild member, if any.
-     */
-    get member() {
-        return this.raw instanceof GuildMember ? this.raw : null
-    }
-
-    /**
-     * Points to the current message, if any.
-     */
-    get message() {
-        return this.#hold
     }
 
     /**

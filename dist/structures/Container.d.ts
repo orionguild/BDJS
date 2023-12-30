@@ -10,6 +10,8 @@ export declare class Container {
     allowedMentions?: MessageMentionOptions;
     files?: (BufferResolvable | Stream | JSONEncodable<APIAttachment> | Attachment | AttachmentBuilder | AttachmentPayload)[];
     components?: (JSONEncodable<APIActionRowComponent<APIMessageActionRowComponent>> | ActionRowData<MessageActionRowComponentData | MessageActionRowComponentBuilder> | APIActionRowComponent<APIMessageActionRowComponent>)[];
+    fetchReply?: boolean;
+    ephemeral?: boolean;
     /**
      * Set the allowed mentions for this payload.
      * @param parse - Allow parse 'roles', 'users' and 'everyone'.
@@ -38,6 +40,16 @@ export declare class Container {
      * @param data - File payload.
      */
     addFile(data: BufferResolvable | Stream | JSONEncodable<APIAttachment> | Attachment | AttachmentBuilder | AttachmentPayload): this;
+    /**
+     * Whether fetch message reply.
+     * @param state - Boolean state.
+     */
+    setFetchReply(state: boolean): this;
+    /**
+     * Whether set ephemeral responses.
+     * @param state - Boolean state.
+     */
+    setEphemeral(state: boolean): this;
     /**
      * Clear the container.
      */

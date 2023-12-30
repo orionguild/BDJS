@@ -37,6 +37,8 @@ export class Container {
         | ActionRowData<MessageActionRowComponentData | MessageActionRowComponentBuilder>
         | APIActionRowComponent<APIMessageActionRowComponent>
     )[] = []
+    public fetchReply?: boolean = true
+    public ephemeral?: boolean = true
 
     /**
      * Set the allowed mentions for this payload.
@@ -101,6 +103,24 @@ export class Container {
     }
 
     /**
+     * Whether fetch message reply.
+     * @param state - Boolean state.
+     */
+    setFetchReply(state: boolean) {
+        this.fetchReply = state
+        return this
+    }
+
+    /**
+     * Whether set ephemeral responses.
+     * @param state - Boolean state.
+     */
+    setEphemeral(state: boolean) {
+        this.ephemeral = state
+        return this
+    }
+
+    /**
      * Clear the container.
      */
     clear() {
@@ -109,5 +129,7 @@ export class Container {
         this.components = undefined
         this.embeds = undefined
         this.files = undefined
+        this.fetchReply = false
+        this.ephemeral = false
     }
 }

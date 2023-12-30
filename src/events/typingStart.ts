@@ -7,7 +7,12 @@ export default new BaseEvent<[Typing]>({
     name: 'onTypingStart',
     description: 'Executed when someone starts typing.',
     async listener(bot, typing) {
-        const context = new Context(typing, bot)
+        const context = new Context({
+            author: typing.user,
+            channel: typing.channel,
+            guild: typing.inGuild() ? typing.guild : null,
+            raw: typing
+        }, bot)
         const commands = Array.from(bot.commands.values()).filter(cmd => cmd.type === 'typing')
             const data = new Data({
                 bot,
