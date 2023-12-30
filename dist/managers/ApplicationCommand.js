@@ -30,12 +30,14 @@ class BDJSApplicationCommandManager {
             }
             const spec = require((0, path_1.join)(root, dir, file));
             if (!Array.isArray(spec))
-                tslib_1.__classPrivateFieldGet(this, _BDJSApplicationCommandManager_commands, "f").set(spec.data.name, spec.data.toJSON());
+                tslib_1.__classPrivateFieldGet(this, _BDJSApplicationCommandManager_commands, "f").set(spec.data.name, spec.data instanceof discord_js_1.SlashCommandBuilder || spec.data instanceof discord_js_1.ContextMenuCommandBuilder
+                    ? spec.data.toJSON() : spec.data);
             else {
                 for (const cmd of spec) {
                     if (!('data' in cmd))
                         continue;
-                    tslib_1.__classPrivateFieldGet(this, _BDJSApplicationCommandManager_commands, "f").set(cmd.data.name, cmd.data.toJSON());
+                    tslib_1.__classPrivateFieldGet(this, _BDJSApplicationCommandManager_commands, "f").set(cmd.data.name, cmd.data instanceof discord_js_1.SlashCommandBuilder || cmd.data instanceof discord_js_1.ContextMenuCommandBuilder
+                        ? cmd.data.toJSON() : cmd.data);
                 }
             }
             delete require.cache[(0, path_1.join)(root, dir, file)];

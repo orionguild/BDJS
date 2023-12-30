@@ -1,4 +1,4 @@
-import { Collection, RESTPostAPIApplicationCommandsJSONBody, SlashCommandBuilder } from 'discord.js'
+import { ContextMenuCommandBuilder, Collection, RESTPostAPIApplicationCommandsJSONBody, SlashCommandBuilder } from 'discord.js'
 import { lstat, readdir } from 'fs/promises'
 import { Bot } from '../structures/Bot'
 import { BDJSLog } from '../util/BDJSLog'
@@ -6,7 +6,7 @@ import { join } from 'path'
 import { CommandData } from './Command'
 
 interface ExtendedCommandData extends CommandData {
-    data?: SlashCommandBuilder
+    data?: ContextMenuCommandBuilder | SlashCommandBuilder | RESTPostAPIApplicationCommandsJSONBody
 }
 
 export class BDJSApplicationCommandManager {
@@ -34,11 +34,19 @@ export class BDJSApplicationCommandManager {
             }
 
             const spec: ExtendedCommandData | ExtendedCommandData[] = require(join(root, dir, file))
-            if (!Array.isArray(spec)) this.#commands.set(spec.data!.name, spec.data!.toJSON())
+            if (!Array.isArray(spec)) this.#commands.set(
+                spec.data!.name,
+                spec.data instanceof SlashCommandBuilder || spec.data instanceof ContextMenuCommandBuilder
+                    ? spec.data!.toJSON() : spec.data!
+            )
             else {
                 for (const cmd of spec) {
                     if (!('data' in cmd)) continue
-                    this.#commands.set(cmd.data!.name!, cmd.data!.toJSON())
+                    this.#commands.set(
+                        cmd.data!.name,
+                        cmd.data instanceof SlashCommandBuilder || cmd.data instanceof ContextMenuCommandBuilder
+                            ? cmd.data!.toJSON() : cmd.data!
+                    )
                 }
             }
             delete require.cache[join(root, dir, file)]
