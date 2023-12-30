@@ -1,7 +1,7 @@
 {
   "name": "bdjs",
-  "version": "1.0.0-N",
-  "description": "A TypeScript-written library to create Discord bots with ease.",
+  "version": "1.0.0-O",
+  "description": "A potent package for creating Discord bots.",
   "main": "./dist/index.js",
   "type": "commonjs",
   "scripts": {
@@ -29,6 +29,7 @@
     "@types/node": "^20.10.4",
     "@typescript-eslint/eslint-plugin": "^6.13.2",
     "@typescript-eslint/parser": "^6.13.2",
+    "bdjs-db": "^0.0.1",
     "eslint": "^8.55.0",
     "hjson": "^3.2.2",
     "typedoc": "^0.25.4",

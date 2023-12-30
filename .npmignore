@@ -3,6 +3,7 @@
 /src
 /test
 /database
+/custom
 
 # Files
 .eslintrc.json
@@ -16,3 +17,4 @@ tsconfig.json
 tsconfig.tsbuildinfo
 /dist/util/Generators.js
 /dist/util/Generators.d.ts
+sidebar.md

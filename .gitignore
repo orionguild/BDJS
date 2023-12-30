@@ -2,6 +2,7 @@
 /database
 /node_modules
 /test
+/custom
 
 # Files
 .env
@@ -12,3 +13,4 @@ event.names.descriptions.txt
 package-lock.json
 pnpm-lock.yaml
 tsconfig.tsbuildinfo
+sidebar.md
