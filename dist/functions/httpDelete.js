@@ -21,6 +21,13 @@ exports.default = new Function_1.BaseFunction({
             value: 'none'
         },
         {
+            name: 'Response Type',
+            description: 'The type of response API can return. (json\|text\|blob\|arrayBuffer)',
+            required: false,
+            resolver: 'String',
+            value: 'json'
+        },
+        {
             name: 'Headers',
             description: 'Headers to include to the request data.',
             required: false,
@@ -28,7 +35,7 @@ exports.default = new Function_1.BaseFunction({
             value: 'none'
         }
     ],
-    code: async function (d, [url, variable, ...raw_headers]) {
+    code: async function (d, [url, variable, responseType = 'json', ...raw_headers]) {
         if (url === undefined)
             throw new d.error(d, 'required', 'URL', d.function.name);
         if (variable === undefined)
@@ -44,8 +51,12 @@ exports.default = new Function_1.BaseFunction({
             headers: raw_headers.length ? headers : undefined,
             method: 'DELETE'
         });
+        const data = responseType === 'json' ? await result.body.json()
+            : responseType === 'arrayBuffer' ? await result.body.arrayBuffer()
+                : responseType === 'blob' ? await result.body.blob()
+                    : await result.body.text();
         d.setEnvironmentVariable(variable, {
-            body: await result.body.text(),
+            body: data,
             code: result.statusCode,
             headers: result.headers
         });

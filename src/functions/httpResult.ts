@@ -32,6 +32,6 @@ export default new BaseFunction({
         if (typeof data !== 'object' || ['body', 'code', 'headers'].some(x => !Object.keys(data).includes(x)))
             throw new d.error(d, 'invalid', 'Variable Name', d.function!.name)
 
-        return _.get(data, path)
+        return _.get(data.body, path)
     }
 })
