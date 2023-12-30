@@ -61,7 +61,7 @@ class VariableManager {
      * @param table Table name.
      */
     async get(name, table = 'main') {
-        return await this.db.get(table, name) ?? this._data[table][name];
+        return await this.db.get(table, name); // ?? this._data[table][name]
     }
     /**
      * Set a value into the database.
@@ -78,7 +78,7 @@ class VariableManager {
      * @param table Table name.
      */
     async has(name, table = 'main') {
-        return (await this.db.has(table, name)) && this.checkVar(name, table);
+        return (await this.db.has(table, name)); // && this.checkVar(name, table)
     }
     /**
      * Delete a value from the database.
