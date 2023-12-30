@@ -1,8 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Generators = void 0;
-const Event_1 = require("../managers/Event");
-const fs_1 = require("fs");
 const promises_1 = require("fs/promises");
 const ascii_table3_1 = require("ascii-table3");
 const BDJSLog_1 = require("./BDJSLog");
@@ -48,9 +46,12 @@ class FunctionInfo {
         return [
             `# $${this.name}`,
             this.description,
+            '',
             '## Usage',
             `> \`${this.usage}\``,
+            '',
             args,
+            '',
             special,
             /*'## Source Code',
             '```ts',
@@ -73,125 +74,68 @@ class FunctionInfo {
         return `$${this.name + (args.length > 0 ? '[' + args.join(';') + ']' : '')}`;
     }
 }
+/**
+ * All BDJS documentation generator toolsets.
+ */
 class Generators {
     /**
-     * Save StringEventNames type to a new file.
+     * Read functions and load its metadata.
+     * @param input - Function path.
+     * @param input_providing_cwd - Whether input includes a custom cwd.
      */
-    static eventNamesToFile() {
-        const events = new Event_1.EventManager;
-        (0, fs_1.writeFileSync)('./bdjs.events.txt', `
-            export type StringEventNames = '${events.reformulatedNames.join('\'\n| \'')}'
-        `.trim().split('\n').map(line => line.trim()).join('\n'));
+    static async loadFunctions(input, input_providing_cwd = false) {
+        const files = (await (0, promises_1.readdir)((0, path_1.join)(input_providing_cwd ? '' : process.cwd(), input))).filter(file => file.endsWith('.js'));
+        const loaded = [];
+        for (const file of files) {
+            const data = require((0, path_1.join)(input_providing_cwd ? '' : process.cwd(), input, file))['default'];
+            if (!data) {
+                BDJSLog_1.BDJSLog.error('Unable to read: ' + file);
+                continue;
+            }
+            const doc = new FunctionInfo(file.slice(0, -3), data.description, {
+                builders: data.builders ?? false,
+                injection: data.injectable ?? false,
+                params: data.parameters ?? []
+            });
+            loaded.push(doc);
+        }
+        return loaded;
     }
     /**
-     * Get the documentation of a function.
-     * @param output_dir - Output directory (without filename).
+     * Generates documentation of every BDJS function.
+     * @param input - Input directory for reading functions.
+     * @param output - Ouput directory for markdown files.
      */
-    static async getFunctionDoc(output_dir) {
-        const files = (await (0, promises_1.readdir)((0, path_1.join)(process.cwd(), 'dist/functions'))).filter(file => file.endsWith('.js'));
-        for (const file of files) {
-            BDJSLog_1.BDJSLog.debug('Encoding ' + file);
-            const func = require((0, path_1.join)(process.cwd(), 'dist/functions', file)).default;
-            const doc = new FunctionInfo(file.slice(0, -3), func.description, {
-                builders: func.builders ?? false,
-                injection: func.injectable ?? false,
-                params: func.parameters ?? []
-            });
-            await (0, promises_1.writeFile)((0, path_1.join)(process.cwd(), output_dir, file.replace('.js', '.md')), (await doc.toMD()));
+    static async documentFunctions(input, output) {
+        let input_providing_cwd = input.endsWith(':providing_cwd');
+        if (input_providing_cwd)
+            input = input.replaceAll(':providing_cwd', '');
+        let output_providing_cwd = output.endsWith(':providing_cwd');
+        if (output_providing_cwd)
+            output = output.replaceAll(':providing_cwd', '');
+        const paths = output.split(/(\/|\\|\\\\)/g).filter(path => path.match(/\w+/));
+        await (0, promises_1.mkdir)((0, path_1.join)(input_providing_cwd ? '' : process.cwd(), ...paths), { recursive: true });
+        const accumulated = await Generators.loadFunctions(input, input_providing_cwd);
+        accumulated && Generators.generateSideBar(accumulated, (0, path_1.join)(input_providing_cwd ? '' : process.cwd(), ...paths.slice(0, paths.length - 1)));
+        for (const func of accumulated) {
+            const content = await func.toMD();
+            BDJSLog_1.BDJSLog.info(`Writing ${func.name}.md...`);
+            (0, promises_1.writeFile)((0, path_1.join)(!output_providing_cwd ? '' : process.cwd(), ...paths, func.name + '.md'), content);
         }
     }
     /**
-     * Get the sidebar for documentation.
-     * @param output_dir - Output directory (without filename).
+     * Generates the documentation sidebar.
+     * @param accumulated - Array of loaded functions.
+     * @param output - Output directory.
+     * @param providing_cwd - Whether output includes a custom cwd.
      */
-    static async getSideBar(output_dir) {
-        const files = (await (0, promises_1.readdir)((0, path_1.join)(process.cwd(), 'dist/functions'))).filter(file => file.endsWith('.js'));
-        await (0, promises_1.writeFile)((0, path_1.join)(process.cwd(), output_dir, 'sidebar.md'), `**Functions**\n${files.map(t => `* [$${t.slice(0, -3)}](functions/${t.slice(0, -3)}.md)`).join('\n')}`);
-    }
-    /**
-     * Render a table of functions that supports builders.
-     */
-    static renderBuilders() {
-        const table = new ascii_table3_1.AsciiTable3();
-        const descriptions = [];
-        table.setHeading('Function name', 'Description')
-            .setStyle('github-markdown');
-        (0, fs_1.readdirSync)('./dist/functions').forEach(file => {
-            if (file.endsWith('.js')) {
-                const path = (0, path_1.join)(process.cwd(), 'dist', 'functions', file);
-                const event = require(path).default;
-                if (event.builders === true) {
-                    descriptions.push(['$' + file.slice(0, -3), event.description]);
-                }
-            }
-        });
-        table.addRowMatrix(descriptions);
-        (0, fs_1.writeFileSync)('./builders.descriptions.txt', table.toString());
-    }
-    /**
-     * Render a table including command types/descriptions
-     */
-    static renderCommands() {
-        const commandTypes = new ascii_table3_1.AsciiTable3('Allowed command types')
-            .setHeading('Name', 'Description')
-            .addRowMatrix([
-            ['ready', 'Executed when client user is ready.'],
-            ['prefixed', 'Executed when a prefixed message is created.'],
-            ['unprefixed', 'Executed when an unprefixed (command name without prefix) message is created.'],
-            ['always', 'Executed when a message is created.'],
-            ['anyInteraction', 'Executed when an interaction is created.'],
-            ['buttonInteraction', 'Executed when a button interaction is created.'],
-            ['selectMenuInteraction', 'Executed when a select menu interaction is created.'],
-            ['commandInteraction', 'Executed when a command interaction is created.'],
-            ['modalInteraction', 'Executed when a modal interaction is created.'],
-            ['interval', 'Executed when an interval is emitted.'],
-            ['timeout', 'Executed when a timeout is emitted.'],
-            ['typingStart', 'Executed when someone starts typing in a guild channel.'],
-            ['memberJoin', 'Executed when a new member joins a guild.'],
-            ['memberLeave', 'Executed when a member leaves a guild.'],
-            ['botJoin', 'Executed when bot joins a guild.'],
-            ['botLeave', 'Executed when bot leaves a guild.']
-        ])
-            .setStyle('github-markdown');
-        (0, fs_1.writeFileSync)('./command.types.descriptions.txt', commandTypes.toString());
-    }
-    /**
-     * Renders a table including event names and descriptions.
-     */
-    static renderEvents() {
-        const eventDescriptions = [];
-        const eventNames = new ascii_table3_1.AsciiTable3()
-            .setHeading('Name', 'Description');
-        (0, fs_1.readdirSync)('./dist/events').forEach(file => {
-            if (file.endsWith('.js')) {
-                const path = (0, path_1.join)(process.cwd(), 'dist', 'events', file);
-                const event = require(path).default;
-                eventDescriptions.push([event.name, event.description]);
-            }
-        });
-        eventNames.addRowMatrix(eventDescriptions)
-            .setStyle('github-markdown');
-        (0, fs_1.writeFileSync)('./event.names.descriptions.txt', eventNames.toString());
-    }
-    /**
-     * Render a table of functions that supports injections.
-     */
-    static renderInjections() {
-        const table = new ascii_table3_1.AsciiTable3();
-        const descriptions = [];
-        table.setHeading('Function name', 'Description')
-            .setStyle('github-markdown');
-        (0, fs_1.readdirSync)('./dist/functions').forEach(file => {
-            if (file.endsWith('.js')) {
-                const path = (0, path_1.join)(process.cwd(), 'dist', 'functions', file);
-                const event = require(path).default;
-                if (event.injectable === true) {
-                    descriptions.push(['$' + file.slice(0, -3), event.description]);
-                }
-            }
-        });
-        table.addRowMatrix(descriptions);
-        (0, fs_1.writeFileSync)('./injection.descriptions.txt', table.toString());
+    static async generateSideBar(accumulated, output) {
+        const contents = ['**Functions**'];
+        for (const func of accumulated) {
+            contents.push(`* [$${func.name}](functions/${func.name}.md)`);
+        }
+        await (0, promises_1.writeFile)((0, path_1.join)(output, 'sidebar.md'), contents.join('\n'));
     }
 }
 exports.Generators = Generators;
+Generators.documentFunctions('./dist/functions', './autogenerated/functions');
