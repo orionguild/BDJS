@@ -59,5 +59,15 @@ export declare class Generators {
      * @param providing_cwd - Whether output includes a custom cwd.
      */
     static generateSideBar(accumulated: FunctionInfo[], output: string): Promise<void>;
+    /**
+     * Generates a markdown file including all supported command types as table.
+     * @param output - Markdown file output directory.
+     */
+    static getCommandTypeTable(output: string): Promise<void>;
+    /**
+     * Generates a markdown file including all supported events as table.
+     * @param output - Markdown file output directory.
+     */
+    static getEventTable(output: string): Promise<void>;
 }
 export {};
