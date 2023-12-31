@@ -38,6 +38,8 @@ export type StringCommandTypes = 'always'
 | 'channelCreate'
 | 'channelDelete'
 | 'channelUpdate'
+| 'banAdd'
+| 'banRemove'
 | 'typing'
 | 'unknown'
 // BDJS customs
