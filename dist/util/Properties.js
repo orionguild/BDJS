@@ -362,6 +362,76 @@ exports.default = {
             code: (m) => m.voice.channel?.id
         },
     },
+    Message: {
+        authorid: {
+            description: 'Retrieves the author ID of this message.',
+            code: m => m.author?.id
+        },
+        content: {
+            description: 'Retrieves the content of this message.',
+            code: m => m.content
+        },
+        createdtimestamp: {
+            description: 'The time this message was created, in milliseconds.',
+            code: m => m.createdTimestamp
+        },
+        editedtimestamp: {
+            description: 'The time this message was edited, in milliseconds.',
+            code: m => m.editedTimestamp
+        },
+        hasthread: {
+            description: 'Whether this message has threads.',
+            code: m => m.hasThread
+        },
+        id: {
+            description: 'Retrieves the ID of this message.',
+            code: m => m.id
+        },
+        iscrossportable: {
+            description: 'Whether this message is crossportable.',
+            code: m => m.crosspostable
+        },
+        isdeletable: {
+            description: 'Whether this message is deletable.',
+            code: m => m.deletable
+        },
+        iseditable: {
+            description: 'Whether this message is editable.',
+            code: m => m.editable
+        },
+        ispinnable: {
+            description: 'Whether this message is pinnable.',
+            code: m => m.pinnable
+        },
+        ispinned: {
+            description: 'Whether this message is pinned.',
+            code: m => m.pinned
+        },
+        isthread: {
+            description: 'Whether this message is thread.',
+            code: m => m.thread
+        },
+        position: {
+            description: 'Returns the position of this message.',
+            code: m => m.position
+        },
+        reactions: {
+            description: 'Join all message reactions IDs.',
+            code: m => m.reactions.cache.map(x => x.emoji.id).join(',')
+        },
+        reference: {
+            description: 'Retrieves the message reference ID.',
+            code: m => m.reference?.messageId
+        },
+        type: {
+            description: 'Retrieves the message type.',
+            code: m => m.type
+        },
+        url: {
+            description: 'Retrieves the URL of this message.',
+            code: m => m.url
+        }
+    },
     Role: {
         createdtimestamp: {
             description: 'The time this role was created, in milliseconds.',

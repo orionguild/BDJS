@@ -1,9 +1,9 @@
-import { NonThreadGuildBasedChannel } from 'discord.js'
 import { BaseFunction } from '../structures/Function'
 import Properties from '../util/Properties'
+import { Message } from 'discord.js'
 
 export default new BaseFunction({
-    description: 'Get information from a new channel.',
+    description: 'Get information from a new message.',
     parameters: [
         {
             name: 'Property',
@@ -14,8 +14,8 @@ export default new BaseFunction({
         }
     ],
     code: async function(d, [property]) {
-        if (d.commandType !== 'channelUpdate')
-            throw new d.error(d, 'disallowed', d.function!.name, 'onChannelUpdate event')
+        if (d.commandType !== 'messageUpdate')
+            throw new d.error(d, 'disallowed', d.function!.name, 'onMessageUpdate event')
         if (property === undefined)
             throw new d.error(d, 'required', 'Property', d.function!.name)
 
@@ -23,8 +23,8 @@ export default new BaseFunction({
         if (!types.includes(property.toLowerCase()))
             throw new d.error(d, 'invalid', 'Property', d.function!.name)
 
-        const channel = d.getEnvironmentVariable('__BDJS__NEW__CHANNEL') as NonThreadGuildBasedChannel
+        const message = d.getEnvironmentVariable('__BDJS__NEW__MESSAGE') as Message
 
-        return Properties.Channel[property.toLowerCase()].code(channel as any)
+        return Properties.Message[property.toLowerCase()].code(message)
     }
 })

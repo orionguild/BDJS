@@ -233,6 +233,10 @@ export class CommandManager extends Map<string, CommandData> {
             'channelCreate',
             'channelDelete',
             'channelUpdate',
+            'messageDelete',
+            'messageUpdate',
+            'reactionAdd',
+            'reactionRemove',
             'unknown',
             // BDJS Customs
             'interval',

@@ -187,6 +187,10 @@ class CommandManager extends Map {
             'channelCreate',
             'channelDelete',
             'channelUpdate',
+            'messageDelete',
+            'messageUpdate',
+            'reactionAdd',
+            'reactionRemove',
             'unknown',
             // BDJS Customs
             'interval',
