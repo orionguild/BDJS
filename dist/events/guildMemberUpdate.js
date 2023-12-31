@@ -17,8 +17,8 @@ exports.default = new Event_1.BaseEvent({
         const data = new Data_1.Data({
             bot, context,
             env: {
-                '__BDJS__OLD__MEMBER': old_member,
-                '__BDJS__NEW__MEMBER': new_member
+                '__BDJS__OLD__MEMBER__': old_member,
+                '__BDJS__NEW__MEMBER__': new_member
             },
             commandType: 'memberUpdate',
             functions: bot.functions,

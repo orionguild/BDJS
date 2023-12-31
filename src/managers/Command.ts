@@ -237,6 +237,9 @@ export class CommandManager extends Map<string, CommandData> {
             'messageUpdate',
             'reactionAdd',
             'reactionRemove',
+            'stickerCreate',
+            'stickerDelete',
+            'stickerUpdate',
             'unknown',
             // BDJS Customs
             'interval',

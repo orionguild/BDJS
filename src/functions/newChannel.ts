@@ -23,7 +23,7 @@ export default new BaseFunction({
         if (!types.includes(property.toLowerCase()))
             throw new d.error(d, 'invalid', 'Property', d.function!.name)
 
-        const channel = d.getEnvironmentVariable('__BDJS__NEW__CHANNEL') as NonThreadGuildBasedChannel
+        const channel = d.getEnvironmentVariable('__BDJS__NEW__CHANNEL__') as NonThreadGuildBasedChannel
 
         return Properties.Channel[property.toLowerCase()].code(channel as any)
     }

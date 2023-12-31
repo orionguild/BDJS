@@ -17,8 +17,8 @@ export default new BaseEvent<[Message | PartialMessage, Message | PartialMessage
         const data = new Data({
             bot, context,
             env: {
-                '__BDJS__OLD__MESSAGE': old_msg,
-                '__BDJS__NEW__MESSAGE': new_msg,
+                '__BDJS__OLD__MESSAGE__': old_msg,
+                '__BDJS__NEW__MESSAGE__': new_msg,
                 '__BDJS__ARGS__': new_msg.content?.split(/ +/g)
             },
             commandType: 'messageUpdate',

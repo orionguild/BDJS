@@ -17,8 +17,8 @@ export default new BaseEvent<[GuildMember | PartialGuildMember, GuildMember | Pa
         const data = new Data({
             bot, context,
             env: {
-                '__BDJS__OLD__MEMBER': old_member,
-                '__BDJS__NEW__MEMBER': new_member
+                '__BDJS__OLD__MEMBER__': old_member,
+                '__BDJS__NEW__MEMBER__': new_member
             },
             commandType: 'memberUpdate',
             functions: bot.functions,

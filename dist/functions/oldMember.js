@@ -22,7 +22,7 @@ exports.default = new Function_1.BaseFunction({
         const types = Object.keys(Properties_1.default.Channel);
         if (!types.includes(property.toLowerCase()))
             throw new d.error(d, 'invalid', 'Property', d.function.name);
-        const member = d.getEnvironmentVariable('__BDJS__OLD__MEMBER');
+        const member = d.getEnvironmentVariable('__BDJS__OLD__MEMBER__');
         return Properties_1.default.Member[property.toLowerCase()].code(member);
     }
 });

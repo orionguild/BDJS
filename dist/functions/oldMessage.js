@@ -22,7 +22,7 @@ exports.default = new Function_1.BaseFunction({
         const types = Object.keys(Properties_1.default.Channel);
         if (!types.includes(property.toLowerCase()))
             throw new d.error(d, 'invalid', 'Property', d.function.name);
-        const message = d.getEnvironmentVariable('__BDJS__OLD__MESSAGE');
+        const message = d.getEnvironmentVariable('__BDJS__OLD__MESSAGE__');
         return Properties_1.default.Message[property.toLowerCase()].code(message);
     }
 });

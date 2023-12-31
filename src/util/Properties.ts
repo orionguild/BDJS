@@ -1,4 +1,4 @@
-import { Channel, ChannelType, Guild, GuildMember, Message, PartialGuildMember, PartialMessage, Role, TextChannel, User, VoiceChannel } from 'discord.js'
+import { ChannelType, Guild, GuildMember, Message, PartialGuildMember, PartialMessage, Role, Sticker, TextChannel, User, VoiceChannel } from 'discord.js'
 import { Bot } from '../structures/Bot'
 
 type Member = GuildMember | PartialGuildMember;
@@ -511,6 +511,39 @@ export default {
     } as Record<string, {
         description: string,
         code: (r: Role) => any
+    }>,
+    Sticker: {
+        createdtimestamp: {
+            description: 'The time this sticker was created, in milliseconds.',
+            code: s => s.createdTimestamp
+        },
+        description: {
+            description: 'Retrieves this sticker description.',
+            code: s => s.description
+        },
+        id: {
+            description: 'Retrieves this sticker ID.',
+            code: s => s.id
+        },
+        name: {
+            description: 'Retrieves this sticker name.',
+            code: s => s.name
+        },
+        tags: {
+            description: 'Retrieves this sticker tags.',
+            code: s => s.tags
+        },
+        type: {
+            description: 'Retrieves this sticker type.',
+            code: s => s.type
+        },
+        url: {
+            description: 'Retrieves this sticker URL.',
+            code: s => s.url
+        }
+    } as Record<string, {
+        description: string,
+        code: (s: Sticker) => any
     }>,
     User: {
         accentcolor: {

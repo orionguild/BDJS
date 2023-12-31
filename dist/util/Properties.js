@@ -494,6 +494,36 @@ exports.default = {
             code: (r) => r.rawPosition
         }
     },
+    Sticker: {
+        createdtimestamp: {
+            description: 'The time this sticker was created, in milliseconds.',
+            code: s => s.createdTimestamp
+        },
+        description: {
+            description: 'Retrieves this sticker description.',
+            code: s => s.description
+        },
+        id: {
+            description: 'Retrieves this sticker ID.',
+            code: s => s.id
+        },
+        name: {
+            description: 'Retrieves this sticker name.',
+            code: s => s.name
+        },
+        tags: {
+            description: 'Retrieves this sticker tags.',
+            code: s => s.tags
+        },
+        type: {
+            description: 'Retrieves this sticker type.',
+            code: s => s.type
+        },
+        url: {
+            description: 'Retrieves this sticker URL.',
+            code: s => s.url
+        }
+    },
     User: {
         accentcolor: {
             description: 'The user\'s accent hexadecimal color.',

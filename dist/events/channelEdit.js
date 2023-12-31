@@ -19,8 +19,8 @@ exports.default = new Event_1.BaseEvent({
         const data = new Data_1.Data({
             bot, context,
             env: {
-                '__BDJS__OLD__CHANNEL': old_channel,
-                '__BDJS__NEW__CHANNEL': new_channel
+                '__BDJS__OLD__CHANNEL__': old_channel,
+                '__BDJS__NEW__CHANNEL__': new_channel
             },
             commandType: 'channelUpdate',
             functions: bot.functions,

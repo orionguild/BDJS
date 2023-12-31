@@ -23,7 +23,7 @@ export default new BaseFunction({
         if (!types.includes(property.toLowerCase()))
             throw new d.error(d, 'invalid', 'Property', d.function!.name)
 
-        const member = d.getEnvironmentVariable('__BDJS__OLD__MEMBER') as GuildMember
+        const member = d.getEnvironmentVariable('__BDJS__OLD__MEMBER__') as GuildMember
 
         return Properties.Member[property.toLowerCase()].code(member)
     }

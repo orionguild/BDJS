@@ -23,7 +23,7 @@ export default new BaseFunction({
         if (!types.includes(property.toLowerCase()))
             throw new d.error(d, 'invalid', 'Property', d.function!.name)
 
-        const message = d.getEnvironmentVariable('__BDJS__OLD__MESSAGE') as Message
+        const message = d.getEnvironmentVariable('__BDJS__OLD__MESSAGE__') as Message
 
         return Properties.Message[property.toLowerCase()].code(message)
     }

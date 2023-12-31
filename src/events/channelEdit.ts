@@ -17,8 +17,8 @@ export default new BaseEvent<[NonThreadGuildBasedChannel | DMChannel, NonThreadG
         const data = new Data({
             bot, context,
             env: {
-                '__BDJS__OLD__CHANNEL': old_channel,
-                '__BDJS__NEW__CHANNEL': new_channel
+                '__BDJS__OLD__CHANNEL__': old_channel,
+                '__BDJS__NEW__CHANNEL__': new_channel
             },
             commandType: 'channelUpdate',
             functions: bot.functions,
