@@ -88,6 +88,10 @@ export default {
             description: 'Whether this channel is deletable.',
             code: c => c.deletable
         },
+        isfull: {
+            description: 'Whether this channel is full.',
+            code: c => c.isVoiceBased() ? c.full : undefined
+        },
         ismanageable: {
             description: 'Whether this channel is manageable.',
             code: c => c.manageable
@@ -99,6 +103,10 @@ export default {
         isviewable: {
             description: 'Whether this channel is viewable.',
             code: c => c.viewable
+        },
+        isjoinable: {
+            description: 'Whether this channel is joinable.',
+            code: c => c.isVoiceBased() ? c.joinable : undefined
         },
         lastmessageid: {
             description: 'ID of the last message sent in this channel.',
@@ -140,9 +148,17 @@ export default {
             description: 'The channel type.',
             code: c => c.type
         },
+        userlimit: {
+            description: 'The user limit for this voice channel.',
+            code: c => c.isVoiceBased() ? c.userLimit.toString() : undefined
+        },
         url: {
             description: 'The URL of this channel.',
             code: c => c.url
+        },
+        videoqualitymode: {
+            description: 'The video quality mode for this voice channel.',
+            code: c => c.isVoiceBased() ? c.videoQualityMode?.toString() : undefined
         }
     } as Record<string, {
         description: string,
