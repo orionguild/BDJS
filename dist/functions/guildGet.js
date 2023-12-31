@@ -1,7 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const tslib_1 = require("tslib");
 const Function_1 = require("../structures/Function");
-const guildFetch_1 = require("./guildFetch");
+const Properties_1 = tslib_1.__importDefault(require("../util/Properties"));
 exports.default = new Function_1.BaseFunction({
     description: 'Get a guild property.',
     parameters: [
@@ -30,9 +31,9 @@ exports.default = new Function_1.BaseFunction({
         const guild = d.bot?.guilds.cache.get(guildID);
         if (!guild)
             throw new d.error(d, 'invalid', 'Property', d.function?.name);
-        const types = Object.keys(JSON.parse(JSON.stringify(guild)));
-        if (!types.includes(property))
+        const types = Object.keys(Properties_1.default.Guild);
+        if (!types.includes(property.toLowerCase()))
             throw new d.error(d, 'invalid', 'Property', d.function?.name);
-        return (0, guildFetch_1.getGuildProperty)(guild, property);
+        return Properties_1.default.Guild[property.toLowerCase()].code(guild);
     }
 });

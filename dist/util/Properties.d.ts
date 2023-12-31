@@ -1,4 +1,4 @@
-import { GuildMember, PartialGuildMember, Role, TextChannel, User, VoiceChannel } from 'discord.js';
+import { Guild, GuildMember, PartialGuildMember, Role, TextChannel, User, VoiceChannel } from 'discord.js';
 import { Bot } from '../structures/Bot';
 type Member = GuildMember | PartialGuildMember;
 declare const _default: {
@@ -9,6 +9,10 @@ declare const _default: {
     Channel: Record<string, {
         description: string;
         code: (c: TextChannel | VoiceChannel) => any;
+    }>;
+    Guild: Record<string, {
+        description: string;
+        code: (g: Guild) => any;
     }>;
     Member: Record<string, {
         description: string;

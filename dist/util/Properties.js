@@ -158,6 +158,128 @@ exports.default = {
             code: c => c.isVoiceBased() ? c.videoQualityMode?.toString() : undefined
         }
     },
+    Guild: {
+        afkchannelid: {
+            description: 'The AFK channel ID of this guild.',
+            code: g => g.afkChannelId
+        },
+        afktimeout: {
+            description: 'The guild\'s AFK timeout.',
+            code: g => g.afkTimeout
+        },
+        available: {
+            description: 'Whether this guild is available to access.',
+            code: g => g.available
+        },
+        bans: {
+            description: 'Join all user IDs banned in this guild.',
+            code: g => g.bans.cache.map(x => x.user.id).join(',')
+        },
+        channels: {
+            description: 'Join all channel IDs in this guild.',
+            code: g => g.channels.cache.map(x => x.id).join(',')
+        },
+        commands: {
+            description: 'Returns all the application command IDs for this guild.',
+            code: g => {
+                return g.commands.fetch().then((cmds) => {
+                    return cmds.map(cmd => cmd.id).join(',');
+                });
+            }
+        },
+        defaultmessagenotification: {
+            description: 'Returns this guild\'s default message notifications setting.',
+            code: g => g.defaultMessageNotifications.toString()
+        },
+        description: {
+            description: 'This guild description.',
+            code: g => g.description
+        },
+        emojis: {
+            description: 'Join all emojis IDs in this guild.',
+            code: g => g.emojis.cache.map(x => x.id).join(',')
+        },
+        explicitcontentfilter: {
+            description: 'This guild explicit content filter.',
+            code: g => g.explicitContentFilter.toString()
+        },
+        features: {
+            description: 'Return all guild features.',
+            code: g => g.features.join(',')
+        },
+        id: {
+            description: 'Guild\'s ID.',
+            code: g => g.id
+        },
+        ispartnered: {
+            description: 'Whether guild is partnered.',
+            code: g => g.partnered
+        },
+        isverified: {
+            description: 'Whether this guild is verified by Discord.',
+            code: g => g.verified
+        },
+        iswidgetenabled: {
+            description: 'Whether guild widget is enabled.',
+            code: g => g.widgetEnabled
+        },
+        members: {
+            description: 'Join all member IDs in this guild.',
+            code: g => g.emojis.cache.map(x => x.id).join(',')
+        },
+        memberCount: {
+            description: 'Return the member count in this guild.',
+            code: g => g.memberCount
+        },
+        mfalevel: {
+            description: 'This guild\'s MFA level.',
+            code: g => g.mfaLevel.toString()
+        },
+        name: {
+            description: 'The name of this guild.',
+            code: g => g.name
+        },
+        ownerid: {
+            description: 'The ID of the guild\'s owner.',
+            code: g => g.ownerId
+        },
+        preferredlocale: {
+            description: 'This guild preferred locale.',
+            code: g => g.preferredLocale.toString()
+        },
+        premiumsubscriptioncount: {
+            description: 'This guild\'s boost count.',
+            code: g => g.premiumSubscriptionCount
+        },
+        premiumtier: {
+            description: 'This guild\'s boost count.',
+            code: g => g.premiumTier.toString()
+        },
+        publicupdateschannelid: {
+            description: 'This guild\'s public updates channel ID.',
+            code: g => g.publicUpdatesChannelId
+        },
+        roles: {
+            description: 'Join all role IDs in this guild.',
+            code: g => g.roles.cache.map(x => x.id).join(',')
+        },
+        ruleschannelid: {
+            description: 'This guild\'s rules channel ID.',
+            code: g => g.rulesChannelId
+        },
+        systemchannelid: {
+            description: 'This guild\'s system channel ID.',
+            code: g => g.systemChannelId
+        },
+        verificationlevel: {
+            description: 'This guild\'s verification level.',
+            code: g => g.verificationLevel.toString()
+        },
+        widgetchannelid: {
+            description: 'This guild\'s widget channel ID.',
+            code: g => g.widgetChannelId
+        }
+    },
     Member: {
         avatar: {
             description: 'Retrieves the avatar of this guild member.',

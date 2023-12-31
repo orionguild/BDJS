@@ -1,14 +1,5 @@
 import { BaseFunction } from '../structures/Function'
-import { Guild } from 'discord.js'
-
-export function getGuildProperty(guild: Guild & Record<string, any>, property: string) {
-    const data = JSON.parse(JSON.stringify(guild))
-    let result: string
-    return Array.isArray(data[property]) 
-        ? data[property].join(',') 
-        : typeof data[property] === 'number' 
-            ? data[property].toString() : data[property]
-}
+import Properties from '../util/Properties'
 
 export default new BaseFunction({
     description: 'Fetch a guild property.',
@@ -38,9 +29,9 @@ export default new BaseFunction({
         if (!guild && property === 'exists') return 'false'
         else if (!guild && property !== 'exists') throw new d.error(d, 'invalid', 'Property', d.function?.name!)
 
-        const types = Object.keys(JSON.parse(JSON.stringify(guild)))
-        if (!types.includes(property)) throw new d.error(d, 'invalid', 'Property', d.function?.name!)
+        const types = Object.keys(Properties.Guild)
+        if (!types.includes(property.toLowerCase())) throw new d.error(d, 'invalid', 'Property', d.function?.name!)
         
-        return getGuildProperty(guild!, property)
+        return Properties.Guild[property.toLowerCase()].code(guild!)
     }
 })

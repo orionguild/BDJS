@@ -1,5 +1,5 @@
 import { BaseFunction } from '../structures/Function'
-import { getGuildProperty } from './guildFetch'
+import Properties from '../util/Properties'
 
 export default new BaseFunction({
     description: 'Get a guild property.',
@@ -28,9 +28,9 @@ export default new BaseFunction({
         const guild = d.bot?.guilds.cache.get(guildID)
         if (!guild) throw new d.error(d, 'invalid', 'Property', d.function?.name!)
 
-        const types = Object.keys(JSON.parse(JSON.stringify(guild)))
-        if (!types.includes(property)) throw new d.error(d, 'invalid', 'Property', d.function?.name!)
+        const types = Object.keys(Properties.Guild)
+        if (!types.includes(property.toLowerCase())) throw new d.error(d, 'invalid', 'Property', d.function?.name!)
         
-        return getGuildProperty(guild, property)
+        return Properties.Guild[property.toLowerCase()].code(guild)
     }
 })
