@@ -1,6 +1,73 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const discord_js_1 = require("discord.js");
 exports.default = {
+    Bot: {
+        avatar: {
+            description: 'Retrieves the avatar of the client.',
+            code: b => b.user.displayAvatarURL()
+        },
+        botcount: {
+            description: 'Total amount of cached bots.',
+            code: b => b.users.cache.filter(u => u.bot).size
+        },
+        channelcount: {
+            description: 'Total amount of channels.',
+            code: b => b.guilds.cache.map(t => t.channels.cache.size).reduce((a, b) => a + b).toString()
+        },
+        commands: {
+            description: 'Retrieves all loaded command names.',
+            code: b => Array.from(b.commands.values()).filter(cmd => cmd.name).join(',')
+        },
+        emojicount: {
+            description: 'Total amount of emojis.',
+            code: b => b.guilds.cache.map(t => t.emojis.cache.size).reduce((a, b) => a + b).toString()
+        },
+        globalcommands: {
+            description: 'Retrieves all synced application command names.',
+            code: b => {
+                return b.application.commands.fetch().then((cmds) => {
+                    return Array.from(cmds.values()).map(x => x.name).join(',');
+                });
+            }
+        },
+        guildcount: {
+            description: 'Total amount of guilds.',
+            code: b => b.guilds.cache.size.toString()
+        },
+        id: {
+            description: 'Client ID.',
+            code: b => b.user.id
+        },
+        token: {
+            description: 'Returns the client token.',
+            code: b => b.token
+        },
+        owners: {
+            description: 'The owner IDs of this client.',
+            code: b => {
+                return b.application.fetch().then((app) => {
+                    if (app.owner instanceof discord_js_1.User) {
+                        return app.owner.id;
+                    }
+                    else
+                        return app.owner?.members.map(t => t.id).join(',');
+                });
+            }
+        },
+        usercount: {
+            description: 'Total amount of users.',
+            code: b => b.guilds.cache.map(t => t.memberCount).reduce((a, b) => a + b).toString()
+        },
+        uptime: {
+            description: 'The client connection time, in milliseconds.',
+            code: b => b.uptime
+        },
+        username: {
+            description: 'The username of the client.',
+            code: b => b.user.username
+        }
+    },
     Member: {
         avatar: {
             description: 'Retrieves the avatar of this guild member.',

@@ -1,6 +1,11 @@
 import { GuildMember, PartialGuildMember, Role, User } from 'discord.js';
+import { Bot } from '../structures/Bot';
 type Member = GuildMember | PartialGuildMember;
 declare const _default: {
+    Bot: Record<string, {
+        description: string;
+        code: (b: Bot) => any;
+    }>;
     Member: Record<string, {
         description: string;
         code: (m: Member) => any;
