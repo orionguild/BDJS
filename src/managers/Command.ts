@@ -240,6 +240,9 @@ export class CommandManager extends Map<string, CommandData> {
             'stickerCreate',
             'stickerDelete',
             'stickerUpdate',
+            'roleCreate',
+            'roleDelete',
+            'roleUpdate',
             'unknown',
             // BDJS Customs
             'interval',

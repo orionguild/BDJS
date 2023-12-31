@@ -1,9 +1,9 @@
 import { BaseFunction } from '../structures/Function'
 import Properties from '../util/Properties'
-import { Sticker } from 'discord.js'
+import { Role } from 'discord.js'
 
 export default new BaseFunction({
-    description: 'Get information from an old sticker.',
+    description: 'Get information from an old role.',
     parameters: [
         {
             name: 'Property',
@@ -14,8 +14,8 @@ export default new BaseFunction({
         }
     ],
     code: async function(d, [property]) {
-        if (d.commandType !== 'stickerUpdate')
-            throw new d.error(d, 'disallowed', d.function!.name, 'onStickerUpdate event')
+        if (d.commandType !== 'roleUpdate')
+            throw new d.error(d, 'disallowed', d.function!.name, 'onRoleUpdate event')
         if (property === undefined)
             throw new d.error(d, 'required', 'Property', d.function!.name)
 
@@ -23,8 +23,8 @@ export default new BaseFunction({
         if (!types.includes(property.toLowerCase()))
             throw new d.error(d, 'invalid', 'Property', d.function!.name)
 
-        const sticker = d.getEnvironmentVariable('__BDJS__OLD__STICKER__') as Sticker
+        const role = d.getEnvironmentVariable('__BDJS__NEW__ROLE__') as Role
 
-        return Properties.Sticker[property.toLowerCase()].code(sticker)
+        return Properties.Role[property.toLowerCase()].code(role)
     }
 })

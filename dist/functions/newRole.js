@@ -4,7 +4,7 @@ const tslib_1 = require("tslib");
 const Function_1 = require("../structures/Function");
 const Properties_1 = tslib_1.__importDefault(require("../util/Properties"));
 exports.default = new Function_1.BaseFunction({
-    description: 'Get information from an old sticker.',
+    description: 'Get information from an old role.',
     parameters: [
         {
             name: 'Property',
@@ -15,14 +15,14 @@ exports.default = new Function_1.BaseFunction({
         }
     ],
     code: async function (d, [property]) {
-        if (d.commandType !== 'stickerUpdate')
-            throw new d.error(d, 'disallowed', d.function.name, 'onStickerUpdate event');
+        if (d.commandType !== 'roleUpdate')
+            throw new d.error(d, 'disallowed', d.function.name, 'onRoleUpdate event');
         if (property === undefined)
             throw new d.error(d, 'required', 'Property', d.function.name);
         const types = Object.keys(Properties_1.default.Channel);
         if (!types.includes(property.toLowerCase()))
             throw new d.error(d, 'invalid', 'Property', d.function.name);
-        const sticker = d.getEnvironmentVariable('__BDJS__OLD__STICKER__');
-        return Properties_1.default.Sticker[property.toLowerCase()].code(sticker);
+        const role = d.getEnvironmentVariable('__BDJS__NEW__ROLE__');
+        return Properties_1.default.Role[property.toLowerCase()].code(role);
     }
 });

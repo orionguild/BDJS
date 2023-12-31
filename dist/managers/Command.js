@@ -194,6 +194,9 @@ class CommandManager extends Map {
             'stickerCreate',
             'stickerDelete',
             'stickerUpdate',
+            'roleCreate',
+            'roleDelete',
+            'roleUpdate',
             'unknown',
             // BDJS Customs
             'interval',
