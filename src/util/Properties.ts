@@ -29,7 +29,7 @@ export default {
             description: 'Retrieves all synced application command names.',
             code: b => {
                 return b.application.commands.fetch().then((cmds) => {
-                    return Array.from(cmds.values()).map(x => x.name).join(',')
+                    return Array.from(cmds.values()).map(x => x.id).join(',')
                 })
             }
         },
