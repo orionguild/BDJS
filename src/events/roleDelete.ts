@@ -13,7 +13,7 @@ export default new BaseEvent<[Role]>({
         }, bot)
         const commands = Array.from(bot.commands.values()).filter(cmd => cmd.type === 'roleDelete')
         const data = new Data({
-            bot, context,
+            bot, ctx: context,
             commandType: 'roleDelete',
             functions: bot.functions,
             reader: bot.reader

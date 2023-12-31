@@ -13,7 +13,7 @@ export default new BaseEvent<[Guild]>({
         }, bot)
         const commands = Array.from(bot.commands.values()).filter(cmd => cmd.type === 'botLeave')
         const data = new Data({
-            bot, context,
+            bot, ctx: context,
             commandType: 'botLeave',
             functions: bot.functions,
             reader: bot.reader

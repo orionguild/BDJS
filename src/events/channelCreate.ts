@@ -9,12 +9,12 @@ export default new BaseEvent<[NonThreadGuildBasedChannel]>({
     async listener(bot, channel) {
         const context = new Context({
             channel,
-            guild: channel.guild,
+            guild: channel.guild ?? await bot.guilds.fetch(channel.guildId),
             raw: channel
         }, bot)
         const commands = Array.from(bot.commands.values()).filter(cmd => cmd.type === 'channelCreate')
         const data = new Data({
-            bot, context,
+            bot, ctx: context,
             commandType: 'channelCreate',
             functions: bot.functions,
             reader: bot.reader

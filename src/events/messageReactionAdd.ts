@@ -16,7 +16,7 @@ export default new BaseEvent<[MessageReaction | PartialMessageReaction, User]>({
         }, bot)
         const commands = Array.from(bot.commands.values()).filter(cmd => cmd.type === 'reactionAdd')
         const data = new Data({
-            bot, context,
+            bot, ctx: context,
             env: {
                 '__BDJS__ARGS__': reaction.message.content?.split(/ +/g)
             },

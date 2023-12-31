@@ -15,7 +15,7 @@ exports.default = new Event_1.BaseEvent({
         }, bot);
         const commands = Array.from(bot.commands.values()).filter(cmd => cmd.type === 'messageUpdate');
         const data = new Data_1.Data({
-            bot, context,
+            bot, ctx: context,
             env: {
                 '__BDJS__OLD__MESSAGE__': old_msg,
                 '__BDJS__NEW__MESSAGE__': new_msg,

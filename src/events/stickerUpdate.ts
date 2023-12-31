@@ -14,7 +14,7 @@ export default new BaseEvent<[Sticker, Sticker]>({
         }, bot)
         const commands = Array.from(bot.commands.values()).filter(cmd => cmd.type === 'stickerUpdate')
         const data = new Data({
-            bot, context,
+            bot, ctx: context,
             env: {
                 '__BDJS__OLD__STICKER__': old,
                 '__BDJS__NEW__STICKER__': sticker

@@ -14,7 +14,7 @@ exports.default = new Event_1.BaseEvent({
         }, bot);
         const commands = Array.from(bot.commands.values()).filter(cmd => cmd.type === 'stickerCreate');
         const data = new Data_1.Data({
-            bot, context,
+            bot, ctx: context,
             commandType: 'stickerCreate',
             functions: bot.functions,
             reader: bot.reader

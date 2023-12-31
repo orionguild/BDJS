@@ -213,6 +213,10 @@ export default {
             description: 'Return all guild features.',
             code: g => g.features.join(',')
         },
+        icon: {
+            description: 'Guild\'s icon.',
+            code: g => g.iconURL()
+        },
         id: {
             description: 'Guild\'s ID.',
             code: g => g.id

@@ -26,7 +26,7 @@ interface DataOptions {
     /** BDJS reader. */
     reader: Reader;
     /** Discord context. */
-    context?: Context<any>;
+    ctx?: Context<any>;
     /** Payload container. */
     container?: Container;
 }
@@ -59,7 +59,7 @@ export declare class Data {
      * @param options - Data options to inherit.
      * @returns {Data}
      */
-    extend(options: DataOptions): Data;
+    extend(options: Data): Data;
     /**
      * Get a environment variable from the cache.
      * @param {string} name - The variable name.

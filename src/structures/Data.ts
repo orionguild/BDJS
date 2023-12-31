@@ -26,7 +26,7 @@ interface DataOptions {
     /** BDJS reader. */
     reader: Reader
     /** Discord context. */
-    context?: Context<any>
+    ctx?: Context<any>
     /** Payload container. */
     container?: Container
 }
@@ -59,7 +59,7 @@ export class Data {
         this.function = {} as AddProperty<BaseFunction, 'name', string>
         this.container = options.container ?? new Container
         this.command = options.command
-        this.ctx = options.context
+        this.ctx = options.ctx
         this.reader = options.reader ?? new Reader()
         this.stop = false
         this.condition = Condition
@@ -83,7 +83,7 @@ export class Data {
      * @param options - Data options to inherit.
      * @returns {Data}
      */
-    extend(options: DataOptions): Data {
+    extend(options: Data): Data {
         return new Data({ ...options })
     }
 

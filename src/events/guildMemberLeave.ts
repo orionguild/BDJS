@@ -15,7 +15,7 @@ export default new BaseEvent<[GuildMember | PartialGuildMember]>({
         }, bot)
         const commands = Array.from(bot.commands.values()).filter(cmd => cmd.type === 'memberLeave')
         const data = new Data({
-            bot, context,
+            bot, ctx: context,
             commandType: 'memberLeave',
             functions: bot.functions,
             reader: bot.reader

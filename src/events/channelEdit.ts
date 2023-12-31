@@ -15,7 +15,7 @@ export default new BaseEvent<[NonThreadGuildBasedChannel | DMChannel, NonThreadG
         }, bot)
         const commands = Array.from(bot.commands.values()).filter(cmd => cmd.type === 'channelUpdate')
         const data = new Data({
-            bot, context,
+            bot, ctx: context,
             env: {
                 '__BDJS__OLD__CHANNEL__': old_channel,
                 '__BDJS__NEW__CHANNEL__': new_channel

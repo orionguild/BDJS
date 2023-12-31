@@ -14,7 +14,7 @@ exports.default = new Event_1.BaseEvent({
         const commands = Array.from(bot.commands.values()).filter(cmd => cmd.type === 'botJoin');
         const data = new Data_1.Data({
             bot,
-            context,
+            ctx: context,
             commandType: 'memberJoin',
             functions: bot.functions,
             reader: bot.reader

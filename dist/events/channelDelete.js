@@ -12,12 +12,12 @@ exports.default = new Event_1.BaseEvent({
             return;
         const context = new Context_1.Context({
             channel,
-            guild: channel.guild,
+            guild: channel.guild ?? await bot.guilds.fetch(channel.guildId),
             raw: channel
         }, bot);
         const commands = Array.from(bot.commands.values()).filter(cmd => cmd.type === 'channelDelete');
         const data = new Data_1.Data({
-            bot, context,
+            bot, ctx: context,
             commandType: 'channelDelete',
             functions: bot.functions,
             reader: bot.reader

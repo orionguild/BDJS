@@ -14,7 +14,7 @@ export default new BaseEvent<[GuildBan]>({
         }, bot)
         const commands = Array.from(bot.commands.values()).filter(cmd => cmd.type === 'banAdd')
         const data = new Data({
-            bot, context,
+            bot, ctx: context,
             env: {
                 'reason': ban.reason
             },

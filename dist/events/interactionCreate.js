@@ -20,7 +20,7 @@ exports.default = new Event_1.BaseEvent({
             const data = new Data_1.Data({
                 bot,
                 commandType: 'anyInteraction',
-                context,
+                ctx: context,
                 command: cmd,
                 functions: bot.functions,
                 reader: bot.reader
@@ -33,7 +33,7 @@ exports.default = new Event_1.BaseEvent({
             const data = new Data_1.Data({
                 bot,
                 commandType: 'buttonInteraction',
-                context,
+                ctx: context,
                 functions: bot.functions,
                 reader: bot.reader
             });
@@ -46,7 +46,7 @@ exports.default = new Event_1.BaseEvent({
             const data = new Data_1.Data({
                 bot,
                 commandType: 'selectMenuInteraction',
-                context,
+                ctx: context,
                 functions: bot.functions,
                 reader: bot.reader
             });
@@ -59,7 +59,7 @@ exports.default = new Event_1.BaseEvent({
             const data = new Data_1.Data({
                 bot,
                 commandType: 'modalInteraction',
-                context,
+                ctx: context,
                 functions: bot.functions,
                 reader: bot.reader
             });
@@ -76,7 +76,7 @@ exports.default = new Event_1.BaseEvent({
             const data = new Data_1.Data({
                 bot,
                 commandType: 'commandInteraction',
-                context,
+                ctx: context,
                 functions: bot.functions,
                 reader: bot.reader
             });
@@ -90,7 +90,7 @@ exports.default = new Event_1.BaseEvent({
             const data = new Data_1.Data({
                 bot,
                 commandType: 'userContextMenuInteraction',
-                context,
+                ctx: context,
                 env: {
                     targetId: interaction.targetId,
                     targetMember: interaction.targetMember,
@@ -110,7 +110,7 @@ exports.default = new Event_1.BaseEvent({
             const data = new Data_1.Data({
                 bot,
                 commandType: 'messageContextMenuInteraction',
-                context,
+                ctx: context,
                 env: {
                     targetId: interaction.targetId,
                     targetMessage: interaction.targetMessage

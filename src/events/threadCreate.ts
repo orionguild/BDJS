@@ -13,7 +13,7 @@ export default new BaseEvent<[AnyThreadChannel, boolean]>({
         }, bot)
         const commands = Array.from(bot.commands.values()).filter(cmd => cmd.type === 'threadCreate')
         const data = new Data({
-            bot, context, env: { newlyCreated },
+            bot, ctx: context, env: { newlyCreated },
             commandType: 'threadCreate',
             functions: bot.functions,
             reader: bot.reader

@@ -14,7 +14,7 @@ export default new BaseEvent<[Guild]>({
         const commands = Array.from(bot.commands.values()).filter(cmd => cmd.type === 'botJoin')
         const data = new Data({
             bot,
-            context,
+            ctx: context,
             commandType: 'memberJoin',
             functions: bot.functions,
             reader: bot.reader

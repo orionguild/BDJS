@@ -15,7 +15,7 @@ export default new BaseEvent<[GuildMember | PartialGuildMember, GuildMember | Pa
         }, bot)
         const commands = Array.from(bot.commands.values()).filter(cmd => cmd.type === 'memberUpdate')
         const data = new Data({
-            bot, context,
+            bot, ctx: context,
             env: {
                 '__BDJS__OLD__MEMBER__': old_member,
                 '__BDJS__NEW__MEMBER__': new_member

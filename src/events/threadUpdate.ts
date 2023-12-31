@@ -13,7 +13,7 @@ export default new BaseEvent<[AnyThreadChannel, AnyThreadChannel]>({
         }, bot)
         const commands = Array.from(bot.commands.values()).filter(cmd => cmd.type === 'threadUpdate')
         const data = new Data({
-            bot, context,
+            bot, ctx: context,
             env: {
                 '__BDJS__OLD__THREAD__': old,
                 '__BDJS__NEW__THREAD__': thread,

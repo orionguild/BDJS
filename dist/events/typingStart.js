@@ -15,7 +15,7 @@ exports.default = new Event_1.BaseEvent({
         }, bot);
         const commands = Array.from(bot.commands.values()).filter(cmd => cmd.type === 'typing');
         const data = new Data_1.Data({
-            bot, context,
+            bot, ctx: context,
             commandType: 'typing',
             env: {},
             functions: bot.functions,

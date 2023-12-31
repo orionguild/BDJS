@@ -13,7 +13,7 @@ export default new BaseEvent<[AnyThreadChannel]>({
         }, bot)
         const commands = Array.from(bot.commands.values()).filter(cmd => cmd.type === 'threadDelete')
         const data = new Data({
-            bot, context,
+            bot, ctx: context,
             commandType: 'threadDelete',
             functions: bot.functions,
             reader: bot.reader

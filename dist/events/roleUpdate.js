@@ -13,7 +13,7 @@ exports.default = new Event_1.BaseEvent({
         }, bot);
         const commands = Array.from(bot.commands.values()).filter(cmd => cmd.type === 'roleUpdate');
         const data = new Data_1.Data({
-            bot, context,
+            bot, ctx: context,
             env: {
                 '__BDJS__OLD__ROLE__': old,
                 '__BDJS__NEW__ROLE__': role

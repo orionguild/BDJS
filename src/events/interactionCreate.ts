@@ -21,7 +21,7 @@ export default new BaseEvent<[Interaction]>({
             const data = new Data({
                 bot,
                 commandType: 'anyInteraction',
-                context,
+                ctx: context,
                 command: cmd,
                 functions: bot.functions,
                 reader: bot.reader
@@ -40,7 +40,7 @@ export default new BaseEvent<[Interaction]>({
             const data = new Data({
                 bot,
                 commandType: 'buttonInteraction',
-                context,
+                ctx: context,
                 functions: bot.functions,
                 reader: bot.reader
             })
@@ -59,7 +59,7 @@ export default new BaseEvent<[Interaction]>({
             const data = new Data({
                 bot,
                 commandType: 'selectMenuInteraction',
-                context,
+                ctx: context,
                 functions: bot.functions,
                 reader: bot.reader
             })
@@ -78,7 +78,7 @@ export default new BaseEvent<[Interaction]>({
             const data = new Data({
                 bot,
                 commandType: 'modalInteraction',
-                context,
+                ctx: context,
                 functions: bot.functions,
                 reader: bot.reader
             })
@@ -97,7 +97,7 @@ export default new BaseEvent<[Interaction]>({
             const data = new Data({
                 bot,
                 commandType: 'commandInteraction',
-                context,
+                ctx: context,
                 functions: bot.functions,
                 reader: bot.reader
             })
@@ -113,7 +113,7 @@ export default new BaseEvent<[Interaction]>({
             const data = new Data({
                 bot,
                 commandType: 'userContextMenuInteraction',
-                context,
+                ctx: context,
                 env: {
                     targetId: interaction.targetId,
                     targetMember: interaction.targetMember,
@@ -136,7 +136,7 @@ export default new BaseEvent<[Interaction]>({
             const data = new Data({
                 bot,
                 commandType: 'messageContextMenuInteraction',
-                context,
+                ctx: context,
                 env: {
                     targetId: interaction.targetId,
                     targetMessage: interaction.targetMessage

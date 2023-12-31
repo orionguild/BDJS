@@ -19,7 +19,7 @@ class Data {
         this.function = {};
         this.container = options.container ?? new Container_1.Container;
         this.command = options.command;
-        this.ctx = options.context;
+        this.ctx = options.ctx;
         this.reader = options.reader ?? new Reader_1.Reader();
         this.stop = false;
         this.condition = Condition_1.Condition;

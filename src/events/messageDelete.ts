@@ -17,7 +17,7 @@ export default new BaseEvent<[Message]>({
         }, bot)
         const commands = Array.from(bot.commands.values()).filter(cmd => cmd.type === 'messageDelete')
         const data = new Data({
-            bot, context,
+            bot, ctx: context,
             env: {
                 '__BDJS__ARGS__': message.content.split(/ +/g)
             },

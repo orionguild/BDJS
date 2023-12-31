@@ -27,7 +27,7 @@ export default new BaseEvent<[Message<true>]>({
         for (const command of always) {
             const data = new Data({
                 bot,
-                context,
+                ctx: context,
                 command,
                 env: {
                     '__BDJS__ARGS__': message.content.split(/ +/g)
@@ -52,7 +52,7 @@ export default new BaseEvent<[Message<true>]>({
             if (command) {
                 const data = new Data({
                     bot,
-                    context,
+                    ctx: context,
                     command,
                     commandType: 'unprefixed',
                     env: {
@@ -74,7 +74,7 @@ export default new BaseEvent<[Message<true>]>({
         let args = message.content.split(/ +/g)
         const data = new Data({
             bot,
-            context,
+            ctx: context,
             commandType: 'prefixed',
             env: {
                 '__BDJS__ARGS__': args

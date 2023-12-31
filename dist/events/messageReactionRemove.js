@@ -16,7 +16,7 @@ exports.default = new Event_1.BaseEvent({
         }, bot);
         const commands = Array.from(bot.commands.values()).filter(cmd => cmd.type === 'reactionRemove');
         const data = new Data_1.Data({
-            bot, context,
+            bot, ctx: context,
             env: {
                 '__BDJS__ARGS__': reaction.message.content?.split(/ +/g)
             },
