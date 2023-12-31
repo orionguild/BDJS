@@ -1,6 +1,6 @@
 import { BaseFunction } from '../structures/Function'
+import Properties from '../util/Properties'
 import { Role } from 'discord.js'
-import { inspect } from 'util'
 
 export default new BaseFunction({
     description: 'Fetch a guild role property.',
@@ -38,9 +38,9 @@ export default new BaseFunction({
         const role = await guild.roles.cache.get(roleID) as Role & Record<string, string>
         if (!role) throw new d.error(d, 'invalid', 'Role', d.function?.name!)
 
-        const types = Object.keys(JSON.parse(JSON.stringify(role)))
-        if (!types.includes(property)) throw new d.error(d, 'invalid', 'Property', d.function?.name!)
+        const types = Object.keys(Properties.Role)
+        if (!types.includes(property.toLowerCase())) throw new d.error(d, 'invalid', 'Property', d.function?.name!)
 
-        return typeof role[property] === 'string' ? role[property] : typeof role[property] === 'number' ? role[property].toString() : inspect(role[property])
+        return Properties.Role[property.toLowerCase()].code(role)
     }
 })

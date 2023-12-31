@@ -83,6 +83,68 @@ exports.default = {
             code: (m) => m.voice.channel?.id
         },
     },
+    Role: {
+        createdtimestamp: {
+            description: 'The time this role was created, in milliseconds.',
+            code: (r) => r.createdTimestamp
+        },
+        hexcolor: {
+            description: 'Color this role has, as hexadecimal.',
+            code: (r) => r.hexColor
+        },
+        icon: {
+            description: 'The icon of this role, if any.',
+            code: (r) => r.iconURL()
+        },
+        id: {
+            description: 'Role ID.',
+            code: (r) => r.id
+        },
+        iseditable: {
+            description: 'Whether this role is editable.',
+            code: (r) => r.editable
+        },
+        iseveryonerole: {
+            description: 'Whether this role is the @everyone role for this guild.',
+            code: (r) => r.id === r.guild.id
+        },
+        ishoisted: {
+            description: 'Whether this role is hoisted.',
+            code: (r) => r.hoist
+        },
+        ismanaged: {
+            description: 'Whether this role is managed.',
+            code: (r) => r.managed
+        },
+        ismentionable: {
+            description: 'Whether this role is mentionable.',
+            code: (r) => r.mentionable
+        },
+        name: {
+            description: 'Name this role has.',
+            code: (r) => r.name
+        },
+        members: {
+            description: 'Cached member IDs with this role.',
+            code: (r) => Array.from(r.members.values()).map(m => m.id).join(',')
+        },
+        mention: {
+            description: 'Returns the role mention.',
+            code: (r) => r.toString()
+        },
+        permissions: {
+            description: 'Permission list this role has.',
+            code: (r) => r.permissions.toArray().join(',')
+        },
+        position: {
+            description: 'This role position.',
+            code: (r) => r.position
+        },
+        rawposition: {
+            description: 'This role raw position.',
+            code: (r) => r.rawPosition
+        }
+    },
     User: {
         accentcolor: {
             description: 'The user\'s accent hexadecimal color.',

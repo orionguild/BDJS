@@ -1,7 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const tslib_1 = require("tslib");
 const Function_1 = require("../structures/Function");
-const util_1 = require("util");
+const Properties_1 = tslib_1.__importDefault(require("../util/Properties"));
 exports.default = new Function_1.BaseFunction({
     description: 'Fetch a guild role property.',
     parameters: [
@@ -40,9 +41,9 @@ exports.default = new Function_1.BaseFunction({
         const role = await guild.roles.cache.get(roleID);
         if (!role)
             throw new d.error(d, 'invalid', 'Role', d.function?.name);
-        const types = Object.keys(JSON.parse(JSON.stringify(role)));
-        if (!types.includes(property))
+        const types = Object.keys(Properties_1.default.Role);
+        if (!types.includes(property.toLowerCase()))
             throw new d.error(d, 'invalid', 'Property', d.function?.name);
-        return typeof role[property] === 'string' ? role[property] : typeof role[property] === 'number' ? role[property].toString() : (0, util_1.inspect)(role[property]);
+        return Properties_1.default.Role[property.toLowerCase()].code(role);
     }
 });
