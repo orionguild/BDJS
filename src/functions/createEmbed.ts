@@ -16,9 +16,7 @@ export default new BaseFunction({
     ],
     code: async function(d, [payload]) {
         if (payload === undefined) throw new d.error(d, 'required', 'payload', d.function?.name!)
-
-        const parentProperties = { ...d }
-        const data = d.extend(parentProperties), embed = new EmbedBuilder
+        const data = d.extend(d), embed = new EmbedBuilder
         data.functions.set('settitle', new BaseFunction({
             description: 'Set the title for the embed.',
             async code(extended, [title]) {

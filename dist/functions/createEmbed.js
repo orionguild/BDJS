@@ -18,8 +18,7 @@ exports.default = new Function_1.BaseFunction({
     code: async function (d, [payload]) {
         if (payload === undefined)
             throw new d.error(d, 'required', 'payload', d.function?.name);
-        const parentProperties = { ...d };
-        const data = d.extend(parentProperties), embed = new discord_js_1.EmbedBuilder;
+        const data = d.extend(d), embed = new discord_js_1.EmbedBuilder;
         data.functions.set('settitle', new Function_1.BaseFunction({
             description: 'Set the title for the embed.',
             async code(extended, [title]) {
