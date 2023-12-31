@@ -524,6 +524,92 @@ exports.default = {
             code: s => s.url
         }
     },
+    Thread: {
+        archiveduration: {
+            description: 'The for thread to be archived.',
+            code: t => t.autoArchiveDuration?.toString()
+        },
+        archivedtimestamp: {
+            description: 'The time this thread was archived, in milliseconds.',
+            code: t => t.archiveTimestamp
+        },
+        createdtimestamp: {
+            description: 'The time this thread was created, in milliseconds.',
+            code: t => t.createdTimestamp
+        },
+        id: {
+            description: 'Retrieves the ID of this thread.',
+            code: t => t.id
+        },
+        isarchived: {
+            description: 'Whether this thread is archived.',
+            code: t => t.archived
+        },
+        iseditable: {
+            description: 'Whether this thread is editable.',
+            code: t => t.editable
+        },
+        isinvitable: {
+            description: 'Whether this thread is invitable.',
+            code: t => t.invitable
+        },
+        isjoinable: {
+            description: 'Whether this thread is joinable.',
+            code: t => t.joinable
+        },
+        islocked: {
+            description: 'Whether this thread is locked.',
+            code: t => t.locked
+        },
+        ismanageable: {
+            description: 'Whether this thread is manageable.',
+            code: t => t.manageable
+        },
+        isviewable: {
+            description: 'Whether this thread is viewable.',
+            code: t => t.viewable
+        },
+        lastmessageid: {
+            description: 'Retrieves the ID of the last message sent in this thread.',
+            code: t => t.lastMessageId
+        },
+        ownerid: {
+            description: 'Retrieves the ID of the user who created this thread.',
+            code: t => t.ownerId
+        },
+        members: {
+            description: 'Join all guild members IDs participating in this thread.',
+            code: t => Array.from(t.guildMembers.values()).map(m => m.id).join(',')
+        },
+        membercount: {
+            description: 'Retrieves the member count participating in this thread.',
+            code: t => t.memberCount
+        },
+        messagecount: {
+            description: 'Retrieves the message count in this thread.',
+            code: t => t.messageCount
+        },
+        name: {
+            description: 'Retrieves the name of this thread.',
+            code: t => t.name
+        },
+        parentid: {
+            description: 'Retrieves the parent ID of this thread.',
+            code: t => t.parentId
+        },
+        slowmode: {
+            description: 'Retrieves the slowmode of this thread.',
+            code: t => t.rateLimitPerUser
+        },
+        type: {
+            description: 'Retrieves the type of this thread.',
+            code: t => t.type
+        },
+        url: {
+            description: 'Retrieves the URL of this thread.',
+            code: t => t.url
+        }
+    },
     User: {
         accentcolor: {
             description: 'The user\'s accent hexadecimal color.',

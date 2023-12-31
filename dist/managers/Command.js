@@ -197,6 +197,10 @@ class CommandManager extends Map {
             'roleCreate',
             'roleDelete',
             'roleUpdate',
+            'threadCreate',
+            'threadDelete',
+            'threadUpdate',
+            // 'ratelimit',
             'unknown',
             // BDJS Customs
             'interval',

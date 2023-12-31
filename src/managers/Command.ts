@@ -243,6 +243,10 @@ export class CommandManager extends Map<string, CommandData> {
             'roleCreate',
             'roleDelete',
             'roleUpdate',
+            'threadCreate',
+            'threadDelete',
+            'threadUpdate',
+            // 'ratelimit',
             'unknown',
             // BDJS Customs
             'interval',
