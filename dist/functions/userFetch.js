@@ -1,48 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getUserProperty = exports.isValidUserProperty = exports.UserProperties = void 0;
+const tslib_1 = require("tslib");
 const Function_1 = require("../structures/Function");
-var UserProperties;
-(function (UserProperties) {
-    UserProperties["isBot"] = "isBot";
-    UserProperties["avatar"] = "avatar";
-    UserProperties["id"] = "id";
-    UserProperties["username"] = "username";
-    UserProperties["displayName"] = "displayName";
-    UserProperties["globalName"] = "globalName";
-    UserProperties["banner"] = "banner";
-    UserProperties["accentColor"] = "accentColor";
-    UserProperties["timestamp"] = "timestamp";
-    UserProperties["dmChannelID"] = "dmChannelID";
-})(UserProperties || (exports.UserProperties = UserProperties = {}));
-const isValidUserProperty = (property) => Object.values(UserProperties).includes(property);
-exports.isValidUserProperty = isValidUserProperty;
-function getUserProperty(user, property) {
-    const data = JSON.parse(JSON.stringify(user));
-    switch (property) {
-        case 'isBot':
-            return user.bot + '';
-        case 'avatar':
-            return user.displayAvatarURL();
-        case 'id':
-            return user.id;
-        case 'username':
-            return user.username;
-        case 'displayName':
-            return user.displayName;
-        case 'globalName':
-            return user.globalName;
-        case 'banner':
-            return user.bannerURL();
-        case 'accentColor':
-            return user.hexAccentColor;
-        case 'timestamp':
-            return user.createdTimestamp;
-        case 'dmChannelID':
-            return user.dmChannel?.id;
-    }
-}
-exports.getUserProperty = getUserProperty;
+const Properties_1 = tslib_1.__importDefault(require("../util/Properties"));
 exports.default = new Function_1.BaseFunction({
     description: 'Fetch an user property.',
     parameters: [
@@ -69,8 +29,9 @@ exports.default = new Function_1.BaseFunction({
         const user = await d.bot?.users.fetch(memberID);
         if (!user)
             throw new d.error(d, 'invalid', 'user', d.function?.name);
-        if (!(0, exports.isValidUserProperty)(property))
+        const types = Object.keys(Properties_1.default.User);
+        if (!types.includes(property.toLowerCase()))
             throw new d.error(d, 'invalid', 'Property', d.function?.name);
-        return getUserProperty(user, property);
+        return Properties_1.default.User[property.toLowerCase()].code(user);
     }
 });

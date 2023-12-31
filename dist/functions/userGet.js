@@ -1,7 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const userFetch_1 = require("./userFetch");
+const tslib_1 = require("tslib");
 const Function_1 = require("../structures/Function");
+const Properties_1 = tslib_1.__importDefault(require("../util/Properties"));
 exports.default = new Function_1.BaseFunction({
     description: 'Get an user property.',
     parameters: [
@@ -28,8 +29,9 @@ exports.default = new Function_1.BaseFunction({
         const user = d.bot?.users.cache.get(memberID);
         if (!user)
             throw new d.error(d, 'invalid', 'user', d.function?.name);
-        if (!(0, userFetch_1.isValidUserProperty)(property))
+        const types = Object.keys(Properties_1.default.User);
+        if (!types.includes(property.toLowerCase()))
             throw new d.error(d, 'invalid', 'Property', d.function?.name);
-        return (0, userFetch_1.getUserProperty)(user, property);
+        return Properties_1.default.User[property.toLowerCase()].code(user);
     }
 });

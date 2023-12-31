@@ -1,46 +1,6 @@
 import { BaseFunction } from '../structures/Function'
+import Properties from '../util/Properties'
 import { User } from 'discord.js'
-
-export enum UserProperties {
-    isBot = 'isBot',
-    avatar = 'avatar',
-    id = 'id',
-    username = 'username',
-    displayName = 'displayName',
-    globalName = 'globalName',
-    banner = 'banner',
-    accentColor = 'accentColor',
-    timestamp = 'timestamp',
-    dmChannelID = 'dmChannelID'
-}
-
-export const isValidUserProperty = (property: UserProperties) => Object.values(UserProperties).includes(property)
-
-export function getUserProperty(user: User & Record<string, any>, property: UserProperties) {
-    const data = JSON.parse(JSON.stringify(user))
-    switch (property) {
-        case 'isBot':
-            return user.bot + ''
-        case 'avatar':
-            return user.displayAvatarURL()
-        case 'id':
-            return user.id
-        case 'username':
-            return user.username
-        case 'displayName':
-            return user.displayName
-        case 'globalName':
-            return user.globalName
-        case 'banner':
-            return user.bannerURL()
-        case 'accentColor':
-            return user.hexAccentColor
-        case 'timestamp':
-            return user.createdTimestamp
-        case 'dmChannelID':
-            return user.dmChannel?.id
-    }
-}
 
 export default new BaseFunction({
     description: 'Fetch an user property.',
@@ -67,8 +27,9 @@ export default new BaseFunction({
         const user = await d.bot?.users.fetch(memberID) as User & Record<string, string>
         if (!user) throw new d.error(d, 'invalid', 'user', d.function?.name!)
 
-        if (!isValidUserProperty(property as UserProperties)) throw new d.error(d, 'invalid', 'Property', d.function?.name!)
+        const types = Object.keys(Properties.User)
+        if (!types.includes(property.toLowerCase())) throw new d.error(d, 'invalid', 'Property', d.function?.name!)
 
-        return getUserProperty(user, property as UserProperties)
+        return Properties.User[property.toLowerCase()].code(user)
     }
 })

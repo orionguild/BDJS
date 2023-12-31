@@ -1,4 +1,4 @@
-import { GuildMember, PartialGuildMember } from "discord.js";
+import { GuildMember, PartialGuildMember, User } from 'discord.js'
 
 type Member = GuildMember | PartialGuildMember
 
@@ -87,5 +87,50 @@ export default {
     } as Record<string, {
         description: string,
         code: (m: Member) => any
+    }>,
+    User: {
+        accentcolor: {
+            description: 'The user\'s accent hexadecimal color.',
+            code: (u) => u.hexAccentColor
+        },
+        avatar: {
+            description: 'Retrieves the avatar of this user.',
+            code: (u) => u.displayAvatarURL()
+        },
+        avatardecoration: {
+            description: 'Retrieves the avatar decoration of this user, if any.',
+            code: (u) => u.avatarDecorationURL()
+        },
+        banner: {
+            description: 'Retrieves the banner of this user.',
+            code: (u) => u.bannerURL()
+        },
+        createdtimestamp: {
+            description: 'The time this user created its account, in milliseconds.',
+            code: (u) => u.createdTimestamp
+        },
+        displayname: {
+            description: 'The displayed name of this user.',
+            code: (u) => u.displayName
+        },
+        dmchannelid: {
+            description: 'The channel ID of this user\'s DM.',
+            code: (u) => u.dmChannel?.id
+        },
+        id: {
+            description: 'User ID.',
+            code: (u) => u.id
+        },
+        globalname: {
+            description: 'The global name this user has.',
+            code: (u) => u.globalName
+        },
+        username: {
+            description: 'The username this user has.',
+            code: (u) => u.username
+        }
+    } as Record<string, {
+        description: string,
+        code: (u: User) => any
     }>
 }
