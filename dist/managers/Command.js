@@ -181,6 +181,7 @@ class CommandManager extends Map {
             'typing',
             'memberJoin',
             'memberLeave',
+            'memberUpdate',
             'botJoin',
             'botLeave',
             'channelCreate',

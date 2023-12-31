@@ -227,6 +227,7 @@ export class CommandManager extends Map<string, CommandData> {
             'typing',
             'memberJoin',
             'memberLeave',
+            'memberUpdate',
             'botJoin',
             'botLeave',
             'channelCreate',
