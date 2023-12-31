@@ -68,6 +68,68 @@ exports.default = {
             code: b => b.user.username
         }
     },
+    Channel: {
+        createdtimestamp: {
+            description: 'The time this channel was created, in milliseconds.',
+            code: c => c.createdTimestamp
+        },
+        id: {
+            description: 'The channel ID.',
+            code: c => c.id
+        },
+        isdeletable: {
+            description: 'Whether this channel is deletable.',
+            code: c => c.deletable
+        },
+        ismanageable: {
+            description: 'Whether this channel is manageable.',
+            code: c => c.manageable
+        },
+        isnsfw: {
+            description: 'Whether this channel is NSFW.',
+            code: c => c.nsfw
+        },
+        isviewable: {
+            description: 'Whether this channel is viewable.',
+            code: c => c.viewable
+        },
+        lastmessageid: {
+            description: 'ID of the last message sent in this channel.',
+            code: c => c.lastMessageId
+        },
+        name: {
+            description: 'The name of this channel.',
+            code: c => c.name
+        },
+        parentid: {
+            description: 'The ID of the parent channel.',
+            code: c => c.parentId
+        },
+        parentname: {
+            description: 'The name of the parent channel.',
+            code: c => c.parent?.name
+        },
+        position: {
+            description: 'The position this channel has.',
+            code: c => c.position
+        },
+        ratelimitperuser: {
+            description: 'The ratelimit per user in this channel.',
+            code: c => c.rateLimitPerUser
+        },
+        rawposition: {
+            description: 'The raw position this channel has.',
+            code: c => c.rawPosition
+        },
+        type: {
+            description: 'The channel type.',
+            code: c => c.type
+        },
+        url: {
+            description: 'The URL of this channel.',
+            code: c => c.url
+        }
+    },
     Member: {
         avatar: {
             description: 'Retrieves the avatar of this guild member.',

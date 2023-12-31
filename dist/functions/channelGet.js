@@ -1,13 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getChannelProperty = void 0;
+const tslib_1 = require("tslib");
 const Function_1 = require("../structures/Function");
-function getChannelProperty(guild, property) {
-    const data = JSON.parse(JSON.stringify(guild));
-    let result;
-    return Array.isArray(data[property]) ? data[property].join(',') : typeof data[property] === 'number' ? data[property].toString() : data[property];
-}
-exports.getChannelProperty = getChannelProperty;
+const Properties_1 = tslib_1.__importDefault(require("../util/Properties"));
 exports.default = new Function_1.BaseFunction({
     description: 'Get a channel property.',
     parameters: [
@@ -48,9 +43,9 @@ exports.default = new Function_1.BaseFunction({
             return false;
         else if (!channel && property !== 'exists')
             throw new d.error(d, 'invalid', 'Channel ID', d.function?.name);
-        const types = Object.keys(JSON.parse(JSON.stringify(channel)));
-        if (!types.includes(property))
+        const types = Object.keys(Properties_1.default.Channel);
+        if (!types.includes(property.toLowerCase()))
             throw new d.error(d, 'invalid', 'Property', d.function?.name);
-        return getChannelProperty(channel, property);
+        return Properties_1.default.Channel[property.toLowerCase()].code(channel);
     }
 });
