@@ -9,6 +9,8 @@ exports.default = new Event_1.BaseEvent({
     async listener(bot, reaction, user) {
         const context = new Context_1.Context({
             author: user,
+            channel: reaction.message.channel,
+            guild: reaction.message.guild,
             message: reaction.message,
             raw: reaction
         }, bot);
