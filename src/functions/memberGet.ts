@@ -1,5 +1,5 @@
 import { BaseFunction } from '../structures/Function'
-import { getMemberProperty } from './memberFetch'
+import Properties from '../util/Properties'
 import { GuildMember } from 'discord.js'
 
 export default new BaseFunction({
@@ -38,9 +38,9 @@ export default new BaseFunction({
         const member = await guild.members.cache.get(memberID) as GuildMember & Record<string, string>
         if (!member) throw new d.error(d, 'invalid', 'member', d.function?.name!)
 
-        const types = Object.keys(JSON.parse(JSON.stringify(member))).concat(['isBot', 'isBannable', 'isMuted', 'username', 'id'])
-        if (!types.includes(property)) throw new d.error(d, 'invalid', 'Property', d.function?.name!)
+        const types = Object.keys(Properties.Member)
+        if (!types.includes(property.toLowerCase())) throw new d.error(d, 'invalid', 'Property', d.function?.name!)
 
-        return getMemberProperty(member, property)
+        return Properties.Member[property.toLowerCase()].code(member)
     }
 })

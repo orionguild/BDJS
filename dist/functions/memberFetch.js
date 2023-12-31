@@ -1,25 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getMemberProperty = void 0;
+const tslib_1 = require("tslib");
 const Function_1 = require("../structures/Function");
-const util_1 = require("util");
-function getMemberProperty(member, property) {
-    switch (property) {
-        case 'isbot':
-            return member.user.bot + '';
-        case 'isbannable':
-            return member.bannable + '';
-        case 'ismuted':
-            return (member.communicationDisabledUntil instanceof Date) + '';
-        case 'username':
-            return member.user.username;
-        case 'id':
-            return member.user.id;
-        default:
-            return Array.isArray(member[property]) ? member[property].join(',') : typeof member[property] === 'string' ? member[property] : (0, util_1.inspect)(member[property]);
-    }
-}
-exports.getMemberProperty = getMemberProperty;
+const Properties_1 = tslib_1.__importDefault(require("../util/Properties"));
 exports.default = new Function_1.BaseFunction({
     description: 'Fetch a guild member property.',
     parameters: [
@@ -58,9 +41,9 @@ exports.default = new Function_1.BaseFunction({
         const member = await guild.members.fetch(memberID);
         if (!member)
             throw new d.error(d, 'invalid', 'member', d.function?.name);
-        const types = Object.keys(JSON.parse(JSON.stringify(member))).concat(['isBot', 'isBannable', 'isMuted', 'username', 'id']);
-        if (!types.includes(property))
+        const types = Object.keys(Properties_1.default.Member);
+        if (!types.includes(property.toLowerCase()))
             throw new d.error(d, 'invalid', 'Property', d.function?.name);
-        return getMemberProperty(member, property);
+        return Properties_1.default.Member[property.toLowerCase()].code(member);
     }
 });
