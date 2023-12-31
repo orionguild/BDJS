@@ -1,7 +1,6 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const Function_1 = require("../structures/Function");
-exports.default = new Function_1.BaseFunction({
+import { BaseFunction } from '../structures/Function'
+
+export default new BaseFunction({
     description: 'Execute a code if the condition is met.',
     parameters: [
         {
@@ -20,17 +19,19 @@ exports.default = new Function_1.BaseFunction({
             value: 'none'
         }
     ],
-    code: async function (d, [condition, code]) {
-        if (condition === undefined)
-            throw new d.error(d, 'required', 'Condition', d.function?.name);
-        const solves = d.condition.evaluate(condition);
+    code: async function(d, [condition, code]) {
+        if (condition === undefined) throw new d.error(d, 'required', 'Condition', d.function?.name!)
+
+        const solves = d.condition.evaluate(condition)
+
         if (!solves) {
             d.stop = true;
             if (code) {
-                const data = d.extend(d);
-                data.stop = false;
-                await data.reader.compile(code, data);
+                const data = d.extend(d)
+                data.stop = false
+                await data.reader.compile(code, data)
             }
         }
+        
     }
-});
+})
