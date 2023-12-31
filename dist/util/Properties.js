@@ -2,9 +2,21 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = {
     Member: {
+        avatar: {
+            description: 'Retrieves the avatar of this guild member.',
+            code: (m) => m.displayAvatarURL()
+        },
+        banner: {
+            description: 'Retrieves the avatar of this guild member.',
+            code: (m) => m.user.bannerURL()
+        },
         displayname: {
             description: 'The displayed name of this member.',
             code: (m) => m.displayName
+        },
+        dmchannelid: {
+            description: 'The channel ID of this member\'s DM.',
+            code: (m) => m.dmChannel?.id
         },
         guildid: {
             description: 'The guild this member is in.',
@@ -33,6 +45,22 @@ exports.default = {
         iskickable: {
             description: 'Whether this guild member is kickable.',
             code: (m) => m.kickable
+        },
+        ismanageable: {
+            description: 'Whether this guild member is manageable.',
+            code: (m) => m.manageable
+        },
+        ismoderable: {
+            description: 'Whether this guild member is moderable.',
+            code: (m) => m.moderatable
+        },
+        ismuted: {
+            description: 'Whether this guild member is muted.',
+            code: (m) => m.isCommunicationDisabled()
+        },
+        ispending: {
+            description: 'Whether this guild member is pending.',
+            code: (m) => m.pending
         },
         joinedtimestamp: {
             description: 'The time this member joined the server, in milliseconds.',

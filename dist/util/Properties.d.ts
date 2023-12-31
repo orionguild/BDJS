@@ -3,7 +3,7 @@ type Member = GuildMember | PartialGuildMember;
 declare const _default: {
     Member: Record<string, {
         description: string;
-        code: (member: Member) => any;
+        code: (m: Member) => any;
     }>;
 };
 export default _default;
