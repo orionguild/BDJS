@@ -1,7 +1,7 @@
-import { Channel, GuildMember, PartialGuildMember, Role, TextChannel, User, VoiceChannel } from 'discord.js'
+import { Channel, ChannelType, GuildMember, PartialGuildMember, Role, TextChannel, User, VoiceChannel } from 'discord.js'
 import { Bot } from '../structures/Bot'
 
-type Member = GuildMember | PartialGuildMember
+type Member = GuildMember | PartialGuildMember;
 
 export default {
     Bot: {
@@ -72,6 +72,10 @@ export default {
         code: (b: Bot) => any
     }>,
     Channel: {
+        bitrate: {
+            description: 'The channel bitrate.',
+            code: c => c.isVoiceBased() ? c.bitrate : undefined
+        },
         createdtimestamp: {
             description: 'The time this channel was created, in milliseconds.',
             code: c => c.createdTimestamp
@@ -116,13 +120,21 @@ export default {
             description: 'The position this channel has.',
             code: c => c.position
         },
-        ratelimitperuser: {
+        slowmode: {
             description: 'The ratelimit per user in this channel.',
             code: c => c.rateLimitPerUser
         },
         rawposition: {
             description: 'The raw position this channel has.',
             code: c => c.rawPosition
+        },
+        threads: {
+            description: 'A list of threads in this channel.',
+            code: c => c.type === ChannelType.GuildText ? c.threads.cache.map(x => x.name).join(',') : undefined
+        },
+        topic: {
+            description: 'The topic of this channel.',
+            code: c => c.type === ChannelType.GuildText ? c.topic : undefined
         },
         type: {
             description: 'The channel type.',

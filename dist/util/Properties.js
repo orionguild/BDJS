@@ -69,6 +69,10 @@ exports.default = {
         }
     },
     Channel: {
+        bitrate: {
+            description: 'The channel bitrate.',
+            code: c => c.isVoiceBased() ? c.bitrate : undefined
+        },
         createdtimestamp: {
             description: 'The time this channel was created, in milliseconds.',
             code: c => c.createdTimestamp
@@ -113,13 +117,21 @@ exports.default = {
             description: 'The position this channel has.',
             code: c => c.position
         },
-        ratelimitperuser: {
+        slowmode: {
             description: 'The ratelimit per user in this channel.',
             code: c => c.rateLimitPerUser
         },
         rawposition: {
             description: 'The raw position this channel has.',
             code: c => c.rawPosition
+        },
+        threads: {
+            description: 'A list of threads in this channel.',
+            code: c => c.type === discord_js_1.ChannelType.GuildText ? c.threads.cache.map(x => x.name).join(',') : undefined
+        },
+        topic: {
+            description: 'The topic of this channel.',
+            code: c => c.type === discord_js_1.ChannelType.GuildText ? c.topic : undefined
         },
         type: {
             description: 'The channel type.',
