@@ -1,0 +1,3195 @@
+[
+  {
+    "name": "addReactions",
+    "description": "Adds reactions to a message.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Reactions",
+          "description": "All message reactions, separated by commas.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Message ID",
+          "description": "The message ID to add reactions to.",
+          "required": false,
+          "resolver": "String",
+          "value": "d.ctx?.message?.id"
+        },
+        {
+          "name": "Channel ID",
+          "description": "The ID of the channel that the message belongs to.",
+          "required": false,
+          "resolver": "String",
+          "value": "d.ctx?.channel?.id"
+        },
+        {
+          "name": "Guild ID",
+          "description": "The guild ID of the message.",
+          "required": false,
+          "resolver": "String",
+          "value": "d.ctx?.guild?.id"
+        }
+      ]
+    }
+  },
+  {
+    "name": "appendFile",
+    "description": "Appends content to the end of a file.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Directory",
+          "description": "The file directory.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Content",
+          "description": "File content to append.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Encoding",
+          "description": "Type of encoding to write into the file.",
+          "required": false,
+          "resolver": "String",
+          "value": "utf-8"
+        }
+      ]
+    }
+  },
+  {
+    "name": "args",
+    "description": "Get context message arguments, if any.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Index",
+          "description": "Argument index.",
+          "required": true,
+          "resolver": "Number",
+          "value": "none"
+        },
+        {
+          "name": "End Index",
+          "description": "The slice end index.",
+          "required": false,
+          "resolver": "Number",
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "arrayAppend",
+    "description": "Appends an element to the given array.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Name",
+          "description": "The name for the array.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Elements",
+          "description": "Elements to be pushed",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "arrayAt",
+    "description": "Returns the element of an array at the given index.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Name",
+          "description": "The name for the array.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Index",
+          "description": "Element index.",
+          "required": true,
+          "resolver": "Number",
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "arrayClear",
+    "description": "Clear elements of an array.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Name",
+          "description": "The name for the array.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "arrayCreate",
+    "description": "Creates an array.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Name",
+          "description": "The name for this array.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Text",
+          "description": "The text to be splitted.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Separator",
+          "description": "The element separator to split the elements.",
+          "required": false,
+          "resolver": "String",
+          "value": ","
+        }
+      ]
+    }
+  },
+  {
+    "name": "arrayFilter",
+    "description": "Filter array elements that mets the condition.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Name",
+          "description": "The name for the array.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Condition",
+          "description": "Condition to filter variables.",
+          "required": true,
+          "compile": false,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Separator",
+          "description": "Separator to join the results.",
+          "required": false,
+          "resolver": "String",
+          "value": ","
+        }
+      ]
+    }
+  },
+  {
+    "name": "arrayIncludes",
+    "description": "Returns if the element exists inside the array.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Name",
+          "description": "The name for the array.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Element",
+          "description": "Elements to be found.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "arrayIndexOf",
+    "description": "Returns the index of the provided element.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Name",
+          "description": "The name for the array.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Element",
+          "description": "Elements to be found.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "arrayJoin",
+    "description": "Joins an array.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Name",
+          "description": "The name for the array.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Separator",
+          "description": "The element separator to join the elements.",
+          "required": false,
+          "resolver": "String",
+          "value": ","
+        }
+      ]
+    }
+  },
+  {
+    "name": "arrayLastIndexOf",
+    "description": "Returns the last index of the provided element.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Name",
+          "description": "The name for the array.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Element",
+          "description": "Elements to be found.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "arrayMap",
+    "description": "Execute a code for each array element.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Name",
+          "description": "The name for the array.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Variable",
+          "description": "Variable to load the results to.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Code",
+          "description": "Code to be applied to each element.",
+          "required": true,
+          "compile": false,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Separator",
+          "description": "Result separator.",
+          "required": false,
+          "resolver": "String",
+          "value": ","
+        }
+      ]
+    }
+  },
+  {
+    "name": "arrayPop",
+    "description": "Returns the last element of an array.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Name",
+          "description": "The name for the array.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "arrayRemove",
+    "description": "Removes an element from the given array.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Name",
+          "description": "The name for the array.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Index",
+          "description": "The element index.",
+          "required": true,
+          "resolver": "Number",
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "arrayReverse",
+    "description": "Clear elements of an array.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Name",
+          "description": "The name for the array.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "arrayShift",
+    "description": "Returns the first element of an array.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Name",
+          "description": "The name for the array.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "arraySize",
+    "description": "Returns the array size.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Name",
+          "description": "The name for the array.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "arraySort",
+    "description": "Creates an array.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Name",
+          "description": "The name for this array.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Method",
+          "description": "Method to sort the array. (alpha|asc|desc)",
+          "required": false,
+          "resolver": "String",
+          "value": "alpha"
+        },
+        {
+          "name": "Separator",
+          "description": "The element separator to split the elements.",
+          "required": false,
+          "resolver": "String",
+          "value": ","
+        }
+      ]
+    }
+  },
+  {
+    "name": "assignRole",
+    "description": "Assigns a role to a guild member.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Role ID",
+          "description": "The ID of the role to be assigned.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Member ID",
+          "description": "The ID of the member to assign the role to.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Guild ID",
+          "description": "The ID of guild were the role belongs to.",
+          "required": false,
+          "resolver": "String",
+          "value": "d.ctx?.guild?.id"
+        }
+      ]
+    }
+  },
+  {
+    "name": "await",
+    "description": "Holds code execution for the given time.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Duration",
+          "description": "The time to hold the remaining code.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "calculate",
+    "description": "Calculates a math expression.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Expression",
+          "description": "Math expression to be evaled.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "channelCreate",
+    "description": "Creates a channel in a guild.",
+    "extraOptions": {
+      "builders": true,
+      "injection": false,
+      "params": [
+        {
+          "name": "Name",
+          "description": "The name for this channel.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Type",
+          "description": "The channel type.",
+          "required": false,
+          "resolver": "String",
+          "value": "text"
+        },
+        {
+          "name": "Guild ID",
+          "description": "The ID of the guild where channel should be created.",
+          "required": false,
+          "resolver": "String",
+          "value": "d.ctx?.guild?.id"
+        },
+        {
+          "name": "Options",
+          "description": "Builder functions to set channel properties.",
+          "required": false,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Return ID",
+          "description": "Whether return channel ID.",
+          "required": false,
+          "resolver": "Boolean",
+          "value": "false"
+        }
+      ]
+    }
+  },
+  {
+    "name": "channelGet",
+    "description": "Get a channel property.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Property",
+          "description": "Channel property name.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Channel ID",
+          "description": "Channel ID to get the property from.",
+          "required": false,
+          "resolver": "String",
+          "value": "d.ctx?.channel?.id"
+        },
+        {
+          "name": "Guild ID",
+          "description": "Guild ID to get the property from.",
+          "required": false,
+          "resolver": "String",
+          "value": "d.ctx?.guild?.id"
+        }
+      ]
+    }
+  },
+  {
+    "name": "charAt",
+    "description": "Returns the character of a text at the provided index.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Text",
+          "description": "The text to work with.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Index",
+          "description": "Argument index.",
+          "required": true,
+          "resolver": "Number",
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "clientGet",
+    "description": "Get a client property.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Property",
+          "description": "Client property name.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "clientLeaveGuild",
+    "description": "Client leaves the provided guild.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Guild ID",
+          "description": "Guild ID which the client will leave.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "clientSendTyping",
+    "description": "Shows the client as \"typing\" in the provided channel.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Channel ID",
+          "description": "Guild ID which the client will leave.",
+          "required": false,
+          "resolver": "String",
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "clientSetAvatar",
+    "description": "Set the avatar for the client.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "URL",
+          "description": "URL of the new avatar.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "clientSetName",
+    "description": "Set the name for the client.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Name",
+          "description": "The new name for the client.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "clientSetStatus",
+    "description": "Set the presence for the client.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Text",
+          "description": "The text for the presence.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Type",
+          "description": "The type for the presence.",
+          "required": false,
+          "resolver": "String",
+          "value": "playing"
+        },
+        {
+          "name": "Status",
+          "description": "Status type for the presence.",
+          "required": false,
+          "resolver": "String",
+          "value": "online"
+        },
+        {
+          "name": "URL",
+          "description": "Streaming URL, if set.",
+          "required": false,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "AFK",
+          "description": "Whether client is AFK.",
+          "required": false,
+          "resolver": "Boolean",
+          "value": "false"
+        }
+      ]
+    }
+  },
+  {
+    "name": "command",
+    "description": "Get a property from a command data.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Type",
+          "description": "The command type.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Name",
+          "description": "The command name.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Property",
+          "description": "The command property.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "containerClear",
+    "description": "Clears the container.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": []
+    }
+  },
+  {
+    "name": "createActionRow",
+    "description": "Creates a new action row.",
+    "extraOptions": {
+      "builders": true,
+      "injection": false,
+      "params": [
+        {
+          "name": "Components",
+          "description": "Components to be attached into the action row.",
+          "required": true,
+          "compile": false,
+          "resolver": "String",
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "createBan",
+    "description": "Creates a ban for the provided user ID in a guild.",
+    "extraOptions": {
+      "builders": true,
+      "injection": false,
+      "params": [
+        {
+          "name": "User ID",
+          "description": "The user ID to be banned.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Guild ID",
+          "description": "The Guild ID where the user will be banned from.",
+          "required": false,
+          "resolver": "String",
+          "value": "d.ctx?.guild?.id"
+        },
+        {
+          "name": "Options",
+          "description": "Ban creation option builders.",
+          "required": false,
+          "compile": false,
+          "resolver": "String",
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "createEmbed",
+    "description": "Creates an embed.",
+    "extraOptions": {
+      "builders": true,
+      "injection": true,
+      "params": [
+        {
+          "name": "Payload",
+          "description": "The embed payload.",
+          "required": true,
+          "compile": false,
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "createModal",
+    "description": "Creates a modal.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Title",
+          "description": "The title for this modal.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Custom ID",
+          "description": "The custom ID for this modal",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Components",
+          "description": "Components to be attached into the modal.",
+          "required": true,
+          "compile": false,
+          "resolver": "String",
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "createPayloadFile",
+    "description": "Creates a file data to be sent whintin message payload.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Name",
+          "description": "File name.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Content",
+          "description": "File content.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "deleteBan",
+    "description": "Deletes a ban for the provided user ID in a guild.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "User ID",
+          "description": "The user ID to be unbanned.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Guild ID",
+          "description": "The Guild ID where the user will be banned from.",
+          "required": false,
+          "resolver": "String",
+          "value": "d.ctx?.guild?.id"
+        },
+        {
+          "name": "Reason",
+          "description": "The reason for deleting the ban.",
+          "required": false,
+          "resolver": "String",
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "editMessage",
+    "description": "Retrieves data from an embed message.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Message",
+          "description": "The message payload.",
+          "required": true,
+          "compile": false,
+          "value": "none"
+        },
+        {
+          "name": "Guild ID",
+          "description": "Guild ID where message is in.",
+          "required": false,
+          "resolver": "String",
+          "value": "d.ctx?.guild?.id"
+        },
+        {
+          "name": "Channel ID",
+          "description": "Channel ID where message is in.",
+          "required": false,
+          "resolver": "String",
+          "value": "d.ctx?.channel?.id"
+        },
+        {
+          "name": "Message ID",
+          "description": "Message ID to get the data from.",
+          "required": false,
+          "resolver": "String",
+          "value": "d.ctx?.message?.id"
+        }
+      ]
+    }
+  },
+  {
+    "name": "executionTime",
+    "description": "Return how many milliseconds took the Reader to interprete the code.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": []
+    }
+  },
+  {
+    "name": "exitProcess",
+    "description": "Exits the process.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": []
+    }
+  },
+  {
+    "name": "get",
+    "description": "Get a variable from the environment data.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Name",
+          "description": "Variable name.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "getEmbedData",
+    "description": "Retrieves data from an embed message.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Property",
+          "description": "Embed property to be retrieved.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Index",
+          "description": "Embed index.",
+          "required": false,
+          "resolver": "Number",
+          "value": "1"
+        },
+        {
+          "name": "Message ID",
+          "description": "Message ID to get the data from.",
+          "required": false,
+          "resolver": "String",
+          "value": "d.ctx?.message?.id"
+        }
+      ]
+    }
+  },
+  {
+    "name": "getFunction",
+    "description": "Get a BDJS function property.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Name",
+          "description": "Variable name.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "guildFetch",
+    "description": "Fetch a guild property.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Property",
+          "description": "Guild property name.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Guild ID",
+          "description": "Guild ID to fetch the property from.",
+          "required": false,
+          "resolver": "String",
+          "value": "d.ctx?.guild?.id"
+        }
+      ]
+    }
+  },
+  {
+    "name": "guildGet",
+    "description": "Get a guild property.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Property",
+          "description": "Guild property name.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Guild ID",
+          "description": "Guild ID to get the property from.",
+          "required": false,
+          "resolver": "String",
+          "value": "d.ctx?.guild?.id"
+        }
+      ]
+    }
+  },
+  {
+    "name": "hasPerm",
+    "description": "Check if the member has the provided permission.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Permission Name",
+          "description": "The name of the permission to be checked.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Member ID",
+          "description": "The member to be checked.",
+          "required": false,
+          "resolver": "String",
+          "value": "d.ctx?.author?.id"
+        },
+        {
+          "name": "Guild ID",
+          "description": "The ID of the guild member belongs to.",
+          "required": false,
+          "resolver": "String",
+          "value": "d.ctx?.guild?.id"
+        }
+      ]
+    }
+  },
+  {
+    "name": "hasPermInChannel",
+    "description": "Check if the member has the provided permission in channel.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Permission Name",
+          "description": "The name of the permission to be checked.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Member ID",
+          "description": "The member to be checked.",
+          "required": false,
+          "resolver": "String",
+          "value": "d.ctx?.author?.id"
+        },
+        {
+          "name": "Channel ID",
+          "description": "The channel to be checked.",
+          "required": false,
+          "resolver": "String",
+          "value": "d.ctx?.channel?.id"
+        },
+        {
+          "name": "Guild ID",
+          "description": "The ID of the guild member belongs to.",
+          "required": false,
+          "resolver": "String",
+          "value": "d.ctx?.guild?.id"
+        }
+      ]
+    }
+  },
+  {
+    "name": "hasRole",
+    "description": "Check if the provided member has a role.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Role ID",
+          "description": "Guild role ID to be checked.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Member ID",
+          "description": "The member to be checked.",
+          "required": false,
+          "resolver": "String",
+          "value": "d.ctx?.author?.id"
+        },
+        {
+          "name": "Guild ID",
+          "description": "The ID of the guild member belongs to.",
+          "required": false,
+          "resolver": "String",
+          "value": "d.ctx?.guild?.id"
+        }
+      ]
+    }
+  },
+  {
+    "name": "httpCode",
+    "description": "Retrieves a status code from a request.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Variable",
+          "description": "Variable name to get the status code from.",
+          "required": true,
+          "resolver": "String",
+          "compile": false,
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "httpDelete",
+    "description": "Performs an http DELETE request to given url.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "URL",
+          "description": "URL to request to.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Variable",
+          "description": "Variable name to load the results to.",
+          "required": true,
+          "resolver": "String",
+          "compile": false,
+          "value": "none"
+        },
+        {
+          "name": "Response Type",
+          "description": "The type of response API can return. (json|text|blob|arrayBuffer)",
+          "required": false,
+          "resolver": "String",
+          "value": "json"
+        },
+        {
+          "name": "Headers",
+          "description": "Headers to include to the request data.",
+          "required": false,
+          "resolver": "String",
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "httpGet",
+    "description": "Performs an http GET request to given url.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "URL",
+          "description": "URL to request to.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Variable",
+          "description": "Variable name to load the results to.",
+          "required": true,
+          "resolver": "String",
+          "compile": false,
+          "value": "none"
+        },
+        {
+          "name": "Response Type",
+          "description": "The type of response API can return. (json|text|blob|arrayBuffer)",
+          "required": false,
+          "resolver": "String",
+          "value": "json"
+        },
+        {
+          "name": "Headers",
+          "description": "Headers to include to the request data.",
+          "required": false,
+          "resolver": "String",
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "httpPatch",
+    "description": "Performs an http PATCH request to given url.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "URL",
+          "description": "URL to request to.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Data",
+          "description": "Data to send as body.",
+          "required": true,
+          "resolver": "Object",
+          "value": "none"
+        },
+        {
+          "name": "Variable",
+          "description": "Variable name to load the results to.",
+          "required": true,
+          "resolver": "String",
+          "compile": false,
+          "value": "none"
+        },
+        {
+          "name": "Response Type",
+          "description": "The type of response API can return. (json|text|blob|arrayBuffer)",
+          "required": false,
+          "resolver": "String",
+          "value": "json"
+        },
+        {
+          "name": "Headers",
+          "description": "Headers to include to the request data.",
+          "required": false,
+          "resolver": "String",
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "httpPost",
+    "description": "Performs an http POST request to given url.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "URL",
+          "description": "URL to request to.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "data",
+          "description": "Data to send as body.",
+          "required": true,
+          "resolver": "Object",
+          "value": "none"
+        },
+        {
+          "name": "Variable",
+          "description": "Variable name to load the results to.",
+          "required": true,
+          "resolver": "String",
+          "compile": false,
+          "value": "none"
+        },
+        {
+          "name": "Response Type",
+          "description": "The type of response API can return. (json|text|blob|arrayBuffer)",
+          "required": false,
+          "resolver": "String",
+          "value": "json"
+        },
+        {
+          "name": "Headers",
+          "description": "Headers to include to the request data.",
+          "required": false,
+          "resolver": "String",
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "httpPut",
+    "description": "Performs an http PUT request to given url.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "URL",
+          "description": "URL to request to.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "data",
+          "description": "Data to send as body.",
+          "required": true,
+          "resolver": "Object",
+          "value": "none"
+        },
+        {
+          "name": "Variable",
+          "description": "Variable name to load the results to.",
+          "required": true,
+          "resolver": "String",
+          "compile": false,
+          "value": "none"
+        },
+        {
+          "name": "Response Type",
+          "description": "The type of response API can return. (json|text|blob|arrayBuffer)",
+          "required": false,
+          "resolver": "String",
+          "value": "json"
+        },
+        {
+          "name": "Headers",
+          "description": "Headers to include to the request data.",
+          "required": false,
+          "resolver": "String",
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "httpResult",
+    "description": "Retrieves a property value from a request.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Variable",
+          "description": "Variable name to get the property value from.",
+          "required": true,
+          "resolver": "String",
+          "compile": false,
+          "value": "none"
+        },
+        {
+          "name": "Path",
+          "description": "Property path to retrieve.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "hyperlink",
+    "description": "Creates a HyperLink block.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Text",
+          "description": "The text for the block.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "URL",
+          "description": "The URL for the block.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "if",
+    "description": "Execute a code field if the condition is met.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Condition",
+          "description": "The condition to evaluate.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Then code",
+          "description": "The code to execute if the condition is true.",
+          "required": true,
+          "resolver": "String",
+          "compile": false,
+          "value": "none"
+        },
+        {
+          "name": "Else code",
+          "description": "The code to execute if the condition is false.",
+          "required": false,
+          "resolver": "String",
+          "compile": false,
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "ignore",
+    "description": "Code inside is ignore.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Code",
+          "description": "The condition to evaluate.",
+          "required": true,
+          "resolver": "String",
+          "value": "none",
+          "compile": false
+        }
+      ]
+    }
+  },
+  {
+    "name": "interaction",
+    "description": "Retrieves an option from an interaction.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Option Type",
+          "description": "Option type to be retrieved. (between \"customID\" | \"focusedOption\" | \"menuOption\" | \"modalComponent\" | \"slashOption\" | \"subCommand\" | \"subCommandGroup\")",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Extra Options",
+          "description": "Extra options to get an interaction value.",
+          "required": false,
+          "resolver": "String",
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "interactionCommandName",
+    "description": "Returns the name of the chat input command.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": []
+    }
+  },
+  {
+    "name": "interactionCustomID",
+    "description": "Returns the customID of the interaction.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": []
+    }
+  },
+  {
+    "name": "interactionDeferReply",
+    "description": "Defers an interaction.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Ephemeral",
+          "description": "Send the defer reply as ephemeral.",
+          "required": false,
+          "compile": true,
+          "resolver": "Boolean",
+          "value": "false"
+        },
+        {
+          "name": "Fetch Reply",
+          "description": "Whether fetch message reply.",
+          "required": false,
+          "resolver": "Boolean",
+          "value": "true"
+        },
+        {
+          "name": "Return ID",
+          "description": "Returns the interaction reply ID.",
+          "required": false,
+          "compile": true,
+          "resolver": "Boolean",
+          "value": "false"
+        }
+      ]
+    }
+  },
+  {
+    "name": "interactionEditReply",
+    "description": "Edits a defer reply.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Message",
+          "description": "The message payload.",
+          "required": true,
+          "compile": false,
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "interactionFollowUp",
+    "description": "Follow up an interaction reply.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Message",
+          "description": "The message to be sent.",
+          "required": true,
+          "compile": false,
+          "value": "none"
+        },
+        {
+          "name": "Ephemeral",
+          "description": "Set the reply as ephemeral or not.",
+          "required": false,
+          "resolver": "Boolean",
+          "value": "none"
+        },
+        {
+          "name": "Fetch Reply",
+          "description": "Whether fetch message reply.",
+          "required": false,
+          "resolver": "Boolean",
+          "value": "true"
+        },
+        {
+          "name": "Return ID",
+          "description": "Returns the interaction reply ID.",
+          "required": false,
+          "resolver": "Boolean",
+          "value": "false"
+        }
+      ]
+    }
+  },
+  {
+    "name": "interactionIsDeferred",
+    "description": "Check whether interaction is deferred or not.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": []
+    }
+  },
+  {
+    "name": "interactionIsRepliable",
+    "description": "Check whether interaction is repliable or not.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": []
+    }
+  },
+  {
+    "name": "interactionIsReplied",
+    "description": "Check whether interaction is replied or not.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": []
+    }
+  },
+  {
+    "name": "interactionReply",
+    "description": "Replies an interaction.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Message",
+          "description": "The message to be sent.",
+          "required": true,
+          "compile": false,
+          "value": "none"
+        },
+        {
+          "name": "Ephemeral",
+          "description": "Set the reply as ephemeral or not.",
+          "required": false,
+          "resolver": "Boolean",
+          "value": "none"
+        },
+        {
+          "name": "Fetch Reply",
+          "description": "Whether fetch message reply.",
+          "required": false,
+          "resolver": "Boolean",
+          "value": "true"
+        },
+        {
+          "name": "Return ID",
+          "description": "Returns the interaction reply ID.",
+          "required": false,
+          "compile": true,
+          "resolver": "Boolean",
+          "value": "false"
+        }
+      ]
+    }
+  },
+  {
+    "name": "interactionUpdate",
+    "description": "Updates an interaction.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Message",
+          "description": "The message to be sent.",
+          "required": true,
+          "compile": false,
+          "value": "none"
+        },
+        {
+          "name": "Fetch Reply",
+          "description": "Whether fetch message reply.",
+          "required": false,
+          "resolver": "Boolean",
+          "value": "true"
+        },
+        {
+          "name": "Return ID",
+          "description": "Returns the interaction reply ID.",
+          "required": false,
+          "compile": true,
+          "resolver": "Boolean",
+          "value": "false"
+        }
+      ]
+    }
+  },
+  {
+    "name": "isAnySelectMenu",
+    "description": "Check whether current interaction belongs to a select menu or not.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": []
+    }
+  },
+  {
+    "name": "isButton",
+    "description": "Check whether current interaction belongs to a button or not.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": []
+    }
+  },
+  {
+    "name": "isCommand",
+    "description": "Check whether current interaction belongs to a slash command or not.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": []
+    }
+  },
+  {
+    "name": "isModal",
+    "description": "Check whether current interaction belongs to a modal or not.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": []
+    }
+  },
+  {
+    "name": "jsEval",
+    "description": "Evaluates JavaScript code.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Return results",
+          "description": "Whether return evaluation results.",
+          "required": true,
+          "resolver": "Boolean",
+          "value": "none"
+        },
+        {
+          "name": "Code",
+          "description": "JavaScript code.",
+          "required": true,
+          "compile": false,
+          "resolver": "String",
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "kick",
+    "description": "Kicks an user from the provided guild.",
+    "extraOptions": {
+      "builders": true,
+      "injection": false,
+      "params": [
+        {
+          "name": "User ID",
+          "description": "The user ID to be kicked.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Guild ID",
+          "description": "The Guild ID where the user will be kicked from.",
+          "required": false,
+          "resolver": "String",
+          "value": "d.ctx?.guild?.id"
+        },
+        {
+          "name": "Reason",
+          "description": "Kick reason.",
+          "required": false,
+          "compile": false,
+          "resolver": "String",
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "lowerCase",
+    "description": "Converts a string to lowercase.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Text",
+          "description": "The text to convert.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "memberFetch",
+    "description": "Fetch a guild member property.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Property",
+          "description": "Member property name.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Member ID",
+          "description": "Guild member ID to fetch the property from.",
+          "required": true,
+          "resolver": "String",
+          "value": "d.ctx?.author?.id"
+        },
+        {
+          "name": "Guild ID",
+          "description": "The ID of the guild where member should be retrieved.",
+          "required": false,
+          "resolver": "String",
+          "value": "d.ctx?.guild?.id"
+        }
+      ]
+    }
+  },
+  {
+    "name": "memberGet",
+    "description": "Get a guild member property.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Property",
+          "description": "Member property name.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Member ID",
+          "description": "Guild member ID to get the property from.",
+          "required": true,
+          "resolver": "String",
+          "value": "d.ctx?.author?.id"
+        },
+        {
+          "name": "Guild ID",
+          "description": "The ID of the guild where member should be retrieved.",
+          "required": false,
+          "resolver": "String",
+          "value": "d.ctx?.guild?.id"
+        }
+      ]
+    }
+  },
+  {
+    "name": "mkdir",
+    "description": "Makes a directory.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Directory",
+          "description": "The directory to be created.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "newChannel",
+    "description": "Get information from a new channel.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Property",
+          "description": "The property name.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "newMember",
+    "description": "Get information from a new member.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Property",
+          "description": "The property name.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "newMessage",
+    "description": "Get information from a new message.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Property",
+          "description": "The property name.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "newRole",
+    "description": "Get information from an old role.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Property",
+          "description": "The property name.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "newSticker",
+    "description": "Get information from a new sticker.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Property",
+          "description": "The property name.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "newThread",
+    "description": "Get information from a new thread.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Property",
+          "description": "The property name.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "objectCreate",
+    "description": "Creates an object.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Name",
+          "description": "The name for this object.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Body",
+          "description": "Object body to be parsed.",
+          "required": true,
+          "resolver": "Object",
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "objectGet",
+    "description": "Get a property value from an object.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Name",
+          "description": "The name for this object.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Path",
+          "description": "Property path to retrieve.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "objectIn",
+    "description": "Check if the provided key exists in the object.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Name",
+          "description": "The name for this object.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Key",
+          "description": "The key name to be checked.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "objectKeys",
+    "description": "Joins all keys from an object.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Name",
+          "description": "The name for this object.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Separator",
+          "description": "The key separator to join the elements.",
+          "required": false,
+          "resolver": "String",
+          "value": ","
+        }
+      ]
+    }
+  },
+  {
+    "name": "objectMap",
+    "description": "Execute a code for each key/value pair.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Name",
+          "description": "The name for this object.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Variable",
+          "description": "Variable to load the results to.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Code",
+          "description": "Code to be applied to each key/value pair.",
+          "required": true,
+          "compile": false,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Separator",
+          "description": "Result separator.",
+          "required": false,
+          "resolver": "String",
+          "value": ","
+        }
+      ]
+    }
+  },
+  {
+    "name": "objectSet",
+    "description": "Set a property value in an object.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Name",
+          "description": "The name for this object.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Path",
+          "description": "Property path to set the value.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Value",
+          "description": "The property value.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "objectUnset",
+    "description": "Removes an object property.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Name",
+          "description": "The name for this object.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Separator",
+          "description": "The value separator to join the elements.",
+          "required": false,
+          "resolver": "String",
+          "value": ","
+        }
+      ]
+    }
+  },
+  {
+    "name": "objectValues",
+    "description": "Joins all valus from an object.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Name",
+          "description": "The name for this object.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Separator",
+          "description": "The value separator to join the elements.",
+          "required": false,
+          "resolver": "String",
+          "value": ","
+        }
+      ]
+    }
+  },
+  {
+    "name": "oldChannel",
+    "description": "Get information from an old channel.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Property",
+          "description": "The property name.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "oldMember",
+    "description": "Get information from an old member.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Property",
+          "description": "The property name.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "oldMessage",
+    "description": "Get information from a new message.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Property",
+          "description": "The property name.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "oldRole",
+    "description": "Get information from an old role.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Property",
+          "description": "The property name.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "oldSticker",
+    "description": "Get information from an old sticker.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Property",
+          "description": "The property name.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "oldThread",
+    "description": "Get information from an old thread.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Property",
+          "description": "The property name.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "onlyIf",
+    "description": "Execute a code if the condition is met.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Condition",
+          "description": "Condition to be solved.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Error Code",
+          "description": "Code to execute if the condition is not met.",
+          "required": false,
+          "resolver": "String",
+          "compile": false,
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "print",
+    "description": "Prints a text into the console.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Texts",
+          "description": "The text to print into the console.",
+          "required": true,
+          "resolver": "String",
+          "compile": true,
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "readdir",
+    "description": "Reads a directory and load the result into a environment variable.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Directory",
+          "description": "The directory to be readed.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Variable",
+          "description": "Environment variable name to load the code results to, if any.",
+          "required": true,
+          "compile": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Separator",
+          "description": "Result separator.",
+          "required": false,
+          "resolver": "String",
+          "value": ","
+        }
+      ]
+    }
+  },
+  {
+    "name": "readFile",
+    "description": "Reads a file and load the result into a environment variable.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Directory",
+          "description": "The directory to be readed.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Variable",
+          "description": "Environment variable name to load the code results to, if any.",
+          "required": true,
+          "compile": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Encoding",
+          "description": "Type of encoding to read the file.",
+          "required": false,
+          "resolver": "String",
+          "value": "utf-8"
+        }
+      ]
+    }
+  },
+  {
+    "name": "removeRole",
+    "description": "Removes a role from a guild member.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Role ID",
+          "description": "The ID of the role to be removed.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Member ID",
+          "description": "The ID of the member to remove the role from.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Guild ID",
+          "description": "The ID of guild were the role belongs to.",
+          "required": false,
+          "resolver": "String",
+          "value": "d.ctx?.guild?.id"
+        }
+      ]
+    }
+  },
+  {
+    "name": "renameFile",
+    "description": "Renames a file.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Old",
+          "description": "The old file name.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "New",
+          "description": "The new file name.",
+          "required": true,
+          "compile": true,
+          "resolver": "String",
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "roleCreate",
+    "description": "Creates a role in a guild.",
+    "extraOptions": {
+      "builders": true,
+      "injection": false,
+      "params": [
+        {
+          "name": "Name",
+          "description": "The name for the role.",
+          "required": true,
+          "resolver": "String",
+          "compile": true,
+          "value": "none"
+        },
+        {
+          "name": "Options",
+          "description": "Builder functions to set role properties.",
+          "required": false,
+          "resolver": "String",
+          "compile": false,
+          "value": "none"
+        },
+        {
+          "name": "Guild ID",
+          "description": "The ID of the guild where role should be created.",
+          "required": false,
+          "resolver": "String",
+          "value": "d.ctx?.guild?.id"
+        },
+        {
+          "name": "Return ID",
+          "description": "Whether return role ID.",
+          "required": false,
+          "resolver": "Boolean",
+          "value": "false"
+        }
+      ]
+    }
+  },
+  {
+    "name": "roleDelete",
+    "description": "Deletes a guild role.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Role ID",
+          "description": "Guild role ID to be deleted.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Guild ID",
+          "description": "The ID of the guild where role will be deleted from.",
+          "required": false,
+          "resolver": "String",
+          "value": "d.ctx?.guild?.id"
+        },
+        {
+          "name": "Reason",
+          "description": "Reason for role deletion.",
+          "required": false,
+          "resolver": "String",
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "roleFetch",
+    "description": "Fetch a guild role property.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Property",
+          "description": "Role property name.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Role ID",
+          "description": "Guild role ID to fetch the property from.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Guild ID",
+          "description": "The ID of the guild where role should be fetched.",
+          "required": false,
+          "resolver": "String",
+          "value": "d.ctx?.guild?.id"
+        }
+      ]
+    }
+  },
+  {
+    "name": "roleGet",
+    "description": "Get a guild role property.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Property",
+          "description": "Role property name.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Role ID",
+          "description": "Guild role ID to get the property from.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Guild ID",
+          "description": "The ID of the guild where role should be retrieved.",
+          "required": false,
+          "resolver": "String",
+          "value": "d.ctx?.guild?.id"
+        }
+      ]
+    }
+  },
+  {
+    "name": "roleUpdate",
+    "description": "Updates a role in a guild.",
+    "extraOptions": {
+      "builders": true,
+      "injection": false,
+      "params": [
+        {
+          "name": "Role ID",
+          "description": "Guild role ID to be updated.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Options",
+          "description": "Builder functions to set role properties.",
+          "required": false,
+          "resolver": "String",
+          "compile": false,
+          "value": "none"
+        },
+        {
+          "name": "Guild ID",
+          "description": "The ID of the guild where role will be updated.",
+          "required": false,
+          "resolver": "String",
+          "value": "d.ctx?.guild?.id"
+        }
+      ]
+    }
+  },
+  {
+    "name": "sendMessage",
+    "description": "Sends a message to the provided channel.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Payload",
+          "description": "Message payload.",
+          "required": true,
+          "compile": false,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Channel ID",
+          "description": "The ID of the channel were the message will be sent.",
+          "required": false,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Guild ID",
+          "description": "The ID of the guild were the channel is located.",
+          "required": false,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Return ID",
+          "description": "Whether return the message ID.",
+          "required": false,
+          "resolver": "Boolean",
+          "value": "false"
+        }
+      ]
+    }
+  },
+  {
+    "name": "setInterval",
+    "description": "Executes a code after certain time.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Time",
+          "description": "The time to execute the code.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Code",
+          "description": "The code to be executed.",
+          "required": true,
+          "compile": false,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Variable",
+          "description": "Environment variable name to load the code results to, if any.",
+          "required": true,
+          "compile": true,
+          "resolver": "String",
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "setTimeout",
+    "description": "Executes a code when the timeout ends.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Duration",
+          "description": "The time to hold the code.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Code",
+          "description": "The code to be executed when the timeout ends.",
+          "required": true,
+          "compile": false,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Variable",
+          "description": "Environment variable name to load the code results to, if any.",
+          "required": true,
+          "compile": true,
+          "resolver": "String",
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "stop",
+    "description": "Stops the execution for the remaining code.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": []
+    }
+  },
+  {
+    "name": "stringEndsWith",
+    "description": "Check whether a string ends with some of the provided words.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Text",
+          "description": "The text to work with.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Values",
+          "description": "Words to be checked.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "stringIncludes",
+    "description": "Check whether a string includes some of the provided words.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Text",
+          "description": "The text to work with.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Values",
+          "description": "Words to be checked.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "stringReplace",
+    "description": "Replaces something in a string.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Text",
+          "description": "The text to work with.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Query",
+          "description": "The word to be replaced.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Replacer",
+          "description": "Word to replace the match.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Type",
+          "description": "Type of replace worker. (all|limited)",
+          "required": false,
+          "resolver": "String",
+          "value": "all"
+        },
+        {
+          "name": "Limit",
+          "description": "How many times the word should be replaced.",
+          "required": false,
+          "resolver": "Number",
+          "value": ""
+        }
+      ]
+    }
+  },
+  {
+    "name": "stringStartsWith",
+    "description": "Check whether a string starts with some of the provided words.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Text",
+          "description": "The text to work with.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Values",
+          "description": "Words to be checked.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "toFixed",
+    "description": "Fixes a number.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Number",
+          "description": "Number to be fixed.",
+          "required": true,
+          "resolver": "Number",
+          "value": "none"
+        },
+        {
+          "name": "Decimals",
+          "description": "Number of digits after the decimal point.",
+          "required": false,
+          "resolver": "Number",
+          "value": "2"
+        }
+      ]
+    }
+  },
+  {
+    "name": "try",
+    "description": "Allows you to handle and manage errors and exceptions in a code.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Code",
+          "description": "The code to try first.",
+          "required": true,
+          "resolver": "String",
+          "compile": false,
+          "value": "none"
+        },
+        {
+          "name": "Catch code",
+          "description": "The code to execute something goes wrong.",
+          "required": true,
+          "resolver": "String",
+          "compile": false,
+          "value": "none"
+        },
+        {
+          "name": "Finally code",
+          "description": "The code to execute if the condition is false.",
+          "required": false,
+          "resolver": "String",
+          "compile": false,
+          "value": "none"
+        },
+        {
+          "name": "Separator",
+          "description": "Code result separator.",
+          "required": false,
+          "resolver": "String",
+          "value": ","
+        }
+      ]
+    }
+  },
+  {
+    "name": "unlink",
+    "description": "Deletes a file.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Directory",
+          "description": "The directory to be deleted.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "upperCase",
+    "description": "Converts a string to uppercase.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Text",
+          "description": "The text to convert.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "userFetch",
+    "description": "Fetch an user property.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Property",
+          "description": "User property name.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "User ID",
+          "description": "User ID to fetch the property from.",
+          "required": true,
+          "resolver": "String",
+          "value": "d.ctx?.author?.id"
+        }
+      ]
+    }
+  },
+  {
+    "name": "userGet",
+    "description": "Get an user property.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Property",
+          "description": "User property name.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "User ID",
+          "description": "User ID to get the property from.",
+          "required": true,
+          "resolver": "String",
+          "value": "d.ctx?.author?.id"
+        }
+      ]
+    }
+  },
+  {
+    "name": "var",
+    "description": "Add a new variable into the environment data.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Name",
+          "description": "Variable name.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Value",
+          "description": "Variable value.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "varExists",
+    "description": "Check if the variable name exists in the environment data.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Name",
+          "description": "Variable name.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "version",
+    "description": "Returns the installed version of BDJS.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": []
+    }
+  },
+  {
+    "name": "writeFile",
+    "description": "Writes and replaces any content in a file.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Directory",
+          "description": "The file directory.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Content",
+          "description": "File content to replace with.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Encoding",
+          "description": "Type of encoding to write into the file.",
+          "required": false,
+          "resolver": "String",
+          "value": "utf-8"
+        }
+      ]
+    }
+  }
+]

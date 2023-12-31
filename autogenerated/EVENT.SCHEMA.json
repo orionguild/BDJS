@@ -1,0 +1,152 @@
+[
+  {
+    "name": "onChannelCreate",
+    "description": "Executed when a channel is created.",
+    "once": false
+  },
+  {
+    "name": "onChannelDelete",
+    "description": "Executed when a channel is deleted.",
+    "once": false
+  },
+  {
+    "name": "onChannelUpdate",
+    "description": "Executed when a channel is updated.",
+    "once": false
+  },
+  {
+    "name": "onError",
+    "description": "Executed when an error is emitted.",
+    "once": false
+  },
+  {
+    "name": "onGuildBanAdd",
+    "description": "Executed when a guild ban is created.",
+    "once": false
+  },
+  {
+    "name": "onGuildBanRemove",
+    "description": "Executed when a guild ban is removed.",
+    "once": false
+  },
+  {
+    "name": "onGuildCreate",
+    "description": "Executed when bot joins a guild.",
+    "once": false
+  },
+  {
+    "name": "onGuildDelete",
+    "description": "Executed when bot leaves a guild.",
+    "once": false
+  },
+  {
+    "name": "onGuildMemberAdd",
+    "description": "Executed when a new member joins a guild.",
+    "once": false
+  },
+  {
+    "name": "onGuildMemberRemove",
+    "description": "Executed when a new member joins a guild.",
+    "once": false
+  },
+  {
+    "name": "onGuildMemberUpdate",
+    "description": "Executed when a guild member is updated.",
+    "once": false
+  },
+  {
+    "name": "onInteractionCreate",
+    "description": "Executed when an interaction is created.",
+    "once": false
+  },
+  {
+    "name": "onInterval",
+    "description": "Executed when an interval is emitted.",
+    "once": false
+  },
+  {
+    "name": "onMessageCreate",
+    "description": "Executed when a message is created.",
+    "once": false
+  },
+  {
+    "name": "onMessageDelete",
+    "description": "Executed when a message is deleted.",
+    "once": false
+  },
+  {
+    "name": "onMessageReactionAdd",
+    "description": "Executed when a message reaction is added.",
+    "once": false
+  },
+  {
+    "name": "onMessageReactionRemove",
+    "description": "Executed when a message reaction is removed.",
+    "once": false
+  },
+  {
+    "name": "onGuildMemberUpdate",
+    "description": "Executed when a guild member is updated.",
+    "once": false
+  },
+  {
+    "name": "onReady",
+    "description": "Executed when client user is ready.",
+    "once": true
+  },
+  {
+    "name": "onRoleCreate",
+    "description": "Executed when a role is created.",
+    "once": false
+  },
+  {
+    "name": "onRoleDelete",
+    "description": "Executed when a role is deleted.",
+    "once": false
+  },
+  {
+    "name": "onRoleDelete",
+    "description": "Executed when a role is deleted.",
+    "once": false
+  },
+  {
+    "name": "onStickerCreate",
+    "description": "Executed when an sticker is created.",
+    "once": false
+  },
+  {
+    "name": "onStickerDelete",
+    "description": "Executed when an sticker is deleted.",
+    "once": false
+  },
+  {
+    "name": "onStickerUpdate",
+    "description": "Executed when an sticker is update.",
+    "once": false
+  },
+  {
+    "name": "onThreadCreate",
+    "description": "Executed when a thread is created.",
+    "once": false
+  },
+  {
+    "name": "onThreadDelete",
+    "description": "Executed when a thread is deleted.",
+    "once": false
+  },
+  {
+    "name": "onThreadUpdate",
+    "description": "Executed when a thread is deleted.",
+    "once": false
+  },
+  {
+    "name": "onTimeout",
+    "description": "Executed when a timeout is emitted.",
+    "once": false
+  },
+  {
+    "name": "onTypingStart",
+    "description": "Executed when someone starts typing.",
+    "once": false
+  }
+]

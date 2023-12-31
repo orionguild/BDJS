@@ -53,12 +53,17 @@ export declare class Generators {
      */
     static documentFunctions(input: string, output: string): Promise<void>;
     /**
+     * Generates a JSON file including all functions.
+     * @param output - JSON file output directory.
+     */
+    static getFunctionSchema(accumulated: FunctionInfo[], output: string): Promise<void>;
+    /**
      * Generates the documentation sidebar.
      * @param accumulated - Array of loaded functions.
      * @param output - Output directory.
      * @param providing_cwd - Whether output includes a custom cwd.
      */
-    static generateSideBar(accumulated: FunctionInfo[], output: string): Promise<void>;
+    static getSideBar(accumulated: FunctionInfo[], output: string): Promise<void>;
     /**
      * Generates a markdown file including all supported command types as table.
      * @param output - Markdown file output directory.
@@ -69,5 +74,10 @@ export declare class Generators {
      * @param output - Markdown file output directory.
      */
     static getEventTable(output: string): Promise<void>;
+    /**
+     * Generates a JSON file including all functions.
+     * @param output - JSON file output directory.
+     */
+    static getEventSchema(output: string): Promise<void>;
 }
 export {};

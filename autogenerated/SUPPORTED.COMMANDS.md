@@ -35,6 +35,5 @@
 | threadCreate                  |
 | threadDelete                  |
 | threadUpdate                  |
-| unknown                       |
 | interval                      |
 | timeout                       |
