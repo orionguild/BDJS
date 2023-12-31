@@ -184,7 +184,7 @@ export class Generators {
      */
 
     static async getCommandTypeTable(output: string) {
-        const types = new CommandManager().types
+        const types = new CommandManager().types.filter(x => x !== 'unknown')
 
         const table = new AsciiTable3()
         .setStyle('github-markdown')
