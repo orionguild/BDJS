@@ -1,4 +1,4 @@
-import { ChatInputCommandInteraction, InteractionEditReplyOptions, InteractionUpdateOptions, InteractionReplyOptions, Guild, GuildMember, MessageComponentInteraction, MessageEditOptions, Message, MessagePayload, MessageCreateOptions, User, InteractionResponse, GuildTextBasedChannel, Interaction, PartialGuildMember, TextBasedChannel, APIInteractionGuildMember, PartialUser } from 'discord.js';
+import { ChatInputCommandInteraction, InteractionEditReplyOptions, InteractionUpdateOptions, InteractionReplyOptions, Guild, GuildMember, MessageComponentInteraction, MessageEditOptions, Message, MessagePayload, MessageCreateOptions, User, InteractionResponse, GuildTextBasedChannel, Interaction, PartialGuildMember, TextBasedChannel, APIInteractionGuildMember, PartialUser, NonThreadGuildBasedChannel } from 'discord.js';
 import { Bot } from './Bot';
 /**
  * Get the correct message payload for the given context.
@@ -13,7 +13,7 @@ type GetEditPayload<T> = T extends Message ? MessageEditOptions : T extends Chat
 interface ContextData<T extends unknown = unknown> {
     guild?: Guild | null;
     message?: Message | null;
-    channel?: TextBasedChannel | GuildTextBasedChannel | null;
+    channel?: TextBasedChannel | GuildTextBasedChannel | NonThreadGuildBasedChannel | null;
     author?: PartialUser | User | null;
     member?: APIInteractionGuildMember | GuildMember | PartialGuildMember | null | undefined;
     interaction?: Interaction;
@@ -28,7 +28,7 @@ export declare class Context<T extends unknown = unknown> {
     raw: T;
     guild: Guild | null;
     message: Message | null;
-    channel: TextBasedChannel | GuildTextBasedChannel | null;
+    channel: TextBasedChannel | GuildTextBasedChannel | NonThreadGuildBasedChannel | null;
     author: PartialUser | User | null;
     member: APIInteractionGuildMember | GuildMember | PartialGuildMember | null | undefined;
     interaction: Interaction | null;

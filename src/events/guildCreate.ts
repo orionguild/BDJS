@@ -12,17 +12,16 @@ export default new BaseEvent<[Guild]>({
             raw: guild
         }, bot)
         const commands = Array.from(bot.commands.values()).filter(cmd => cmd.type === 'botJoin')
-            const data = new Data({
-                bot,
-                context,
-                commandType: 'memberJoin',
-                functions: bot.functions,
-                reader: bot.reader
-            })
-
-            for (const command of commands) {
-                data.command = command
-                await data.reader.compile(command.code, data)
-            }
+        const data = new Data({
+            bot,
+            context,
+            commandType: 'memberJoin',
+            functions: bot.functions,
+            reader: bot.reader
+        })
+        for (const command of commands) {
+            data.command = command
+            await data.reader.compile(command.code, data)
+        }
     }
 })

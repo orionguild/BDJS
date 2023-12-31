@@ -1,4 +1,4 @@
-import { BaseChannel, BaseInteraction, ChatInputCommandInteraction, CommandInteraction, InteractionEditReplyOptions, InteractionUpdateOptions, InteractionReplyOptions, Guild, GuildChannel, GuildMember, MessageComponentInteraction, MessageEditOptions, Message, MessagePayload, MessageCreateOptions, ModalSubmitInteraction, TextChannel, StageChannel, ThreadChannel, NewsChannel, User, InteractionResponse, Sticker, GuildTextBasedChannel, Interaction, PartialGuildMember, TextBasedChannel, APIInteractionGuildMember, PartialUser } from 'discord.js'
+import { BaseChannel, BaseInteraction, ChatInputCommandInteraction, CommandInteraction, InteractionEditReplyOptions, InteractionUpdateOptions, InteractionReplyOptions, Guild, GuildChannel, GuildMember, MessageComponentInteraction, MessageEditOptions, Message, MessagePayload, MessageCreateOptions, ModalSubmitInteraction, TextChannel, StageChannel, ThreadChannel, NewsChannel, User, InteractionResponse, Sticker, GuildTextBasedChannel, Interaction, PartialGuildMember, TextBasedChannel, APIInteractionGuildMember, PartialUser, NonThreadGuildBasedChannel } from 'discord.js'
 import { Bot } from './Bot'
 
 /**
@@ -28,7 +28,7 @@ function isValidInstance(data: TextChannel | ThreadChannel | StageChannel | News
 interface ContextData<T extends unknown = unknown> {
     guild?: Guild | null
     message?: Message | null
-    channel?: TextBasedChannel | GuildTextBasedChannel | null
+    channel?: TextBasedChannel | GuildTextBasedChannel | NonThreadGuildBasedChannel | null
     author?: PartialUser | User | null
     member?: APIInteractionGuildMember | GuildMember | PartialGuildMember | null | undefined,
     interaction?: Interaction,
@@ -43,7 +43,7 @@ export class Context<T extends unknown = unknown> {
     public raw: T
     public guild: Guild | null
     public message: Message | null
-    public channel: TextBasedChannel | GuildTextBasedChannel | null
+    public channel: TextBasedChannel | GuildTextBasedChannel | NonThreadGuildBasedChannel | null
     public author: PartialUser | User | null
     public member: APIInteractionGuildMember | GuildMember | PartialGuildMember | null | undefined
     public interaction: Interaction | null

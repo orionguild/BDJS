@@ -1,20 +1,21 @@
+import { NonThreadGuildBasedChannel } from 'discord.js'
 import { Context } from '../structures/Context'
 import { BaseEvent } from '../structures/Event'
 import { Data } from '../structures/Data'
-import { Guild } from 'discord.js'
 
-export default new BaseEvent<[Guild]>({
-    name: 'onGuildDelete',
-    description: 'Executed when bot leaves a guild.',
-    async listener(bot, guild) {
+export default new BaseEvent<[NonThreadGuildBasedChannel]>({
+    name: 'onChannelCreate',
+    description: 'Executed when a channel is created.',
+    async listener(bot, channel) {
         const context = new Context({
-            guild,
-            raw: guild
+            channel,
+            guild: channel.guild,
+            raw: channel
         }, bot)
-        const commands = Array.from(bot.commands.values()).filter(cmd => cmd.type === 'botLeave')
+        const commands = Array.from(bot.commands.values()).filter(cmd => cmd.type === 'channelCreate')
         const data = new Data({
             bot, context,
-            commandType: 'botLeave',
+            commandType: 'channelCreate',
             functions: bot.functions,
             reader: bot.reader
         })

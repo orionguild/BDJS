@@ -1,23 +1,21 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const Event_1 = require("../structures/Event");
 const Context_1 = require("../structures/Context");
+const Event_1 = require("../structures/Event");
 const Data_1 = require("../structures/Data");
 exports.default = new Event_1.BaseEvent({
-    name: 'onTypingStart',
-    description: 'Executed when someone starts typing.',
-    async listener(bot, typing) {
+    name: 'onChannelCreate',
+    description: 'Executed when a channel is created.',
+    async listener(bot, channel) {
         const context = new Context_1.Context({
-            author: typing.user,
-            channel: typing.channel,
-            guild: typing.inGuild() ? typing.guild : null,
-            raw: typing
+            channel,
+            guild: channel.guild,
+            raw: channel
         }, bot);
-        const commands = Array.from(bot.commands.values()).filter(cmd => cmd.type === 'typing');
+        const commands = Array.from(bot.commands.values()).filter(cmd => cmd.type === 'channelCreate');
         const data = new Data_1.Data({
             bot, context,
-            commandType: 'typing',
-            env: {},
+            commandType: 'channelCreate',
             functions: bot.functions,
             reader: bot.reader
         });

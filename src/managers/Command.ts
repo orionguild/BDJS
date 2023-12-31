@@ -229,6 +229,9 @@ export class CommandManager extends Map<string, CommandData> {
             'memberLeave',
             'botJoin',
             'botLeave',
+            'channelCreate',
+            'channelDelete',
+            'channelUpdate',
             'unknown',
             // BDJS Customs
             'interval',
