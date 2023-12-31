@@ -38,11 +38,9 @@ exports.default = new Function_1.BaseFunction({
         const guild = d.bot?.guilds.cache.get(guildID);
         if (!guild)
             throw new d.error(d, 'invalid', 'Guild', d.function?.name);
-        const channel = await d.util.getChannel(channelID, guild);
-        if (!channel && property === 'exists')
-            return false;
-        else if (!channel && property !== 'exists')
-            throw new d.error(d, 'invalid', 'Channel ID', d.function?.name);
+        const channel = (d.ctx?.channel ?? await d.util.getChannel(channelID, guild));
+        if (!channel)
+            throw new d.error(d, 'invalid', 'Channel', d.function?.name);
         const types = Object.keys(Properties_1.default.Channel);
         if (!types.includes(property.toLowerCase()))
             throw new d.error(d, 'invalid', 'Property', d.function?.name);
