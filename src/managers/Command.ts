@@ -250,6 +250,7 @@ export class CommandManager extends Map<string, CommandData> {
             'emojiDelete',
             'emojiUpdate',
             'presenceUpdate',
+            'userUpdate',
             // 'ratelimit',
             'unknown',
             // BDJS Customs

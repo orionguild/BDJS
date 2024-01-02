@@ -204,6 +204,7 @@ class CommandManager extends Map {
             'emojiDelete',
             'emojiUpdate',
             'presenceUpdate',
+            'userUpdate',
             // 'ratelimit',
             'unknown',
             // BDJS Customs
