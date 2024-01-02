@@ -1,9 +1,38 @@
-import { AnyThreadChannel, ChannelType, Guild, GuildEmoji, GuildMember, Message, PartialGuildMember, PartialMessage, Role, Sticker, TextChannel, User, VoiceChannel } from 'discord.js'
+import { Activity, AnyThreadChannel, ChannelType, Guild, GuildEmoji, GuildMember, Message, PartialGuildMember, PartialMessage, Role, Sticker, TextChannel, User, VoiceChannel } from 'discord.js'
 import { Bot } from '../structures/Bot'
 
 type Member = GuildMember | PartialGuildMember;
 
 export default {
+    Activity: {
+        createdtimestamp: {
+            description: 'The time this activity was created, in milliseconds.',
+            code: a => a.createdTimestamp
+        },
+        name: {
+            description: 'The activity\'s name.',
+            code: a => a.name
+        },
+        details: {
+            description: 'The activity details.',
+            code: a => a.details
+        },
+        state: {
+            description: 'The activity\'s state.',
+            code: a => a.state
+        },
+        type: {
+            description: 'The activity\'s type.',
+            code: a => a.type
+        },
+        url: {
+            description: 'The activity\'s URL.',
+            code: a => a.url
+        }
+    } as Record<string, {
+        description: string,
+        code: (a: Activity) => any
+    }>,
     Bot: {
         avatar: {
             description: 'Retrieves the avatar of the client.',

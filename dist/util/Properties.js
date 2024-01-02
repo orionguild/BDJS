@@ -2,6 +2,32 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const discord_js_1 = require("discord.js");
 exports.default = {
+    Activity: {
+        createdtimestamp: {
+            description: 'The time this activity was created, in milliseconds.',
+            code: a => a.createdTimestamp
+        },
+        name: {
+            description: 'The activity\'s name.',
+            code: a => a.name
+        },
+        details: {
+            description: 'The activity details.',
+            code: a => a.details
+        },
+        state: {
+            description: 'The activity\'s state.',
+            code: a => a.state
+        },
+        type: {
+            description: 'The activity\'s type.',
+            code: a => a.type
+        },
+        url: {
+            description: 'The activity\'s URL.',
+            code: a => a.url
+        }
+    },
     Bot: {
         avatar: {
             description: 'Retrieves the avatar of the client.',
