@@ -5,7 +5,7 @@ import { Data } from '../structures/Data'
 
 export default new BaseEvent<[AnyThreadChannel, AnyThreadChannel]>({
     name: 'onThreadUpdate',
-    description: 'Executed when a thread is deleted.',
+    description: 'Executed when a thread is updated.',
     async listener(bot, old, thread) {
         const context = new Context({
             guild: thread.guild,

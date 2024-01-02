@@ -158,6 +158,48 @@ exports.default = {
             code: c => c.isVoiceBased() ? c.videoQualityMode?.toString() : undefined
         }
     },
+    Emoji: {
+        authorid: {
+            description: 'The emoji author ID.',
+            code: e => e.author?.id
+        },
+        createdtimestamp: {
+            description: 'The time this emoji was created, in milliseconds.',
+            code: e => e.createdTimestamp
+        },
+        guildid: {
+            description: 'The emoji guild ID.',
+            code: e => e.guild.id
+        },
+        id: {
+            description: 'The ID for this emoji.',
+            code: e => e.id
+        },
+        isanimated: {
+            description: 'Whether this emoji is animated.',
+            code: e => e.animated
+        },
+        isavailable: {
+            description: 'Whether this emoji is available.',
+            code: e => e.available
+        },
+        isdeletable: {
+            description: 'Whether this emoji is deletable.',
+            code: e => e.deletable
+        },
+        ismanaged: {
+            description: 'Whether this emoji is managed.',
+            code: e => e.managed
+        },
+        name: {
+            description: 'The name of this emoji.',
+            code: e => e.name
+        },
+        url: {
+            description: 'The URL for this emoji.',
+            code: e => e.url
+        }
+    },
     Guild: {
         afkchannelid: {
             description: 'The AFK channel ID of this guild.',

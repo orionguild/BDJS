@@ -200,6 +200,9 @@ class CommandManager extends Map {
             'threadCreate',
             'threadDelete',
             'threadUpdate',
+            'emojiCreate',
+            'emojiDelete',
+            'emojiUpdate',
             // 'ratelimit',
             'unknown',
             // BDJS Customs

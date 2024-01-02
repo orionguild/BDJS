@@ -5,7 +5,7 @@ const Event_1 = require("../structures/Event");
 const Data_1 = require("../structures/Data");
 exports.default = new Event_1.BaseEvent({
     name: 'onThreadUpdate',
-    description: 'Executed when a thread is deleted.',
+    description: 'Executed when a thread is updated.',
     async listener(bot, old, thread) {
         const context = new Context_1.Context({
             guild: thread.guild,

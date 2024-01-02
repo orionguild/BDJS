@@ -246,6 +246,9 @@ export class CommandManager extends Map<string, CommandData> {
             'threadCreate',
             'threadDelete',
             'threadUpdate',
+            'emojiCreate',
+            'emojiDelete',
+            'emojiUpdate',
             // 'ratelimit',
             'unknown',
             // BDJS Customs

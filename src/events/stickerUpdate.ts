@@ -5,7 +5,7 @@ import { Sticker } from 'discord.js'
 
 export default new BaseEvent<[Sticker, Sticker]>({
     name: 'onStickerUpdate',
-    description: 'Executed when an sticker is update.',
+    description: 'Executed when an sticker is updated.',
     async listener(bot, old, sticker) {
         const context = new Context({
             author: sticker.user,

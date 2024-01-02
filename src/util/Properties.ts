@@ -1,4 +1,4 @@
-import { AnyThreadChannel, ChannelType, Guild, GuildMember, Message, PartialGuildMember, PartialMessage, Role, Sticker, TextChannel, User, VoiceChannel } from 'discord.js'
+import { AnyThreadChannel, ChannelType, Guild, GuildEmoji, GuildMember, Message, PartialGuildMember, PartialMessage, Role, Sticker, TextChannel, User, VoiceChannel } from 'discord.js'
 import { Bot } from '../structures/Bot'
 
 type Member = GuildMember | PartialGuildMember;
@@ -163,6 +163,51 @@ export default {
     } as Record<string, {
         description: string,
         code: (c: TextChannel | VoiceChannel) => any
+    }>,
+    Emoji: {
+        authorid: {
+            description: 'The emoji author ID.',
+            code: e => e.author?.id
+        },
+        createdtimestamp: {
+            description: 'The time this emoji was created, in milliseconds.',
+            code: e => e.createdTimestamp
+        },
+        guildid: {
+            description: 'The emoji guild ID.',
+            code: e => e.guild.id
+        },
+        id: {
+            description: 'The ID for this emoji.',
+            code: e => e.id
+        },
+        isanimated: {
+            description: 'Whether this emoji is animated.',
+            code: e => e.animated
+        },
+        isavailable: {
+            description: 'Whether this emoji is available.',
+            code: e => e.available
+        },
+        isdeletable: {
+            description: 'Whether this emoji is deletable.',
+            code: e => e.deletable
+        },
+        ismanaged: {
+            description: 'Whether this emoji is managed.',
+            code: e => e.managed
+        },
+        name: {
+            description: 'The name of this emoji.',
+            code: e => e.name
+        },
+        url: {
+            description: 'The URL for this emoji.',
+            code: e => e.url
+        }
+    } as Record<string, {
+        description: string,
+        code: (e: GuildEmoji) => any
     }>,
     Guild: {
         afkchannelid: {

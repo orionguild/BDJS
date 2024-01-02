@@ -4,22 +4,22 @@ const Context_1 = require("../structures/Context");
 const Event_1 = require("../structures/Event");
 const Data_1 = require("../structures/Data");
 exports.default = new Event_1.BaseEvent({
-    name: 'onStickerUpdate',
-    description: 'Executed when an sticker is updated.',
-    async listener(bot, old, sticker) {
+    name: 'onEmojiUpdate',
+    description: 'Executed when an emoji is updated.',
+    async listener(bot, old, emoji) {
         const context = new Context_1.Context({
-            author: sticker.user,
-            guild: sticker.guild,
-            raw: sticker
+            author: emoji.author,
+            guild: emoji.guild,
+            raw: emoji
         }, bot);
-        const commands = Array.from(bot.commands.values()).filter(cmd => cmd.type === 'stickerUpdate');
+        const commands = Array.from(bot.commands.values()).filter(cmd => cmd.type === 'emojiUpdate');
         const data = new Data_1.Data({
             bot, ctx: context,
             env: {
-                '__BDJS__OLD__STICKER__': old,
-                '__BDJS__NEW__STICKER__': sticker
+                '__BDJS__OLD__EMOJI__': old,
+                '__BDJS__NEW__EMOJI__': emoji,
             },
-            commandType: 'stickerUpdate',
+            commandType: 'emojiUpdate',
             functions: bot.functions,
             reader: bot.reader
         });
