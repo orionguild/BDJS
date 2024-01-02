@@ -37,51 +37,51 @@ class Util {
             }
         }
     }
-    static deepClone(input) {
+    /*static deepClone<T>(input: T): T {
         if (input === null || typeof input !== 'object') {
-            return input;
+            return input
         }
         if (Array.isArray(input)) {
-            const newArray = [];
+            const newArray = [] as any[]
             for (const item of input) {
-                newArray.push(Util.deepClone(item));
+                newArray.push(Util.deepClone(item))
             }
-            return newArray;
+            return newArray as T
         }
         if (input instanceof Date) {
-            return new Date(input.getTime());
+            return new Date(input.getTime()) as T
         }
         if (input instanceof RegExp) {
-            const flags = input.flags;
-            return new RegExp(input.source, flags);
+            const flags = (input as any).flags
+            return new RegExp(input.source, flags) as T
         }
         if (input instanceof Map) {
-            const newMap = new Map();
+            const newMap = new Map()
             for (const [key, value] of input) {
-                newMap.set(Util.deepClone(key), Util.deepClone(value));
+                newMap.set(Util.deepClone(key), Util.deepClone(value))
             }
-            return newMap;
+            return newMap as T
         }
         if (input instanceof Set) {
-            const newSet = new Set();
+            const newSet = new Set()
             for (const value of input) {
-                newSet.add(Util.deepClone(value));
+                newSet.add(Util.deepClone(value))
             }
-            return newSet;
+            return newSet as T
         }
         // Handle custom classes or objects
         if (typeof input === 'object') {
-            const newObject = {};
+            const newObject: Record<string, any> = {}
             for (const key in input) {
                 if (input.hasOwnProperty(key)) {
-                    newObject[key] = Util.deepClone(input[key]);
+                    newObject[key] = Util.deepClone(input[key])
                 }
             }
-            return newObject;
+            return newObject as T
         }
         // If the type is not handled, return the input as is
         return input;
-    }
+    }*/
     /**
      * Validates all provided permissions names.
      * @param permissions - Permission names.
@@ -97,6 +97,20 @@ class Util {
      */
     static async sleep(time) {
         return new Promise(res => setTimeout(res, time));
+    }
+    /**
+     * Get a guild automoderation rule.
+     * @param guild - Guild to get the rule from.
+     * @param query - Rule resolver.
+     */
+    static async getAutomodRule(guild, query) {
+        if (!query)
+            return null;
+        const someId = query.replace(/[^\d]/g, '');
+        let rule = someId ? guild.autoModerationRules.cache.get(someId) || (await guild.autoModerationRules.fetch(someId).catch(e => null)) : null;
+        if (!rule)
+            rule = guild.autoModerationRules.cache.find(c => c.name.includes(query)) || null;
+        return rule;
     }
     /**
      * Get a guild channel.

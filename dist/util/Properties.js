@@ -28,6 +28,36 @@ exports.default = {
             code: a => a.url
         }
     },
+    AutomodRule: {
+        actiontypes: {
+            description: 'Action types for this automoderation rule ID.',
+            code: a => a.actions.map(x => x.type).join(',')
+        },
+        creatorid: {
+            description: 'The ID of the user who created this automoderation rule.',
+            code: a => a.creatorId
+        },
+        guildid: {
+            description: 'The automoderation rule guild ID.',
+            code: a => a.guild.id
+        },
+        id: {
+            description: 'The automoderation rule ID.',
+            code: a => a.id
+        },
+        isenabled: {
+            description: 'Whether automoderation rule is enabled.',
+            code: a => a.enabled
+        },
+        name: {
+            description: 'The automoderation rule name.',
+            code: a => a.name
+        },
+        triggertype: {
+            description: 'The automoderation rule trigger type.',
+            code: a => a.triggerType
+        }
+    },
     Bot: {
         avatar: {
             description: 'Retrieves the avatar of the client.',

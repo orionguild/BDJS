@@ -1,10 +1,14 @@
-import { Activity, AnyThreadChannel, Guild, GuildEmoji, GuildMember, Message, PartialGuildMember, PartialMessage, Role, Sticker, TextChannel, User, VoiceChannel } from 'discord.js';
+import { Activity, AnyThreadChannel, AutoModerationRule, Guild, GuildEmoji, GuildMember, Message, PartialGuildMember, PartialMessage, Role, Sticker, TextChannel, User, VoiceChannel } from 'discord.js';
 import { Bot } from '../structures/Bot';
 type Member = GuildMember | PartialGuildMember;
 declare const _default: {
     Activity: Record<string, {
         description: string;
         code: (a: Activity) => any;
+    }>;
+    AutomodRule: Record<string, {
+        description: string;
+        code: (a: AutoModerationRule) => any;
     }>;
     Bot: Record<string, {
         description: string;

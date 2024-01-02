@@ -11,7 +11,6 @@ export declare class Util {
      * @param {string} text The string to parse.
      */
     static parse(text: string): undefined | null | number | BigInt | Object | string;
-    static deepClone<T>(input: T): T;
     /**
      * Validates all provided permissions names.
      * @param permissions - Permission names.
@@ -23,6 +22,12 @@ export declare class Util {
      * @param time - Time to sleep the code.
      */
     static sleep(time: number): Promise<unknown>;
+    /**
+     * Get a guild automoderation rule.
+     * @param guild - Guild to get the rule from.
+     * @param query - Rule resolver.
+     */
+    static getAutomodRule(guild: Guild, query: string): Promise<import("discord.js").AutoModerationRule | null>;
     /**
      * Get a guild channel.
      * @param {string} query - Channel resolver.

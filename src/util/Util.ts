@@ -36,7 +36,7 @@ export class Util {
         }
     }
 
-    static deepClone<T>(input: T): T {
+    /*static deepClone<T>(input: T): T {
         if (input === null || typeof input !== 'object') {
             return input
         }
@@ -80,7 +80,7 @@ export class Util {
         }
         // If the type is not handled, return the input as is
         return input;
-    }
+    }*/
 
     /**
      * Validates all provided permissions names.
@@ -99,7 +99,19 @@ export class Util {
     static async sleep(time: number) {
         return new Promise(res => setTimeout(res, time))
     }
-      
+
+    /**
+     * Get a guild automoderation rule.
+     * @param guild - Guild to get the rule from.
+     * @param query - Rule resolver.
+     */
+    static async getAutomodRule(guild: Guild, query: string) {
+        if (!query) return null
+        const someId = query.replace(/[^\d]/g, '')
+        let rule = someId ? guild.autoModerationRules.cache.get(someId) || (await guild.autoModerationRules.fetch(someId).catch(e => null)) : null
+        if (!rule) rule = guild.autoModerationRules.cache.find(c => c.name.includes(query)) || null
+        return rule
+    }
 
     /**
      * Get a guild channel.
