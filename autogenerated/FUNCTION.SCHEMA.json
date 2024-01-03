@@ -1866,6 +1866,22 @@
     }
   },
   {
+    "name": "isNumber",
+    "description": "Check whether content is number.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Number",
+          "description": "Number to be tested.",
+          "required": true,
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
     "name": "jsEval",
     "description": "Evaluates JavaScript code.",
     "extraOptions": {
@@ -3063,6 +3079,71 @@
     }
   },
   {
+    "name": "stringIndexOf",
+    "description": "Finds the index of the first character matched.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Text",
+          "description": "The text to work with.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Character",
+          "description": "Character to be found.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "stringLastIndexOf",
+    "description": "Finds the index of the last character matched.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Text",
+          "description": "The text to work with.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "Character",
+          "description": "Character to be found.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
+    "name": "stringLength",
+    "description": "Returns the length of a text.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Text",
+          "description": "The text to work with.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
     "name": "stringReplace",
     "description": "Replaces something in a string.",
     "extraOptions": {
@@ -3103,6 +3184,37 @@
           "required": false,
           "resolver": "Number",
           "value": ""
+        }
+      ]
+    }
+  },
+  {
+    "name": "stringSlice",
+    "description": "Slices a text.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Text",
+          "description": "The text to work with.",
+          "required": true,
+          "resolver": "String",
+          "value": "none"
+        },
+        {
+          "name": "From",
+          "description": "Index to start slicing the text.",
+          "required": true,
+          "resolver": "Number",
+          "value": "none"
+        },
+        {
+          "name": "To",
+          "description": "End index to slice the text.",
+          "required": false,
+          "resolver": "Number",
+          "value": "none"
         }
       ]
     }
