@@ -1,6 +1,6 @@
 {
   "name": "bdjs",
-  "version": "1.0.0-O",
+  "version": "1.0.0-P",
   "description": "A potent package for creating Discord bots.",
   "main": "./dist/index.js",
   "type": "commonjs",
