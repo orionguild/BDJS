@@ -1,7 +1,7 @@
 # $args
 Get context message arguments, if any.
 ## Usage
-> `$args[index;end index?]`
+> `$args[index;endIndex?]`
 ## Parameters
 |   Name    |     Description      |  Type  | Default value |
 |-----------|----------------------|--------|---------------|

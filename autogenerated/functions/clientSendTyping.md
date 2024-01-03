@@ -1,7 +1,7 @@
 # $clientSendTyping
 Shows the client as "typing" in the provided channel.
 ## Usage
-> `$clientSendTyping[channel id?]`
+> `$clientSendTyping[channelId?]`
 ## Parameters
 |    Name    |              Description              |  Type  | Default value |
 |------------|---------------------------------------|--------|---------------|

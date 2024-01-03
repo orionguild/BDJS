@@ -1,7 +1,7 @@
 # $deleteBan
 Deletes a ban for the provided user ID in a guild.
 ## Usage
-> `$deleteBan[user id;guild id?;reason?]`
+> `$deleteBan[userId;guildId?;reason?]`
 ## Parameters
 |   Name   |                   Description                    |  Type  |  Default value   |
 |----------|--------------------------------------------------|--------|------------------|

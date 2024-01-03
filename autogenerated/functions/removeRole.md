@@ -1,7 +1,7 @@
 # $removeRole
 Removes a role from a guild member.
 ## Usage
-> `$removeRole[role id;member id;guild id?]`
+> `$removeRole[roleId;memberId;guildId?]`
 ## Parameters
 |   Name    |                  Description                  |  Type  |  Default value   |
 |-----------|-----------------------------------------------|--------|------------------|

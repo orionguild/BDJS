@@ -1,7 +1,7 @@
 # $httpPost
 Performs an http POST request to given url.
 ## Usage
-> `$httpPost[url;data;variable;response type?;headers?]`
+> `$httpPost[url;data;variable;responseType?;headers?]`
 ## Parameters
 |     Name      |                            Description                            |  Type  | Default value |
 |---------------|-------------------------------------------------------------------|--------|---------------|

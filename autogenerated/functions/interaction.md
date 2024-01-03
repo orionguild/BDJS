@@ -1,7 +1,7 @@
 # $interaction
 Retrieves an option from an interaction.
 ## Usage
-> `$interaction[option type;extra options?]`
+> `$interaction[optionType;extraOptions?]`
 ## Parameters
 |     Name      |                                                                       Description                                                                        |  Type  | Default value |
 |---------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|--------|---------------|

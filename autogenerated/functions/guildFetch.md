@@ -1,7 +1,7 @@
 # $guildFetch
 Fetch a guild property.
 ## Usage
-> `$guildFetch[property;guild id?]`
+> `$guildFetch[property;guildId?]`
 ## Parameters
 |   Name   |             Description              |  Type  |  Default value   |
 |----------|--------------------------------------|--------|------------------|

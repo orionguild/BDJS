@@ -1,7 +1,7 @@
 # $memberGet
 Get a guild member property.
 ## Usage
-> `$memberGet[property;member id;guild id?]`
+> `$memberGet[property;memberId;guildId?]`
 ## Parameters
 |   Name    |                      Description                      |  Type  |   Default value   |
 |-----------|-------------------------------------------------------|--------|-------------------|

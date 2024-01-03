@@ -1,7 +1,7 @@
 # $editMessage
 Retrieves data from an embed message.
 ## Usage
-> `$editMessage[message;guild id?;channel id?;message id?]`
+> `$editMessage[message;guildId?;channelId?;messageId?]`
 ## Parameters
 |    Name    |           Description            |  Type  |   Default value    |
 |------------|----------------------------------|--------|--------------------|

@@ -1,7 +1,7 @@
 # $httpGet
 Performs an http GET request to given url.
 ## Usage
-> `$httpGet[url;variable;response type?;headers?]`
+> `$httpGet[url;variable;responseType?;headers?]`
 ## Parameters
 |     Name      |                            Description                            |  Type  | Default value |
 |---------------|-------------------------------------------------------------------|--------|---------------|

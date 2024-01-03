@@ -1,7 +1,7 @@
 # $httpDelete
 Performs an http DELETE request to given url.
 ## Usage
-> `$httpDelete[url;variable;response type?;headers?]`
+> `$httpDelete[url;variable;responseType?;headers?]`
 ## Parameters
 |     Name      |                            Description                            |  Type  | Default value |
 |---------------|-------------------------------------------------------------------|--------|---------------|

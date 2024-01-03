@@ -1,7 +1,7 @@
 # $hasPerm
 Check if the member has the provided permission.
 ## Usage
-> `$hasPerm[permission name;member id?;guild id?]`
+> `$hasPerm[permissionName;memberId?;guildId?]`
 ## Parameters
 |      Name       |                Description                |  Type  |   Default value   |
 |-----------------|-------------------------------------------|--------|-------------------|

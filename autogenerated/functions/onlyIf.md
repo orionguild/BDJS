@@ -1,7 +1,7 @@
 # $onlyIf
 Execute a code if the condition is met.
 ## Usage
-> `$onlyIf[condition;error code?]`
+> `$onlyIf[condition;errorCode?]`
 ## Parameters
 |    Name    |                 Description                  |  Type  | Default value |
 |------------|----------------------------------------------|--------|---------------|

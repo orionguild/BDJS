@@ -1,7 +1,7 @@
 # $createModal
 Creates a modal.
 ## Usage
-> `$createModal[title;custom id;components]`
+> `$createModal[title;customId;components]`
 ## Parameters
 |    Name    |                Description                |  Type  | Default value |
 |------------|-------------------------------------------|--------|---------------|

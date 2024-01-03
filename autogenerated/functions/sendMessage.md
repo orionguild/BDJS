@@ -1,7 +1,7 @@
 # $sendMessage
 Sends a message to the provided channel.
 ## Usage
-> `$sendMessage[payload;channel id?;guild id?;return id?]`
+> `$sendMessage[payload;channelId?;guildId?;returnId?]`
 ## Parameters
 |    Name    |                     Description                      |  Type   | Default value |
 |------------|------------------------------------------------------|---------|---------------|

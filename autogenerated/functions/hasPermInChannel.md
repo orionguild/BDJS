@@ -1,7 +1,7 @@
 # $hasPermInChannel
 Check if the member has the provided permission in channel.
 ## Usage
-> `$hasPermInChannel[permission name;member id?;channel id?;guild id?]`
+> `$hasPermInChannel[permissionName;memberId?;channelId?;guildId?]`
 ## Parameters
 |      Name       |                Description                |  Type  |   Default value    |
 |-----------------|-------------------------------------------|--------|--------------------|

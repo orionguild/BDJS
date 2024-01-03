@@ -1,7 +1,7 @@
 # $channelCreate
 Creates a channel in a guild.
 ## Usage
-> `$channelCreate[name;type?;guild id?;options?;return id?]`
+> `$channelCreate[name;type?;guildId?;options?;returnId?]`
 ## Parameters
 |   Name    |                     Description                      |  Type   |  Default value   |
 |-----------|------------------------------------------------------|---------|------------------|

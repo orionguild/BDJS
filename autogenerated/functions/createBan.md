@@ -1,7 +1,7 @@
 # $createBan
 Creates a ban for the provided user ID in a guild.
 ## Usage
-> `$createBan[user id;guild id?;options?]`
+> `$createBan[userId;guildId?;options?]`
 ## Parameters
 |   Name   |                   Description                    |  Type  |  Default value   |
 |----------|--------------------------------------------------|--------|------------------|

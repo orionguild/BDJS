@@ -1,7 +1,7 @@
 # $httpPatch
 Performs an http PATCH request to given url.
 ## Usage
-> `$httpPatch[url;data;variable;response type?;headers?]`
+> `$httpPatch[url;data;variable;responseType?;headers?]`
 ## Parameters
 |     Name      |                            Description                            |  Type  | Default value |
 |---------------|-------------------------------------------------------------------|--------|---------------|

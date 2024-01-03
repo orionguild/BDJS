@@ -1,7 +1,7 @@
 # $interactionFollowUp
 Follow up an interaction reply.
 ## Usage
-> `$interactionFollowUp[message;ephemeral?;fetch reply?;return id?]`
+> `$interactionFollowUp[message;ephemeral?;fetchReply?;returnId?]`
 ## Parameters
 |    Name     |            Description             |  Type   | Default value |
 |-------------|------------------------------------|---------|---------------|

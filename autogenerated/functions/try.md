@@ -1,7 +1,7 @@
 # $try
 Allows you to handle and manage errors and exceptions in a code.
 ## Usage
-> `$try[code;catch code;finally code?;separator?]`
+> `$try[code;catchCode;finallyCode?;separator?]`
 ## Parameters
 |     Name     |                  Description                   |  Type  | Default value |
 |--------------|------------------------------------------------|--------|---------------|

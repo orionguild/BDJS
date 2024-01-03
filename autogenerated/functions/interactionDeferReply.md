@@ -1,7 +1,7 @@
 # $interactionDeferReply
 Defers an interaction.
 ## Usage
-> `$interactionDeferReply[ephemeral?;fetch reply?;return id?]`
+> `$interactionDeferReply[ephemeral?;fetchReply?;returnId?]`
 ## Parameters
 |    Name     |            Description             |  Type   | Default value |
 |-------------|------------------------------------|---------|---------------|

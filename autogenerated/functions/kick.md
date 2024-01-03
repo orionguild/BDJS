@@ -1,7 +1,7 @@
 # $kick
 Kicks an user from the provided guild.
 ## Usage
-> `$kick[user id;guild id?;reason?]`
+> `$kick[userId;guildId?;reason?]`
 ## Parameters
 |   Name   |                   Description                    |  Type  |  Default value   |
 |----------|--------------------------------------------------|--------|------------------|

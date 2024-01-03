@@ -1,7 +1,7 @@
 # $userGet
 Get an user property.
 ## Usage
-> `$userGet[property;user id]`
+> `$userGet[property;userId]`
 ## Parameters
 |   Name   |            Description            |  Type  |   Default value   |
 |----------|-----------------------------------|--------|-------------------|

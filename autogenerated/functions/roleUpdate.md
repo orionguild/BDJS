@@ -1,7 +1,7 @@
 # $roleUpdate
 Updates a role in a guild.
 ## Usage
-> `$roleUpdate[role id;options?;guild id?]`
+> `$roleUpdate[roleId;options?;guildId?]`
 ## Parameters
 |   Name   |                   Description                   |  Type  |  Default value   |
 |----------|-------------------------------------------------|--------|------------------|

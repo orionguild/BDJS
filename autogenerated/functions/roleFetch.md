@@ -1,7 +1,7 @@
 # $roleFetch
 Fetch a guild role property.
 ## Usage
-> `$roleFetch[property;role id;guild id?]`
+> `$roleFetch[property;roleId;guildId?]`
 ## Parameters
 |   Name   |                    Description                    |  Type  |  Default value   |
 |----------|---------------------------------------------------|--------|------------------|

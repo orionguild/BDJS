@@ -1,7 +1,7 @@
 # $userFetch
 Fetch an user property.
 ## Usage
-> `$userFetch[property;user id]`
+> `$userFetch[property;userId]`
 ## Parameters
 |   Name   |             Description             |  Type  |   Default value   |
 |----------|-------------------------------------|--------|-------------------|

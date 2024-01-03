@@ -1,7 +1,7 @@
 # $hasRole
 Check if the provided member has a role.
 ## Usage
-> `$hasRole[role id;member id?;guild id?]`
+> `$hasRole[roleId;memberId?;guildId?]`
 ## Parameters
 |   Name    |              Description               |  Type  |   Default value   |
 |-----------|----------------------------------------|--------|-------------------|

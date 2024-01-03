@@ -1,5 +1,20 @@
 [
   {
+    "name": "onAutoModerationRuleCreate",
+    "description": "Executed when an auto moderation rule is created.",
+    "once": false
+  },
+  {
+    "name": "onAutoModerationRuleDelete",
+    "description": "Executed when an auto moderation rule is deleted.",
+    "once": false
+  },
+  {
+    "name": "onAutoModerationRuleUpdate",
+    "description": "Executed when an automoderation rule is updated.",
+    "once": false
+  },
+  {
     "name": "onChannelCreate",
     "description": "Executed when a channel is created.",
     "once": false
@@ -12,6 +27,21 @@
   {
     "name": "onChannelUpdate",
     "description": "Executed when a channel is updated.",
+    "once": false
+  },
+  {
+    "name": "onEmojiCreate",
+    "description": "Executed when an emoji is created.",
+    "once": false
+  },
+  {
+    "name": "onEmojiDelete",
+    "description": "Executed when an emoji is deleted.",
+    "once": false
+  },
+  {
+    "name": "onEmojiUpdate",
+    "description": "Executed when an emoji is updated.",
     "once": false
   },
   {
@@ -90,6 +120,11 @@
     "once": false
   },
   {
+    "name": "onPresenceUpdate",
+    "description": "Executed when a presence is updated.",
+    "once": false
+  },
+  {
     "name": "onReady",
     "description": "Executed when client user is ready.",
     "once": true
@@ -121,7 +156,7 @@
   },
   {
     "name": "onStickerUpdate",
-    "description": "Executed when an sticker is update.",
+    "description": "Executed when an sticker is updated.",
     "once": false
   },
   {
@@ -136,7 +171,7 @@
   },
   {
     "name": "onThreadUpdate",
-    "description": "Executed when a thread is deleted.",
+    "description": "Executed when a thread is updated.",
     "once": false
   },
   {
@@ -147,6 +182,11 @@
   {
     "name": "onTypingStart",
     "description": "Executed when someone starts typing.",
+    "once": false
+  },
+  {
+    "name": "onUserUpdate",
+    "description": "Executed when an user is updated.",
     "once": false
   }
 ]

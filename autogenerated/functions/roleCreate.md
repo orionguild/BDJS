@@ -1,7 +1,7 @@
 # $roleCreate
 Creates a role in a guild.
 ## Usage
-> `$roleCreate[name;options?;guild id?;return id?]`
+> `$roleCreate[name;options?;guildId?;returnId?]`
 ## Parameters
 |   Name    |                    Description                    |  Type   |  Default value   |
 |-----------|---------------------------------------------------|---------|------------------|

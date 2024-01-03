@@ -1,7 +1,7 @@
 # $assignRole
 Assigns a role to a guild member.
 ## Usage
-> `$assignRole[role id;member id;guild id?]`
+> `$assignRole[roleId;memberId;guildId?]`
 ## Parameters
 |   Name    |                 Description                 |  Type  |  Default value   |
 |-----------|---------------------------------------------|--------|------------------|

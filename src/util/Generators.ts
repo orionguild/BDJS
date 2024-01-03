@@ -4,6 +4,7 @@ import { CommandManager } from '../managers/Command'
 import { BaseEvent } from '../structures/Event'
 import { AsciiTable3 } from 'ascii-table3'
 import { BDJSLog } from './BDJSLog'
+import { Util } from './Util'
 import { join } from 'path'
 
 interface FunctionExtraOptions {
@@ -88,7 +89,7 @@ class FunctionInfo {
      * Get the function usage as string.
      */
     get usage() {
-        const args = (this.extraOptions.params.length ?? 0) > 0 ? this.extraOptions.params.map(x => x.required ? x.name.toLowerCase() : x.name.toLowerCase() + '?') : []
+        const args = (this.extraOptions.params.length ?? 0) > 0 ? this.extraOptions.params.map(x => x.required ? Util.camelCase(x.name.toLowerCase()) : Util.camelCase(x.name.toLowerCase() + '?')) : []
         return `$${this.name + (args.length > 0 ? '[' + args.join(';') + ']' : '')}`
     }
 }

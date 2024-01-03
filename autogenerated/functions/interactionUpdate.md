@@ -1,7 +1,7 @@
 # $interactionUpdate
 Updates an interaction.
 ## Usage
-> `$interactionUpdate[message;fetch reply?;return id?]`
+> `$interactionUpdate[message;fetchReply?;returnId?]`
 ## Parameters
 |    Name     |            Description            |  Type   | Default value |
 |-------------|-----------------------------------|---------|---------------|

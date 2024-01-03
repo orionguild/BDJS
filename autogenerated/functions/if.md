@@ -1,7 +1,7 @@
 # $if
 Execute a code field if the condition is met.
 ## Usage
-> `$if[condition;then code;else code?]`
+> `$if[condition;thenCode;elseCode?]`
 ## Parameters
 |   Name    |                  Description                   |  Type  | Default value |
 |-----------|------------------------------------------------|--------|---------------|

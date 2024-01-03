@@ -1,7 +1,7 @@
 # $getEmbedData
 Retrieves data from an embed message.
 ## Usage
-> `$getEmbedData[property;index?;message id?]`
+> `$getEmbedData[property;index?;messageId?]`
 ## Parameters
 |    Name    |           Description            |  Type  |   Default value    |
 |------------|----------------------------------|--------|--------------------|

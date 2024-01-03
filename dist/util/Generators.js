@@ -5,6 +5,7 @@ const promises_1 = require("fs/promises");
 const Command_1 = require("../managers/Command");
 const ascii_table3_1 = require("ascii-table3");
 const BDJSLog_1 = require("./BDJSLog");
+const Util_1 = require("./Util");
 const path_1 = require("path");
 /**
  * Represents a function documentation.
@@ -71,7 +72,7 @@ class FunctionInfo {
      * Get the function usage as string.
      */
     get usage() {
-        const args = (this.extraOptions.params.length ?? 0) > 0 ? this.extraOptions.params.map(x => x.required ? x.name.toLowerCase() : x.name.toLowerCase() + '?') : [];
+        const args = (this.extraOptions.params.length ?? 0) > 0 ? this.extraOptions.params.map(x => x.required ? Util_1.Util.camelCase(x.name.toLowerCase()) : Util_1.Util.camelCase(x.name.toLowerCase() + '?')) : [];
         return `$${this.name + (args.length > 0 ? '[' + args.join(';') + ']' : '')}`;
     }
 }

@@ -1,7 +1,7 @@
 # $jsEval
 Evaluates JavaScript code.
 ## Usage
-> `$jsEval[return results;code]`
+> `$jsEval[returnResults;code]`
 ## Parameters
 |      Name      |            Description             |  Type   | Default value |
 |----------------|------------------------------------|---------|---------------|

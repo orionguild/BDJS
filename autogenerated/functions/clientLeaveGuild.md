@@ -1,7 +1,7 @@
 # $clientLeaveGuild
 Client leaves the provided guild.
 ## Usage
-> `$clientLeaveGuild[guild id]`
+> `$clientLeaveGuild[guildId]`
 ## Parameters
 |   Name   |              Description              |  Type  | Default value |
 |----------|---------------------------------------|--------|---------------|

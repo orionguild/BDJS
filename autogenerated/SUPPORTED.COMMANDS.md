@@ -35,5 +35,13 @@
 | threadCreate                  |
 | threadDelete                  |
 | threadUpdate                  |
+| emojiCreate                   |
+| emojiDelete                   |
+| emojiUpdate                   |
+| presenceUpdate                |
+| userUpdate                    |
+| automodRuleCreate             |
+| automodRuleDelete             |
+| automodRuleUpdate             |
 | interval                      |
 | timeout                       |

@@ -1,7 +1,7 @@
 # $roleDelete
 Deletes a guild role.
 ## Usage
-> `$roleDelete[role id;guild id?;reason?]`
+> `$roleDelete[roleId;guildId?;reason?]`
 ## Parameters
 |   Name   |                     Description                      |  Type  |  Default value   |
 |----------|------------------------------------------------------|--------|------------------|

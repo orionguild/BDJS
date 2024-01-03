@@ -1,7 +1,7 @@
 # $addReactions
 Adds reactions to a message.
 ## Usage
-> `$addReactions[reactions;message id?;channel id?;guild id?]`
+> `$addReactions[reactions;messageId?;channelId?;guildId?]`
 ## Parameters
 |    Name    |                    Description                     |  Type  |   Default value    |
 |------------|----------------------------------------------------|--------|--------------------|

@@ -1,7 +1,7 @@
 # $httpPut
 Performs an http PUT request to given url.
 ## Usage
-> `$httpPut[url;data;variable;response type?;headers?]`
+> `$httpPut[url;data;variable;responseType?;headers?]`
 ## Parameters
 |     Name      |                            Description                            |  Type  | Default value |
 |---------------|-------------------------------------------------------------------|--------|---------------|

@@ -1,7 +1,7 @@
 # $channelGet
 Get a channel property.
 ## Usage
-> `$channelGet[property;channel id?;guild id?]`
+> `$channelGet[property;channelId?;guildId?]`
 ## Parameters
 |    Name    |             Description              |  Type  |   Default value    |
 |------------|--------------------------------------|--------|--------------------|

@@ -70,4 +70,9 @@ export declare class Util {
      * @returns {Promise<boolean>}
      */
     static hasDM(bot: Bot, user: string | User): Promise<boolean>;
+    /**
+     * Generates the "camelized version" of a text.
+     * @param text - The text to be camelized.
+     */
+    static camelCase(text: string): string;
 }

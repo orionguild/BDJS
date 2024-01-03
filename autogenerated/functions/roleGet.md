@@ -1,7 +1,7 @@
 # $roleGet
 Get a guild role property.
 ## Usage
-> `$roleGet[property;role id;guild id?]`
+> `$roleGet[property;roleId;guildId?]`
 ## Parameters
 |   Name   |                     Description                     |  Type  |  Default value   |
 |----------|-----------------------------------------------------|--------|------------------|

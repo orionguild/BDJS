@@ -198,5 +198,15 @@ class Util {
         const c = await u.send(' ').catch(err => err.code);
         return c === 50007 ? false : true;
     }
+    /**
+     * Generates the "camelized version" of a text.
+     * @param text - The text to be camelized.
+     */
+    static camelCase(text) {
+        return text.split(/ +/g)
+            .map((t, i) => i === 0
+            ? t.toLowerCase() : t[0].toUpperCase().concat(t.slice(1).toLowerCase()))
+            .join('');
+    }
 }
 exports.Util = Util;

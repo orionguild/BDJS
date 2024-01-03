@@ -1,7 +1,7 @@
 # $memberFetch
 Fetch a guild member property.
 ## Usage
-> `$memberFetch[property;member id;guild id?]`
+> `$memberFetch[property;memberId;guildId?]`
 ## Parameters
 |   Name    |                      Description                      |  Type  |   Default value   |
 |-----------|-------------------------------------------------------|--------|-------------------|

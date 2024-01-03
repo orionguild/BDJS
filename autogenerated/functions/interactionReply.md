@@ -1,7 +1,7 @@
 # $interactionReply
 Replies an interaction.
 ## Usage
-> `$interactionReply[message;ephemeral?;fetch reply?;return id?]`
+> `$interactionReply[message;ephemeral?;fetchReply?;returnId?]`
 ## Parameters
 |    Name     |            Description             |  Type   | Default value |
 |-------------|------------------------------------|---------|---------------|
