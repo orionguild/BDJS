@@ -29,9 +29,12 @@ class BDJSApplicationCommandManager {
                 continue;
             }
             const spec = require((0, path_1.join)(root, dir, file));
-            if (!Array.isArray(spec))
+            if (!Array.isArray(spec)) {
+                if (!('data' in spec))
+                    continue;
                 tslib_1.__classPrivateFieldGet(this, _BDJSApplicationCommandManager_commands, "f").set(spec.data.name, spec.data instanceof discord_js_1.SlashCommandBuilder || spec.data instanceof discord_js_1.ContextMenuCommandBuilder
                     ? spec.data.toJSON() : spec.data);
+            }
             else {
                 for (const cmd of spec) {
                     if (!('data' in cmd))

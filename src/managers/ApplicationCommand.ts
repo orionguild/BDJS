@@ -34,14 +34,16 @@ export class BDJSApplicationCommandManager {
             }
 
             const spec: ExtendedCommandData | ExtendedCommandData[] = require(join(root, dir, file))
-            if (!Array.isArray(spec)) this.#commands.set(
-                spec.data!.name,
-                spec.data instanceof SlashCommandBuilder || spec.data instanceof ContextMenuCommandBuilder
-                    ? spec.data!.toJSON() : spec.data!
-            )
-            else {
+            if (!Array.isArray(spec)) {
+                if (!('data' in spec)) continue;
+                this.#commands.set(
+                    spec.data!.name,
+                    spec.data instanceof SlashCommandBuilder || spec.data instanceof ContextMenuCommandBuilder
+                        ? spec.data!.toJSON() : spec.data!
+                )
+            } else {
                 for (const cmd of spec) {
-                    if (!('data' in cmd)) continue
+                    if (!('data' in cmd)) continue;
                     this.#commands.set(
                         cmd.data!.name,
                         cmd.data instanceof SlashCommandBuilder || cmd.data instanceof ContextMenuCommandBuilder
