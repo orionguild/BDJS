@@ -81,7 +81,7 @@ export class Reader {
     async compile(code: string, data: Data) {
         data.setEnvironmentVariable('__BDJS__PERFORMANCE__', performance.now())
 
-        const lines = code.split('\n').map(line => line.trim()).join('\n')
+        const lines = code.trim().split('\n').map(line => line.trim()).join('\n')
 
         let compiled: CompiledData = {
             functions: [],
