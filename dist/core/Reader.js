@@ -175,23 +175,12 @@ class Reader {
                 ].join('\n'));
             let fields = dfunc.fields.map(field => field.value), newFields = [];
             for (let idx = 0; idx < fields.length; idx++) {
-                if (spec.parameters?.[idx].rest === true) {
-                    for (const str of fields.slice(idx)) {
-                        const compile = typeof spec.parameters?.[idx] === 'undefined' ? true
-                            : 'compile' in spec.parameters[idx]
-                                ? spec.parameters[idx].compile === true : true;
-                        const parsed = compile ? (await data.reader.compile(str, data))?.code ?? '' : str;
-                        newFields.push(Reader.unescapeParam(parsed, spec.parameters?.[idx]));
-                    }
-                }
-                else {
-                    const field = fields[idx];
-                    const compile = typeof spec.parameters?.[idx] === 'undefined' ? true
-                        : 'compile' in spec.parameters[idx]
-                            ? spec.parameters[idx].compile === true : true;
-                    const parsed = compile ? (await data.reader.compile(field, data))?.code ?? '' : field;
-                    newFields.push(Reader.unescapeParam(parsed, spec.parameters?.[idx]));
-                }
+                const field = fields[idx];
+                const compile = typeof spec.parameters?.[idx] === 'undefined' ? true
+                    : 'compile' in spec.parameters[idx]
+                        ? spec.parameters[idx].compile === true : true;
+                const parsed = compile ? (await data.reader.compile(field, data))?.code ?? '' : field;
+                newFields.push(Reader.unescapeParam(parsed, spec.parameters?.[idx]));
             }
             const result = await spec.code(data, newFields).catch(e => {
                 if (data.bot?.extraOptions.events.includes('onError'))
