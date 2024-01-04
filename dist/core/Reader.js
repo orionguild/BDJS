@@ -87,7 +87,7 @@ class Reader {
             else {
                 const [start, mode] = compiled.type.split(':');
                 if (mode === 'name') {
-                    if ([' ', '\n'].includes(char)) {
+                    if (!/\w/.test(char) && char !== '[') {
                         compiled.function.setName(compiled.temp.value)
                             .setLine(compiled.line)
                             .setIndex(compiled.functions.length)
@@ -97,6 +97,7 @@ class Reader {
                         compiled.function = new Structures_1.RawFunction;
                         compiled.temp = new Structures_1.RawString;
                         compiled.type = 'any';
+                        compiled.string.write(char);
                     }
                     else if ('[' === char) {
                         compiled.type = 'function:parameters';
@@ -129,12 +130,15 @@ class Reader {
         if (compiled.string.isEmpty === false) {
             compiled.strings.push(compiled.string);
             compiled.string = new Structures_1.RawString;
+            console.log('compiled', compiled);
         }
         if (compiled.function.name !== '') {
             compiled.functions.push(compiled.function);
             compiled.function = new Structures_1.RawFunction;
         }
-        if (compiled.temp.value.startsWith('$') && compiled.type.startsWith('function')) {
+        if (compiled.temp.value.startsWith('$')
+            &&
+                compiled.type.startsWith('function')) {
             compiled.strings.push(new Structures_1.RawString().overwrite(`(call_${compiled.functions.length})`));
             const rest = new Structures_1.RawFunction()
                 .setName(compiled.temp.value)
@@ -170,16 +174,27 @@ class Reader {
                     '|-> Source: "' + dfunc.toString + '"',
                     '|-------------------------------------------------'
                 ].join('\n'));
-            const fields = dfunc.fields.map(field => field.value);
+            let fields = dfunc.fields.map(field => field.value), newFields = [];
             for (let idx = 0; idx < fields.length; idx++) {
-                const field = fields[idx];
-                const compile = typeof spec.parameters?.[idx] === 'undefined' ? true : 'compile' in spec.parameters[idx] ? spec.parameters[idx].compile === true : true;
-                const unescape = typeof spec.parameters?.[idx] === 'undefined' ? true : 'unescape' in spec.parameters[idx] ? spec.parameters[idx].unescape === true : true;
-                const parsed = compile ? (await data.reader.compile(field, data))?.code ?? '' : field;
-                const result = unescape ? UnescapeText(parsed) : parsed;
-                fields[idx] = result;
+                if (spec.parameters?.[idx].rest === true) {
+                    for (const str of fields.slice(idx)) {
+                        const compile = typeof spec.parameters?.[idx] === 'undefined' ? true
+                            : 'compile' in spec.parameters[idx]
+                                ? spec.parameters[idx].compile === true : true;
+                        const parsed = compile ? (await data.reader.compile(str, data))?.code ?? '' : str;
+                        newFields.push(Reader.unescapeParam(parsed, spec.parameters?.[idx]));
+                    }
+                }
+                else {
+                    const field = fields[idx];
+                    const compile = typeof spec.parameters?.[idx] === 'undefined' ? true
+                        : 'compile' in spec.parameters[idx]
+                            ? spec.parameters[idx].compile === true : true;
+                    const parsed = compile ? (await data.reader.compile(field, data))?.code ?? '' : field;
+                    newFields.push(Reader.unescapeParam(parsed, spec.parameters?.[idx]));
+                }
             }
-            const result = await spec.code(data, fields).catch(e => {
+            const result = await spec.code(data, newFields).catch(e => {
                 if (data.bot?.extraOptions.events.includes('onError'))
                     data.bot.emit('error', e);
                 throw e;
@@ -194,6 +209,17 @@ class Reader {
         data.setCode(texts.join('').trim());
         data.compiled = compiled;
         return data;
+    }
+    /**
+     * Unescapes a function parameter.
+     * @param self - The parameter value.
+     * @param spec - Parameter specificaction.
+     * @returns {string}
+     */
+    static unescapeParam(self, spec) {
+        const allowed = typeof spec === 'undefined' ? true
+            : 'unescape' in spec ? spec.unescape === true : true;
+        return allowed ? UnescapeText(self) : self;
     }
 }
 exports.Reader = Reader;

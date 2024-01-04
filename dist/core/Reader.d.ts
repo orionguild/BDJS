@@ -1,5 +1,6 @@
 import { Data } from '../structures/Data';
 import { RawFunction, RawString } from './Structures';
+import { BaseFieldOptions } from '../structures/Function';
 /**
  * Represents the compiled data by BDJS reader.
  */
@@ -24,4 +25,11 @@ export declare class Reader {
      * @returns {Promise<Data>}
      */
     compile(code: string, data: Data): Promise<Data>;
+    /**
+     * Unescapes a function parameter.
+     * @param self - The parameter value.
+     * @param spec - Parameter specificaction.
+     * @returns {string}
+     */
+    static unescapeParam(self: string, spec?: BaseFieldOptions): string;
 }

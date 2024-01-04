@@ -29,6 +29,10 @@ export interface BaseFieldOptions {
      * Tell the compiler what kind of type resolver should be applied.
      */
     resolver?: string
+    /**
+     * Tell the compiler to take this parameter as rest.
+     */
+    rest?: boolean
 }
 
 export interface BaseFunction {

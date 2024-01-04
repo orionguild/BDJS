@@ -16,21 +16,20 @@ exports.default = new Function_1.BaseFunction({
             name: 'Code',
             description: 'JavaScript code.',
             required: true,
-            compile: false,
+            // compile: false,
+            // rest: true,
             resolver: 'String',
             value: 'none'
         }
     ],
-    code: async function (d, [returnResults = 'false', ...code]) {
+    code: async function (d, [returnResults = 'false', ...codes]) {
         if (returnResults === undefined)
             throw new d.error(d, 'required', 'name', d.function?.name);
-        if (code[0] === undefined)
+        if (codes[0] === undefined)
             throw new d.error(d, 'required', 'code', d.function?.name);
-        code[0] = code.join(';');
         let result;
-        code[0] = (await d.reader.compile(code[0], d)).code;
         try {
-            result = await eval(code[0]);
+            result = eval(codes.join(';'));
         }
         catch (e) {
             result = e;
