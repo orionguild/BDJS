@@ -1,4 +1,13 @@
 import { BaseFunction } from '../structures/Function'
+import { StringCommandTypes } from '../index'
+
+const ALLOWED_EVENTS: StringCommandTypes[] = [
+    'always',
+    'prefixed',
+    'unprefixed',
+    'messageUpdate',
+    'messageDelete'
+]
 
 export default new BaseFunction({
     description: 'Get context message arguments, if any.',
@@ -19,7 +28,7 @@ export default new BaseFunction({
         }
     ],
     code: async (d, [index = '-1', endIndex]) => {
-        if (d.commandType !== 'always')
+        if (!ALLOWED_EVENTS.includes(d.commandType))
             throw new d.error(d, 'disallowed', d.function!.name, 'Message Context')
         if (index === undefined)
             throw new d.error(d, 'required', 'Index', d.function!.name)

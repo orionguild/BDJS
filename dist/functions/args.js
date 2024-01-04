@@ -1,6 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const Function_1 = require("../structures/Function");
+const ALLOWED_EVENTS = [
+    'always',
+    'prefixed',
+    'unprefixed',
+    'messageUpdate',
+    'messageDelete'
+];
 exports.default = new Function_1.BaseFunction({
     description: 'Get context message arguments, if any.',
     parameters: [
@@ -20,7 +27,7 @@ exports.default = new Function_1.BaseFunction({
         }
     ],
     code: async (d, [index = '-1', endIndex]) => {
-        if (d.commandType !== 'always')
+        if (!ALLOWED_EVENTS.includes(d.commandType))
             throw new d.error(d, 'disallowed', d.function.name, 'Message Context');
         if (index === undefined)
             throw new d.error(d, 'required', 'Index', d.function.name);
