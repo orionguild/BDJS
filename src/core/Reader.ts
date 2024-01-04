@@ -60,6 +60,15 @@ function UnescapeText(text: string) {
 }
 
 /**
+ * Removes unsafe text from code results.
+ * @param text - Text to be enhanced.
+ * @returns {string}
+ */
+function removeUnsafeText(text: string) {
+    return text.replace(/(\(call_\d+\))/g, '')
+}
+
+/**
  * BDJS code reader.
  */
 export class Reader {
@@ -241,7 +250,7 @@ export class Reader {
             texts[texts.indexOf(`(call_${index})`)] = text
         })
 
-        data.setCode(texts.join('').trim())
+        data.setCode(removeUnsafeText(texts.join('').trim()))
         data.compiled = compiled
         return data as Data
     }

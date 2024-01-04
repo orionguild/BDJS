@@ -41,6 +41,14 @@ function UnescapeText(text) {
     return text;
 }
 /**
+ * Removes unsafe text from code results.
+ * @param text - Text to be enhanced.
+ * @returns {string}
+ */
+function removeUnsafeText(text) {
+    return text.replace(/(\(call_\d+\))/g, '');
+}
+/**
  * BDJS code reader.
  */
 class Reader {
@@ -194,7 +202,7 @@ class Reader {
                 BDJSLog_1.BDJSLog.debug(`Replacing overload "(call_${index})" to "${text === '' ? 'none' : text}"`);
             texts[texts.indexOf(`(call_${index})`)] = text;
         });
-        data.setCode(texts.join('').trim());
+        data.setCode(removeUnsafeText(texts.join('').trim()));
         data.compiled = compiled;
         return data;
     }
