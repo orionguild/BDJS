@@ -130,7 +130,6 @@ class Reader {
         if (compiled.string.isEmpty === false) {
             compiled.strings.push(compiled.string);
             compiled.string = new Structures_1.RawString;
-            console.log('compiled', compiled);
         }
         if (compiled.function.name !== '') {
             compiled.functions.push(compiled.function);

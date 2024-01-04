@@ -156,7 +156,6 @@ export class Reader {
         if (compiled.string.isEmpty === false) {
             compiled.strings.push(compiled.string)
             compiled.string = new RawString
-            console.log('compiled', compiled)
         }
 
         if (compiled.function.name !== '') {
