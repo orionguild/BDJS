@@ -1,5 +1,5 @@
+import { ColorResolvable, EmbedBuilder, resolveColor } from 'discord.js'
 import { BaseFunction } from '../structures/Function'
-import { EmbedBuilder } from 'discord.js'
 
 export default new BaseFunction({
     builders: true,
@@ -62,9 +62,7 @@ export default new BaseFunction({
             description: 'Set the footer for the embed.',
             async code(extended, [hex]) {
                 if (hex === undefined) throw new extended.error(d, 'required', 'hex code', extended.function?.name!)
-                if (!hex.match(/([A-F0-9]{3}|[A-F0-9]{6})/))
-                    throw new extended.error(extended, 'invalid', 'hex code', extended.function?.name!)
-                embed.setColor(parseInt(hex.replace('#', ''), 16))
+                embed.setColor(resolveColor(hex as ColorResolvable))
             }
         })).set('pushfield', new BaseFunction({
             description: 'Push a field into the embed.',

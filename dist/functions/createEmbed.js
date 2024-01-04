@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const Function_1 = require("../structures/Function");
 const discord_js_1 = require("discord.js");
+const Function_1 = require("../structures/Function");
 exports.default = new Function_1.BaseFunction({
     builders: true,
     injectable: true,
@@ -71,9 +71,7 @@ exports.default = new Function_1.BaseFunction({
             async code(extended, [hex]) {
                 if (hex === undefined)
                     throw new extended.error(d, 'required', 'hex code', extended.function?.name);
-                if (!hex.match(/([A-F0-9]{3}|[A-F0-9]{6})/))
-                    throw new extended.error(extended, 'invalid', 'hex code', extended.function?.name);
-                embed.setColor(parseInt(hex.replace('#', ''), 16));
+                embed.setColor((0, discord_js_1.resolveColor)(hex));
             }
         })).set('pushfield', new Function_1.BaseFunction({
             description: 'Push a field into the embed.',
