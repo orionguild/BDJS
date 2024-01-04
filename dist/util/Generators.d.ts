@@ -79,5 +79,6 @@ export declare class Generators {
      * @param output - JSON file output directory.
      */
     static getEventSchema(output: string): Promise<void>;
+    static getPropertiesTable(output: string): Promise<void>;
 }
 export {};

@@ -77,14 +77,14 @@
       "params": [
         {
           "name": "Index",
-          "description": "Argument index.",
-          "required": true,
+          "description": "The index to get the argument.",
+          "required": false,
           "resolver": "Number",
           "value": "none"
         },
         {
           "name": "End Index",
-          "description": "The slice end index.",
+          "description": "The index to slice message arguments.",
           "required": false,
           "resolver": "Number",
           "value": "none"
@@ -1798,6 +1798,23 @@
     }
   },
   {
+    "name": "interactionRespond",
+    "description": "Responds an autocomplete interaction.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": [
+        {
+          "name": "Options",
+          "description": "Options to be appended to the autocomplete response.",
+          "required": true,
+          "compile": false,
+          "value": "none"
+        }
+      ]
+    }
+  },
+  {
     "name": "interactionUpdate",
     "description": "Updates an interaction.",
     "extraOptions": {
@@ -1832,6 +1849,15 @@
   {
     "name": "isAnySelectMenu",
     "description": "Check whether current interaction belongs to a select menu or not.",
+    "extraOptions": {
+      "builders": false,
+      "injection": false,
+      "params": []
+    }
+  },
+  {
+    "name": "isAutocomplete",
+    "description": "Check whether current interaction belongs to an autocomplete.",
     "extraOptions": {
       "builders": false,
       "injection": false,
@@ -1899,7 +1925,6 @@
           "name": "Code",
           "description": "JavaScript code.",
           "required": true,
-          "compile": false,
           "resolver": "String",
           "value": "none"
         }
