@@ -778,6 +778,10 @@ export default {
             description: 'User ID.',
             code: (u) => u.id
         },
+        isbot: {
+            description: 'Whether user is bot.',
+            code: u => u.bot
+        },
         globalname: {
             description: 'The global name this user has.',
             code: (u) => u.globalName
