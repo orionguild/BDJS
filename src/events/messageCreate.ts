@@ -37,11 +37,7 @@ export default new BaseEvent<[Message<true>]>({
                 
                 reader: bot.reader,
             })
-            const compiled = await data.reader.compile(
-                command.code,
-                data
-            )
-            if (compiled.code !== '') await message.channel.send(compiled.code)
+            await data.reader.compile(command.code, data)
         }
 
         // Unprefixed commands.
@@ -62,11 +58,7 @@ export default new BaseEvent<[Message<true>]>({
                     
                     reader: bot.reader,
                 })
-                const compiled = await data.reader.compile(
-                    command.code,
-                    data
-                )
-                if (compiled.code !== '') await message.channel.send(compiled.code)
+                await data.reader.compile(command.code, data)
             }
         }
 
@@ -96,11 +88,10 @@ export default new BaseEvent<[Message<true>]>({
         const command = prefixed.find(cmd => cmd.name?.toLowerCase() === commandName || cmd.aliases?.includes(commandName))
         if (command) {
             data.command = command
-            const compiled = await data.reader.compile(
+            await data.reader.compile(
                 command.code,
                 data
             )
-            if (compiled.code !== '') await message.channel.send(compiled.code)
         }
     }
 })

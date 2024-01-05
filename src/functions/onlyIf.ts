@@ -24,7 +24,7 @@ export default new BaseFunction({
 
         const solves = d.condition.evaluate(condition)
 
-        if (!solves) {
+        if (solves === false) {
             d.stop = true;
             if (code) {
                 const data = d.extend(d)

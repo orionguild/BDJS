@@ -11,14 +11,12 @@ const fullSymbols = [
  * Represents a condition parser.
  */
 export class Condition {
-    static evaluate(text: string): boolean {
-        let results = {
-            ands: [] as boolean[],
-            ors: [] as boolean[]
-        }
+    static evaluate(text: string) {
+        const andResults: boolean[] = []
         const ands = text.split('&&').map(x => x.trim())
 
         for (const and of ands) {
+            const orResults: boolean[] = []
             const ors = and.split('||').map(x => x.trim())
 
             for (const or of ors) {
@@ -27,44 +25,40 @@ export class Condition {
 
                 switch (operator) {
                     case '==':
-                        results.ors.push(
+                        orResults.push(
                             left == right
                         )
                         break
                     case '!=':
-                        results.ors.push(
+                        orResults.push(
                             left != right
                         )
                         break
                     case '>=':
-                        results.ors.push(
+                        orResults.push(
                             Number(left) >= Number(right)
                         )
                         break
                     case '<=':
-                        results.ors.push(
+                        orResults.push(
                             Number(left) <= Number(right)
                         )
                         break
                     case '>':
-                        results.ors.push(
+                        orResults.push(
                             Number(left) > Number(right)
                         )
                         break
                     case '<':
-                        results.ors.push(
+                        orResults.push(
                             Number(left) < Number(right)
                         )
                         break
                 }
             }
-
-            results.ands.push(
-                results.ors.some(x => x === true)
-            )
-            results.ors.length = 0
+            andResults.push(orResults.some(x => x === true))
         }
 
-        return results.ands.every(x => x === true)
+        return andResults.every(x => x === true)
     }
 }

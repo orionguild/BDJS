@@ -24,7 +24,7 @@ exports.default = new Function_1.BaseFunction({
         if (condition === undefined)
             throw new d.error(d, 'required', 'Condition', d.function?.name);
         const solves = d.condition.evaluate(condition);
-        if (!solves) {
+        if (solves === false) {
             d.stop = true;
             if (code) {
                 const data = d.extend(d);

@@ -34,9 +34,7 @@ exports.default = new Event_1.BaseEvent({
                 functions: bot.functions,
                 reader: bot.reader,
             });
-            const compiled = await data.reader.compile(command.code, data);
-            if (compiled.code !== '')
-                await message.channel.send(compiled.code);
+            await data.reader.compile(command.code, data);
         }
         // Unprefixed commands.
         {
@@ -55,9 +53,7 @@ exports.default = new Event_1.BaseEvent({
                     functions: bot.functions,
                     reader: bot.reader,
                 });
-                const compiled = await data.reader.compile(command.code, data);
-                if (compiled.code !== '')
-                    await message.channel.send(compiled.code);
+                await data.reader.compile(command.code, data);
             }
         }
         // Prefixed commands.
@@ -89,9 +85,7 @@ exports.default = new Event_1.BaseEvent({
         const command = prefixed.find(cmd => cmd.name?.toLowerCase() === commandName || cmd.aliases?.includes(commandName));
         if (command) {
             data.command = command;
-            const compiled = await data.reader.compile(command.code, data);
-            if (compiled.code !== '')
-                await message.channel.send(compiled.code);
+            await data.reader.compile(command.code, data);
         }
     }
 });

@@ -14,12 +14,10 @@ const fullSymbols = [
  */
 class Condition {
     static evaluate(text) {
-        let results = {
-            ands: [],
-            ors: []
-        };
+        const andResults = [];
         const ands = text.split('&&').map(x => x.trim());
         for (const and of ands) {
+            const orResults = [];
             const ors = and.split('||').map(x => x.trim());
             for (const or of ors) {
                 let [left, operator, right] = or.split(new RegExp(`(${fullSymbols.join('|')})`, 'ig')).map(t => t.trim());
@@ -27,29 +25,28 @@ class Condition {
                     operator = '==', right = left;
                 switch (operator) {
                     case '==':
-                        results.ors.push(left == right);
+                        orResults.push(left == right);
                         break;
                     case '!=':
-                        results.ors.push(left != right);
+                        orResults.push(left != right);
                         break;
                     case '>=':
-                        results.ors.push(Number(left) >= Number(right));
+                        orResults.push(Number(left) >= Number(right));
                         break;
                     case '<=':
-                        results.ors.push(Number(left) <= Number(right));
+                        orResults.push(Number(left) <= Number(right));
                         break;
                     case '>':
-                        results.ors.push(Number(left) > Number(right));
+                        orResults.push(Number(left) > Number(right));
                         break;
                     case '<':
-                        results.ors.push(Number(left) < Number(right));
+                        orResults.push(Number(left) < Number(right));
                         break;
                 }
             }
-            results.ands.push(results.ors.some(x => x === true));
-            results.ors.length = 0;
+            andResults.push(orResults.some(x => x === true));
         }
-        return results.ands.every(x => x === true);
+        return andResults.every(x => x === true);
     }
 }
 exports.Condition = Condition;
