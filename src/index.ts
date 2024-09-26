@@ -1,3 +1,4 @@
+/* eslint-disable  @typescript-eslint/no-explicit-any */
 import { ActivityType, ApplicationCommandType, ApplicationCommandOptionType, ClientEvents, ContextMenuCommandBuilder, Shard, SlashCommandBuilder } from 'discord.js'
 import { VariableManager } from './managers/Variable'
 import { BaseFunction } from './structures/Function'
@@ -7,7 +8,8 @@ import { Plugin } from './structures/Plugin'
 import { Data } from './structures/Data'
 import { BDJSLog } from './util/BDJSLog'
 
-/* eslint-disable  @typescript-eslint/no-explicit-any */
+export type CustomCommandTypes = 'interval' | 'timeout'
+
 export type StringCommandTypes = 'always'
     | 'error'
     | 'ready'
@@ -55,11 +57,9 @@ export type StringCommandTypes = 'always'
     // | 'ratelimit'
     | 'typing'
     | 'unknown'
-    // BDJS customs
-    | 'interval'
-    | 'timeout'
+    | CustomCommandTypes
 
-export type StringEventNames = `on${Capitalize<keyof ClientEvents>}` | 'onTimeout' | 'onInterval'
+export type StringEventNames = `on${Capitalize<keyof ClientEvents>}` | `on${Capitalize<CustomCommandTypes>}`
 
 interface BDJSCustomEvents {
     interval: (data: Record<string, any>) => void
