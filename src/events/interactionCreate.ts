@@ -89,10 +89,10 @@ export default new BaseEvent<[Interaction]>({
         // Slash commands
         if (interaction.isChatInputCommand()) {
             const commands = Array.from(bot.commands.values()).filter(cmd => cmd.type === 'commandInteraction')
-            const command = interaction.options.getSubcommandGroup(false) 
+            const command = interaction.options.getSubcommandGroup(false)
                 ? commands.find(cmd => cmd.name?.toLowerCase() === `${interaction.commandName} ${interaction.options.getSubcommand(false)} ${interaction.options.getSubcommandGroup(false)}`)
                 : interaction.options.getSubcommand(false) ? commands.find(cmd => cmd.name?.toLowerCase() === `${interaction.commandName} ${interaction.options.getSubcommand(false)}`)
-                : commands.find(cmd => cmd.name?.toLowerCase() === interaction.commandName)
+                    : commands.find(cmd => cmd.name?.toLowerCase() === interaction.commandName)
 
             const data = new Data({
                 bot,
@@ -130,9 +130,9 @@ export default new BaseEvent<[Interaction]>({
         if (interaction.isMessageContextMenuCommand()) {
             const commands = Array.from(bot.commands.values()).filter(cmd => cmd.type === 'messageContextMenuInteraction')
             const command = commands.find(cmd => cmd.name?.toLowerCase() === interaction.commandName)
-            
+
             context.message = interaction.targetMessage
-            
+
             const data = new Data({
                 bot,
                 commandType: 'messageContextMenuInteraction',
