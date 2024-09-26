@@ -29,7 +29,7 @@ interface DataOptions {
     container?: Container
 }
 
-export type IterableFunctions = Iterable<readonly [string, BaseFunction]>
+export type IterableFunctions = IterableIterator<readonly [string, BaseFunction]>
 
 export class Data {
     bot?: Bot

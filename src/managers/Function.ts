@@ -29,7 +29,6 @@ export class FunctionManager extends Map<string, BaseFunction> {
                 }
             }
         }
-
     }
 
     /**
