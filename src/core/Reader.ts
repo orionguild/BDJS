@@ -1,8 +1,7 @@
-import { AddProperty, Data } from '../structures/Data'
+import { Data } from '../structures/Data'
 import { RawFunction, RawString } from './Structures'
 import { BaseFieldOptions, BaseFunction } from '../structures/Function'
 import { BDJSLog } from '../util/BDJSLog'
-import { inspect } from 'util'
 
 /**
  * Represents the compiled data by BDJS reader.
@@ -93,10 +92,10 @@ export class Reader {
             type: 'any',
             temp: new RawString
         }
-        
+
         // Reading each line character.
         for (let i = 0; i < lines.length; i++) {
-            const char = lines[i], next = lines[i + 1]            
+            const char = lines[i], next = lines[i + 1]
 
             if (char === '\n') compiled.line++
 
@@ -117,9 +116,9 @@ export class Reader {
                 if (mode === 'name') {
                     if (!/\w/.test(char) && char !== '[') {
                         compiled.function.setName(compiled.temp.value)
-                        .setLine(compiled.line)
-                        .setIndex(compiled.functions.length)
-                        .setClosed(true);
+                            .setLine(compiled.line)
+                            .setIndex(compiled.functions.length)
+                            .setClosed(true);
                         compiled.strings.push(
                             new RawString().overwrite(
                                 `(call_${compiled.functions.length})`
@@ -133,8 +132,8 @@ export class Reader {
                     } else if ('[' === char) {
                         compiled.type = 'function:parameters'
                         compiled.function.setName(compiled.temp.value)
-                        .setLine(compiled.line)
-                        .setIndex(compiled.functions.length);
+                            .setLine(compiled.line)
+                            .setIndex(compiled.functions.length);
                         compiled.temp = new RawString
                     } else compiled.temp.write(char)
                 } else if (mode === 'parameters') {
@@ -182,12 +181,12 @@ export class Reader {
                     `(call_${compiled.functions.length})`
                 )
             )
-            
+
             const rest = new RawFunction()
-            .setName(compiled.temp.value)
-            .setClosed(true)
-            .setIndex(compiled.functions.length)
-            .setLine(compiled.line);
+                .setName(compiled.temp.value)
+                .setClosed(true)
+                .setIndex(compiled.functions.length)
+                .setLine(compiled.line);
 
             compiled.functions.push(rest)
             compiled.temp = new RawString
@@ -199,9 +198,9 @@ export class Reader {
         for (const dfunc of compiled.functions) {
             if (data.bot?.extraOptions.debug === true) BDJSLog.debug(`Parsing ${dfunc.name} => ${dfunc.toString}`)
             if (data.stop) break
-            
+
             const spec = data.functions.get(dfunc.name.slice(1).toLowerCase())
-            const functionData = { name: dfunc.name, ...spec } as AddProperty<BaseFunction, 'name', string>
+            const functionData = { name: dfunc.name, ...spec } as BaseFunction & { name: string }
             data.function = functionData
 
             if (!spec) throw new data.error(data, 'custom', [
@@ -225,11 +224,11 @@ export class Reader {
 
             for (let idx = 0; idx < fields.length; idx++) {
                 const field = fields[idx]
-                const compile = 
-                    typeof spec.parameters?.[idx] === 'undefined' ? true 
-                    : 'compile' in spec.parameters[idx] 
-                        ? spec.parameters[idx].compile === true : true;
-                
+                const compile =
+                    typeof spec.parameters?.[idx] === 'undefined' ? true
+                        : 'compile' in spec.parameters[idx]
+                            ? spec.parameters[idx].compile === true : true;
+
                 const parsed = compile ? (await data.reader.compile(field, data))?.code ?? '' : field
                 newFields.push(Reader.unescapeParam(parsed, spec.parameters?.[idx]))
             }
@@ -244,9 +243,9 @@ export class Reader {
         }
 
         parsedFunctions.forEach((text, index) => {
-            if (data.bot?.extraOptions.debug === true) 
+            if (data.bot?.extraOptions.debug === true)
                 BDJSLog.debug(`Replacing overload "(call_${index})" to "${text === '' ? 'none' : text}"`)
-        
+
             texts[texts.indexOf(`(call_${index})`)] = text
         })
 
@@ -262,9 +261,9 @@ export class Reader {
      * @returns {string}
      */
     static unescapeParam(self: string, spec?: BaseFieldOptions) {
-        const allowed = 
-            typeof spec === 'undefined' ? true 
-            : 'unescape' in spec ? spec.unescape === true : true
+        const allowed =
+            typeof spec === 'undefined' ? true
+                : 'unescape' in spec ? spec.unescape === true : true
 
         return allowed ? UnescapeText(self) : self
     }

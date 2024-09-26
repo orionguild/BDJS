@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.VariableManager = exports.SlashCommandBuilder = exports.Plugin = exports.Data = exports.ContextMenuCommandBuilder = exports.Bot = exports.BDJSLog = exports.BDJSDefaultOptions = exports.BaseFunction = exports.ApplicationCommandOptionType = exports.ApplicationCommandType = exports.ActivityType = void 0;
+/* eslint-disable  @typescript-eslint/no-explicit-any */
 const discord_js_1 = require("discord.js");
 Object.defineProperty(exports, "ActivityType", { enumerable: true, get: function () { return discord_js_1.ActivityType; } });
 Object.defineProperty(exports, "ApplicationCommandType", { enumerable: true, get: function () { return discord_js_1.ApplicationCommandType; } });

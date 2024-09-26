@@ -1,5 +1,4 @@
 import { BaseFunction } from '../structures/Function'
-import { AddProperty } from '../structures/Data'
 import { readdir } from 'fs/promises'
 import { join } from 'path'
 
@@ -18,10 +17,10 @@ export class FunctionManager extends Map<string, BaseFunction> {
                 const func = require(join(root, file)).default
                 if (func instanceof BaseFunction) {
                     const name = (
-                        file.startsWith('$') 
+                        file.startsWith('$')
                             ? file.slice(1, -3)
                             : file.slice(0, -3)
-                        ).toLowerCase()
+                    ).toLowerCase()
 
                     this.set(
                         name,
@@ -38,7 +37,7 @@ export class FunctionManager extends Map<string, BaseFunction> {
      * @param data - Array of functions.
      * @returns {FunctionManager}
      */
-    add(...data: AddProperty<BaseFunction, 'name', string>[]) {
+    add(...data: (BaseFunction & { name: string })[]) {
         for (const func of data) {
             const name = func.name.toLowerCase(), body = func as BaseFunction
             this.set(name.startsWith('$') ? name.slice(1) : name, body)
@@ -55,16 +54,16 @@ export class FunctionManager extends Map<string, BaseFunction> {
      */
     inject(target: string, name: string, data: BaseFunction) {
         this.#injections[
-            name.startsWith('$') 
-                ? name.slice(1).toLowerCase() 
+            name.startsWith('$')
+                ? name.slice(1).toLowerCase()
                 : name.toLowerCase()
         ] = {
             data,
-            name: name.startsWith('$') 
-                ? name.slice(1).toLowerCase() 
+            name: name.startsWith('$')
+                ? name.slice(1).toLowerCase()
                 : name.toLowerCase(),
-            target: target.startsWith('$') 
-                ? target.slice(1).toLowerCase() 
+            target: target.startsWith('$')
+                ? target.slice(1).toLowerCase()
                 : target.toLowerCase()
         }
         return this

@@ -10,8 +10,6 @@ import { Context } from './Context'
 import { Util } from '../util/Util'
 import { Bot } from './Bot'
 
-export type AddProperty<T, K extends string, V> = T & { [key in K]: V };
-
 interface DataOptions {
     /** BDJS client instance. */
     bot?: Bot
@@ -31,6 +29,7 @@ interface DataOptions {
     container?: Container
 }
 
+export type IterableFunctions = Iterable<readonly [string, BaseFunction]>
 
 export class Data {
     bot?: Bot
@@ -40,7 +39,7 @@ export class Data {
     ctx?: Context<any>
     env: Record<string, any>
     functions: FunctionManager
-    function?: AddProperty<BaseFunction, 'name', string>
+    function?: BaseFunction & { name: string }
     commandType: StringCommandTypes
     compiled: CompiledData & Record<string, any>
     container: Container
@@ -56,7 +55,7 @@ export class Data {
         this.functions = options.bot?.functions ?? options.functions ?? new FunctionManager
         this.commandType = options.commandType ?? 'unknown'
         this.compiled = {} as CompiledData
-        this.function = {} as AddProperty<BaseFunction, 'name', string>
+        this.function = {} as BaseFunction & { name: string }
         this.container = options.container ?? new Container
         this.command = options.command
         this.ctx = options.ctx

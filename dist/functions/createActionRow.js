@@ -33,13 +33,19 @@ exports.default = new Function_1.BaseFunction({
                     secondary: discord_js_1.ButtonStyle.Secondary,
                     success: discord_js_1.ButtonStyle.Secondary,
                     danger: discord_js_1.ButtonStyle.Danger,
-                    link: discord_js_1.ButtonStyle.Link
+                    link: discord_js_1.ButtonStyle.Link,
+                    premium: discord_js_1.ButtonStyle.Premium
                 };
                 if (!Object.keys(buttonStyles).includes(style))
                     throw new t.error(t, 'invalid', 'Style', t.function?.name);
                 const button = new discord_js_1.ButtonBuilder;
-                button[style === 'link' ? 'setURL' : 'setCustomId'](customID)
-                    .setStyle(buttonStyles[style])
+                if (style === 'link')
+                    button.setURL(customID);
+                else if (style === 'premium')
+                    button.setSKUId(customID);
+                else
+                    button.setCustomId(customID);
+                button.setStyle(buttonStyles[style])
                     .setDisabled(disabled === 'true');
                 if (label)
                     button.setLabel(label);

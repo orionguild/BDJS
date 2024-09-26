@@ -1,5 +1,4 @@
 import { BaseFunction } from '../structures/Function';
-import { AddProperty } from '../structures/Data';
 export declare class FunctionManager extends Map<string, BaseFunction> {
     #private;
     /**
@@ -13,7 +12,9 @@ export declare class FunctionManager extends Map<string, BaseFunction> {
      * @param data - Array of functions.
      * @returns {FunctionManager}
      */
-    add(...data: AddProperty<BaseFunction, 'name', string>[]): this;
+    add(...data: (BaseFunction & {
+        name: string;
+    })[]): this;
     /**
      * Inject a subfunction into a function.
      * @param target - Function name where the function will be injected in.

@@ -48,11 +48,11 @@ export declare class Context<T extends unknown = unknown> {
      * Follow up a message response.
      * @param options - Message payload to be sent.
      */
-    followUp(options: GetPayload<T> | string): Promise<Message<boolean> | InteractionResponse<boolean> | null>;
+    followUp(options: GetPayload<T> | string): Promise<Message<boolean> | null>;
     /**
      * Sends a message using the possible channel.
      * @param payload - Message payload to be sent.
      */
-    send(payload: GetPayload<T> | string): Promise<Message<boolean> | InteractionResponse<boolean> | null>;
+    send(payload: GetPayload<T> | string): Promise<any>;
 }
 export {};
