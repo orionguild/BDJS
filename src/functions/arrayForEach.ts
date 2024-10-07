@@ -1,7 +1,7 @@
 import { BaseFunction } from '../structures/Function'
 
 export default new BaseFunction({
-    description: 'Execute a code for each array element, returns the result of the evaluation.',
+    description: 'Execute a code for each array element, does not return anything.',
     parameters: [
         {
             name: 'Name',
@@ -24,16 +24,9 @@ export default new BaseFunction({
             compile: false,
             resolver: 'String',
             value: 'none'
-        },
-        {
-            name: 'Separator',
-            description: 'Result separator.',
-            required: false,
-            resolver: 'String',
-            value: ','
         }
     ],
-    code: async function(d, [name, variable, code, separator = ',']) {
+    code: async function(d, [name, variable, code]) {
         if (name === undefined) throw new d.error(d, 'required', 'Array Name', d.function?.name!)
         if (variable === undefined) throw new d.error(d, 'required', 'Variable Name', d.function?.name!)
         if (code === undefined) throw new d.error(d, 'required', 'Code', d.function?.name!)
@@ -49,7 +42,5 @@ export default new BaseFunction({
             const compiled = await data.reader.compile(code, data)
             if (compiled.code !== '') results.push(compiled.code)
         }
-
-        d.setEnvironmentVariable(variable, results.join(separator))
     }
 })
