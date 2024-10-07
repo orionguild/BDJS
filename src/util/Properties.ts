@@ -3,8 +3,12 @@ import { Bot } from '../structures/Bot'
 
 type Member = GuildMember | PartialGuildMember;
 
+function defineProperties<T>(data: Record<string, { description: string, code: (a: T) => string | boolean | number | null | undefined }>) {
+    return data
+}
+
 export default {
-    Activity: {
+    Activity: defineProperties<Activity>({
         createdtimestamp: {
             description: 'The time this activity was created, in milliseconds.',
             code: a => a.createdTimestamp
@@ -29,11 +33,8 @@ export default {
             description: 'The activity\'s URL.',
             code: a => a.url
         }
-    } as Record<string, {
-        description: string,
-        code: (a: Activity) => any
-    }>,
-    AutomodRule: {
+    }),
+    AutomodRule: defineProperties<AutoModerationRule>({
         actiontypes: {
             description: 'Action types for this automoderation rule ID.',
             code: a => a.actions.map(x => x.type).join(',')
@@ -62,11 +63,8 @@ export default {
             description: 'The automoderation rule trigger type.',
             code: a => a.triggerType
         }
-    } as Record<string, {
-        description: string,
-        code: (a: AutoModerationRule) => any
-    }>,
-    Bot: {
+    }),
+    Bot: defineProperties<Bot>({
         avatar: {
             description: 'Retrieves the avatar of the client.',
             code: b => b.user.displayAvatarURL()
@@ -89,6 +87,7 @@ export default {
         },
         globalcommands: {
             description: 'Retrieves all synced application command names.',
+            // @ts-ignore
             code: b => {
                 return b.application.commands.fetch().then((cmds) => {
                     return Array.from(cmds.values()).map(x => x.id).join(',')
@@ -109,6 +108,7 @@ export default {
         },
         owners: {
             description: 'The owner IDs of this client.',
+            // @ts-ignore
             code: b => {
                 return b.application.fetch().then((app) => {
                     if (app.owner instanceof User) {
@@ -129,11 +129,8 @@ export default {
             description: 'The username of the client.',
             code: b => b.user.username
         }
-    } as Record<string, {
-        description: string,
-        code: (b: Bot) => any
-    }>,
-    Channel: {
+    }),
+    Channel: defineProperties<TextChannel | VoiceChannel>({
         bitrate: {
             description: 'The channel bitrate.',
             code: c => c.isVoiceBased() ? c.bitrate : undefined
@@ -222,11 +219,8 @@ export default {
             description: 'The video quality mode for this voice channel.',
             code: c => c.isVoiceBased() ? c.videoQualityMode?.toString() : undefined
         }
-    } as Record<string, {
-        description: string,
-        code: (c: TextChannel | VoiceChannel) => any
-    }>,
-    Emoji: {
+    }),
+    Emoji: defineProperties<GuildEmoji>({
         authorid: {
             description: 'The emoji author ID.',
             code: e => e.author?.id
@@ -267,11 +261,8 @@ export default {
             description: 'The URL for this emoji.',
             code: e => e.url
         }
-    } as Record<string, {
-        description: string,
-        code: (e: GuildEmoji) => any
-    }>,
-    Guild: {
+    }),
+    Guild: defineProperties<Guild>({
         afkchannelid: {
             description: 'The AFK channel ID of this guild.',
             code: g => g.afkChannelId
@@ -294,6 +285,7 @@ export default {
         },
         commands: {
             description: 'Returns all the application command IDs for this guild.',
+            // @ts-ignore
             code: g => {
                 return g.commands.fetch().then((cmds) => {
                     return cmds.map(cmd => cmd.id).join(',')
@@ -396,11 +388,8 @@ export default {
             description: 'This guild\'s widget channel ID.',
             code: g => g.widgetChannelId
         }
-    } as Record<string, {
-        description: string,
-        code: (g: Guild) => any
-    }>,
-    Member: {
+    }),
+    Member: defineProperties<Member>({
         avatar: {
             description: 'Retrieves the avatar of this guild member.',
             code: (m) => m.displayAvatarURL()
@@ -481,11 +470,8 @@ export default {
             description: 'The voice channel ID of this member, if any.',
             code: (m) => m.voice.channel?.id
         },
-    } as Record<string, {
-        description: string,
-        code: (m: Member) => any
-    }>,
-    Message: {
+    }),
+    Message: defineProperties<Message | PartialMessage>({
         authorid: {
             description: 'Retrieves the author ID of this message.',
             code: m => m.author?.id
@@ -532,7 +518,7 @@ export default {
         },
         isthread: {
             description: 'Whether this message is thread.',
-            code: m => m.thread
+            code: m => !!m.thread
         },
         position: {
             description: 'Returns the position of this message.',
@@ -554,11 +540,8 @@ export default {
             description: 'Retrieves the URL of this message.',
             code: m => m.url
         }
-    } as Record<string, {
-        description: string,
-        code: (m: Message | PartialMessage) => any
-    }>,
-    Role: {
+    }),
+    Role: defineProperties<Role>({
         createdtimestamp: {
             description: 'The time this role was created, in milliseconds.',
             code: (r) => r.createdTimestamp
@@ -619,11 +602,8 @@ export default {
             description: 'This role raw position.',
             code: (r) => r.rawPosition
         }
-    } as Record<string, {
-        description: string,
-        code: (r: Role) => any
-    }>,
-    Sticker: {
+    }),
+    Sticker: defineProperties<Sticker>({
         createdtimestamp: {
             description: 'The time this sticker was created, in milliseconds.',
             code: s => s.createdTimestamp
@@ -652,11 +632,8 @@ export default {
             description: 'Retrieves this sticker URL.',
             code: s => s.url
         }
-    } as Record<string, {
-        description: string,
-        code: (s: Sticker) => any
-    }>,
-    Thread: {
+    }),
+    Thread: defineProperties<AnyThreadChannel>({
         archiveduration: {
             description: 'The for thread to be archived.',
             code: t => t.autoArchiveDuration?.toString()
@@ -741,11 +718,8 @@ export default {
             description: 'Retrieves the URL of this thread.',
             code: t => t.url
         }
-    } as Record<string, {
-        description: string,
-        code: (t: AnyThreadChannel) => any
-    }>,
-    User: {
+    }),
+    User: defineProperties<User>({
         accentcolor: {
             description: 'The user\'s accent hexadecimal color.',
             code: (u) => u.hexAccentColor
@@ -790,8 +764,5 @@ export default {
             description: 'The username this user has.',
             code: (u) => u.username
         }
-    } as Record<string, {
-        description: string,
-        code: (u: User) => any
-    }>
+    })
 }
