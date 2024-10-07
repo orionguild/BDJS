@@ -27,7 +27,7 @@ interface DataOptions {
     /** Payload container. */
     container?: Container;
 }
-export type IterableFunctions = Iterable<readonly [string, BaseFunction]>;
+export type IterableFunctions = IterableIterator<readonly [string, BaseFunction]>;
 export declare class Data {
     bot?: Bot;
     code: string;

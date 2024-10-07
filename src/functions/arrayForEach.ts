@@ -38,7 +38,7 @@ export default new BaseFunction({
         const results: string[] = []
         for (const element of args) {
             const data = d.extend(d)
-            data.setEnvironmentVariable('element', element)
+            data.setEnvironmentVariable(variable, element)
             const compiled = await data.reader.compile(code, data)
             if (compiled.code !== '') results.push(compiled.code)
         }

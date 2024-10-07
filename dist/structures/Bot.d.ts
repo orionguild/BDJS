@@ -2,7 +2,6 @@ import { BDJSApplicationCommandManager } from '../managers/ApplicationCommand';
 import { Client, ClientOptions } from 'discord.js';
 import { FunctionManager } from '../managers/Function';
 import { VariableManager } from '../managers/Variable';
-import DataBase, { DataBaseOptions } from 'collie-db';
 import { CommandManager } from '../managers/Command';
 import { StatusManager } from '../managers/Status';
 import { EventManager } from '../managers/Event';
@@ -19,7 +18,6 @@ export declare function reformulateEvents(names: string[], type?: 'BDJS' | 'DJS'
 export interface BDJSOptions extends ClientOptions {
     auth: `${string}.${string}.${string}`;
     autoUpdate?: boolean;
-    database?: DataBaseOptions;
     disableLogs?: boolean;
     debug?: boolean;
     events: StringEventNames[];
@@ -31,7 +29,7 @@ export interface BDJSOptions extends ClientOptions {
 /**
  * Represents a BDJS client.
  */
-export declare class Bot<T = DataBase> extends Client<true> {
+export declare class Bot extends Client<true> {
     appManager: BDJSApplicationCommandManager;
     commands: CommandManager;
     events: EventManager;
@@ -39,7 +37,6 @@ export declare class Bot<T = DataBase> extends Client<true> {
     reader: Reader;
     status: StatusManager;
     extraOptions: BDJSOptions;
-    db: any | null;
     vars: VariableManager | null;
     constructor(options: BDJSOptions);
     /**

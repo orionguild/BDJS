@@ -38,7 +38,6 @@ class Bot extends discord_js_1.Client {
         this.functions = new Function_1.FunctionManager;
         this.reader = new Reader_1.Reader;
         this.status = new Status_1.StatusManager(this);
-        this.db = null;
         this.vars = null;
         this.extraOptions = options;
         // this.db = new DataBase(options.database)

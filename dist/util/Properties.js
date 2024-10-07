@@ -1,8 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const discord_js_1 = require("discord.js");
+function defineProperties(data) {
+    return data;
+}
 exports.default = {
-    Activity: {
+    Activity: defineProperties({
         createdtimestamp: {
             description: 'The time this activity was created, in milliseconds.',
             code: a => a.createdTimestamp
@@ -27,8 +30,8 @@ exports.default = {
             description: 'The activity\'s URL.',
             code: a => a.url
         }
-    },
-    AutomodRule: {
+    }),
+    AutomodRule: defineProperties({
         actiontypes: {
             description: 'Action types for this automoderation rule ID.',
             code: a => a.actions.map(x => x.type).join(',')
@@ -57,8 +60,8 @@ exports.default = {
             description: 'The automoderation rule trigger type.',
             code: a => a.triggerType
         }
-    },
-    Bot: {
+    }),
+    Bot: defineProperties({
         avatar: {
             description: 'Retrieves the avatar of the client.',
             code: b => b.user.displayAvatarURL()
@@ -81,6 +84,7 @@ exports.default = {
         },
         globalcommands: {
             description: 'Retrieves all synced application command names.',
+            // @ts-ignore
             code: b => {
                 return b.application.commands.fetch().then((cmds) => {
                     return Array.from(cmds.values()).map(x => x.id).join(',');
@@ -101,6 +105,7 @@ exports.default = {
         },
         owners: {
             description: 'The owner IDs of this client.',
+            // @ts-ignore
             code: b => {
                 return b.application.fetch().then((app) => {
                     if (app.owner instanceof discord_js_1.User) {
@@ -123,8 +128,8 @@ exports.default = {
             description: 'The username of the client.',
             code: b => b.user.username
         }
-    },
-    Channel: {
+    }),
+    Channel: defineProperties({
         bitrate: {
             description: 'The channel bitrate.',
             code: c => c.isVoiceBased() ? c.bitrate : undefined
@@ -213,8 +218,8 @@ exports.default = {
             description: 'The video quality mode for this voice channel.',
             code: c => c.isVoiceBased() ? c.videoQualityMode?.toString() : undefined
         }
-    },
-    Emoji: {
+    }),
+    Emoji: defineProperties({
         authorid: {
             description: 'The emoji author ID.',
             code: e => e.author?.id
@@ -255,8 +260,8 @@ exports.default = {
             description: 'The URL for this emoji.',
             code: e => e.url
         }
-    },
-    Guild: {
+    }),
+    Guild: defineProperties({
         afkchannelid: {
             description: 'The AFK channel ID of this guild.',
             code: g => g.afkChannelId
@@ -279,6 +284,7 @@ exports.default = {
         },
         commands: {
             description: 'Returns all the application command IDs for this guild.',
+            // @ts-ignore
             code: g => {
                 return g.commands.fetch().then((cmds) => {
                     return cmds.map(cmd => cmd.id).join(',');
@@ -381,8 +387,8 @@ exports.default = {
             description: 'This guild\'s widget channel ID.',
             code: g => g.widgetChannelId
         }
-    },
-    Member: {
+    }),
+    Member: defineProperties({
         avatar: {
             description: 'Retrieves the avatar of this guild member.',
             code: (m) => m.displayAvatarURL()
@@ -463,8 +469,8 @@ exports.default = {
             description: 'The voice channel ID of this member, if any.',
             code: (m) => m.voice.channel?.id
         },
-    },
-    Message: {
+    }),
+    Message: defineProperties({
         authorid: {
             description: 'Retrieves the author ID of this message.',
             code: m => m.author?.id
@@ -511,7 +517,7 @@ exports.default = {
         },
         isthread: {
             description: 'Whether this message is thread.',
-            code: m => m.thread
+            code: m => !!m.thread
         },
         position: {
             description: 'Returns the position of this message.',
@@ -533,8 +539,8 @@ exports.default = {
             description: 'Retrieves the URL of this message.',
             code: m => m.url
         }
-    },
-    Role: {
+    }),
+    Role: defineProperties({
         createdtimestamp: {
             description: 'The time this role was created, in milliseconds.',
             code: (r) => r.createdTimestamp
@@ -595,8 +601,8 @@ exports.default = {
             description: 'This role raw position.',
             code: (r) => r.rawPosition
         }
-    },
-    Sticker: {
+    }),
+    Sticker: defineProperties({
         createdtimestamp: {
             description: 'The time this sticker was created, in milliseconds.',
             code: s => s.createdTimestamp
@@ -625,8 +631,8 @@ exports.default = {
             description: 'Retrieves this sticker URL.',
             code: s => s.url
         }
-    },
-    Thread: {
+    }),
+    Thread: defineProperties({
         archiveduration: {
             description: 'The for thread to be archived.',
             code: t => t.autoArchiveDuration?.toString()
@@ -711,8 +717,8 @@ exports.default = {
             description: 'Retrieves the URL of this thread.',
             code: t => t.url
         }
-    },
-    User: {
+    }),
+    User: defineProperties({
         accentcolor: {
             description: 'The user\'s accent hexadecimal color.',
             code: (u) => u.hexAccentColor
@@ -757,5 +763,5 @@ exports.default = {
             description: 'The username this user has.',
             code: (u) => u.username
         }
-    }
+    })
 };

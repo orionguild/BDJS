@@ -4,51 +4,51 @@ type Member = GuildMember | PartialGuildMember;
 declare const _default: {
     Activity: Record<string, {
         description: string;
-        code: (a: Activity) => any;
+        code: (a: Activity) => string | number | boolean | null | undefined;
     }>;
     AutomodRule: Record<string, {
         description: string;
-        code: (a: AutoModerationRule) => any;
+        code: (a: AutoModerationRule) => string | number | boolean | null | undefined;
     }>;
     Bot: Record<string, {
         description: string;
-        code: (b: Bot) => any;
+        code: (a: Bot) => string | number | boolean | null | undefined;
     }>;
     Channel: Record<string, {
         description: string;
-        code: (c: TextChannel | VoiceChannel) => any;
+        code: (a: TextChannel | VoiceChannel) => string | number | boolean | null | undefined;
     }>;
     Emoji: Record<string, {
         description: string;
-        code: (e: GuildEmoji) => any;
+        code: (a: GuildEmoji) => string | number | boolean | null | undefined;
     }>;
     Guild: Record<string, {
         description: string;
-        code: (g: Guild) => any;
+        code: (a: Guild) => string | number | boolean | null | undefined;
     }>;
     Member: Record<string, {
         description: string;
-        code: (m: Member) => any;
+        code: (a: Member) => string | number | boolean | null | undefined;
     }>;
     Message: Record<string, {
         description: string;
-        code: (m: Message | PartialMessage) => any;
+        code: (a: Message<boolean> | PartialMessage) => string | number | boolean | null | undefined;
     }>;
     Role: Record<string, {
         description: string;
-        code: (r: Role) => any;
+        code: (a: Role) => string | number | boolean | null | undefined;
     }>;
     Sticker: Record<string, {
         description: string;
-        code: (s: Sticker) => any;
+        code: (a: Sticker) => string | number | boolean | null | undefined;
     }>;
     Thread: Record<string, {
         description: string;
-        code: (t: AnyThreadChannel) => any;
+        code: (a: AnyThreadChannel) => string | number | boolean | null | undefined;
     }>;
     User: Record<string, {
         description: string;
-        code: (u: User) => any;
+        code: (a: User) => string | number | boolean | null | undefined;
     }>;
 };
 export default _default;

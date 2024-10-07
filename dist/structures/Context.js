@@ -3,6 +3,7 @@ var _Context_instances, _Context_hold, _Context_setMessage;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Context = void 0;
 const tslib_1 = require("tslib");
+// @ts-nocheck
 const discord_js_1 = require("discord.js");
 /**
  * Look-up for a valid context instance.

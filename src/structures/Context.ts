@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { BaseChannel, BaseInteraction, ChatInputCommandInteraction, CommandInteraction, InteractionEditReplyOptions, InteractionUpdateOptions, InteractionReplyOptions, Guild, GuildChannel, GuildMember, MessageComponentInteraction, MessageEditOptions, Message, MessagePayload, MessageCreateOptions, ModalSubmitInteraction, TextChannel, StageChannel, ThreadChannel, NewsChannel, User, InteractionResponse, Sticker, GuildTextBasedChannel, Interaction, PartialGuildMember, TextBasedChannel, APIInteractionGuildMember, PartialUser, NonThreadGuildBasedChannel } from 'discord.js'
 import { Bot } from './Bot'
 

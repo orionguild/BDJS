@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const Function_1 = require("../structures/Function");
 exports.default = new Function_1.BaseFunction({
-    description: 'Execute a code for each array element, returns the result of the evaluation.',
+    description: 'Execute a code for each array element, does not return anything.',
     parameters: [
         {
             name: 'Name',
@@ -25,16 +25,9 @@ exports.default = new Function_1.BaseFunction({
             compile: false,
             resolver: 'String',
             value: 'none'
-        },
-        {
-            name: 'Separator',
-            description: 'Result separator.',
-            required: false,
-            resolver: 'String',
-            value: ','
         }
     ],
-    code: async function (d, [name, variable, code, separator = ',']) {
+    code: async function (d, [name, variable, code]) {
         if (name === undefined)
             throw new d.error(d, 'required', 'Array Name', d.function?.name);
         if (variable === undefined)
@@ -47,11 +40,10 @@ exports.default = new Function_1.BaseFunction({
         const results = [];
         for (const element of args) {
             const data = d.extend(d);
-            data.setEnvironmentVariable('element', element);
+            data.setEnvironmentVariable(variable, element);
             const compiled = await data.reader.compile(code, data);
             if (compiled.code !== '')
                 results.push(compiled.code);
         }
-        d.setEnvironmentVariable(variable, results.join(separator));
     }
 });
