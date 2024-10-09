@@ -1,5 +1,5 @@
-import { Bot, SlashCommandBuilder, StringCommandTypes } from '../index'
 import { RESTPostAPIApplicationCommandsJSONBody } from 'discord.js'
+import { SlashCommandBuilder, StringCommandTypes } from '../index'
 import { AsciiTable3, AlignmentEnum } from 'ascii-table3'
 import { lstat, readdir } from 'fs/promises'
 import { BDJSLog } from '../util/BDJSLog'
@@ -154,15 +154,14 @@ export class CommandManager extends Map<string, CommandData> {
             delete require.cache[require.resolve(join(root, dir, file))]
         }
 
-        this.#logCommands()
+        if (log) this.#logCommands()
     }
 
     /**
      * Reload commands from source.
-     * @param bot - BDJS client.
      * @returns {Promise<void>}
      */
-    async reload(bot: Bot) {
+    async reload() {
         if (!this.#directory) return BDJSLog.error('Cannot find a commands directory.')
         this.clear()
         return await this.load(this.#directory, this.#cwd, true)
@@ -186,8 +185,8 @@ export class CommandManager extends Map<string, CommandData> {
         const table = new AsciiTable3('Commands')
 
         table.setHeading('Name', 'Type', 'Status', 'Path')
-        .setAlign(2, AlignmentEnum.AUTO)
-        .setStyle('compact')
+            .setAlign(2, AlignmentEnum.AUTO)
+            .setStyle('compact')
 
         for (const data of this.#commandStatus) {
             rows.push([
