@@ -1,6 +1,5 @@
-import { Guild, GuildBasedChannel, GuildTextBasedChannel, PermissionsBitField, PermissionsString, Snowflake, TextBasedChannel, User } from 'discord.js'
+import { Guild, GuildBasedChannel, GuildTextBasedChannel, PermissionsBitField, PermissionsString, Snowflake, User } from 'discord.js'
 import { Bot } from 'src/structures/Bot'
-import { Context } from 'src/structures/Context'
 
 export class Util {
     /**
@@ -15,7 +14,7 @@ export class Util {
      * Parses string to its native type.
      * @param {string} text The string to parse.
      */
-    static parse(text: string): undefined | null | number | BigInt | Object | string {
+    static parse(text: string): undefined | null | number | bigint | object | string {
         if (text === undefined) return undefined
         else if (text === null) return null
         
@@ -101,6 +100,14 @@ export class Util {
     }
 
     /**
+     * Handles an .catch statement.
+     * @returns {null}
+     */
+    static noop() {
+        return null
+    }
+
+    /**
      * Get a guild automoderation rule.
      * @param guild - Guild to get the rule from.
      * @param query - Rule resolver.
@@ -108,7 +115,7 @@ export class Util {
     static async getAutomodRule(guild: Guild, query: string) {
         if (!query) return null
         const someId = query.replace(/[^\d]/g, '')
-        let rule = someId ? guild.autoModerationRules.cache.get(someId) || (await guild.autoModerationRules.fetch(someId).catch(e => null)) : null
+        let rule = someId ? guild.autoModerationRules.cache.get(someId) || (await guild.autoModerationRules.fetch(someId).catch(Util.noop)) : null
         if (!rule) rule = guild.autoModerationRules.cache.find(c => c.name.includes(query)) || null
         return rule
     }
@@ -121,7 +128,7 @@ export class Util {
     static async getChannel<T = GuildBasedChannel>(query: string, guild: Guild): Promise<T | null> {
         if (!query) return null
         const someId = query.replace(/[^\d]/g, '')
-        let channel = someId ? guild.channels.cache.get(someId) || (await guild.channels.fetch(someId).catch(e => null)) : null
+        let channel = someId ? guild.channels.cache.get(someId) || (await guild.channels.fetch(someId).catch(Util.noop)) : null
         if (!channel) channel = guild.channels.cache.find(c => c.name.includes(query)) || null
         return channel as T
     }
@@ -135,7 +142,7 @@ export class Util {
     static async getMember(query: string, guild: Guild) {
         if (!query) return null
         const someId = query.replace(/[^\d]/g, '')
-        let member = someId ? guild.members.cache.get(someId) || (await guild.members.fetch(someId).catch(e => null)) : null
+        let member = someId ? guild.members.cache.get(someId) || (await guild.members.fetch(someId).catch(Util.noop)) : null
         if (!member) member = guild.members.cache.find(m => m.user.username.includes(query)) || null
         return member
     }
@@ -149,7 +156,7 @@ export class Util {
     static async getMessage(channel: GuildTextBasedChannel, query: string) {
         if (!query) return null
         const someId = query.replace(/[^\d]/g, '')
-        let message = someId ? channel.messages.cache.get(someId) || (await channel.messages.fetch(someId).catch(e => null)) : null
+        const message = someId ? channel.messages.cache.get(someId) || (await channel.messages.fetch(someId).catch(Util.noop)) : null
         return message
     }
 
@@ -162,7 +169,7 @@ export class Util {
     static async getRole(query: string, guild: Guild) {
         if (!query) return null
         const someId = query.replace(/[^\d]/g, '')
-        let role = someId ? guild.roles.cache.get(someId) || (await guild.roles.fetch(someId).catch(e => null)) : null
+        let role = someId ? guild.roles.cache.get(someId) || (await guild.roles.fetch(someId).catch(Util.noop)) : null
         if (!role) role = guild.roles.cache.find(r => r.name.includes(query)) || null
         return role
     }
@@ -176,8 +183,8 @@ export class Util {
      */
     static async getUser(bot: Bot, id: Snowflake, strict: boolean = false) {
         if(!id) return null
-        let some_id = id.replace(/[^\d]/g, '')
-        let user = some_id ? (bot.users.cache.get(some_id)) || (await bot.users.fetch(some_id).catch(e=>null)): null
+        const some_id = id.replace(/[^\d]/g, '')
+        let user = some_id ? (bot.users.cache.get(some_id)) || (await bot.users.fetch(some_id).catch(Util.noop)): null
         if(!strict && !user) user = (bot.users.cache.find(u => u.username.includes(id)) || null)
         return user
     }
@@ -189,7 +196,7 @@ export class Util {
      * @returns {Promise<boolean>}
      */
     static async hasDM(bot: Bot, user: string | User): Promise<boolean> {
-        let u = user instanceof User ? user: (await this.getUser(bot, user, false))
+        const u = user instanceof User ? user: (await this.getUser(bot, user, false))
         if(!u) return false
         const c = await u.send(' ').catch(err => err.code)
         return c === 50007 ? false : true
@@ -202,7 +209,7 @@ export class Util {
     static camelCase(text: string) {
         return text.split(/ +/g)
             .map((t, i) => i === 0 
-            ? t.toLowerCase() : t[0].toUpperCase().concat(t.slice(1).toLowerCase())
+                ? t.toLowerCase() : t[0].toUpperCase().concat(t.slice(1).toLowerCase())
             )
             .join('')
     }
